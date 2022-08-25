@@ -1,0 +1,7 @@
+name: Supporter
+version: '${project.version}'
+main: claimworld.net.supporter.Supporter
+api-version: 1.19
+prefix: CLAIMWORLD SUPPORTER SYSTEM
+authors: [ MaciejXChikaraaXPanocha ]
+description: Simple plugin fitting our needs! <3

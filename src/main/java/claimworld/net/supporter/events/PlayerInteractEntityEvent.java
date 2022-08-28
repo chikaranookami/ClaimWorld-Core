@@ -32,7 +32,7 @@ public class PlayerInteractEntityEvent implements Listener {
                 Entity entity = event.getRightClicked();
 
                 player.addPassenger(entity);
-                player.playSound(player, Sound.ITEM_ARMOR_EQUIP_ELYTRA, 1.0f, 1.0f);
+                player.playSound(player, Sound.ITEM_ARMOR_EQUIP_ELYTRA, 0.7f, 1.0f);
 
                 return;
             }
@@ -43,15 +43,15 @@ public class PlayerInteractEntityEvent implements Listener {
                 World world = entity.getWorld();
 
                 player.removePassenger(entity);
-                player.playSound(player, Sound.BLOCK_HONEY_BLOCK_PLACE, 1.0f, 1.0f);
+                player.playSound(player, Sound.BLOCK_HONEY_BLOCK_PLACE, 0.7f, 1.0f);
 
                 entity.setVelocity(direction.multiply(new Random().nextInt(1) + 2));
 
                 Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getInstance(), () -> {
                     Location location = entity.getLocation().add(0, 1, 0);
-                    world.spawnParticle(Particle.CLOUD, location, 1);
-                    world.spawnParticle(Particle.ASH, location, 1);
-                    world.spawnParticle(Particle.WHITE_ASH, location, 1);
+                    world.spawnParticle(Particle.CLOUD, location, 2, 0, 0, 0, 0, 0);
+                    world.spawnParticle(Particle.ASH, location, 2, 0, 0, 0, 0, 0);
+                    world.spawnParticle(Particle.WHITE_ASH, location, 2, 0, 0, 0, 0, 0);
                 }, 8L);
             }
 
@@ -62,7 +62,7 @@ public class PlayerInteractEntityEvent implements Listener {
 
         for (Entity entity : player.getPassengers()) {
             player.removePassenger(entity);
-            player.playSound(player, Sound.ITEM_ARMOR_EQUIP_ELYTRA, 1.0f, 1.0f);
+            player.playSound(player, Sound.ITEM_ARMOR_EQUIP_ELYTRA, 0.7f, 1.0f);
         }
     }
 }

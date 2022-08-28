@@ -14,9 +14,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import static org.bukkit.Bukkit.getScheduler;
+
 public class PlayerInteractEntityEvent implements Listener {
 
     private final List<EntityType> entityTypes = Arrays.asList(EntityType.COW, EntityType.SHEEP, EntityType.PIG, EntityType.CHICKEN);
+
+    private int showParticlesTask;
 
     @EventHandler
     public void playerInteractEntityEvent(org.bukkit.event.player.PlayerInteractEntityEvent event) {
@@ -43,16 +47,33 @@ public class PlayerInteractEntityEvent implements Listener {
                 World world = entity.getWorld();
 
                 player.removePassenger(entity);
-                player.playSound(player, Sound.BLOCK_HONEY_BLOCK_PLACE, 0.7f, 1.0f);
+                player.playSound(player, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 0.5f, 1.0f);
 
-                entity.setVelocity(direction.multiply(new Random().nextInt(1) + 2));
+                int force = new Random().nextInt(10);
 
-                Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getInstance(), () -> {
-                    Location location = entity.getLocation().add(0, 1, 0);
-                    world.spawnParticle(Particle.CLOUD, location, 2, 0, 0, 0, 0, 0);
-                    world.spawnParticle(Particle.ASH, location, 2, 0, 0, 0, 0, 0);
-                    world.spawnParticle(Particle.WHITE_ASH, location, 2, 0, 0, 0, 0, 0);
-                }, 8L);
+                if (force == 0) {
+                    entity.setVelocity(direction.multiply(1.5));
+                }
+
+                if (force > 0) {
+                    entity.setVelocity(direction.multiply(1));
+                }
+
+                if (player.isSneaking()) {
+                    entity.setVelocity(direction.multiply(1.5));
+                }
+
+                showParticlesTask = getScheduler().scheduleSyncRepeatingTask(Supporter.getInstance(), () -> {
+                    if (!entity.isOnGround()) {
+                        Location location = entity.getLocation().add(0, 1, 0);
+
+                        world.spawnParticle(Particle.CLOUD, location, 1, 0, 0, 0, 0);
+                        world.spawnParticle(Particle.ASH, location, 1, 0, 0, 0, 0);
+                        world.spawnParticle(Particle.WHITE_ASH, location, 1, 0, 0, 0, 0);
+                    } else {
+                        getScheduler().cancelTask(showParticlesTask);
+                    }
+                }, 2L, 2L);
             }
 
             return;

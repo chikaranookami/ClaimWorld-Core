@@ -10,7 +10,7 @@ public class PlayerLoginEvent implements Listener {
 
     @EventHandler
     public void loginEvent(org.bukkit.event.player.PlayerLoginEvent event) {
-        if (!(getServer().getOnlinePlayers().size() >= (getServer().getMaxPlayers() - 3))) return;
+        if (!(getServer().getOnlinePlayers().size() >= (getServer().getMaxPlayers() - 2))) return;
 
         Player player = event.getPlayer();
 

@@ -39,8 +39,11 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new AsyncPlayerChatEvent(), this);
         pluginManager.registerEvents(new PlayerInteractEntityEvent(), this);
         pluginManager.registerEvents(new EntityDamageEvent(), this);
+        pluginManager.registerEvents(new EntitySpawnEvent(), this);
+        pluginManager.registerEvents(new HangingPlaceEvent(), this);
 
         //commands
+        new Kosz();
         new Cws();
         new Pomoc();
         new Teleporter();

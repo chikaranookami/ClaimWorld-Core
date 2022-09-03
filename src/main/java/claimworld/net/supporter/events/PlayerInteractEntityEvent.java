@@ -35,6 +35,10 @@ public class PlayerInteractEntityEvent implements Listener {
             if (player.getPassengers().isEmpty()) {
                 Entity entity = event.getRightClicked();
 
+                if (getScheduler().isCurrentlyRunning(showParticlesTask)) {
+                    getScheduler().cancelTask(showParticlesTask);
+                }
+
                 player.addPassenger(entity);
                 player.playSound(player, Sound.ITEM_ARMOR_EQUIP_ELYTRA, 0.7f, 1.0f);
 
@@ -52,19 +56,15 @@ public class PlayerInteractEntityEvent implements Listener {
                 int force = new Random().nextInt(10);
 
                 if (force == 0) {
-                    entity.setVelocity(direction.multiply(1.5));
+                    entity.setVelocity(direction.multiply(1.75));
                 }
 
                 if (force > 0) {
                     entity.setVelocity(direction.multiply(1));
                 }
 
-                if (player.isSneaking()) {
-                    entity.setVelocity(direction.multiply(1.5));
-                }
-
                 showParticlesTask = getScheduler().scheduleSyncRepeatingTask(Supporter.getInstance(), () -> {
-                    if (!entity.isOnGround()) {
+                    if (!entity.isOnGround() && !entity.isDead() && !entity.isInWater()) {
                         Location location = entity.getLocation().add(0, 1, 0);
 
                         world.spawnParticle(Particle.CLOUD, location, 1, 0, 0, 0, 0);
@@ -74,6 +74,12 @@ public class PlayerInteractEntityEvent implements Listener {
                         getScheduler().cancelTask(showParticlesTask);
                     }
                 }, 2L, 2L);
+
+                getScheduler().runTaskLaterAsynchronously(Supporter.getInstance(), () -> {
+                    if (!getScheduler().isCurrentlyRunning(showParticlesTask)) return;
+
+                    getScheduler().cancelTask(showParticlesTask);
+                }, 200L);
             }
 
             return;

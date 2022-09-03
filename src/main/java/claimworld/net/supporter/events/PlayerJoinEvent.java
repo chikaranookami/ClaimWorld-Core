@@ -20,7 +20,7 @@ public class PlayerJoinEvent implements Listener {
 
         //set tablist
         player.setPlayerListHeader("\n " + ChatColor.AQUA + "ClaimWorld" + ChatColor.WHITE + ".net" + " \n");
-        player.setPlayerListFooter(ChatColor.AQUA + "\n Nowosci + Powiekszenie Endu \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "02.09.2022 " + ChatColor.AQUA + "\n\n Event Rzut Owca \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "03.09.2022 \n");
+        player.setPlayerListFooter(ChatColor.AQUA + "\n Event Rzut Owca \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "03.09.2022 " + ChatColor.AQUA + "\n\n Duze Powiekszenie Mapy \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "09.09.2022 \n");
 
         //set ranks
         Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getInstance(), () ->{

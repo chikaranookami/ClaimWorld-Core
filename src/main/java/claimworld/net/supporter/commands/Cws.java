@@ -31,7 +31,7 @@ public class Cws {
 
                 if (arguments[0].equals("DoubleXp")) {
                     if (Supporter.DoubleXp) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getDisplayName() + " AddPoints 50");
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getDisplayName() + " AddPoints 30");
 
                         sender.sendMessage("DoubleXp is already true");
                         player.sendMessage(ChatColor.GRAY + "Ktos juz wlaczyl podwojne doswiadczenie. Punkty zostaly zwrocone.");
@@ -51,7 +51,7 @@ public class Cws {
 
                 if (arguments[0].equals("TogglePhantoms")) {
                     if (TogglePhantoms) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getDisplayName() + " AddPoints 20");
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getDisplayName() + " AddPoints 15");
 
                         sender.sendMessage("TogglePhantoms is already true");
                         player.sendMessage(ChatColor.GRAY + "Ktos juz wylaczyl fantomy. Punkty zostaly zwrocone.");
@@ -72,7 +72,7 @@ public class Cws {
 
                 if (arguments[0].equals("ToggleEnd")) {
                     if (Supporter.ToggleEnd) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getDisplayName() + " AddPoints 50");
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getDisplayName() + " AddPoints 30");
 
                         sender.sendMessage("ToggleEnd is already true");
                         player.sendMessage(ChatColor.GRAY + "Ktos juz wlaczyl end. Punkty zostaly zwrocone.");

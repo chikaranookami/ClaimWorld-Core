@@ -55,7 +55,7 @@ public class EntitySpawnEvent implements Listener {
             recipe1.addIngredient(new ItemStack(Material.EMERALD, 24));
             recipe1.addIngredient(new ItemStack(Material.ITEM_FRAME));
 
-            MerchantRecipe recipe2 = new MerchantRecipe(randomPlayerHead, 0, 1, true, 1, 1, 32, 16);
+            MerchantRecipe recipe2 = new MerchantRecipe(randomPlayerHead, 0, 2, true, 1, 1, 32, 16);
             recipe2.addIngredient(new ItemStack(Material.EMERALD, 32));
 
             updatedRecipes = new ArrayList<>();
@@ -69,7 +69,7 @@ public class EntitySpawnEvent implements Listener {
             trader.setRecipes(updatedRecipes);
 
             Location location = trader.getLocation();
-            broadcastMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Tajemniczy Handlarz" + ChatColor.RESET + "" + ChatColor.GREEN + " wlasnie pojawil sie na koordynatach x" + Math.round(location.getX()) + "oraz z" + Math.round(location.getZ()) + ".");
+            broadcastMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Tajemniczy Handlarz" + ChatColor.RESET + "" + ChatColor.GREEN + " wlasnie pojawil sie na koordynatach x" + Math.round(location.getX()) + " oraz z" + Math.round(location.getZ()) + ".");
         }, 30L);
     }
 }

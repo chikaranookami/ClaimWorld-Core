@@ -4,7 +4,6 @@ import claimworld.net.supporter.commands.*;
 import claimworld.net.supporter.events.*;
 import claimworld.net.supporter.timers.AutoMessages;
 import org.bukkit.Bukkit;
-import org.bukkit.block.Sign;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -43,6 +42,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new HangingPlaceEvent(), this);
 
         //commands
+        new CwAdmin();
         new Kosz();
         new Cws();
         new Pomoc();

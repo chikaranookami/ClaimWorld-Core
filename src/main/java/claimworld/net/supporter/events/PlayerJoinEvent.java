@@ -20,21 +20,11 @@ public class PlayerJoinEvent implements Listener {
 
         //set tablist
         player.setPlayerListHeader("\n " + ChatColor.AQUA + "ClaimWorld" + ChatColor.WHITE + ".net" + " \n");
-        player.setPlayerListFooter(ChatColor.AQUA + "\n Duze Powiekszenie Mapy \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "09.09.2022 " + ChatColor.AQUA + "\n\n Turniej Siatkowki \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "10.09.2022 \n");
+        player.setPlayerListFooter("\n " + ChatColor.AQUA + "Duze Powiekszenie Mapy \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "09.09.2022" + " \n\n " + ChatColor.AQUA + "Turniej Siatkowki \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "10.09.2022" + " \n");
 
         //set ranks
         Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getInstance(), () ->{
-            String newPlayerListName = ranks.getDesign(player);
-
-            if (newPlayerListName == null) {
-                ErrorMessages errorMessages = new ErrorMessages();
-                player.sendMessage(errorMessages.getUserResponse(0));
-                Bukkit.getConsoleSender().sendMessage(errorMessages.getByCode(0));
-                return;
-            }
-
-            player.setPlayerListName(ranks.getDesign(player));
-            player.setDisplayName(ranks.getDesign(player));
+            ranks.updateRank(player);
         }, 4L);
 
         //end available?

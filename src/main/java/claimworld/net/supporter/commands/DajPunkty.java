@@ -50,7 +50,7 @@ public class DajPunkty {
 
                     int total = (int) (points + multipler);
 
-                    Bukkit.dispatchCommand(sender, "adminvote User " + player.getDisplayName() + " AddPoints " + total);
+                    Bukkit.dispatchCommand(sender, "adminvote User " + player.getName() + " AddPoints " + total);
 
                     sender.sendMessage(ChatColor.GREEN + "Pomyslnie dodano graczowi " + player.getDisplayName() + ChatColor.GREEN + " " + points + ChatColor.GREEN + " punktow (multipler " + multipler + ChatColor.GREEN + ")");
                     player.sendMessage(ChatColor.AQUA + "Otrzymano " + total + ChatColor.AQUA + " punktow za glosowanie.");
@@ -73,7 +73,7 @@ public class DajPunkty {
 
                     int total = (int) (points * multipler);
 
-                    Bukkit.dispatchCommand(sender, "adminvote User " + player.getDisplayName() + " AddPoints " + total);
+                    Bukkit.dispatchCommand(sender, "adminvote User " + player.getName() + " AddPoints " + total);
 
                     sender.sendMessage(ChatColor.GREEN + "Pomyslnie dodano graczowi " + player.getDisplayName() + ChatColor.GREEN + " " + points + ChatColor.GREEN + " punktow (multipler " + multipler + ChatColor.GREEN + ")");
                     player.sendMessage(ChatColor.AQUA + "Otrzymano " + total + ChatColor.AQUA + " punktow.");

@@ -15,7 +15,7 @@ public class PlayerChangedWorldEvent implements Listener {
         Player player = event.getPlayer();
 
         if (!(player.getWorld().getEnvironment() == World.Environment.THE_END)) return;
-        if (Supporter.ToggleEnd) return;
+        if (Supporter.toggleEnd) return;
 
         Bukkit.dispatchCommand(player, "spawn");
 

@@ -22,7 +22,7 @@ public class EntityDeathEvent implements Listener {
         }
 
         if (event.getEntityType() == EntityType.PLAYER) {
-            if (!Supporter.DoubleXp) return;
+            if (!Supporter.doubleXp) return;
 
             int exp = event.getDroppedExp();
 

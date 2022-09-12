@@ -21,6 +21,8 @@ public class Teleporter {
                     location = ((Player) sender).getLocation();
 
                     sender.sendMessage("nowy teleporter: " + location);
+
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "> " + ChatColor.GREEN + ChatColor.BOLD + "Teleporter" + ChatColor.GREEN + " zyskal nowe koordynaty i jest juz aktywny!");
                     return true;
                 }
 

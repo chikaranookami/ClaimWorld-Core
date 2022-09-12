@@ -1,7 +1,6 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.ErrorMessages;
 import claimworld.net.supporter.utils.Ranks;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -20,7 +19,7 @@ public class PlayerJoinEvent implements Listener {
 
         //set tablist
         player.setPlayerListHeader("\n " + ChatColor.AQUA + "ClaimWorld" + ChatColor.WHITE + ".net" + " \n");
-        player.setPlayerListFooter("\n " + ChatColor.AQUA + "Duze Powiekszenie Mapy \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "09.09.2022" + " \n\n " + ChatColor.AQUA + "Turniej Siatkowki \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "10.09.2022" + " \n");
+        player.setPlayerListFooter("\n " + ChatColor.AQUA + "Magiczne Skrzynki \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "16.09.2022" + " \n\n " + ChatColor.AQUA + "Konkurs Talentow \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "17.09.2022" + " \n");
 
         //set ranks
         Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getInstance(), () ->{
@@ -28,7 +27,7 @@ public class PlayerJoinEvent implements Listener {
         }, 4L);
 
         //end available?
-        if (Supporter.ToggleEnd) {
+        if (Supporter.toggleEnd) {
             player.sendMessage(ChatColor.LIGHT_PURPLE + "End jest obecnie wlaczony. Korzystaj, poki mozesz!");
             return;
         }

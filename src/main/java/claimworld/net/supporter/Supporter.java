@@ -17,9 +17,11 @@ public final class Supporter extends JavaPlugin implements Listener {
         return instance;
     }
 
-    public static boolean TogglePhantoms;
-    public static boolean ToggleEnd;
-    public static boolean DoubleXp;
+    public static boolean togglePhantoms;
+    public static boolean toggleEnd;
+    public static boolean doubleXp;
+    public static boolean pickupAll;
+    public static boolean doubledForce;
 
     @Override
     public void onEnable() {
@@ -40,6 +42,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new EntityDamageEvent(), this);
         pluginManager.registerEvents(new EntitySpawnEvent(), this);
         pluginManager.registerEvents(new HangingPlaceEvent(), this);
+        pluginManager.registerEvents(new PlayerItemConsumeEvent(), this);
 
         //commands
         new CwAdmin();

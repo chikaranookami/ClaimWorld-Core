@@ -8,7 +8,7 @@ public class BlockBreakEvent implements Listener {
 
     @EventHandler
     public void blockBreakEvent(org.bukkit.event.block.BlockBreakEvent event) {
-        if (!Supporter.DoubleXp) return;
+        if (!Supporter.doubleXp) return;
         if (event.getExpToDrop() <= 0 )return;
 
         event.setExpToDrop(event.getExpToDrop() * 2);

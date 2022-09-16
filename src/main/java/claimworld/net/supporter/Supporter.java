@@ -23,6 +23,8 @@ public final class Supporter extends JavaPlugin implements Listener {
     public static boolean pickupAll;
     public static boolean doubledForce;
 
+    public static int quequedChests = 0;
+
     @Override
     public void onEnable() {
         instance = this;
@@ -43,8 +45,11 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new EntitySpawnEvent(), this);
         pluginManager.registerEvents(new HangingPlaceEvent(), this);
         pluginManager.registerEvents(new PlayerItemConsumeEvent(), this);
+        //pluginManager.registerEvents(new PlayerInteractEvent(), this);
 
         //commands
+        //new claimworld.net.supporter.commands.MagicChests();
+        new MagicChests2();
         new CwAdmin();
         new Kosz();
         new Cws();
@@ -66,7 +71,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         }, 20L);
 
         //play bossbars after 2 and 4 hours
-        scheduler.runTaskLater(Supporter.getInstance(), AutoMessages::new, 100L);
+        scheduler.runTaskLater(this, AutoMessages::new, 100L);
     }
 
     @Override

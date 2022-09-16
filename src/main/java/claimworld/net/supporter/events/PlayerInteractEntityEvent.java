@@ -22,8 +22,8 @@ import static org.bukkit.Bukkit.getScheduler;
 public class PlayerInteractEntityEvent implements Listener {
 
     private final List<EntityType> entityTypes = Arrays.asList(EntityType.COW, EntityType.SHEEP, EntityType.PIG, EntityType.CHICKEN);
-    private final List<EntityType> blockedEntityTypes = Arrays.asList(EntityType.ENDER_DRAGON, EntityType.ENDER_CRYSTAL);
-    private final List<Player> deleyedPlayers = new ArrayList<>();
+    private final List<EntityType> blockedEntityTypes = Arrays.asList(EntityType.ENDER_DRAGON, EntityType.ENDER_CRYSTAL, EntityType.AREA_EFFECT_CLOUD, EntityType.DRAGON_FIREBALL, EntityType.ENDER_SIGNAL, EntityType.EXPERIENCE_ORB, EntityType.LIGHTNING, EntityType.SMALL_FIREBALL);
+    private final List<Player> delayedPlayers = new ArrayList<>();
 
     private int showParticlesTask;
 
@@ -39,7 +39,7 @@ public class PlayerInteractEntityEvent implements Listener {
         Player player = event.getPlayer();
 
         if (!player.getInventory().getItemInMainHand().getType().isAir()) return;
-        if (deleyedPlayers.contains(player)) return;
+        if (delayedPlayers.contains(player)) return;
 
         if (player.isSneaking()) {
             if (player.getPassengers().isEmpty()) {
@@ -52,9 +52,9 @@ public class PlayerInteractEntityEvent implements Listener {
                 player.addPassenger(entity);
                 player.playSound(player, Sound.ITEM_ARMOR_EQUIP_ELYTRA, 0.7f, 1.0f);
 
-                deleyedPlayers.add(player);
+                delayedPlayers.add(player);
                 getScheduler().runTaskLaterAsynchronously(Supporter.getInstance(), () -> {
-                    deleyedPlayers.remove(player);
+                    delayedPlayers.remove(player);
                 }, 15L);
 
                 return;
@@ -80,9 +80,9 @@ public class PlayerInteractEntityEvent implements Listener {
 
                 entity.setVelocity(direction.multiply(number));
 
-                deleyedPlayers.add(player);
+                delayedPlayers.add(player);
                 getScheduler().runTaskLaterAsynchronously(Supporter.getInstance(), () -> {
-                    deleyedPlayers.remove(player);
+                    delayedPlayers.remove(player);
                 }, 15L);
 
                 showParticlesTask = getScheduler().scheduleSyncRepeatingTask(Supporter.getInstance(), () -> {
@@ -113,9 +113,9 @@ public class PlayerInteractEntityEvent implements Listener {
             player.removePassenger(entity);
             player.playSound(player, Sound.ITEM_ARMOR_EQUIP_ELYTRA, 0.7f, 1.0f);
 
-            deleyedPlayers.add(player);
+            delayedPlayers.add(player);
             getScheduler().runTaskLaterAsynchronously(Supporter.getInstance(), () -> {
-                deleyedPlayers.remove(player);
+                delayedPlayers.remove(player);
             }, 15L);
         }
     }

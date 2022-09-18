@@ -12,11 +12,12 @@ import java.util.List;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
 
 public class CustomItems {
-    private final String commonItemLore = colorize("&7&oPowszechny przedmiot [&f&o▪&7&o▪▪▪▪]");
-    private final String uncommonItemLore = colorize("&7&oNiepowszechny przedmiot [&a&o▪▪&7&o▪▪▪]");
-    private final String rareItemLore = colorize("&7&oRzadki przedmiot [&d&o▪▪▪&7&o▪▪]");
-    private final String uniqueItemLore = colorize("&7&oUnikalny przedmiot [&c&o▪▪▪▪&7&o▪]");
-    private final String legendaryItemLore = colorize("&7&oLegendarny przedmiot [&e&o▪▪▪▪▪&7&o]");
+    private final String commonItemLore = colorize("&7&oPowszechny przedmiot [&f&o■&7&o■■■■]");
+    private final String uncommonItemLore = colorize("&7&oNiepowszechny przedmiot [&a&o■■&7&o■■■]");
+    private final String rareItemLore = colorize("&7&oRzadki przedmiot [&d&o■■■&7&o■■]");
+    private final String uniqueItemLore = colorize("&7&oWyjatkowy przedmiot [&c&o■■■■&7&o■]");
+    private final String legendaryItemLore = colorize("&7&oLegendarny przedmiot [&e&o■■■■■&7&o]");
+    private final String customItemLore = colorize("&7&oUnikalny przedmiot [&a&l■&b&l■&c&l■&d&l■&e&l■&7&o]");
 
     private ItemStack playerHead(int amount, Player player) {
         ItemStack item = new ItemStack(Material.PLAYER_HEAD, amount);

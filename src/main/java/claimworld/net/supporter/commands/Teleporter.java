@@ -1,11 +1,13 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
+import claimworld.net.supporter.utils.Messages;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import static claimworld.net.supporter.utils.StringUtils.colorize;
 
 public class Teleporter {
 
@@ -22,7 +24,7 @@ public class Teleporter {
 
                     sender.sendMessage("nowy teleporter: " + location);
 
-                    Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "> " + ChatColor.GREEN + ChatColor.BOLD + "Teleporter" + ChatColor.GREEN + " zyskal nowe koordynaty i jest juz aktywny!");
+                    Bukkit.getConsoleSender().sendMessage(colorize(Messages.getBroadcastPrefix() + "&eTeleporter&f otrzymal nowe, aktywne koordynaty. Przejdz na &e/spawn&f, by go uzyc."));
                     return true;
                 }
 
@@ -35,12 +37,12 @@ public class Teleporter {
 
                 if (location == null) {
                     sender.sendMessage(player.getDisplayName() + " tried to use teleporter.");
-                    player.sendMessage(ChatColor.GRAY + "Magiczny Portal jest obecnie wylaczony.");
+                    player.sendMessage(Messages.getUserPrefix() + "Magiczny Portal jest obecnie wylaczony.");
                     return true;
                 }
 
                 player.teleport(location);
-                player.sendMessage(ChatColor.GREEN + "Przeszedles przez Magiczny Portal.");
+                player.sendMessage(Messages.getUserPrefix() + "Przeszedles przez Magiczny Portal.");
                 sender.sendMessage("teleporter uzyty na " + player);
 
                 return true;

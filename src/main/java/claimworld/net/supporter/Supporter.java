@@ -11,12 +11,11 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 public final class Supporter extends JavaPlugin implements Listener {
 
-    private static Supporter instance;
+    private static Supporter plugin;
 
-    public static Supporter getInstance() {
-        return instance;
+    public static Supporter getPlugin() {
+        return plugin;
     }
-
     public static boolean togglePhantoms;
     public static boolean toggleEnd;
     public static boolean doubleXp;
@@ -25,10 +24,12 @@ public final class Supporter extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        instance = this;
+        plugin = this;
+
+        BukkitScheduler scheduler = Bukkit.getScheduler();
+        PluginManager pluginManager = getServer().getPluginManager();
 
         //events
-        PluginManager pluginManager = getServer().getPluginManager();
         pluginManager.registerEvents(new PlayerLoginEvent(), this);
         pluginManager.registerEvents(new PlayerJoinEvent(), this);
         pluginManager.registerEvents(new PlayerDeathEvent(), this);
@@ -54,19 +55,15 @@ public final class Supporter extends JavaPlugin implements Listener {
         new Sklep();
         new Vip();
         new DajPunkty();
-        new ThrowEntity();
         new Fw();
         new Test();
-
-        BukkitScheduler scheduler = Bukkit.getScheduler();
+        new ShopAnnouncement();
 
         //enablePhantoms
-        scheduler.runTaskLater(this, () -> {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true");
-        }, 20L);
+        scheduler.runTaskLater(this, () -> { Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true"); }, 20L);
 
         //play bossbars after 2 and 4 hours
-        scheduler.runTaskLater(Supporter.getInstance(), AutoMessages::new, 100L);
+        scheduler.runTaskLater(this, AutoMessages::new, 100L);
     }
 
     @Override

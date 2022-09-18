@@ -17,6 +17,7 @@ public class Fw {
             public boolean onCommand(CommandSender sender, String[] arguments) {
 
                 Location location = ((Player) sender).getLocation();
+                assert location.getWorld() != null;
                 Firework firework = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
                 FireworkMeta fireworkMeta = firework.getFireworkMeta();
 

@@ -13,7 +13,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-import static claimworld.net.supporter.Supporter.getInstance;
+import static claimworld.net.supporter.Supporter.getPlugin;
 
 public abstract class CommandBase extends BukkitCommand implements CommandExecutor {
 
@@ -98,19 +98,19 @@ public abstract class CommandBase extends BukkitCommand implements CommandExecut
 
         String permission = getPermission();
         if (permission != null && !(sender.hasPermission(permission))) {
-            sender.sendMessage("Brak uprawnien.");
+            sender.sendMessage(Messages.getUserPrefix() + "Brak uprawnien.");
             return true;
         }
 
         if (delayedPlayers != null && sender instanceof Player) {
             Player player = (Player) sender;
             if (delayedPlayers.contains(player.getName()) && !player.hasPermission("claimworld.mod")) {
-                player.sendMessage("Musisz odczekac chwile, zanim bedziesz mogl uzyc tej komendy ponownie.");
+                player.sendMessage(Messages.getUserPrefix() + "Musisz odczekac chwile, zanim bedziesz mogl uzyc tej komendy ponownie.");
                 return true;
             }
 
             delayedPlayers.add(player.getName());
-            Bukkit.getScheduler().runTaskLaterAsynchronously(getInstance(), () -> {
+            Bukkit.getScheduler().runTaskLaterAsynchronously(getPlugin(), () -> {
                 delayedPlayers.remove(player.getName());
             }, 20L * delay);
         }

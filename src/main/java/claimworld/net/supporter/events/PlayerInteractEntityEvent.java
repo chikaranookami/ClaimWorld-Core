@@ -23,7 +23,7 @@ public class PlayerInteractEntityEvent implements Listener {
 
     private final List<EntityType> entityTypes = Arrays.asList(EntityType.COW, EntityType.SHEEP, EntityType.PIG, EntityType.CHICKEN);
     private final List<EntityType> blockedEntityTypes = Arrays.asList(EntityType.ENDER_DRAGON, EntityType.ENDER_CRYSTAL);
-    private final List<Player> deleyedPlayers = new ArrayList<>();
+    private final List<Player> delayedPlayers = new ArrayList<>();
 
     private int showParticlesTask;
 
@@ -39,7 +39,7 @@ public class PlayerInteractEntityEvent implements Listener {
         Player player = event.getPlayer();
 
         if (!player.getInventory().getItemInMainHand().getType().isAir()) return;
-        if (deleyedPlayers.contains(player)) return;
+        if (delayedPlayers.contains(player)) return;
 
         if (player.isSneaking()) {
             if (player.getPassengers().isEmpty()) {
@@ -52,9 +52,9 @@ public class PlayerInteractEntityEvent implements Listener {
                 player.addPassenger(entity);
                 player.playSound(player, Sound.ITEM_ARMOR_EQUIP_ELYTRA, 0.7f, 1.0f);
 
-                deleyedPlayers.add(player);
-                getScheduler().runTaskLaterAsynchronously(Supporter.getInstance(), () -> {
-                    deleyedPlayers.remove(player);
+                delayedPlayers.add(player);
+                getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
+                    delayedPlayers.remove(player);
                 }, 15L);
 
                 return;
@@ -80,12 +80,12 @@ public class PlayerInteractEntityEvent implements Listener {
 
                 entity.setVelocity(direction.multiply(number));
 
-                deleyedPlayers.add(player);
-                getScheduler().runTaskLaterAsynchronously(Supporter.getInstance(), () -> {
-                    deleyedPlayers.remove(player);
+                delayedPlayers.add(player);
+                getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
+                    delayedPlayers.remove(player);
                 }, 15L);
 
-                showParticlesTask = getScheduler().scheduleSyncRepeatingTask(Supporter.getInstance(), () -> {
+                showParticlesTask = getScheduler().scheduleSyncRepeatingTask(Supporter.getPlugin(), () -> {
                     if (!entity.isOnGround() && !entity.isDead() && !entity.isInWater() && !getScheduler().isCurrentlyRunning(showParticlesTask)) {
                         Location location = entity.getLocation().add(0, 1, 0);
 
@@ -97,7 +97,7 @@ public class PlayerInteractEntityEvent implements Listener {
                     }
                 }, 2L, 2L);
 
-                getScheduler().runTaskLaterAsynchronously(Supporter.getInstance(), () -> {
+                getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                     if (!getScheduler().isCurrentlyRunning(showParticlesTask)) return;
 
                     getScheduler().cancelTask(showParticlesTask);
@@ -113,9 +113,9 @@ public class PlayerInteractEntityEvent implements Listener {
             player.removePassenger(entity);
             player.playSound(player, Sound.ITEM_ARMOR_EQUIP_ELYTRA, 0.7f, 1.0f);
 
-            deleyedPlayers.add(player);
-            getScheduler().runTaskLaterAsynchronously(Supporter.getInstance(), () -> {
-                deleyedPlayers.remove(player);
+            delayedPlayers.add(player);
+            getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
+                delayedPlayers.remove(player);
             }, 15L);
         }
     }

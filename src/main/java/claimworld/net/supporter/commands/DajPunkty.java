@@ -2,6 +2,7 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.ErrorMessages;
+import claimworld.net.supporter.utils.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -10,6 +11,7 @@ import org.bukkit.entity.Player;
 import java.util.Random;
 
 public class DajPunkty {
+
     public DajPunkty() {
         new CommandBase("dajpunkty", 2, false) {
             @Override
@@ -53,7 +55,7 @@ public class DajPunkty {
                     Bukkit.dispatchCommand(sender, "adminvote User " + player.getName() + " AddPoints " + total);
 
                     sender.sendMessage(ChatColor.GREEN + "Pomyslnie dodano graczowi " + player.getDisplayName() + ChatColor.GREEN + " " + points + ChatColor.GREEN + " punktow (multipler " + multipler + ChatColor.GREEN + ")");
-                    player.sendMessage(ChatColor.AQUA + "Otrzymano " + total + ChatColor.AQUA + " punktow za glosowanie.");
+                    player.sendMessage(Messages.getUserPrefix() + "Otrzymano " + total + " punktow za glosowanie.");
                 }
 
                 else {
@@ -76,7 +78,7 @@ public class DajPunkty {
                     Bukkit.dispatchCommand(sender, "adminvote User " + player.getName() + " AddPoints " + total);
 
                     sender.sendMessage(ChatColor.GREEN + "Pomyslnie dodano graczowi " + player.getDisplayName() + ChatColor.GREEN + " " + points + ChatColor.GREEN + " punktow (multipler " + multipler + ChatColor.GREEN + ")");
-                    player.sendMessage(ChatColor.AQUA + "Otrzymano " + total + ChatColor.AQUA + " punktow.");
+                    player.sendMessage(Messages.getUserPrefix() + "Otrzymano " + total + " punktow.");
                 }
 
                 return true;

@@ -1,8 +1,9 @@
 package claimworld.net.supporter.utils;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import static claimworld.net.supporter.utils.StringUtils.colorize;
 
 public class Ranks {
     public void updateRank(Player player) {
@@ -21,22 +22,22 @@ public class Ranks {
 
     public final String getDesign(Player player) {
         if (player.hasPermission("claimworld.admin")) {
-            return ChatColor.LIGHT_PURPLE + "[CEO]" + ChatColor.RESET + " " + player.getName();
+            return colorize("&d[ADM]&r " + player.getName());
         }
         if (player.hasPermission("claimworld.mod")) {
-            return ChatColor.GREEN + "[MOD]" + ChatColor.RESET + " " + player.getName();
+            return colorize("&a[MOD]&r " + player.getName());
         }
         if (player.hasPermission("claimworld.mvp")) {
-            return ChatColor.RED + "[MVP]" + ChatColor.RESET + " " + player.getName();
+            return colorize("&c[MVP]&r " + player.getName());
         }
         if (player.hasPermission("claimworld.vip+")) {
-            return ChatColor.YELLOW + "[VIP+]" + ChatColor.RESET + " " + player.getName();
+            return colorize("&e[VIP+]&r " + player.getName());
         }
         if (player.hasPermission("claimworld.vip")) {
-            return ChatColor.AQUA + "[VIP]" + ChatColor.RESET + " " + player.getName();
+            return colorize("&b[VIP]&r " + player.getName());
         }
         if (player.hasPermission("claimworld.player")) {
-            return ChatColor.GRAY + "[GRA]" + ChatColor.RESET + " " + player.getName();
+            return colorize("&7[GRA]&r " + player.getName());
         }
         else {
             return null;

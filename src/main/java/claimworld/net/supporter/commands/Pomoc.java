@@ -36,7 +36,7 @@ public class Pomoc {
 
                 bookMeta.setPages(pages);
                 bookMeta.setPage(1, "§3§lInformacje§r\n- Zasady oraz wytyczne znajduja sie na Discordzie\n- Komendy znajduja sie na kolejnej stronie");
-                bookMeta.setPage(2, "§3§lPodstawowe Komendy§r\n/lwc - obsluga zabezpieczen\n/vote, /punkty - glosowanie i punkty\n/home, /sethome, /spawn - obsluga lokacji\n/msg - prywatna wiadomosc\n/warp lobby - lobby\n/voicechat - czat glosowy");
+                bookMeta.setPage(2, "§3§lPodstawowe Komendy§r\n/lwc - obsluga zabezpieczen\n/vote, /punkty - glosowanie i punkty\n/home, /sethome, /spawn, /warp - obsluga lokacji\n/msg - prywatna wiadomosc\n/poziomorza, /kosz\n/voicechat - czat glosowy");
                 bookMeta.setPage(3, "§3§lDodatkowe komendy VIP§r\n/playtime - czas online\n/me - opis postaci (RP)\n/skin - zmien swojego skina\n/hat - zaloz na glowe trzymany blok");
                 bookMeta.setPage(4, "§3§lDodatkowe komendy VIP+§r\n/sit, /lay, /crawl, /spin, /bellyflop - animacje\n\nVIP+ ma rowniez wszystkie komendy VIP.");
                 bookMeta.setPage(5, "§3§lDodatkowe komendy MVP+§r\n/pp - konsola efektow\n/fw - fajerwerk\n\nMVP ma rowniez wszystkie komendy VIP+ i VIP.");

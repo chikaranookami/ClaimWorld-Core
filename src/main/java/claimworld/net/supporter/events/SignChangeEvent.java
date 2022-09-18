@@ -14,6 +14,6 @@ public class SignChangeEvent implements Listener {
 
         if (lines.length < 1) return;
 
-        Bukkit.getConsoleSender().sendMessage("Player " + event.getPlayer().getDisplayName() + " napisal na tabliczce: " + Arrays.toString(lines) + " (ilosc znakow " + lines.length + ")");
+        Bukkit.getConsoleSender().sendMessage("Player " + event.getPlayer().getDisplayName() + " napisal na tabliczce (lokalizacja " + event.getPlayer().getLocation() + ": " + Arrays.toString(lines) + " (ilosc znakow " + lines.length + ")");
     }
 }

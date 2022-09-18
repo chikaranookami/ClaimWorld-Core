@@ -1,6 +1,7 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.utils.CustomItems;
+import claimworld.net.supporter.utils.Messages;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -8,6 +9,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.util.Random;
+
+import static claimworld.net.supporter.utils.StringUtils.colorize;
 
 public class PlayerItemConsumeEvent implements Listener {
 
@@ -29,7 +32,7 @@ public class PlayerItemConsumeEvent implements Listener {
             world.playSound(location, Sound.ENTITY_SHEEP_AMBIENT, 0.6f, 2f);
             world.spawnParticle(Particle.SPELL, location, 10, 0.75, 0.75, 0.75, 0);
             world.spawnParticle(Particle.SLIME, location, 10, 0.75, 0.75, 0.75);
-            player.sendMessage(ChatColor.GREEN + "" + ChatColor.ITALIC + "> Chyba zbiera Ci sie na cos ciezszego...");
+            player.sendMessage(Messages.getUserPrefix() + "Chyba zbiera Ci sie na cos ciezszego...");
         }
 
         if (poopChance <= 2) {
@@ -51,7 +54,7 @@ public class PlayerItemConsumeEvent implements Listener {
             world.spawnParticle(Particle.SPELL, location, 20, 0.75, 0.75, 0.75, 0);
             world.spawnParticle(Particle.SLIME, location, 20, 0.75, 0.75, 0.75);
 
-            Bukkit.broadcastMessage(ChatColor.GREEN + "> " + player.getDisplayName() + ChatColor.GREEN + " wlasnie sie zesral.");
+            Bukkit.broadcastMessage(colorize(Messages.getBroadcastPrefix() + "Gracz&e" + player.getDisplayName() + " &fwlasnie sie... zesral."));
         }
     }
 }

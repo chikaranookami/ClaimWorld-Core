@@ -1,8 +1,8 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.Messages;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,6 +19,6 @@ public class PlayerChangedWorldEvent implements Listener {
 
         Bukkit.dispatchCommand(player, "spawn");
 
-        player.sendMessage(ChatColor.GRAY + "End niedostepny. Mozesz go wlaczyc w Sklepie Punktowym (/punkty).");
+        player.sendMessage(Messages.getUserPrefix() + "End niedostepny. Mozesz go wlaczyc w Sklepie Punktowym (/punkty).");
     }
 }

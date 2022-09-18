@@ -18,10 +18,59 @@ public class CustomItems {
         return moneyItem(amount);
     }
 
+    public ItemStack getShitItem() {
+        return getShitItem(1);
+    }
+
+    public ItemStack getShitItem(int amount) {
+        return getShitItem(amount);
+    }
+
+    public ItemStack getGlobalTicketItem() {
+        return getGlobalTicketItem(1);
+    }
+
+    public ItemStack getGlobalTicketItem(int amount) {
+        return getGlobalTicketItem(amount);
+    }
+
+    private ItemStack shitItem(int amount) {
+        ItemStack item  = new ItemStack(Material.MUSHROOM_STEM, amount);
+
+        ItemMeta meta = item.getItemMeta();
+        assert meta != null;
+        meta.setDisplayName(ChatColor.GREEN + "Kupa");
+
+        List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "" + ChatColor.ITALIC + "Powszechny Skladnik " + ChatColor.GRAY + "[▪▪▪▪▪]");
+        meta.setLore(lore);
+
+        item.setItemMeta(meta);
+
+        return item;
+    }
+
+    private ItemStack globalTicketItem(int amount) {
+        ItemStack item  = new ItemStack(Material.PAPER, amount);
+
+        ItemMeta meta = item.getItemMeta();
+        assert meta != null;
+        meta.setDisplayName(ChatColor.GREEN + "Uniwersalny Bilet");
+
+        List<String> lore = new ArrayList<>();
+        lore.add(ChatColor.GRAY + "" + ChatColor.ITALIC + "Powszechny Skladnik " + ChatColor.GRAY + "[▪▪▪▪▪]");
+        meta.setLore(lore);
+
+        item.setItemMeta(meta);
+
+        return item;
+    }
+
     private ItemStack moneyItem(int amount) {
         ItemStack item = new ItemStack(Material.EMERALD, amount);
 
         ItemMeta meta = item.getItemMeta();
+        assert meta != null;
         meta.setDisplayName(ChatColor.GREEN + "" + ChatColor.BOLD + "$1");
 
         List<String> lore = new ArrayList<>();

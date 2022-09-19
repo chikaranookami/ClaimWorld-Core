@@ -18,9 +18,9 @@ public class PlayerItemConsumeEvent implements Listener {
     public void playerItemConsumeEvent(org.bukkit.event.player.PlayerItemConsumeEvent event) {
         int poopChance = new Random().nextInt(1000);
 
-        if (poopChance > 9) return;
+        if (poopChance > 18) return;
 
-        int random = new Random().nextInt(2);
+        int random = new Random().nextInt(5);
 
         Player player = event.getPlayer();
         Block block = player.getLocation().getBlock();
@@ -29,7 +29,7 @@ public class PlayerItemConsumeEvent implements Listener {
         Location location = player.getLocation();
 
         if (poopChance > 2) {
-            world.playSound(location, Sound.ENTITY_SHEEP_AMBIENT, 0.6f, 2f);
+            world.playSound(location, Sound.ENTITY_SHEEP_AMBIENT, 0.5f, 2f);
             world.spawnParticle(Particle.SPELL, location, 10, 0.75, 0.75, 0.75, 0);
             world.spawnParticle(Particle.SLIME, location, 10, 0.75, 0.75, 0.75);
             player.sendMessage(Messages.getUserPrefix() + "Chyba zbiera Ci sie na cos ciezszego...");

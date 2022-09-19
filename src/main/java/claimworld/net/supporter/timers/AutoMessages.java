@@ -46,31 +46,5 @@ public class AutoMessages {
 
             getServer().getConsoleSender().sendMessage("Zakonczono wyswietlanie bossbara #1.");
         }, 144000L);
-
-        scheduler.runTaskLater(Supporter.getPlugin(), () -> {
-            for (Player player : getOnlinePlayers()) {
-                bossBar.addPlayer(player);
-            }
-
-            getServer().getConsoleSender().sendMessage("Wyswietlanie bossbara #1...");
-
-            new BukkitRunnable() {
-                double d = 0.0;
-
-                @Override
-                public void run() {
-                    if (d >= 1.0) {
-                        bossBar.removeAll();
-                        cancel();
-                        return;
-                    }
-
-                    bossBar.setProgress(d);
-                    d += 0.01;
-                }
-            }.runTaskTimer(Supporter.getPlugin(), 20L, 4L);
-
-            getServer().getConsoleSender().sendMessage("Zakonczono wyswietlanie bossbara ##1.");
-        }, 288000L);
     }
 }

@@ -26,6 +26,8 @@ public final class Supporter extends JavaPlugin implements Listener {
     public void onEnable() {
         plugin = this;
 
+        this.saveDefaultConfig();
+
         BukkitScheduler scheduler = Bukkit.getScheduler();
         PluginManager pluginManager = getServer().getPluginManager();
 
@@ -46,6 +48,8 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new PlayerItemConsumeEvent(), this);
 
         //commands
+        new LoadLokacja();
+        new SetLokacja();
         new CwAdmin();
         new Kosz();
         new Cws();
@@ -58,6 +62,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         new Fw();
         new Test();
         new ShopAnnouncement();
+        new PoziomMorza();
 
         //enablePhantoms
         scheduler.runTaskLater(this, () -> { Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true"); }, 20L);

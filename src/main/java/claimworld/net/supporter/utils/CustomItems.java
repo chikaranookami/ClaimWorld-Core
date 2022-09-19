@@ -109,7 +109,7 @@ public class CustomItems {
     }
 
     public ItemStack getMoneyItem() {
-        return moneyItem(1);
+        return getMoneyItem(1);
     }
 
     public ItemStack getMoneyItem(int amount) {
@@ -121,7 +121,7 @@ public class CustomItems {
     }
 
     public ItemStack getShitItem(int amount) {
-        return getShitItem(amount);
+        return shitItem(amount);
     }
 
     public ItemStack getGlobalTicketItem() {
@@ -129,6 +129,6 @@ public class CustomItems {
     }
 
     public ItemStack getGlobalTicketItem(int amount) {
-        return getGlobalTicketItem(amount);
+        return globalTicketItem(amount);
     }
 }

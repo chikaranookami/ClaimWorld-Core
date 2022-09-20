@@ -7,10 +7,10 @@ import org.bukkit.command.CommandSender;
 
 public class ShopAnnouncement {
     public ShopAnnouncement() {
-        new CommandBase("shopannouncement", 1, false) {
+        new CommandBase("shopannouncement", 1, 99, false) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
-                Bukkit.broadcastMessage(Messages.getShopAnnouncementPrefix() + arguments[0]);
+                Bukkit.broadcastMessage(Messages.getShopAnnouncementPrefix() + String.join(" ", arguments));
                 return true;
             }
 

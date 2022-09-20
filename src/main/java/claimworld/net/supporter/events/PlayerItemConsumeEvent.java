@@ -18,9 +18,9 @@ public class PlayerItemConsumeEvent implements Listener {
     public void playerItemConsumeEvent(org.bukkit.event.player.PlayerItemConsumeEvent event) {
         int poopChance = new Random().nextInt(1000);
 
-        if (poopChance > 18) return;
+        if (poopChance > 20) return;
 
-        int random = new Random().nextInt(5);
+        int random = new Random().nextInt(2);
 
         Player player = event.getPlayer();
         Block block = player.getLocation().getBlock();
@@ -28,33 +28,27 @@ public class PlayerItemConsumeEvent implements Listener {
         World world = player.getWorld();
         Location location = player.getLocation();
 
-        if (poopChance > 2) {
+        if (poopChance > 5) {
             world.playSound(location, Sound.ENTITY_SHEEP_AMBIENT, 0.5f, 2f);
             world.spawnParticle(Particle.SPELL, location, 10, 0.75, 0.75, 0.75, 0);
             world.spawnParticle(Particle.SLIME, location, 10, 0.75, 0.75, 0.75);
             player.sendMessage(Messages.getUserPrefix() + "Chyba zbiera Ci sie na cos ciezszego...");
+            return;
         }
 
-        if (poopChance <= 2) {
-            if (block.getType() != Material.AIR) return;
-            if (random == 1) if (block1.getType() != Material.AIR) return;
+        if (block.getType() != Material.AIR) return;
+        block.setType(Material.DIRT);
 
-            block.setType(Material.DIRT);
+        if (random == 1) block1.setType(Material.DIRT);
 
-            if (random == 1) {
-                if (block1.getType() != Material.AIR) return;
-                block1.setType(Material.DIRT);
-            }
+        world.dropItem(location, new CustomItems().getShitItem());
 
-            world.dropItem(location, new CustomItems().getShitItem());
+        world.playSound(location, Sound.ENTITY_SHEEP_AMBIENT, 0.6f, 2f);
+        world.playSound(location, Sound.BLOCK_ROOTED_DIRT_PLACE, 0.85f, 2f);
+        world.playSound(location, Sound.BLOCK_ROOTED_DIRT_BREAK, 0.6f, 2f);
+        world.spawnParticle(Particle.SPELL, location, 20, 0.75, 0.75, 0.75, 0);
+        world.spawnParticle(Particle.SLIME, location, 20, 0.75, 0.75, 0.75);
 
-            world.playSound(location, Sound.ENTITY_SHEEP_AMBIENT, 0.6f, 2f);
-            world.playSound(location, Sound.BLOCK_ROOTED_DIRT_PLACE, 0.85f, 2f);
-            world.playSound(location, Sound.BLOCK_ROOTED_DIRT_BREAK, 0.6f, 2f);
-            world.spawnParticle(Particle.SPELL, location, 20, 0.75, 0.75, 0.75, 0);
-            world.spawnParticle(Particle.SLIME, location, 20, 0.75, 0.75, 0.75);
-
-            Bukkit.broadcastMessage(colorize(Messages.getBroadcastPrefix() + "Gracz&e" + player.getDisplayName() + " &fwlasnie sie... zesral."));
-        }
+        Bukkit.broadcastMessage(colorize(Messages.getBroadcastPrefix() + "Gracz " + player.getDisplayName() + " &fwlasnie sie... zesral."));
     }
 }

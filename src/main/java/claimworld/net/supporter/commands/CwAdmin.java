@@ -1,6 +1,7 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
+import claimworld.net.supporter.utils.CustomItems;
 import claimworld.net.supporter.utils.Ranks;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -8,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class CwAdmin {
     public CwAdmin() {
-        new CommandBase("cwadmin", 2, true) {
+        new CommandBase("cwadmin", 2, false) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
                 Player player = Bukkit.getPlayer(arguments[0]);
@@ -22,6 +23,12 @@ public class CwAdmin {
                 if (action.equals("updateRank")) {
                     sender.sendMessage("Trying to update rank of " + player.getDisplayName());
                     new Ranks().updateRank(player);
+                    return true;
+                }
+
+                if (action.equals("giveShitItem")) {
+                    assert player.getLocation().getWorld() != null;
+                    player.getLocation().getWorld().dropItem(player.getLocation(), new CustomItems().getShitItem());
                     return true;
                 }
 

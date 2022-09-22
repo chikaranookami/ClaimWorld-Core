@@ -46,6 +46,8 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new EntitySpawnEvent(), this);
         pluginManager.registerEvents(new HangingPlaceEvent(), this);
         pluginManager.registerEvents(new PlayerItemConsumeEvent(), this);
+        pluginManager.registerEvents(new InventoryClickEvent(), this);
+        pluginManager.registerEvents(new InventoryDragEvent(), this);
 
         //commands
         new LoadLokacja();
@@ -60,7 +62,6 @@ public final class Supporter extends JavaPlugin implements Listener {
         new Vip();
         new DajPunkty();
         new Fw();
-        new Test();
         new ShopAnnouncement();
         new PoziomMorza();
 

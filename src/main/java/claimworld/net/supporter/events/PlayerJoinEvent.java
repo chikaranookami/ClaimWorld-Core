@@ -3,6 +3,7 @@ package claimworld.net.supporter.events;
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.Messages;
 import claimworld.net.supporter.utils.Ranks;
+import claimworld.net.supporter.utils.guis.ReadyItems;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -22,6 +23,9 @@ public class PlayerJoinEvent implements Listener {
         //set tablist
         player.setPlayerListHeader(colorize("\n &bClaimWorld&f.net \n"));
         //player.setPlayerListFooter("\n " + ChatColor.AQUA + "Magiczne Skrzynki \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "16.09.2022" + " \n\n " + ChatColor.AQUA + "Konkurs Talentow \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "17.09.2022" + " \n");
+
+        //set menu item
+        player.getInventory().setItem(17, new ReadyItems().get("Menu"));
 
         //set ranks
         Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () ->{

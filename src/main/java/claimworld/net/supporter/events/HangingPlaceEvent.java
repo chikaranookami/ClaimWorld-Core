@@ -1,20 +1,18 @@
 package claimworld.net.supporter.events;
 
+import claimworld.net.supporter.utils.guis.ReadyItems;
+import org.bukkit.Material;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
-
-import static claimworld.net.supporter.utils.StringUtils.colorize;
 
 public class HangingPlaceEvent implements Listener {
 
     @EventHandler
     public void hangingPlaceEvent(org.bukkit.event.hanging.HangingPlaceEvent event) {
-        ItemStack itemStack = event.getItemStack();
-        assert itemStack != null;
-        assert itemStack.getItemMeta()!= null;
-        if (!itemStack.getItemMeta().getDisplayName().equals(colorize("&aNiewidzialna Ramka"))) return;
+        if (event.getItemStack().getType() != Material.ITEM_FRAME) return;
+        if (event.getItemStack().getItemMeta().getLore() == null) return;
+        if (!event.getItemStack().getItemMeta().getLore().equals(new ReadyItems().get("Niewidzialna ramka").getItemMeta().getLore())) return;
 
         ((ItemFrame) event.getEntity()).setVisible(false);
     }

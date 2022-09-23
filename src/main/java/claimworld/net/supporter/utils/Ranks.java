@@ -1,5 +1,6 @@
 package claimworld.net.supporter.utils;
 
+import claimworld.net.supporter.utils.wip.ErrorMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -18,6 +19,30 @@ public class Ranks {
 
         player.setPlayerListName(getDesign(player));
         player.setDisplayName(getDesign(player));
+    }
+
+    public final String getRankName(Player player) {
+        if (player.hasPermission("claimworld.admin")) {
+            return colorize("&dAdmin");
+        }
+        if (player.hasPermission("claimworld.mod")) {
+            return colorize("&aModerator");
+        }
+        if (player.hasPermission("claimworld.mvp")) {
+            return colorize("&cMVP");
+        }
+        if (player.hasPermission("claimworld.vip+")) {
+            return colorize("&eVIP+");
+        }
+        if (player.hasPermission("claimworld.vip")) {
+            return colorize("&bVIP");
+        }
+        if (player.hasPermission("claimworld.player")) {
+            return colorize("&7Gracz");
+        }
+        else {
+            return null;
+        }
     }
 
     public final String getDesign(Player player) {

@@ -42,6 +42,10 @@ public class PlayerInteractEntityEvent implements Listener {
         if (delayedPlayers.contains(player)) return;
 
         if (player.isSneaking()) {
+            if (event.getRightClicked().getType() == EntityType.HORSE) event.setCancelled(true);
+            if (event.getRightClicked().getType() == EntityType.SKELETON_HORSE) event.setCancelled(true);
+            if (event.getRightClicked().getType() == EntityType.ZOMBIE_HORSE) event.setCancelled(true);
+
             if (player.getPassengers().isEmpty()) {
                 Entity entity = event.getRightClicked();
 

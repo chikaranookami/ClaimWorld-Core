@@ -1,8 +1,9 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.CustomItems;
+import claimworld.net.supporter.utils.CustomHead;
 import claimworld.net.supporter.utils.Messages;
+import claimworld.net.supporter.utils.guis.ReadyItems;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
@@ -14,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -24,7 +26,7 @@ public class EntitySpawnEvent implements Listener {
 
     private Player player;
     private final List<MerchantRecipe> updatedRecipes = new ArrayList<>();
-    private final CustomItems customItems = new CustomItems();
+    private final ReadyItems readyItems = new ReadyItems();
 
     @EventHandler
     public void entitySpawnEvent(org.bukkit.event.entity.EntitySpawnEvent event) {
@@ -39,14 +41,14 @@ public class EntitySpawnEvent implements Listener {
             }
 
             //invisibleItemFrame
-            ItemStack invisibleItemFrame = customItems.getInvisibleItemFrameItem();
+            ItemStack invisibleItemFrame = readyItems.get("Niewidzialna ramka");
             MerchantRecipe recipe1 = new MerchantRecipe(invisibleItemFrame, 0, 7, true, 1, 1, 32, 24);
             recipe1.addIngredient(new ItemStack(Material.EMERALD, 24));
             recipe1.addIngredient(new ItemStack(Material.ITEM_FRAME));
             updatedRecipes.add(recipe1);
 
             //random player skull
-            ItemStack randomPlayerHead = customItems.getPlayerSkull(player);
+            ItemStack randomPlayerHead = new CustomHead("&fGlowa " + player.getName(), player, 1, Collections.singletonList(colorize(readyItems.getLore("common")))).getItem();
             MerchantRecipe recipe2 = new MerchantRecipe(randomPlayerHead, 0, 1, true, 1, 1, 32, 16);
             recipe2.addIngredient(new ItemStack(Material.EMERALD, 32));
             updatedRecipes.add(recipe2);
@@ -67,9 +69,10 @@ public class EntitySpawnEvent implements Listener {
                 updatedRecipes.add(recipe3);
             }
 
+            ItemStack money = readyItems.get("$1");
+
             //60% on money for phantom membrane
             if (additionalChances > 1) {
-                ItemStack money = new CustomItems().getMoneyItem();
                 MerchantRecipe recipe4 = new MerchantRecipe(money, 0, 2, true, 1, 1, 8, 32);
                 recipe4.addIngredient(new ItemStack(Material.PHANTOM_MEMBRANE, 64));
                 updatedRecipes.add(recipe4);
@@ -77,7 +80,6 @@ public class EntitySpawnEvent implements Listener {
 
             //40% on money
             if (additionalChances > 2) {
-                ItemStack money = new CustomItems().getMoneyItem();
                 MerchantRecipe recipe5 = new MerchantRecipe(money, 0, 1, true, 1, 1, 8, 32);
                 recipe5.addIngredient(new ItemStack(Material.EMERALD, 64));
                 updatedRecipes.add(recipe5);
@@ -85,7 +87,7 @@ public class EntitySpawnEvent implements Listener {
 
             //40% on global ticket
             if (additionalChances > 2) {
-                ItemStack universalTicket = new CustomItems().getGlobalTicketItem();
+                ItemStack universalTicket = readyItems.get("Uniwersalny Bilet");
                 MerchantRecipe recipe7 = new MerchantRecipe(universalTicket, 0, 8, true, 1, 1, 8, 32);
                 recipe7.addIngredient(new ItemStack(Material.PHANTOM_MEMBRANE, 16));
                 updatedRecipes.add(recipe7);

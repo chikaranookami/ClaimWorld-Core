@@ -1,4 +1,4 @@
-package claimworld.net.supporter.utils;
+package claimworld.net.supporter.utils.wip;
 
 import org.bukkit.ChatColor;
 

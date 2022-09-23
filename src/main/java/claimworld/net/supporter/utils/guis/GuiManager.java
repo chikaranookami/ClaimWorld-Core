@@ -17,9 +17,8 @@ public class GuiManager {
 
         long delay = 0;
 
-        for (Map.Entry<Integer, ItemStack> entry : new ItemSets().initializeInventoryContent(gui.getName()).entrySet()) {
-            getScheduler().runTaskLater(Supporter.getPlugin(), () -> {}, delay + 1);
-            inventory.setItem(entry.getKey(), entry.getValue());
+        for (Map.Entry<Integer, ItemStack> entry : new ItemSets().initializeInventoryContent(player, gui.getName()).entrySet()) {
+            getScheduler().runTaskLater(Supporter.getPlugin(), () -> {inventory.setItem(entry.getKey(), entry.getValue());}, delay++);
         }
     }
 }

@@ -1,12 +1,13 @@
 package claimworld.net.supporter.events;
 
-import claimworld.net.supporter.utils.CustomItems;
 import claimworld.net.supporter.utils.Messages;
+import claimworld.net.supporter.utils.guis.ReadyItems;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.Random;
 
@@ -18,7 +19,7 @@ public class PlayerItemConsumeEvent implements Listener {
     public void playerItemConsumeEvent(org.bukkit.event.player.PlayerItemConsumeEvent event) {
         int poopChance = new Random().nextInt(1000);
 
-        if (poopChance > 20) return;
+        if (poopChance > 15) return;
 
         int random = new Random().nextInt(2);
 
@@ -28,10 +29,11 @@ public class PlayerItemConsumeEvent implements Listener {
         World world = player.getWorld();
         Location location = player.getLocation();
 
-        if (poopChance > 5) {
+        if (poopChance > 4) {
             world.playSound(location, Sound.ENTITY_SHEEP_AMBIENT, 0.5f, 2f);
             world.spawnParticle(Particle.SPELL, location, 10, 0.75, 0.75, 0.75, 0);
             world.spawnParticle(Particle.SLIME, location, 10, 0.75, 0.75, 0.75);
+            world.dropItem(location, new ItemStack(Material.DIRT));
             player.sendMessage(Messages.getUserPrefix() + "Chyba zbiera Ci sie na cos ciezszego...");
             return;
         }
@@ -41,7 +43,8 @@ public class PlayerItemConsumeEvent implements Listener {
 
         if (random == 1) block1.setType(Material.DIRT);
 
-        world.dropItem(location, new CustomItems().getShitItem());
+        world.dropItem(location, new ReadyItems().get("Kupa"));
+        world.dropItem(location, new ItemStack(Material.DIRT, 3));
 
         world.playSound(location, Sound.ENTITY_SHEEP_AMBIENT, 0.6f, 2f);
         world.playSound(location, Sound.BLOCK_ROOTED_DIRT_PLACE, 0.85f, 2f);

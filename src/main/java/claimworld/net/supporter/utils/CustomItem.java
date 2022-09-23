@@ -52,15 +52,12 @@ public class CustomItem {
         this.material = material;
         this.item = new ItemStack(material, amount);
 
-        for (String string : lore) {
-            colorize(string);
-        }
-        this.lore = lore;
-
         ItemMeta itemMeta = item.getItemMeta();
         assert itemMeta != null;
 
         itemMeta.setDisplayName(colorize(name));
+
+        this.lore = lore;
         itemMeta.setLore(lore);
 
         item.setItemMeta(itemMeta);

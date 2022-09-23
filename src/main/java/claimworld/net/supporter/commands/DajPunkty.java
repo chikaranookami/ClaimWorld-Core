@@ -1,7 +1,7 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.ErrorMessages;
+import claimworld.net.supporter.utils.wip.ErrorMessages;
 import claimworld.net.supporter.utils.Messages;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

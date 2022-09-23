@@ -1,8 +1,8 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.CustomItems;
 import claimworld.net.supporter.utils.Ranks;
+import claimworld.net.supporter.utils.guis.ReadyItems;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,7 +28,7 @@ public class CwAdmin {
 
                 if (action.equals("giveShitItem")) {
                     assert player.getLocation().getWorld() != null;
-                    player.getLocation().getWorld().dropItem(player.getLocation(), new CustomItems().getShitItem());
+                    player.getLocation().getWorld().dropItem(player.getLocation(), new ReadyItems().get("Kupa"));
                     return true;
                 }
 

@@ -21,6 +21,7 @@ public final class Supporter extends JavaPlugin implements Listener {
     public static boolean doubleXp;
     public static boolean pickupAll;
     public static boolean doubledForce;
+    public static boolean moreFromOres;
 
     @Override
     public void onEnable() {
@@ -53,7 +54,6 @@ public final class Supporter extends JavaPlugin implements Listener {
         new LoadLokacja();
         new SetLokacja();
         new CwAdmin();
-        new Kosz();
         new Cws();
         new Pomoc();
         new Teleporter();
@@ -63,7 +63,6 @@ public final class Supporter extends JavaPlugin implements Listener {
         new DajPunkty();
         new Fw();
         new ShopAnnouncement();
-        new PoziomMorza();
 
         //enablePhantoms
         scheduler.runTaskLater(this, () -> { Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true"); }, 20L);

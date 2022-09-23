@@ -35,20 +35,15 @@ public class Pomoc {
                 pages.add("Komendy 4");
 
                 bookMeta.setPages(pages);
-                bookMeta.setPage(1, "§3§lInformacje§r\n- Zasady oraz wytyczne znajduja sie na Discordzie\n- Komendy znajduja sie na kolejnej stronie");
-                bookMeta.setPage(2, "§3§lPodstawowe Komendy§r\n/lwc - obsluga zabezpieczen\n/vote, /punkty - glosowanie i punkty\n/home, /sethome, /spawn, /warp - obsluga lokacji\n/msg - prywatna wiadomosc\n/poziomorza, /kosz\n/voicechat - czat glosowy");
-                bookMeta.setPage(3, "§3§lDodatkowe komendy VIP§r\n/playtime - czas online\n/me - opis postaci (RP)\n/skin - zmien swojego skina\n/hat - zaloz na glowe trzymany blok");
-                bookMeta.setPage(4, "§3§lDodatkowe komendy VIP+§r\n/sit, /lay, /crawl, /spin, /bellyflop - animacje\n\nVIP+ ma rowniez wszystkie komendy VIP.");
-                bookMeta.setPage(5, "§3§lDodatkowe komendy MVP+§r\n/pp - konsola efektow\n/fw - fajerwerk\n\nMVP ma rowniez wszystkie komendy VIP+ i VIP.");
+                bookMeta.setPage(1, "Informacje§8\n- Zasady oraz wytyczne znajduja sie na Discordzie\n- Komendy znajduja sie na kolejnej stronie");
+                bookMeta.setPage(2, "Podstawowe Komendy§8\n/lwc - zabezpieczenia skrzynek\n/msg - prywatna wiadomosc");
+                bookMeta.setPage(3, "Dodatkowe komendy VIP§8\n/playtime - czas online\n/me - opis postaci (RP)\n/skin - zmien swojego skina\n/hat - zaloz na glowe trzymany blok");
+                bookMeta.setPage(4, "Dodatkowe komendy VIP+§8\n/sit, /lay, /crawl, /spin, /bellyflop - animacje\n\nVIP+ ma rowniez wszystkie komendy VIP.");
+                bookMeta.setPage(5, "Dodatkowe komendy MVP+§8\n/pp - konsola efektow\n/fw - fajerwerk\n\nMVP ma rowniez wszystkie komendy VIP+ i VIP.");
                 book.setItemMeta(bookMeta);
 
                 Player player = (Player) sender;
                 player.openBook(book);
-
-                TextComponent message = new TextComponent(ChatColor.GREEN + "-> Kliknij tutaj, by przejsc do sklepu.");
-                message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://shop.claimworld.net"));
-                message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("Dolacz do Hall Of Fame!")));
-                player.spigot().sendMessage(message);
                 return true;
             }
 

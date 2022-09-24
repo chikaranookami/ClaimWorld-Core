@@ -32,13 +32,19 @@ public class ReadyItems {
         return null;
     }
 
+    public ItemStack get(String name, int amount) {
+        ItemStack itemStack =  get(name);
+        itemStack.setAmount(amount);
+        return itemStack;
+    }
+
     public ItemStack get(String name) {
         if (name.equals("Cofnij")) {
             return new CustomItem("&fCofnij", Material.ARROW, Collections.singletonList(colorize("&7&oPoprzednie menu."))).getItem();
         }
 
         if (name.equals("Menu")) {
-            return new CustomItem("&aMenu", Material.CLOCK, Collections.singletonList(colorize("&7&oPanel gracza."))).getItem();
+            return new CustomItem("&aMenu", Material.CLOCK, Collections.singletonList(colorize("&7&oPanel gracza.")), 1).getItem();
         }
 
         if (name.equals("Niewidzialna ramka")) {
@@ -46,15 +52,15 @@ public class ReadyItems {
         }
 
         if (name.equals("Kupa")) {
-            return new CustomItem("&fKupa", Material.MUSHROOM_STEM, Collections.singletonList(colorize(getLore("common")))).getItem();
+            return new CustomItem("&fKupa", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("common"))), 11).getItem();
         }
 
         if (name.equals("$1")) {
-            return new CustomItem("&a$1", Material.EMERALD, Collections.singletonList(colorize(getLore("uncommon")))).getItem();
+            return new CustomItem("&a$1", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("uncommon"))), 10).getItem();
         }
 
-        if (name.equals("Uniwersalny Bilet")) {
-            return new CustomItem("&fUniwersalny Bilet", Material.PAPER, Collections.singletonList(colorize(getLore("common")))).getItem();
+        if (name.equals("Uniwersalny bilet")) {
+            return new CustomItem("&fUniwersalny Bilet", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("common"))), 12).getItem();
         }
 
         return null;

@@ -26,9 +26,12 @@ public class CwAdmin {
                     return true;
                 }
 
-                if (action.equals("giveShitItem")) {
+                if (action.equals("giveCustomItems")) {
                     assert player.getLocation().getWorld() != null;
+                    player.getLocation().getWorld().dropItem(player.getLocation(), new ReadyItems().get("$1"));
+                    player.getLocation().getWorld().dropItem(player.getLocation(), new ReadyItems().get("Uniwersalny bilet"));
                     player.getLocation().getWorld().dropItem(player.getLocation(), new ReadyItems().get("Kupa"));
+                    player.getLocation().getWorld().dropItem(player.getLocation(), new ReadyItems().get("Niewidzialna ramka"));
                     return true;
                 }
 

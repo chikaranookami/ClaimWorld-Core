@@ -17,9 +17,15 @@ public class PlayerItemConsumeEvent implements Listener {
 
     @EventHandler
     public void playerItemConsumeEvent(org.bukkit.event.player.PlayerItemConsumeEvent event) {
+        Material material = event.getItem().getType();
+
+        if (material == Material.SWEET_BERRIES) return;
+        if (material == Material.MELON_SLICE) return;
+        if (material == Material.DRIED_KELP) return;
+
         int poopChance = new Random().nextInt(1000);
 
-        if (poopChance > 15) return;
+        if (poopChance > 10) return;
 
         int random = new Random().nextInt(2);
 
@@ -29,7 +35,7 @@ public class PlayerItemConsumeEvent implements Listener {
         World world = player.getWorld();
         Location location = player.getLocation();
 
-        if (poopChance > 4) {
+        if (poopChance > 2) {
             world.playSound(location, Sound.ENTITY_SHEEP_AMBIENT, 0.5f, 2f);
             world.spawnParticle(Particle.SPELL, location, 10, 0.75, 0.75, 0.75, 0);
             world.spawnParticle(Particle.SLIME, location, 10, 0.75, 0.75, 0.75);

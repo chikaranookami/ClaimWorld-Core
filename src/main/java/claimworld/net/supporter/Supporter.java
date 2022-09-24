@@ -33,6 +33,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         PluginManager pluginManager = getServer().getPluginManager();
 
         //events
+        pluginManager.registerEvents(new PlayerRespawnEvent(), this);
         pluginManager.registerEvents(new PlayerLoginEvent(), this);
         pluginManager.registerEvents(new PlayerJoinEvent(), this);
         pluginManager.registerEvents(new PlayerDeathEvent(), this);
@@ -64,11 +65,11 @@ public final class Supporter extends JavaPlugin implements Listener {
         new Fw();
         new ShopAnnouncement();
 
-        //enablePhantoms
-        scheduler.runTaskLater(this, () -> { Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true"); }, 20L);
+        //systems
+        new AutoMessages();
 
-        //play bossbars after 2 and 4 hours
-        scheduler.runTaskLater(this, AutoMessages::new, 100L);
+        //others
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true");
     }
 
     @Override

@@ -1,7 +1,6 @@
 package claimworld.net.supporter.events;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -16,9 +15,7 @@ public class AsyncPlayerChatEvent implements Listener {
     public void asyncPlayerChatEvent(org.bukkit.event.player.AsyncPlayerChatEvent event) {
         if (!event.isAsynchronous()) getLogger().log(Level.WARNING, "tried to use NOT async chat event");
 
-        Player player = event.getPlayer();
-
-        if (player.hasPermission("claimworld.mvp")) {
+        if (event.getPlayer().hasPermission("claimworld.mvp")) {
             event.setFormat(event.getPlayer().getDisplayName() + ChatColor.GRAY + ": " + ChatColor.RESET + colorize(event.getMessage()));
         } else {
             event.setFormat(event.getPlayer().getDisplayName() + ChatColor.GRAY + ": " + ChatColor.RESET + event.getMessage());

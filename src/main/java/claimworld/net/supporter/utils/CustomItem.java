@@ -44,10 +44,14 @@ public class CustomItem {
     private final List<String> lore;
 
     public CustomItem(String name, Material material, List<String> lore) {
-        this(name, material, 1, lore);
+        this(name, material, 1, lore, 0);
     }
 
-    public CustomItem(String name, Material material, int amount, List<String> lore) {
+    public CustomItem(String name, Material material, List<String> lore, int customModelData) {
+        this(name, material, 1, lore, customModelData);
+    }
+
+    public CustomItem(String name, Material material, int amount, List<String> lore, int customModelData) {
         this.name = name;
         this.material = material;
         this.item = new ItemStack(material, amount);
@@ -56,6 +60,9 @@ public class CustomItem {
         assert itemMeta != null;
 
         itemMeta.setDisplayName(colorize(name));
+        if (customModelData > 0) {
+            itemMeta.setCustomModelData(customModelData);
+        }
 
         this.lore = lore;
         itemMeta.setLore(lore);

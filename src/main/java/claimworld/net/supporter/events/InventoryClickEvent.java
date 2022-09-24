@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 
 import static org.bukkit.Bukkit.getConsoleSender;
@@ -16,9 +17,12 @@ public class InventoryClickEvent implements Listener {
 
     @EventHandler
     public void inventoryClickEvent(org.bukkit.event.inventory.InventoryClickEvent event) {
+        Inventory clickedInventory = event.getClickedInventory();
+
+        if (clickedInventory == null) return;
+
         int slot = event.getSlot();
         Player player = (Player) event.getWhoClicked();
-        Inventory clickedInventory = event.getClickedInventory();
 
         if (slot == 17 && clickedInventory == player.getInventory()) {
             event.setCancelled(true);
@@ -27,7 +31,8 @@ public class InventoryClickEvent implements Listener {
             }, 1L);
         }
 
-        if (clickedInventory.getHolder() != null) return;
+        if (event.getInventory().getType() != InventoryType.CHEST) return;
+        if (event.getInventory().getLocation() != null) return;
 
         event.setCancelled(true);
 

@@ -33,7 +33,7 @@ public class Cws {
 
                 if (arguments[0].equals("MoreFromOres")) {
                     if (moreFromOres) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getName() + " AddPoints 40");
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getName() + " AddPoints 30");
 
                         sender.sendMessage("MoreFromOres is already true");
                         player.sendMessage(getUserPrefix() + "Ktos juz wlaczyl dodatkowe diamenty. Punkty zostaly zwrocone.");

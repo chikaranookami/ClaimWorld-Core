@@ -25,82 +25,58 @@ import static org.bukkit.Bukkit.*;
 public class EntitySpawnEvent implements Listener {
 
     private Player player;
-    private final List<MerchantRecipe> updatedRecipes = new ArrayList<>();
     private final ReadyItems readyItems = new ReadyItems();
+
+    private MerchantRecipe getCustomRecipe(ItemStack item, int maxUses, ItemStack ingredient1, ItemStack ingredient2) {
+        MerchantRecipe recipe = new MerchantRecipe(item, 0, maxUses, true, 1, 1, 32, 24);
+        recipe.addIngredient(ingredient1);
+        if (ingredient2 != null) {
+            recipe.addIngredient(ingredient2);
+        }
+        return recipe;
+    }
 
     @EventHandler
     public void entitySpawnEvent(org.bukkit.event.entity.EntitySpawnEvent event) {
         if (!event.getEntityType().equals(EntityType.WANDERING_TRADER)) return;
 
         getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-            if (!(new Random().nextInt(2) == 0)) return;
+            int chance = new Random().nextInt(3);
+
+            if (chance == 0) return;
 
             for (Player onlinePlayer : getOnlinePlayers()) {
                 player = onlinePlayer;
                 break;
             }
 
-            //invisibleItemFrame
-            ItemStack invisibleItemFrame = readyItems.get("Niewidzialna ramka");
-            MerchantRecipe recipe1 = new MerchantRecipe(invisibleItemFrame, 0, 7, true, 1, 1, 32, 24);
-            recipe1.addIngredient(new ItemStack(Material.EMERALD, 24));
-            recipe1.addIngredient(new ItemStack(Material.ITEM_FRAME));
-            updatedRecipes.add(recipe1);
-
-            //random player skull
-            ItemStack randomPlayerHead = new CustomHead("&fGlowa " + player.getName(), player, 1, Collections.singletonList(colorize(readyItems.getLore("common")))).getItem();
-            MerchantRecipe recipe2 = new MerchantRecipe(randomPlayerHead, 0, 1, true, 1, 1, 32, 16);
-            recipe2.addIngredient(new ItemStack(Material.EMERALD, 32));
-            updatedRecipes.add(recipe2);
-
-            //fireworks for phantom membranes
-            ItemStack firework = new ItemStack(Material.FIREWORK_ROCKET, 1);
-            MerchantRecipe recipe6 = new MerchantRecipe(firework, 0, 8, true, 1, 1, 8, 32);
-            recipe6.addIngredient(new ItemStack(Material.PHANTOM_MEMBRANE, 16));
-            updatedRecipes.add(recipe6);
-
-            int additionalChances = new Random().nextInt(5);
-
-            //80% on fern
-            if (additionalChances > 0) {
-                ItemStack fern = new ItemStack(Material.FERN, 1);
-                MerchantRecipe recipe3 = new MerchantRecipe(fern, 0, 4, true, 1, 1, 32, 16);
-                recipe3.addIngredient(new ItemStack(Material.EMERALD, 12));
-                updatedRecipes.add(recipe3);
-            }
-
-            ItemStack money = readyItems.get("$1");
-
-            //60% on money for phantom membrane
-            if (additionalChances > 1) {
-                MerchantRecipe recipe4 = new MerchantRecipe(money, 0, 2, true, 1, 1, 8, 32);
-                recipe4.addIngredient(new ItemStack(Material.PHANTOM_MEMBRANE, 64));
-                updatedRecipes.add(recipe4);
-            }
-
-            //40% on money
-            if (additionalChances > 2) {
-                MerchantRecipe recipe5 = new MerchantRecipe(money, 0, 1, true, 1, 1, 8, 32);
-                recipe5.addIngredient(new ItemStack(Material.EMERALD, 64));
-                updatedRecipes.add(recipe5);
-            }
-
-            //40% on global ticket
-            if (additionalChances > 2) {
-                ItemStack universalTicket = readyItems.get("Uniwersalny Bilet");
-                MerchantRecipe recipe7 = new MerchantRecipe(universalTicket, 0, 8, true, 1, 1, 8, 32);
-                recipe7.addIngredient(new ItemStack(Material.PHANTOM_MEMBRANE, 16));
-                updatedRecipes.add(recipe7);
-            }
-
+            List<MerchantRecipe> updatedRecipes = new ArrayList<>();
             WanderingTrader trader = (WanderingTrader) event.getEntity();
-            trader.setCustomName(colorize("&a&lTajemniczy Handlarz"));
+            String traderName = null;
+
+            //mysterious trader
+            if (chance == 1) {
+                updatedRecipes.add(getCustomRecipe(readyItems.get("Niewidzialna ramka"), 2, new ItemStack(Material.EMERALD, 24), new ItemStack(Material.ITEM_FRAME)));
+                updatedRecipes.add(getCustomRecipe(new CustomHead("&fGlowa " + player.getName(), player, 1, Collections.singletonList(colorize(readyItems.getLore("common")))).getItem(), 1, new ItemStack(Material.EMERALD, 32), null));
+                updatedRecipes.add(getCustomRecipe(new ItemStack(Material.FERN), 2, new ItemStack(Material.EMERALD, 16), null));
+                updatedRecipes.add(getCustomRecipe(readyItems.get("$1"), 2, new ItemStack(Material.EMERALD, 64), null));
+                traderName = colorize("&a&lEmeraldowy Handlarz");
+            }
+
+            //phantom trader
+            if (chance == 2) {
+                updatedRecipes.add(getCustomRecipe(new ItemStack(Material.FIREWORK_ROCKET), 8, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
+                updatedRecipes.add(getCustomRecipe(readyItems.get("Uniwersalny bilet"), 2, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
+                updatedRecipes.add(getCustomRecipe(readyItems.get("$1"), 2, new ItemStack(Material.PHANTOM_MEMBRANE, 64), null));
+                traderName = colorize("&d&lFantomowy Handlarz");
+            }
+
+            trader.setCustomName(traderName);
             trader.setCustomNameVisible(true);
             trader.setDespawnDelay(6000);
             trader.setRecipes(updatedRecipes);
 
-            Location location = trader.getLocation();
-            broadcastMessage(colorize(Messages.getBroadcastPrefix() + "&eTajemniczy Handlarz&f wlasnie pojawil sie na koordynatach &ex" + Math.round(location.getX()) + " &foraz &ez" + Math.round(location.getZ()) + "&f."));
+            broadcastMessage(colorize(Messages.getBroadcastPrefix() + traderName + "&f wlasnie pojawil sie na koordynatach &ex" + Math.round(trader.getLocation().getX()) + " &foraz &ez" + Math.round(trader.getLocation().getZ()) + "&f."));
         }, 30L);
     }
 }

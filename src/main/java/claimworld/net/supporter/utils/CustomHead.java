@@ -1,6 +1,5 @@
 package claimworld.net.supporter.utils;
 
-import claimworld.net.supporter.utils.guis.ReadyItems;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -19,7 +18,7 @@ public class CustomHead extends CustomItem{
     }
 
     public CustomHead(String name, Player player, int amount, List<String> lore) {
-        super(name, Material.PLAYER_HEAD, amount, lore, 0);
+        super(name, Material.PLAYER_HEAD, amount, lore, 0, null, 0);
         this.player = player;
 
         SkullMeta skullMeta = (SkullMeta) this.getItem().getItemMeta();

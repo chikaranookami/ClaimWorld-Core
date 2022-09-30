@@ -33,13 +33,19 @@ public class Pomoc {
                 pages.add("Komendy 2");
                 pages.add("Komendy 3");
                 pages.add("Komendy 4");
+                pages.add("Komendy 5");
+                pages.add("Komendy 6");
+                pages.add("Komendy 7");
 
                 bookMeta.setPages(pages);
-                bookMeta.setPage(1, "Informacje§8\n- Zasady oraz wytyczne znajduja sie na Discordzie\n- Komendy znajduja sie na kolejnej stronie");
-                bookMeta.setPage(2, "Podstawowe Komendy§8\n/lwc - zabezpieczenia skrzynek\n/msg - prywatna wiadomosc");
+                bookMeta.setPage(1, "Informacje\n\nW tym poradniku znajdziesz:§8\n- Komendy\n- Zmiany w rozgrywce\n\n Masz pytania? Smialo, kieruj je na Discorda.");
+                bookMeta.setPage(2, "Komendy gracza§8\n/lwc - zabawy z zabezpieczeniami skrzynek\n/msg - prywatna wiadomosc");
                 bookMeta.setPage(3, "Dodatkowe komendy VIP§8\n/playtime - czas online\n/me - opis postaci (RP)\n/skin - zmien swojego skina\n/hat - zaloz na glowe trzymany blok");
-                bookMeta.setPage(4, "Dodatkowe komendy VIP+§8\n/sit, /lay, /crawl, /spin, /bellyflop - animacje\n\nVIP+ ma rowniez wszystkie komendy VIP.");
-                bookMeta.setPage(5, "Dodatkowe komendy MVP+§8\n/pp - konsola efektow\n/fw - fajerwerk\n\nMVP ma rowniez wszystkie komendy VIP+ i VIP.");
+                bookMeta.setPage(4, "Dodatkowe komendy VIP+§8\n/sit, /lay, /crawl, /spin, /bellyflop - animacje postaci\n\nVIP+ ma rowniez wszystkie komendy VIP.");
+                bookMeta.setPage(5, "Dodatkowe komendy MVP+§8\n/pp - konsola efektow\n/fw - fajerwerk pod nogami\n\nMVP ma rowniez wszystkie komendy VIP+ i VIP.");
+                bookMeta.setPage(6, "Wazniejsze zmiany w rozgrywce§8\n- Skrzynie blokuja sie po postawieniu\n- Wylaczono mocne maszyny z redstone\n- Brodawki wypadaja z Zombie Piglinow");
+                bookMeta.setPage(7, "§8- Slabsze moby ze spawnerow\n- System lokacji\n- Dodatkowi Handlarze\n- Niestandardowe przedmioty, w tym niestandardowa waluta\n- Globalne wzmocnienia\n- Nowe mechaniki\n- Nieco inny spawn mobow");
+                bookMeta.setPage(8, "§8Projekt §0Claim World§8 stawia na dlugoterminowosc i z czasem zmian bedzie wiecej, jednak naszym celem jest utrzymanie rozgrywki w klimatach klasycznego Minecrafta tak bardzo, jak tylko sie da.");
                 book.setItemMeta(bookMeta);
 
                 Player player = (Player) sender;

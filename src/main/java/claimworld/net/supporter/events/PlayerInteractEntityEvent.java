@@ -23,6 +23,7 @@ public class PlayerInteractEntityEvent implements Listener {
 
     private final List<EntityType> entityTypes = Arrays.asList(EntityType.COW, EntityType.SHEEP, EntityType.PIG, EntityType.CHICKEN);
     private final List<EntityType> blockedEntityTypes = Arrays.asList(EntityType.ENDER_DRAGON, EntityType.ENDER_CRYSTAL);
+    private final List<EntityType> fixedEntityTypes = Arrays.asList(EntityType.BEE, EntityType.ALLAY);
     private final List<Player> delayedPlayers = new ArrayList<>();
 
     private int showParticlesTask;
@@ -33,7 +34,7 @@ public class PlayerInteractEntityEvent implements Listener {
         if (!entityTypes.contains(event.getRightClicked().getType())) {
             if (!pickupAll) return;
             if (blockedEntityTypes.contains(event.getRightClicked().getType())) return;
-            if (!event.getRightClicked().hasGravity()) return;
+            if (!(event.getRightClicked().hasGravity() || fixedEntityTypes.contains(event.getRightClicked().getType()))) return;
         }
 
         Player player = event.getPlayer();

@@ -44,6 +44,14 @@ public class ItemSets {
             itemMap.put(16, new CustomItem("&bPanel VIP", Material.ENCHANTING_TABLE, Arrays.asList(colorize("&7&oTajemnicze miejsce!"), colorize("&7&oDostepna juz niebawem!"))).getItem());
             itemMap.put(28, new CustomItem("&fOgnisko u Mariana", Material.CAMPFIRE, Collections.singletonList(colorize("&7&oCentrum pomocy."))).getItem());
             itemMap.put(37, new CustomItem("&fUlatwienia dostepu", Material.NAME_TAG, Collections.singletonList(colorize("&7&oDodatkowe ustawienia."))).getItem());
+            itemMap.put(43, new CustomItem("&a#1 Eventowe Tournée", Material.BOOK, Arrays.asList(
+                    colorize("&7&oSzczegoly na Discordzie."),"",
+                    colorize("&a> Turniej Kosza 2v2"), colorize("&7&oData: 1.10.2022"), "",
+                    colorize("&a> Turniej Zbijaka"), colorize("&7&oData: 8.10.2022"), "",
+                    colorize("&a> Zabawa W Chowanego"), colorize("&7&oData: 15.10.2022"), "",
+                    colorize("&a> Monopoly by CW"), colorize("&7&oData: 22.10.2022"), "",
+                    colorize("&a> Konkurs Talentow"), colorize("&7&oData: 29.10.2022")
+            )).getItem());
         }
 
         if (inventoryName.equals("Teleportacja")) {

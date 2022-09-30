@@ -10,8 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 
-import static org.bukkit.Bukkit.getConsoleSender;
-import static org.bukkit.Bukkit.getScheduler;
+import static org.bukkit.Bukkit.*;
 
 public class InventoryClickEvent implements Listener {
 
@@ -29,10 +28,15 @@ public class InventoryClickEvent implements Listener {
             getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
                 new GuiManager(player, new Gui(null, 54, "Menu"));
             }, 1L);
+            return;
         }
 
-        if (event.getInventory().getType() != InventoryType.CHEST) return;
-        if (event.getInventory().getLocation() != null) return;
+        Inventory inventory = event.getInventory();
+
+        if (inventory.getType() != InventoryType.CHEST) return;
+        if (inventory.getLocation() != null) return;
+        if (inventory.getSize() < 9) return;
+        if (event.getView().getTitle().equals("Kosz")) return;
 
         event.setCancelled(true);
 
@@ -104,6 +108,7 @@ public class InventoryClickEvent implements Listener {
                         getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
                             Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " centrum_publiczne");
                         }, 1L);
+                        return;
                 }
             }
 
@@ -120,7 +125,6 @@ public class InventoryClickEvent implements Listener {
                         getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
                             Bukkit.dispatchCommand(player, "disposal");
                         }, 1L);
-                        return;
                 }
             }
         }

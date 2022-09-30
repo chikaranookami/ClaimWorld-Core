@@ -2,10 +2,12 @@ package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CustomHead;
+import claimworld.net.supporter.utils.CustomItem;
 import claimworld.net.supporter.utils.Messages;
 import claimworld.net.supporter.utils.guis.ReadyItems;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WanderingTrader;
@@ -54,12 +56,13 @@ public class EntitySpawnEvent implements Listener {
             WanderingTrader trader = (WanderingTrader) event.getEntity();
             String traderName = null;
 
-            //mysterious trader
+            //emerald trader
             if (chance == 1) {
                 updatedRecipes.add(getCustomRecipe(readyItems.get("Niewidzialna ramka"), 2, new ItemStack(Material.EMERALD, 24), new ItemStack(Material.ITEM_FRAME)));
                 updatedRecipes.add(getCustomRecipe(new CustomHead("&fGlowa " + player.getName(), player, 1, Collections.singletonList(colorize(readyItems.getLore("common")))).getItem(), 1, new ItemStack(Material.EMERALD, 32), null));
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.FERN), 2, new ItemStack(Material.EMERALD, 16), null));
                 updatedRecipes.add(getCustomRecipe(readyItems.get("$1"), 2, new ItemStack(Material.EMERALD, 64), null));
+                updatedRecipes.add(getCustomRecipe(new CustomItem("", Material.ENCHANTED_BOOK, 1, null, 0, Enchantment.DURABILITY, 4).getItem(), 1, new ItemStack(Material.EMERALD, 16), readyItems.get("$1", 2)));
                 traderName = colorize("&a&lEmeraldowy Handlarz");
             }
 
@@ -68,6 +71,7 @@ public class EntitySpawnEvent implements Listener {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.FIREWORK_ROCKET), 8, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
                 updatedRecipes.add(getCustomRecipe(readyItems.get("Uniwersalny bilet"), 2, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
                 updatedRecipes.add(getCustomRecipe(readyItems.get("$1"), 2, new ItemStack(Material.PHANTOM_MEMBRANE, 64), null));
+                updatedRecipes.add(getCustomRecipe(new ItemStack(Material.ELYTRA), 1, new ItemStack(Material.PHANTOM_MEMBRANE, 64), readyItems.get("$1", 32)));
                 traderName = colorize("&d&lFantomowy Handlarz");
             }
 

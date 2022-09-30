@@ -42,7 +42,6 @@ public class ReadyItems {
         if (name.equals("Cofnij")) {
             return new CustomItem("&fCofnij", Material.ARROW, Collections.singletonList(colorize("&7&oPoprzednie menu."))).getItem();
         }
-
         if (name.equals("Menu")) {
             return new CustomItem("&aMenu", Material.CLOCK, Collections.singletonList(colorize("&7&oPanel gracza.")), 1).getItem();
         }

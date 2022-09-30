@@ -29,7 +29,6 @@ public final class Supporter extends JavaPlugin implements Listener {
 
         this.saveDefaultConfig();
 
-        BukkitScheduler scheduler = Bukkit.getScheduler();
         PluginManager pluginManager = getServer().getPluginManager();
 
         //events
@@ -50,6 +49,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new PlayerItemConsumeEvent(), this);
         pluginManager.registerEvents(new InventoryClickEvent(), this);
         pluginManager.registerEvents(new InventoryDragEvent(), this);
+        pluginManager.registerEvents(new PrepareAnvilEvent(), this);
 
         //commands
         new LoadLokacja();

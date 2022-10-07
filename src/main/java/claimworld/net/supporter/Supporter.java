@@ -3,11 +3,11 @@ package claimworld.net.supporter;
 import claimworld.net.supporter.commands.*;
 import claimworld.net.supporter.events.*;
 import claimworld.net.supporter.timers.AutoMessages;
+import claimworld.net.supporter.utils.wip.Goal;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitScheduler;
 
 public final class Supporter extends JavaPlugin implements Listener {
 
@@ -22,6 +22,7 @@ public final class Supporter extends JavaPlugin implements Listener {
     public static boolean pickupAll;
     public static boolean doubledForce;
     public static boolean moreFromOres;
+    public static boolean loadedWarehouse;
 
     @Override
     public void onEnable() {
@@ -30,6 +31,8 @@ public final class Supporter extends JavaPlugin implements Listener {
         this.saveDefaultConfig();
 
         PluginManager pluginManager = getServer().getPluginManager();
+
+        //below name text & prefixes
 
         //events
         pluginManager.registerEvents(new PlayerRespawnEvent(), this);
@@ -64,6 +67,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         new DajPunkty();
         new Fw();
         new ShopAnnouncement();
+        new Goal();
 
         //systems
         new AutoMessages();

@@ -31,6 +31,26 @@ public class Cws {
                     return true;
                 }
 
+                if (arguments[0].equals("LoadedWarehouse")) {
+                    if (loadedWarehouse) {
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getName() + " AddPoints 40");
+
+                        sender.sendMessage("LoadedWarehouse is already true");
+                        player.sendMessage(getUserPrefix() + "Ktos juz uzupelnil magazyn. Punkty zostaly zwrocone.");
+                    }
+
+                    if (!loadedWarehouse) {
+                        loadedWarehouse = true;
+
+                        Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
+                            sender.sendMessage("LoadedWarehouse has been set to " + loadedWarehouse);
+                            Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + " &frozpoczal uzupelnianie magazynu. Po przedmioty zapraszamy za chwile."));
+                        }, 20L);
+                    }
+
+                    return true;
+                }
+
                 if (arguments[0].equals("MoreFromOres")) {
                     if (moreFromOres) {
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getName() + " AddPoints 30");

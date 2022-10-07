@@ -4,10 +4,15 @@ import claimworld.net.supporter.utils.Messages;
 import claimworld.net.supporter.utils.guis.ReadyItems;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.LingeringPotion;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Random;
 
@@ -57,6 +62,15 @@ public class PlayerItemConsumeEvent implements Listener {
         world.playSound(location, Sound.BLOCK_ROOTED_DIRT_BREAK, 0.6f, 2f);
         world.spawnParticle(Particle.SPELL, location, 20, 0.75, 0.75, 0.75, 0);
         world.spawnParticle(Particle.SLIME, location, 20, 0.75, 0.75, 0.75);
+
+        ItemStack potion = new ItemStack(Material.LINGERING_POTION);
+        PotionMeta potionMeta = (PotionMeta) potion.getItemMeta();
+        assert potionMeta != null;
+        potionMeta.addCustomEffect(new PotionEffect(PotionEffectType.WITHER, 20, 0, true, true), false);
+        potion.setItemMeta(potionMeta);
+
+        ThrownPotion thrownPotion = world.spawn(location, ThrownPotion.class);
+        thrownPotion.setItem(potion);
 
         Bukkit.broadcastMessage(colorize(Messages.getBroadcastPrefix() + "Gracz " + player.getDisplayName() + " &fwlasnie sie... zesral."));
     }

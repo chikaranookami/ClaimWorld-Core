@@ -12,15 +12,16 @@ import static org.bukkit.Bukkit.*;
 
 public class AutoMessages {
     public AutoMessages() {
-        org.bukkit.boss.BossBar bossBar = Bukkit.createBossBar(colorize("Nadchodzaca przepustka i jeszcze wiecej mozliwosci! &c/vip"), BarColor.RED, BarStyle.SOLID);
+        org.bukkit.boss.BossBar vipBossbar = Bukkit.createBossBar(colorize("Nadchodzaca przepustka i jeszcze wiecej mozliwosci! &c/vip"), BarColor.RED, BarStyle.SOLID);
+        org.bukkit.boss.BossBar progressBossbar = Bukkit.createBossBar(colorize(""), BarColor.GREEN, BarStyle.SOLID);
 
         getServer().getConsoleSender().sendMessage("Przygotowywanie bossbarow...");
 
-        bossBar.setProgress(0.0);
+        vipBossbar.setProgress(0.0);
 
         getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
             for (Player player : getOnlinePlayers()) {
-                bossBar.addPlayer(player);
+                vipBossbar.addPlayer(player);
             }
 
             getServer().getConsoleSender().sendMessage("Wyswietlanie bossbara #1...");
@@ -31,12 +32,12 @@ public class AutoMessages {
                 @Override
                 public void run() {
                     if (d >= 1.0) {
-                        bossBar.removeAll();
+                        vipBossbar.removeAll();
                         cancel();
                         return;
                     }
 
-                    bossBar.setProgress(d);
+                    vipBossbar.setProgress(d);
                     d += 0.01;
                 }
             }.runTaskTimer(Supporter.getPlugin(), 20L, 4L);

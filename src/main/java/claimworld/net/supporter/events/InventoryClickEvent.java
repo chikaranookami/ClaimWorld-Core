@@ -109,6 +109,18 @@ public class InventoryClickEvent implements Listener {
                             Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " centrum_publiczne");
                         }, 1L);
                         return;
+                    case 21:
+                        player.closeInventory();
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+                            Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " lasy_wschodnie");
+                        }, 1L);
+                        return;
+                    case 22:
+                        player.closeInventory();
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+                            Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " nadmorska_szlachta");
+                        }, 1L);
+                        return;
                 }
             }
 

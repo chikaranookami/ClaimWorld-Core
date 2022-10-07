@@ -38,14 +38,14 @@ public class Pomoc {
                 pages.add("Komendy 7");
 
                 bookMeta.setPages(pages);
-                bookMeta.setPage(1, "Informacje\n\nW tym poradniku znajdziesz:§8\n- Komendy\n- Zmiany w rozgrywce\n\n Masz pytania? Smialo, kieruj je na Discorda.");
-                bookMeta.setPage(2, "Komendy gracza§8\n/lwc - zabawy z zabezpieczeniami skrzynek\n/msg - prywatna wiadomosc");
-                bookMeta.setPage(3, "Dodatkowe komendy VIP§8\n/playtime - czas online\n/me - opis postaci (RP)\n/skin - zmien swojego skina\n/hat - zaloz na glowe trzymany blok");
-                bookMeta.setPage(4, "Dodatkowe komendy VIP+§8\n/sit, /lay, /crawl, /spin, /bellyflop - animacje postaci\n\nVIP+ ma rowniez wszystkie komendy VIP.");
-                bookMeta.setPage(5, "Dodatkowe komendy MVP+§8\n/pp - konsola efektow\n/fw - fajerwerk pod nogami\n\nMVP ma rowniez wszystkie komendy VIP+ i VIP.");
-                bookMeta.setPage(6, "Wazniejsze zmiany w rozgrywce§8\n- Skrzynie blokuja sie po postawieniu\n- Wylaczono mocne maszyny z redstone\n- Brodawki wypadaja z Zombie Piglinow");
-                bookMeta.setPage(7, "§8- Slabsze moby ze spawnerow\n- System lokacji\n- Dodatkowi Handlarze\n- Niestandardowe przedmioty, w tym niestandardowa waluta\n- Globalne wzmocnienia\n- Nowe mechaniki\n- Nieco inny spawn mobow");
-                bookMeta.setPage(8, "§8Projekt §0Claim World§8 stawia na dlugoterminowosc i z czasem zmian bedzie wiecej, jednak naszym celem jest utrzymanie rozgrywki w klimatach klasycznego Minecrafta tak bardzo, jak tylko sie da.");
+                bookMeta.setPage(1, "Informacje\n\nW tym poradniku znajdziesz:§1\n- Komendy\n- Zmiany w rozgrywce\n\n §0Masz pytania? Smialo, kieruj je na Discorda.");
+                bookMeta.setPage(2, "Komendy gracza\n§1/lwc§0 - zabawy z zabezpieczeniami skrzynek\n§1/msg§0 - prywatna wiadomosc");
+                bookMeta.setPage(3, "Dodatkowe komendy VIP\n§1/playtime§0 - czas online\n§1/me§0 - opis postaci (RP)\n§1/skin§0 - zmien swojego skina\n§1/hat§0 - zaloz na glowe trzymany blok");
+                bookMeta.setPage(4, "Dodatkowe komendy VIP+\n§1/sit§0,§1 /lay§0,§1 /crawl§0, §1/spin§0, §1/bellyflop§0 - animacje postaci\n\nVIP+ ma rowniez wszystkie komendy VIP.");
+                bookMeta.setPage(5, "Dodatkowe komendy MVP+\n§1/pp§0 - konsola efektow\n§1/fw§0 - fajerwerk pod nogami\n\nMVP ma rowniez wszystkie komendy VIP+ i VIP.");
+                bookMeta.setPage(6, "Wazniejsze zmiany w rozgrywce\n§1+§0 Skrzynie blokuja sie po postawieniu\n§1+§0 Wylaczono mocne maszyny z redstone\n§1+§0 Brodawki wypadaja z Zombie Piglinow\n§1+§0 Slabsze moby ze spawnerow");
+                bookMeta.setPage(7, "§1+§0 System lokacji\n§1+§0 Dodatkowi Handlarze\n§1+§0 Niestandardowe przedmioty, w tym niestandardowa waluta\n§1+§0 Globalne wzmocnienia\n§1+§0 Nowe mechaniki\n§1+§0 Nieco inny spawn mobow\n§1+§0Wolniejsze, przerzucajace po 4 sztuki przedmiotow leje");
+                bookMeta.setPage(8, "Projekt §1Claim World§0 stawia na dlugoterminowosc i z czasem zmian bedzie wiecej, jednak naszym celem jest utrzymanie rozgrywki w klimatach klasycznego Minecrafta tak bardzo, jak tylko sie da.");
                 book.setItemMeta(bookMeta);
 
                 Player player = (Player) sender;

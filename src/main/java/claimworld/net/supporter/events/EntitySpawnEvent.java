@@ -61,6 +61,7 @@ public class EntitySpawnEvent implements Listener {
                 updatedRecipes.add(getCustomRecipe(readyItems.get("Niewidzialna ramka"), 2, new ItemStack(Material.EMERALD, 24), new ItemStack(Material.ITEM_FRAME)));
                 updatedRecipes.add(getCustomRecipe(new CustomHead("&fGlowa " + player.getName(), player, 1, Collections.singletonList(colorize(readyItems.getLore("common")))).getItem(), 1, new ItemStack(Material.EMERALD, 32), null));
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.FERN), 2, new ItemStack(Material.EMERALD, 16), null));
+                updatedRecipes.add(getCustomRecipe(new ItemStack(Material.BAT_SPAWN_EGG), 1, new ItemStack(Material.EMERALD, 32), null));
                 updatedRecipes.add(getCustomRecipe(readyItems.get("$1"), 2, new ItemStack(Material.EMERALD, 64), null));
                 updatedRecipes.add(getCustomRecipe(new CustomItem("", Material.ENCHANTED_BOOK, 1, null, 0, Enchantment.DURABILITY, 4).getItem(), 1, new ItemStack(Material.EMERALD, 16), readyItems.get("$1", 2)));
                 traderName = colorize("&a&lEmeraldowy Handlarz");

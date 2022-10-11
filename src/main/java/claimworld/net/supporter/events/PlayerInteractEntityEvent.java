@@ -18,6 +18,8 @@ import java.util.Random;
 
 import static claimworld.net.supporter.Supporter.doubledForce;
 import static claimworld.net.supporter.Supporter.pickupAll;
+import static claimworld.net.supporter.utils.Messages.getUserPrefix;
+import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.*;
 public class PlayerInteractEntityEvent implements Listener {
 
@@ -53,14 +55,24 @@ public class PlayerInteractEntityEvent implements Listener {
     @EventHandler
     public void playerInteractEntityEvent(org.bukkit.event.player.PlayerInteractEntityEvent event) {
         if (!event.getHand().equals(EquipmentSlot.HAND)) return;
-        if (!entityTypes.contains(event.getRightClicked().getType())) {
-            if (!pickupAll) return;
-            if (blockedEntityTypes.contains(event.getRightClicked().getType())) return;
-            if (!fixedEntityTypes.contains(event.getRightClicked().getType())) return;
-            if (!event.getRightClicked().hasGravity()) return;
-        }
 
         Player player = event.getPlayer();
+
+        if (!entityTypes.contains(event.getRightClicked().getType())) {
+            if (!pickupAll) {
+                player.sendMessage(colorize(getUserPrefix() + "&7By podniesc inne byty niz krowy, owce, kurczaki i swinie, wlacz Podnoszenie+."));
+                return;
+            }
+            if (blockedEntityTypes.contains(event.getRightClicked().getType())) {
+                player.sendMessage(colorize(getUserPrefix() + "&7Nie mozesz podniesc tego bytu."));
+                return;
+            }
+            if (fixedEntityTypes.contains(event.getRightClicked().getType())) {
+                player.sendMessage(colorize(getUserPrefix() + "&7Nie mozesz podniesc tego bytu."));
+                return;
+            }
+            if (!event.getRightClicked().hasGravity()) return;
+        }
 
         if (!player.getInventory().getItemInMainHand().getType().isAir()) return;
         if (delayedPlayers.contains(player)) return;

@@ -43,7 +43,7 @@ public class Pomoc {
                 bookMeta.setPage(3, "Dodatkowe komendy VIP\n§1/playtime§0 - czas online\n§1/me§0 - opis postaci (RP)\n§1/skin§0 - zmien swojego skina\n§1/hat§0 - zaloz na glowe trzymany blok");
                 bookMeta.setPage(4, "Dodatkowe komendy VIP+\n§1/sit§0,§1 /lay§0,§1 /crawl§0, §1/spin§0, §1/bellyflop§0 - animacje postaci\n\nVIP+ ma rowniez wszystkie komendy VIP.");
                 bookMeta.setPage(5, "Dodatkowe komendy MVP+\n§1/pp§0 - konsola efektow\n§1/fw§0 - fajerwerk pod nogami\n\nMVP ma rowniez wszystkie komendy VIP+ i VIP.");
-                bookMeta.setPage(6, "Wazniejsze zmiany w rozgrywce\n§1+§0 Skrzynie blokuja sie po postawieniu\n§1+§0 Wylaczono mocne maszyny z redstone\n§1+§0 Brodawki wypadaja z Zombie Piglinow\n§1+§0 Slabsze moby ze spawnerow");
+                bookMeta.setPage(6, "Wazniejsze zmiany w rozgrywce\n§1+§0 Skrzynie blokuja sie po postawieniu\n§1+§0 Wylaczono mocne maszyny z redstone\n§1+§0 Brodawki wypadaja z Zombie Piglinow\n§1+§0 Slabsze moby ze spawnerow\n§1+§0 Niektore moby mozna podnosic przy pomocy SHIFT+PPM");
                 bookMeta.setPage(7, "§1+§0 System lokacji\n§1+§0 Dodatkowi Handlarze\n§1+§0 Niestandardowe przedmioty, w tym niestandardowa waluta\n§1+§0 Globalne wzmocnienia\n§1+§0 Nowe mechaniki\n§1+§0 Nieco inny spawn mobow\n§1+§0Wolniejsze, przerzucajace po 4 sztuki przedmiotow leje");
                 bookMeta.setPage(8, "Projekt §1Claim World§0 stawia na dlugoterminowosc i z czasem zmian bedzie wiecej, jednak naszym celem jest utrzymanie rozgrywki w klimatach klasycznego Minecrafta tak bardzo, jak tylko sie da.");
                 book.setItemMeta(bookMeta);

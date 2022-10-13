@@ -9,6 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import static org.bukkit.Bukkit.getScheduler;
+
 public final class Supporter extends JavaPlugin implements Listener {
 
     private static Supporter plugin;
@@ -73,7 +75,9 @@ public final class Supporter extends JavaPlugin implements Listener {
         new AutoMessages();
 
         //others
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true");
+        getScheduler().runTaskLater(this, () -> {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true");
+        }, 100L);
     }
 
     @Override

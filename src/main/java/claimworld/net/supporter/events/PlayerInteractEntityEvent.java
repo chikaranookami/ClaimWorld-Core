@@ -59,18 +59,9 @@ public class PlayerInteractEntityEvent implements Listener {
         Player player = event.getPlayer();
 
         if (!entityTypes.contains(event.getRightClicked().getType())) {
-            if (!pickupAll) {
-                player.sendMessage(colorize(getUserPrefix() + "&7By podniesc inne byty niz krowy, owce, kurczaki i swinie, wlacz Podnoszenie+."));
-                return;
-            }
-            if (blockedEntityTypes.contains(event.getRightClicked().getType())) {
-                player.sendMessage(colorize(getUserPrefix() + "&7Nie mozesz podniesc tego bytu."));
-                return;
-            }
-            if (fixedEntityTypes.contains(event.getRightClicked().getType())) {
-                player.sendMessage(colorize(getUserPrefix() + "&7Nie mozesz podniesc tego bytu."));
-                return;
-            }
+            if (!pickupAll) return;
+            if (blockedEntityTypes.contains(event.getRightClicked().getType())) return;
+            if (fixedEntityTypes.contains(event.getRightClicked().getType())) return;
             if (!event.getRightClicked().hasGravity()) return;
         }
 

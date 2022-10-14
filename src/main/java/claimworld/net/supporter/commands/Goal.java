@@ -1,4 +1,4 @@
-package claimworld.net.supporter.utils.wip;
+package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
@@ -6,7 +6,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.List;
+import java.util.logging.Level;
 
+import static claimworld.net.supporter.utils.Messages.getBroadcastPrefix;
+import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.*;
 
 public class Goal {
@@ -41,15 +44,18 @@ public class Goal {
                     }
 
                     int newValue = config.getInt("goals.total");
+                    int currentGoal = config.getInt("goals.active_goal");
+
                     newValue = newValue + number;
 
                     config.set("goals.total", newValue);
+                    Supporter.getPlugin().saveConfig();
+
+                    broadcastMessage(colorize(getBroadcastPrefix() + "Postep obecnego celu w sklepie wynosi teraz &e" + newValue + "&f/&e" + currentGoal + "zl&f."));
 
                     getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
                         dispatchCommand(sender, "goal tryBonus 0");
                     }, 30L);
-
-                    Supporter.getPlugin().saveConfig();
 
                     return true;
                 }
@@ -62,6 +68,7 @@ public class Goal {
                     if (currentGoal == 0) {
                         currentGoal = 250;
                         config.set("goals.active_goal", 250);
+                        Supporter.getPlugin().saveConfig();
                     }
 
                     if (currentValue >= currentGoal) {
@@ -69,20 +76,25 @@ public class Goal {
 
                         switch (currentGoal) {
                             case 250:
-                                dispatchCommand(sender, "say osiagnieto cel 250");
+                                dispatchCommand(sender, "gamerule playersSleepingPercentage 60");
+                                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &eprocent osob, potrzebnych do przespania nocy zostal zmniejszony&f."));
                                 break;
                             case 500:
-                                dispatchCommand(sender, "say osiagnieto cel 500");
+                                dispatchCommand(sender, "worldborder set 7000");
+                                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &epowiekszona zostala granica swiata&f."));
                                 break;
                             case 750:
-                                dispatchCommand(sender, "say osiagnieto cel 750");
+                                dispatchCommand(sender, "gamerule randomTickSpeed 5");
+                                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &ezwiekszony zostal randomTickSpeed&f, dzieki czemu na przyklad uprawy beda rosly szybciej."));
                                 break;
                             case 1000:
-                                dispatchCommand(sender, "say osiagnieto cel 1000");
+                                dispatchCommand(sender, "worldborder set 8000");
+                                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &epowiekszona zostala granica swiata&f."));
+                                break;
+                            case 9999:
+                                getLogger().log(Level.WARNING, "wplacone zostalo wiecej kasy, niz ustawionych celow");
                         }
                     }
-
-                    Supporter.getPlugin().saveConfig();
 
                     return true;
                 }

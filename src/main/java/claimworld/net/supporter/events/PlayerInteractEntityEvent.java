@@ -18,8 +18,6 @@ import java.util.Random;
 
 import static claimworld.net.supporter.Supporter.doubledForce;
 import static claimworld.net.supporter.Supporter.pickupAll;
-import static claimworld.net.supporter.utils.Messages.getUserPrefix;
-import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.*;
 public class PlayerInteractEntityEvent implements Listener {
 

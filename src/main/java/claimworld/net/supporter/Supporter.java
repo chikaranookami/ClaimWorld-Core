@@ -3,7 +3,7 @@ package claimworld.net.supporter;
 import claimworld.net.supporter.commands.*;
 import claimworld.net.supporter.events.*;
 import claimworld.net.supporter.timers.AutoMessages;
-import claimworld.net.supporter.utils.wip.Goal;
+import claimworld.net.supporter.commands.Goal;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
@@ -53,7 +53,6 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new HangingPlaceEvent(), this);
         pluginManager.registerEvents(new PlayerItemConsumeEvent(), this);
         pluginManager.registerEvents(new InventoryClickEvent(), this);
-        pluginManager.registerEvents(new InventoryDragEvent(), this);
         pluginManager.registerEvents(new PrepareAnvilEvent(), this);
 
         //commands

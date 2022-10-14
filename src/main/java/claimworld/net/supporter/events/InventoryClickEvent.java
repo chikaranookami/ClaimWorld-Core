@@ -16,12 +16,11 @@ public class InventoryClickEvent implements Listener {
 
     @EventHandler
     public void inventoryClickEvent(org.bukkit.event.inventory.InventoryClickEvent event) {
-        Inventory clickedInventory = event.getClickedInventory();
-
-        if (clickedInventory == null) return;
+        if (event.getClickedInventory() == null) return;
 
         int slot = event.getSlot();
         Player player = (Player) event.getWhoClicked();
+        Inventory clickedInventory = event.getClickedInventory();
 
         if (slot == 17 && clickedInventory == player.getInventory()) {
             event.setCancelled(true);
@@ -30,6 +29,8 @@ public class InventoryClickEvent implements Listener {
             }, 1L);
             return;
         }
+
+        if (clickedInventory == player.getInventory()) return;
 
         Inventory inventory = event.getInventory();
 

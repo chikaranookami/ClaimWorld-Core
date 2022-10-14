@@ -73,6 +73,24 @@ public class Ranks {
         }
     }
 
+    public final String getRankName(String rank) {
+        switch (rank) {
+            case "admin":
+                return colorize("&d[Admin]");
+            case "moderator":
+                return colorize("&a[Modek]");
+            case "mvp":
+                return colorize("&c[&c&lMVP&c]");
+            case "vip+":
+                return colorize("&e[&e&lVIP+&e]");
+            case "vip":
+                return colorize("&b[&b&lVIP&b]");
+            case "player":
+                return colorize("&7[Gracz]");
+        }
+
+        return null;
+    }
 
     public final String getRankName(Player player) {
         if (player.hasPermission("claimworld.admin")) {
@@ -82,13 +100,13 @@ public class Ranks {
             return colorize("&aModerator");
         }
         if (player.hasPermission("claimworld.mvp")) {
-            return colorize("&cMVP");
+            return colorize("&c&lMVP");
         }
         if (player.hasPermission("claimworld.vip+")) {
-            return colorize("&eVIP+");
+            return colorize("&e&lVIP+");
         }
         if (player.hasPermission("claimworld.vip")) {
-            return colorize("&bVIP");
+            return colorize("&b&lVIP");
         }
         if (player.hasPermission("claimworld.player")) {
             return colorize("&7Gracz");
@@ -100,22 +118,22 @@ public class Ranks {
 
     public final String getDesign(Player player) {
         if (player.hasPermission("claimworld.admin")) {
-            return colorize("&d[ADM]&r " + player.getName());
+            return colorize(getRankName("admin") + "&r " + player.getName());
         }
         if (player.hasPermission("claimworld.mod")) {
-            return colorize("&a[MOD]&r " + player.getName());
+            return colorize(getRankName("mod") + "&r " + player.getName());
         }
         if (player.hasPermission("claimworld.mvp")) {
-            return colorize("&c[MVP]&r " + player.getName());
+            return colorize(getRankName("mvp") + "&r " + player.getName());
         }
         if (player.hasPermission("claimworld.vip+")) {
-            return colorize("&e[VIP+]&r " + player.getName());
+            return colorize(getRankName("vip+") + "&r " + player.getName());
         }
         if (player.hasPermission("claimworld.vip")) {
-            return colorize("&b[VIP]&r " + player.getName());
+            return colorize(getRankName("vip") + "&r " + player.getName());
         }
         if (player.hasPermission("claimworld.player")) {
-            return colorize("&7[GRA]&r " + player.getName());
+            return colorize(getRankName("player") + "&r " + player.getName());
         }
         else {
             return "";

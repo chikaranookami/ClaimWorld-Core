@@ -56,23 +56,33 @@ public class EntitySpawnEvent implements Listener {
             WanderingTrader trader = (WanderingTrader) event.getEntity();
             String traderName = null;
 
+            ItemStack dolar = readyItems.get("$1");
+
             //emerald trader
             if (chance == 1) {
-                updatedRecipes.add(getCustomRecipe(readyItems.get("Niewidzialna ramka"), 2, new ItemStack(Material.EMERALD, 24), new ItemStack(Material.ITEM_FRAME)));
-                updatedRecipes.add(getCustomRecipe(new CustomHead("&fGlowa " + player.getName(), player, 1, Collections.singletonList(colorize(readyItems.getLore("common")))).getItem(), 1, new ItemStack(Material.EMERALD, 32), null));
+                ItemStack ramka = readyItems.get("Niewidzialna ramka");
+                ItemStack glowa = new CustomHead("&fGlowa " + player.getName(), player, 1, Collections.singletonList(colorize(readyItems.getLore("common")))).getItem();
+                ItemStack dolar2x = readyItems.get("$1", 2);
+                ItemStack unbreaking4 = new CustomItem("", Material.ENCHANTED_BOOK, 1, null, 0, Enchantment.DURABILITY, 4).getItem();
+
+                updatedRecipes.add(getCustomRecipe(ramka, 2, new ItemStack(Material.EMERALD, 24), new ItemStack(Material.ITEM_FRAME)));
+                updatedRecipes.add(getCustomRecipe(glowa, 1, new ItemStack(Material.EMERALD, 32), null));
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.FERN), 2, new ItemStack(Material.EMERALD, 16), null));
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.BAT_SPAWN_EGG), 1, new ItemStack(Material.EMERALD, 32), null));
-                updatedRecipes.add(getCustomRecipe(readyItems.get("$1"), 2, new ItemStack(Material.EMERALD, 64), null));
-                updatedRecipes.add(getCustomRecipe(new CustomItem("", Material.ENCHANTED_BOOK, 1, null, 0, Enchantment.DURABILITY, 4).getItem(), 1, new ItemStack(Material.EMERALD, 16), readyItems.get("$1", 2)));
+                updatedRecipes.add(getCustomRecipe(dolar, 2, new ItemStack(Material.EMERALD, 64), null));
+                updatedRecipes.add(getCustomRecipe(unbreaking4, 1, new ItemStack(Material.EMERALD, 16), dolar2x));
                 traderName = colorize("&a&lEmeraldowy Handlarz");
             }
 
             //phantom trader
             if (chance == 2) {
+                ItemStack bilet = readyItems.get("Uniwersalny bilet");
+                ItemStack dolar48x = readyItems.get("$1", 48);
+
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.FIREWORK_ROCKET), 8, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
-                updatedRecipes.add(getCustomRecipe(readyItems.get("Uniwersalny bilet"), 2, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
-                updatedRecipes.add(getCustomRecipe(readyItems.get("$1"), 2, new ItemStack(Material.PHANTOM_MEMBRANE, 64), null));
-                updatedRecipes.add(getCustomRecipe(new ItemStack(Material.ELYTRA), 1, new ItemStack(Material.PHANTOM_MEMBRANE, 64), readyItems.get("$1", 32)));
+                updatedRecipes.add(getCustomRecipe(bilet, 2, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
+                updatedRecipes.add(getCustomRecipe(dolar, 2, new ItemStack(Material.PHANTOM_MEMBRANE, 48), null));
+                updatedRecipes.add(getCustomRecipe(new ItemStack(Material.ELYTRA), 1, new ItemStack(Material.PHANTOM_MEMBRANE, 64), dolar48x));
                 traderName = colorize("&d&lFantomowy Handlarz");
             }
 

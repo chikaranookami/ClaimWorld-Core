@@ -11,38 +11,9 @@ import java.util.List;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
 
 public class CustomItem {
-    public String getName() {
-        return name;
-    }
+    public ItemStack getItem() {return item;}
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Material getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(Material material) {
-        this.material = material;
-    }
-
-    public List<String> getLore() {
-        return lore;
-    }
-
-    public void setItem(ItemStack item) {
-        this.item = item;
-    }
-
-    public ItemStack getItem() {
-        return item;
-    }
-
-    private ItemStack item;
-    private String name;
-    private Material material;
-    private final List<String> lore;
+    private final ItemStack item;
 
     public CustomItem(String name, Material material, List<String> lore) {
         this(name, material, 1, lore, 0, null, 0);
@@ -53,22 +24,22 @@ public class CustomItem {
     }
 
     public CustomItem(String name, Material material, int amount, List<String> lore, int customModelData, Enchantment enchantment, int enchantmentLevel) {
-        this.name = name;
-        this.material = material;
-        this.item = new ItemStack(material, amount);
+        ItemStack item = new ItemStack(material, amount);
 
         ItemMeta itemMeta = item.getItemMeta();
         assert itemMeta != null;
 
+        //TU JEST BLAD
         itemMeta.setDisplayName(colorize(name));
 
         if (enchantment != null) ((EnchantmentStorageMeta) itemMeta).addStoredEnchant(enchantment, enchantmentLevel, true);
 
         if (customModelData > 0) itemMeta.setCustomModelData(customModelData);
 
-        this.lore = lore;
         itemMeta.setLore(lore);
 
         item.setItemMeta(itemMeta);
+
+        this.item = item;
     }
 }

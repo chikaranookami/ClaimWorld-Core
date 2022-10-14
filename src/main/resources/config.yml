@@ -1,8 +1,9 @@
 goals:
   total: 0
-  active_goal: 0
+  active_goal: 250
   list:
     - 250
     - 500
     - 750
     - 1000
+    - 9999

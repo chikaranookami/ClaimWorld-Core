@@ -14,19 +14,19 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import static claimworld.net.supporter.utils.StringUtils.colorize;
 
 public class PlayerItemConsumeEvent implements Listener {
 
+    private final List<Material> blockedMaterials = Arrays.asList(Material.SWEET_BERRIES, Material.MELON_SLICE, Material.DRIED_KELP);
+
     @EventHandler
     public void playerItemConsumeEvent(org.bukkit.event.player.PlayerItemConsumeEvent event) {
-        Material material = event.getItem().getType();
-
-        if (material == Material.SWEET_BERRIES) return;
-        if (material == Material.MELON_SLICE) return;
-        if (material == Material.DRIED_KELP) return;
+        if (blockedMaterials.contains(event.getItem().getType())) return;
 
         int poopChance = new Random().nextInt(1000);
 
@@ -54,7 +54,9 @@ public class PlayerItemConsumeEvent implements Listener {
 
         if (random == 1) block1.setType(Material.DIRT);
 
-        world.dropItem(location, new ReadyItems().get("Kupa"));
+        ItemStack kupa = new ReadyItems().get("Kupa");
+
+        world.dropItem(location, kupa);
         world.dropItem(location, new ItemStack(Material.DIRT, 3));
 
         world.playSound(location, Sound.ENTITY_SHEEP_AMBIENT, 0.6f, 2f);

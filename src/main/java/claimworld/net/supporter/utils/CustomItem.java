@@ -24,7 +24,7 @@ public class CustomItem {
     }
 
     public CustomItem(String name, Material material, int amount, List<String> lore, int customModelData, Enchantment enchantment, int enchantmentLevel) {
-        ItemStack item = new ItemStack(material, amount);
+        ItemStack item = new ItemStack(material);
 
         ItemMeta itemMeta = item.getItemMeta();
         assert itemMeta != null;
@@ -39,6 +39,7 @@ public class CustomItem {
         itemMeta.setLore(lore);
 
         item.setItemMeta(itemMeta);
+        item.setAmount(amount);
 
         this.item = item;
     }

@@ -11,6 +11,7 @@ public class GoalUtils {
         rewardsMap.put(500, "Powiekszenie borderu (Overworld)");
         rewardsMap.put(750, "Nieco wiekszy randomTickSpeed");
         rewardsMap.put(1000, "Powiekszenie borderu (Overworld)");
+        rewardsMap.put(9999, "-");
     }
 
     public String getReward(int reward) {

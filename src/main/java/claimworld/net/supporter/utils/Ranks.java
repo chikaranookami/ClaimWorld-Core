@@ -121,7 +121,7 @@ public class Ranks {
             return colorize(getRankName("admin") + "&r " + player.getName());
         }
         if (player.hasPermission("claimworld.mod")) {
-            return colorize(getRankName("mod") + "&r " + player.getName());
+            return colorize(getRankName("moderator") + "&r " + player.getName());
         }
         if (player.hasPermission("claimworld.mvp")) {
             return colorize(getRankName("mvp") + "&r " + player.getName());

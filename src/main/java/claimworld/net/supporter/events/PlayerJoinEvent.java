@@ -55,7 +55,7 @@ public class PlayerJoinEvent implements Listener {
 
     public PlayerJoinEvent() {
         adminTeam.setPrefix(colorize(ranks.getRankName("admin") + " "));
-        modTeam.setPrefix(colorize(ranks.getRankName("mod") + " "));
+        modTeam.setPrefix(colorize(ranks.getRankName("moderator") + " "));
         mvpTeam.setPrefix(colorize(ranks.getRankName("mvp") + " "));
         vippTeam.setPrefix(colorize(ranks.getRankName("vip+") + " "));
         vipTeam.setPrefix(colorize(ranks.getRankName("vip") + " "));

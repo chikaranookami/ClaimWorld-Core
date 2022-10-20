@@ -10,6 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 
+import java.util.logging.Level;
+
 import static org.bukkit.Bukkit.*;
 
 public class InventoryClickEvent implements Listener {
@@ -30,7 +32,7 @@ public class InventoryClickEvent implements Listener {
             return;
         }
 
-        if (clickedInventory == player.getInventory()) return;
+        //if (clickedInventory == player.getInventory()) return;
 
         Inventory inventory = event.getInventory();
 

@@ -11,6 +11,7 @@ public class HangingPlaceEvent implements Listener {
 
     @EventHandler
     public void hangingPlaceEvent(org.bukkit.event.hanging.HangingPlaceEvent event) {
+        if (event.getItemStack() == null) return;
         if (event.getItemStack().getType() != Material.ITEM_FRAME) return;
         if (event.getItemStack().getItemMeta().getLore() == null) return;
 

@@ -54,6 +54,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new PlayerItemConsumeEvent(), this);
         pluginManager.registerEvents(new InventoryClickEvent(), this);
         pluginManager.registerEvents(new PrepareAnvilEvent(), this);
+        pluginManager.registerEvents(new InventoryCloseEvent(), this);
 
         //commands
         new LoadLokacja();
@@ -63,12 +64,12 @@ public final class Supporter extends JavaPlugin implements Listener {
         new Pomoc();
         new Teleporter();
         new Punkty();
-        new Sklep();
-        new Vip();
+        new ShopCommands();
         new DajPunkty();
         new Fw();
         new ShopAnnouncement();
         new Goal();
+        new FillUpWarehouse();
 
         //systems
         new AutoMessages();

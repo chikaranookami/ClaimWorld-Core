@@ -2,9 +2,7 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.*;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -48,9 +46,9 @@ public class Pomoc {
                 bookMeta.setPage(5, "Dodatkowe komendy MVP+\n\n§1/pp§0 - konsola efektow\n§1/fw§0 - fajerwerk pod nogami\n\nMVP ma rowniez wszystkie komendy VIP+ i VIP.");
                 bookMeta.setPage(6, "Wazniejsze zmiany w rozgrywce\n\n§1+§0 Skrzynie blokuja sie po postawieniu\n§1+§0 Limit sily na maszyny\n§1+§0 Brodawki z Piglinow\n§1+§0 Slabsze moby ze spawnerow\n§1+§0 Niektore moby mozna podnosic przy pomocy SHIFT+PPM");
                 bookMeta.setPage(7, "§1+§0 System lokacji\n\n§1+§0 Dodatkowi Handlarze\n§1+§0 Niestandardowe przedmioty\n§1+§0 Globalne wzmocnienia\n§1+§0 Nowe mechaniki\n§1+§0 Nieco inny spawn mobow\n§1+§0Wolniejsze, przerzucajace po 4 sztuki przedmiotow leje");
-                bookMeta.setPage(8, "Odgorne zezwolenia na wykorzystywanie bledow\n\n§1+§0 Wychodzenie na sufit w netherze");
+                bookMeta.setPage(8, "Odgorne zezwolenia na wykorzystywanie bledow\n\n§1+§0 Wychodzenie na sufit w netherze\n\n\nWykorzystywanie bledow, ktore nie daja przewagi w rozgrywce §njest dozwolone§0.");
                 bookMeta.setPage(9, "Zarezerwowane wzory sztandardow\n\n§1+§0 Wszystkie zajete wzory sztandardow dostepne sa do wgladu w specjalnym miejscu obok spawnu (patrz mapa).");
-                bookMeta.setPage(10, "Progi zakupow w sklepie\n\n§1+§0 Za osiagniecie okreslonego progu przewidziane sa specjalne bonusy, o ktorych gracze zostana poinformowani po osiagnieciu wybranego celu                                                                                                                                                                                                                          .");
+                bookMeta.setPage(10, "Progi zakupow w sklepie\n\n§1+§0 Za osiagniecie okreslonego progu przewidziane sa specjalne bonusy, o ktorych gracze zostana poinformowani po osiagnieciu wybranego celu.");
                 bookMeta.setPage(11, "Projekt §1Claim World§0 stawia na dlugoterminowosc i z czasem zmian bedzie wiecej, jednak naszym celem jest utrzymanie rozgrywki w klimatach klasycznego Minecrafta tak bardzo, jak tylko sie da.");
                 book.setItemMeta(bookMeta);
 

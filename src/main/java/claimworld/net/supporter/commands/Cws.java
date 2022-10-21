@@ -2,19 +2,40 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import static claimworld.net.supporter.Supporter.*;
 import static claimworld.net.supporter.utils.Messages.getBroadcastPrefix;
 import static claimworld.net.supporter.utils.Messages.getUserPrefix;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
+import static org.bukkit.Bukkit.getConsoleSender;
 
 public class Cws {
-    private final String usage = "/cws TogglePhantoms/DoubleXp/ToggleEnd";
+    private final String usage = "/cws TogglePhantoms/DoubleXp/ToggleEnd/MoreFromOres/LoadedWarehouse/PickupAll/DoubledForce";
+
+    private final HashMap<String, Integer> boostPointPrices = new HashMap<>();
+
+    private void boosterAlreadyActive(String variableName, Player player) {
+        Bukkit.dispatchCommand(getConsoleSender(), "adminvote User " + player.getName() + " AddPoints " + boostPointPrices.get(variableName));
+        getConsoleSender().sendMessage(variableName + " is already true");
+        player.sendMessage(getUserPrefix() + "Ktos juz aktywowal ten bonus. Punkty zostaly zwrocone.");
+    }
 
     public Cws() {
+        boostPointPrices.put("LoadedWarehouse", 20);
+        boostPointPrices.put("MoreFromOres", 30);
+        boostPointPrices.put("DoubleXp", 30);
+        boostPointPrices.put("TogglePhantoms", 15);
+        boostPointPrices.put("ToggleEnd", 20);
+        boostPointPrices.put("PickupAll", 30);
+        boostPointPrices.put("DoubledForce", 30);
 
         new CommandBase("cws", 0, 3, false) {
             @Override
@@ -31,144 +52,70 @@ public class Cws {
                     return true;
                 }
 
-                if (arguments[0].equals("LoadedWarehouse")) {
-                    if (loadedWarehouse) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getName() + " AddPoints 40");
+                String value = arguments[0];
 
-                        sender.sendMessage("LoadedWarehouse is already true");
-                        player.sendMessage(getUserPrefix() + "Ktos juz uzupelnil magazyn. Punkty zostaly zwrocone.");
-                    }
+                if (loadedWarehouse || moreFromOres || doubleXp || togglePhantoms || toggleEnd || pickupAll || doubledForce) {
+                    boosterAlreadyActive(value, player);
+                    return true;
+                }
 
-                    if (!loadedWarehouse) {
+                if (value.equals("LoadedWarehouse")) {
+                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         loadedWarehouse = true;
+                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + " &frozdal wszystkim troche blokow!"));
+                    }, 20L);
 
-                        Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                            sender.sendMessage("LoadedWarehouse has been set to " + loadedWarehouse);
-                            Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + " &frozpoczal uzupelnianie magazynu. Po przedmioty zapraszamy za chwile."));
-                        }, 20L);
-                    }
-
+                    Bukkit.dispatchCommand(getConsoleSender(), "fillupwarehouse");
                     return true;
                 }
 
-                if (arguments[0].equals("MoreFromOres")) {
-                    if (moreFromOres) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getName() + " AddPoints 30");
-
-                        sender.sendMessage("MoreFromOres is already true");
-                        player.sendMessage(getUserPrefix() + "Ktos juz wlaczyl dodatkowe diamenty. Punkty zostaly zwrocone.");
-                    }
-
-                    if (!moreFromOres) {
+                if (value.equals("MoreFromOres")) {
+                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         moreFromOres = true;
-
-                        Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                            sender.sendMessage("MoreFromOres has been set to " + Supporter.moreFromOres);
-                            Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + " &fwlasnie wlaczyl dodatkowe diamenty z rud do czasu kolejnego restartu serwera."));
-                        }, 20L);
-                    }
-
+                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + " &fwlasnie wlaczyl dodatkowe diamenty z rud do czasu kolejnego restartu serwera."));
+                    }, 20L);
                     return true;
                 }
 
-                if (arguments[0].equals("DoubleXp")) {
-                    if (Supporter.doubleXp) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getName() + " AddPoints 30");
-
-                        sender.sendMessage("DoubleXp is already true");
-                        player.sendMessage(getUserPrefix() + "Ktos juz wlaczyl podwojne doswiadczenie. Punkty zostaly zwrocone.");
-                    }
-
-                    if (!Supporter.doubleXp) {
-                        Supporter.doubleXp = true;
-
-                        Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                            sender.sendMessage("DoubleXp has been set to " + Supporter.doubleXp);
-                            Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + " &fwlasnie dwukrotnie zwiekszyl zdobywane doswiadczenie do czasu kolejnego restartu serwera."));
-                        }, 20L);
-                    }
-
+                if (value.equals("DoubleXp")) {
+                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
+                        doubleXp = true;
+                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + " &fwlasnie dwukrotnie zwiekszyl zdobywane doswiadczenie do czasu kolejnego restartu serwera."));
+                    }, 20L);
                     return true;
                 }
 
-                if (arguments[0].equals("TogglePhantoms")) {
-                    if (togglePhantoms) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getName() + " AddPoints 15");
-
-                        sender.sendMessage("TogglePhantoms is already true");
-                        player.sendMessage(getUserPrefix() + "Ktos juz wylaczyl fantomy. Punkty zostaly zwrocone.");
-                    }
-
-                    if (!togglePhantoms) {
+                if (value.equals("TogglePhantoms")) {
+                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         togglePhantoms = true;
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia false");
+                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie wylaczyl pojawianie sie fantomow do czasu kolejnego restartu serwera."));
+                    }, 20L);
 
-                        Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                            sender.sendMessage("TogglePhantoms has been set to " + togglePhantoms);
-                            Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie wylaczyl pojawianie sie fantomow do czasu kolejnego restartu serwera."));
-                        }, 20L);
-                    }
-
+                    Bukkit.dispatchCommand(getConsoleSender(), "gamerule doInsomnia false");
                     return true;
                 }
 
-                if (arguments[0].equals("ToggleEnd")) {
-                    if (Supporter.toggleEnd) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getName() + " AddPoints 30");
-
-                        sender.sendMessage("ToggleEnd is already true");
-                        player.sendMessage(getUserPrefix() + "Ktos juz wlaczyl end. Punkty zostaly zwrocone.");
-                    }
-
-                    if (!Supporter.toggleEnd) {
+                if (value.equals("ToggleEnd")) {
+                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         toggleEnd = true;
-
-                        Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                            sender.sendMessage("toggleEnd has been set to " + Supporter.toggleEnd);
-                            Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie wlaczyl end do czasu kolejnego restartu serwera."));
-                        }, 20L);
-                    }
-
+                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie wlaczyl end do czasu kolejnego restartu serwera."));
+                    }, 20L);
                     return true;
                 }
 
-                if (arguments[0].equals("PickupAll")) {
-                    if (pickupAll) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getName() + " AddPoints 30");
-
-                        sender.sendMessage("pickupAll is already true");
-                        player.sendMessage(getUserPrefix() + "Ktos juz wlaczyl mozliwosc podnoszenia wszystkiego. Punkty zostaly zwrocone.");
-                    }
-
-                    if (!pickupAll) {
+                if (value.equals("PickupAll")) {
+                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         pickupAll = true;
-
-                        Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                            sender.sendMessage("pickupAll has been set to " + pickupAll);
-                            Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie mozliwosc podnoszenia wszystkich bytow do czasu kolejnego restartu serwera."));
-                        }, 20L);
-                    }
-
+                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie mozliwosc podnoszenia wszystkich bytow do czasu kolejnego restartu serwera."));
+                    }, 20L);
                     return true;
                 }
 
-                if (arguments[0].equals("DoubledForce")) {
-                    if (doubledForce) {
-                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "adminvote User " + player.getName() + " AddPoints 30");
-
-                        sender.sendMessage("doubledForce is already true");
-                        player.sendMessage(getUserPrefix() + "Ktos juz zwiekszyl sile rzucania bytami. Punkty zostaly zwrocone.");
-                    }
-
-                    if (!doubledForce) {
+                if (value.equals("DoubledForce")) {
+                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         doubledForce = true;
-
-                        Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                            sender.sendMessage("doubledForce has been set to " + doubledForce);
-                            Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie zwiekszyl sile rzucania bytami do czasu kolejnego restartu serwera."));
-                        }, 20L);
-                    }
-
+                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie zwiekszyl sile rzucania bytami do czasu kolejnego restartu serwera."));
+                    }, 20L);
                     return true;
                 }
 

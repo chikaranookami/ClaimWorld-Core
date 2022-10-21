@@ -4,9 +4,8 @@ import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.Messages;
 import claimworld.net.supporter.utils.Ranks;
-import claimworld.net.supporter.utils.guis.Gui;
-import claimworld.net.supporter.utils.guis.GuiManager;
 import claimworld.net.supporter.utils.guis.ReadyItems;
+import claimworld.net.supporter.utils.guis.StoredInventories;
 import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Chicken;
@@ -14,6 +13,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.*;
+
+import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class CwAdmin {
@@ -29,18 +31,6 @@ public class CwAdmin {
                     return true;
                 }
 
-                if (action.equals("openWarehouse")) {
-                    new GuiManager(player, new Gui(null, 27, "Magazyn"));
-                    return true;
-                }
-
-                if (action.equals("fillWarehouse")) {
-                    getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-
-                    }, 200L);
-                    return true;
-                }
-
                 if (action.equals("spawnBall")) {
                     Chicken chicken = (Chicken) player.getWorld().spawnEntity(player.getLocation(), EntityType.CHICKEN);
                     chicken.setAware(false);
@@ -49,10 +39,14 @@ public class CwAdmin {
                 }
 
                 if (action.equals("updateRank")) {
-                    sender.sendMessage("Trying to update rank of " + player.getDisplayName());
+                    String displayName = player.getDisplayName();
+
+                    sender.sendMessage("Trying to update rank of " + displayName);
+
                     getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         new Ranks().updateRank(player);
-                        sender.sendMessage("Rank has been updated for " + player.getDisplayName());
+
+                        sender.sendMessage("Rank has been updated for " + displayName);
                     }, 40L);
                     return true;
                 }
@@ -64,10 +58,51 @@ public class CwAdmin {
                     ItemStack bilet = new ReadyItems().get("Uniwersalny bilet");
                     ItemStack ramka = new ReadyItems().get("Niewidzialna ramka");
 
-                    player.getLocation().getWorld().dropItem(player.getLocation(), dolar);
-                    player.getLocation().getWorld().dropItem(player.getLocation(), bilet);
-                    player.getLocation().getWorld().dropItem(player.getLocation(), kupa);
-                    player.getLocation().getWorld().dropItem(player.getLocation(), ramka);
+                    World world = player.getLocation().getWorld();
+                    Location location = player.getLocation();
+
+                    world.dropItem(location, dolar);
+                    world.dropItem(location, bilet);
+                    world.dropItem(location, kupa);
+                    world.dropItem(location, ramka);
+                    return true;
+                }
+
+                StoredInventories storedInventories = new StoredInventories();
+                HashMap<String, List<ItemStack>> items = storedInventories.getStoredItems();
+
+                if (action.equals("manuallyAddToStored")) {
+                    String message = "W Twojej Skrytce cos jest. Odbierz to, zanim zniknie!";
+
+                    if (!(sender instanceof Player)) return true;
+
+                    Player admin = (Player) sender;
+                    ItemStack item = admin.getInventory().getItemInMainHand();
+
+                    if (item.getType().isAir()) {
+                        admin.sendMessage("pusta reka");
+                        return true;
+                    }
+
+                    String playerName = player.getName();
+
+                    if (items.get(playerName) == null) {
+                        List<ItemStack> content = new ArrayList<>();
+                        content.add(item);
+                        storedInventories.updateStoredItems(playerName, content);
+                    } else {
+                        items.get(playerName).add(item);
+                    }
+
+                    player.sendMessage(Messages.getUserPrefix() + message);
+                    return true;
+                }
+
+                if (action.equals("checkStored")) {
+                    for (Map.Entry<String, List<ItemStack>> entry : items.entrySet()) {
+                        sender.sendMessage(colorize("&7&oSI " + entry.getKey() + ": " + entry.getValue()));
+                    }
+
                     return true;
                 }
 
@@ -78,6 +113,6 @@ public class CwAdmin {
             public String getUsage() {
                 return "/cwadmin <nick> <action>";
             }
-        }.setPermission("claimworld.mod");
+        }.setPermission("claimworld.admin");
     }
 }

@@ -22,9 +22,7 @@ public class Teleporter {
 
                     location = ((Player) sender).getLocation();
 
-                    sender.sendMessage("nowy teleporter: " + location);
-
-                    Bukkit.getConsoleSender().sendMessage(colorize(Messages.getBroadcastPrefix() + "&eTeleporter&f otrzymal nowe, aktywne koordynaty. Przejdz na &e/spawn&f, by go uzyc."));
+                    Bukkit.broadcastMessage(colorize(Messages.getBroadcastPrefix() + "&eTeleporter&f otrzymal nowe, aktywne koordynaty. Przejdz na &e/spawn&f, by go uzyc."));
                     return true;
                 }
 
@@ -42,9 +40,9 @@ public class Teleporter {
                 }
 
                 player.teleport(location);
+
                 player.sendMessage(Messages.getUserPrefix() + "Przeszedles przez Magiczny Portal.");
                 sender.sendMessage("teleporter uzyty na " + player);
-
                 return true;
             }
 

@@ -4,14 +4,17 @@ import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.Messages;
 import claimworld.net.supporter.utils.Ranks;
 import claimworld.net.supporter.utils.guis.ReadyItems;
+import claimworld.net.supporter.utils.guis.StoredInventories;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
+import org.bukkit.scoreboard.*;
+
+import java.util.HashMap;
+import java.util.List;
 
 import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.*;
@@ -82,7 +85,6 @@ public class PlayerJoinEvent implements Listener {
 
         //set tablist
         player.setPlayerListHeader(colorize("\n &bClaimWorld&f.net \n"));
-        //player.setPlayerListFooter("\n " + ChatColor.AQUA + "Magiczne Skrzynki \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "16.09.2022" + " \n\n " + ChatColor.AQUA + "Konkurs Talentow \n" + ChatColor.WHITE + " Data: " + ChatColor.AQUA + "17.09.2022" + " \n");
 
         //set menu item
         ItemStack menu = new ReadyItems().get("Menu");
@@ -93,7 +95,7 @@ public class PlayerJoinEvent implements Listener {
         getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> ranks.updateRank(player), 10L);
 
         //set nametag
-        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+        getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
             player.setScoreboard(scoreboard);
             updatePlayerNametag(player);
         }, 10L);
@@ -102,6 +104,13 @@ public class PlayerJoinEvent implements Listener {
         if (Supporter.toggleEnd) {
             player.sendMessage(Messages.getUserPrefix() + "End jest obecnie wlaczony. Korzystaj, poki mozesz!");
             return;
+        }
+
+        HashMap<String, List<ItemStack>> storedItems = new StoredInventories().getStoredItems();
+        if (storedItems.get(player.getName()) != null) {
+            if (storedItems.get(player.getName()).size() < 1) return;
+
+            player.sendMessage(Messages.getUserPrefix() + "W Twojej Skrytce cos jest. Odbierz to, zanim zniknie!");
         }
 
         //end location fix

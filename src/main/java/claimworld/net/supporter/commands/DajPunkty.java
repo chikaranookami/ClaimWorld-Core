@@ -31,11 +31,11 @@ public class DajPunkty {
                     return true;
                 }
 
+                int total = 0;
+                double multipler = 0;
+                int random = new Random().nextInt(3);
+
                 if (points < 10) {
-                    double multipler = 0;
-
-                    int random = new Random().nextInt(3);
-
                     if (player.hasPermission("claimworld.vip")) {
                         /* 33% szans */
                         if (random == 0) multipler = 1;
@@ -50,17 +50,10 @@ public class DajPunkty {
                         multipler = 1;
                     }
 
-                    int total = (int) (points + multipler);
-
-                    Bukkit.dispatchCommand(sender, "adminvote User " + player.getName() + " AddPoints " + total);
-
-                    sender.sendMessage(ChatColor.GREEN + "Pomyslnie dodano graczowi " + player.getDisplayName() + ChatColor.GREEN + " " + points + ChatColor.GREEN + " punktow (multipler " + multipler + ChatColor.GREEN + ")");
-                    player.sendMessage(Messages.getUserPrefix() + "Otrzymano " + total + " punktow za glosowanie.");
+                    total = (int) (points + multipler);
                 }
 
-                else {
-                    double multipler = 1;
-
+                if (points >= 10) {
                     if (player.hasPermission("claimworld.vip")) {
                         multipler = 1.2;
                     }
@@ -73,13 +66,13 @@ public class DajPunkty {
                         multipler = 2;
                     }
 
-                    int total = (int) (points * multipler);
-
-                    Bukkit.dispatchCommand(sender, "adminvote User " + player.getName() + " AddPoints " + total);
-
-                    sender.sendMessage(ChatColor.GREEN + "Pomyslnie dodano graczowi " + player.getDisplayName() + ChatColor.GREEN + " " + points + ChatColor.GREEN + " punktow (multipler " + multipler + ChatColor.GREEN + ")");
-                    player.sendMessage(Messages.getUserPrefix() + "Otrzymano " + total + " punktow.");
+                    total = (int) (points * multipler);
                 }
+
+                Bukkit.dispatchCommand(sender, "adminvote User " + player.getName() + " AddPoints " + total);
+
+                sender.sendMessage(ChatColor.GREEN + "Pomyslnie dodano graczowi " + player.getDisplayName() + ChatColor.GREEN + " " + points + ChatColor.GREEN + " punktow (multipler " + multipler + ChatColor.GREEN + ")");
+                player.sendMessage(Messages.getUserPrefix() + "Otrzymano " + total + " punktow.");
 
                 return true;
             }

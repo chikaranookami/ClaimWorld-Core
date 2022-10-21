@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import static claimworld.net.supporter.utils.Messages.getBroadcastPrefix;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.*;
+import static org.bukkit.Bukkit.getConsoleSender;
 
 public class Goal {
 
@@ -22,6 +23,29 @@ public class Goal {
         }
     }
 
+    private void renderRewardByGoal(int currentGoal) {
+        switch (currentGoal) {
+            case 250:
+                dispatchCommand(getConsoleSender(), "gamerule playersSleepingPercentage 60");
+                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &eprocent osob, potrzebnych do przespania nocy zostal zmniejszony&f."));
+                break;
+            case 500:
+                dispatchCommand(getConsoleSender(), "worldborder set 8000");
+                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &epowiekszona zostala granica swiata&f."));
+                break;
+            case 750:
+                dispatchCommand(getConsoleSender(), "gamerule randomTickSpeed 5");
+                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &ezwiekszony zostal randomTickSpeed&f, dzieki czemu na przyklad uprawy beda rosly szybciej."));
+                break;
+            case 1000:
+                dispatchCommand(getConsoleSender(), "worldborder set 10000");
+                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &epowiekszona zostala granica swiata&f."));
+                break;
+            case 9999:
+                getLogger().log(Level.WARNING, "wplacone zostalo wiecej kasy, niz ustawionych celow");
+        }
+    }
+
     public Goal() {
         new CommandBase("goal", 2, false) {
             @Override
@@ -30,33 +54,23 @@ public class Goal {
                 String value = arguments[1];
                 FileConfiguration config = Supporter.getPlugin().getConfig();
 
-                if (value.isEmpty()) {
-                    sender.sendMessage("Value not set. Use: " + getUsage());
-                    return true;
-                }
+                if (value.isEmpty()) return false;
 
                 if (task.equals("update")) {
                     int number = Integer.parseInt(value);
 
-                    if (number == 0) {
-                        sender.sendMessage("invalid value - converted integer is " + number);
-                        return true;
-                    }
+                    if (number == 0) return false;
 
                     int newValue = config.getInt("goals.total");
                     int currentGoal = config.getInt("goals.active_goal");
-
                     newValue = newValue + number;
 
                     config.set("goals.total", newValue);
                     Supporter.getPlugin().saveConfig();
 
+                    getScheduler().runTaskLater(Supporter.getPlugin(), () -> dispatchCommand(sender, "goal tryBonus 0"), 30L);
+
                     broadcastMessage(colorize(getBroadcastPrefix() + "Postep obecnego celu w sklepie wynosi teraz &e" + newValue + "&f/&e" + currentGoal + "zl&f."));
-
-                    getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                        dispatchCommand(sender, "goal tryBonus 0");
-                    }, 30L);
-
                     return true;
                 }
 
@@ -73,30 +87,9 @@ public class Goal {
 
                     if (currentValue >= currentGoal) {
                         increaseGoal(goals, currentGoal, config);
-
-                        switch (currentGoal) {
-                            case 250:
-                                dispatchCommand(sender, "gamerule playersSleepingPercentage 60");
-                                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &eprocent osob, potrzebnych do przespania nocy zostal zmniejszony&f."));
-                                break;
-                            case 500:
-                                dispatchCommand(sender, "worldborder set 7000");
-                                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &epowiekszona zostala granica swiata&f."));
-                                break;
-                            case 750:
-                                dispatchCommand(sender, "gamerule randomTickSpeed 5");
-                                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &ezwiekszony zostal randomTickSpeed&f, dzieki czemu na przyklad uprawy beda rosly szybciej."));
-                                break;
-                            case 1000:
-                                dispatchCommand(sender, "worldborder set 8000");
-                                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &epowiekszona zostala granica swiata&f."));
-                                break;
-                            case 9999:
-                                getLogger().log(Level.WARNING, "wplacone zostalo wiecej kasy, niz ustawionych celow");
-                        }
+                        renderRewardByGoal(currentGoal);
+                        return true;
                     }
-
-                    return true;
                 }
 
                 return false;

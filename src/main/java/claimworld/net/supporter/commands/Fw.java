@@ -15,19 +15,17 @@ public class Fw {
         new CommandBase("fw", true) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
-
                 Location location = ((Player) sender).getLocation();
                 assert location.getWorld() != null;
+
                 Firework firework = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
                 FireworkMeta fireworkMeta = firework.getFireworkMeta();
 
                 fireworkMeta.setPower(3);
                 fireworkMeta.addEffect(FireworkEffect.builder().withColor(Color.RED).flicker(true).withColor(Color.WHITE).build());
-
                 firework.setFireworkMeta(fireworkMeta);
 
                 firework.detonate();
-
                 return true;
             }
 

@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class GuiManager {
@@ -12,7 +13,12 @@ public class GuiManager {
 
         player.openInventory(gui.getInventory());
 
-        for (Map.Entry<Integer, ItemStack> entry : new ItemSets().initializeInventoryContent(player, gui.getName()).entrySet()) {
+        HashMap<Integer, ItemStack> items = new ItemSets().initializeInventoryContent(player, gui.getName());
+
+        if (items == null) return;
+
+        for (Map.Entry<Integer, ItemStack> entry : items.entrySet()) {
+            if (entry.getKey() > 53) break;
             inventory.setItem(entry.getKey(), entry.getValue());
         }
     }

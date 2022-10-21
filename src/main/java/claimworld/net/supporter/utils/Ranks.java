@@ -52,24 +52,41 @@ public class Ranks {
         player.setDisplayName(getDesign(player));
     }
 
+    public final String getSpecialRankName(String value) {
+        switch (value) {
+            case "weteran":
+                return colorize("&e&l❝ &eWeteran &e&l❞");
+            case "ksiadz":
+                return colorize("&e&l♰ &eKsiadz &e&l♰");
+            case "bog":
+                return colorize("&e&leψ &eBog &e&leψ");
+            case "szczalowy":
+                return colorize("&e&l➹ &eSzczalowy &e&l➹");
+            case "shitmaster":
+                return colorize("&e&l๑ &eShit Master &e&l๑");
+        }
+
+        return "";
+    }
+
     public final String getSpecialRankName(Player player) {
         if (player.hasPermission("claimworld.specialrank.weteran")) {
-            return colorize("&e&l❝ &eWeteran &e&l❞");
+            return getSpecialRankName("weteran");
         }
         if (player.hasPermission("claimworld.specialrank.ksiadz")) {
-            return colorize("&e&l♰ &eKsiadz &e&l♰");
+            return getSpecialRankName("ksiadz");
         }
         if (player.hasPermission("claimworld.specialrank.bog")) {
-            return colorize("&e&leψ &eBog &e&leψ");
+            return getSpecialRankName("bog");
         }
         if (player.hasPermission("claimworld.specialrank.szczalowy")) {
-            return colorize("&e&l➹ &eSzczalowy &e&l➹");
+            return getSpecialRankName("szczalowy");
         }
         if (player.hasPermission("claimworld.specialrank.shitmaster")) {
-            return colorize("&e&l๑ &eShit Master &e&l๑");
+            return getSpecialRankName("shitmaster");
         }
         else {
-            return colorize("&7&oBrak.");
+            return getSpecialRankName("");
         }
     }
 

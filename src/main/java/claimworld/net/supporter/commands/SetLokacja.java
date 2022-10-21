@@ -15,7 +15,6 @@ public class SetLokacja {
                 FileConfiguration config = Supporter.getPlugin().getConfig();
                 Player player = (Player) sender;
                 Location location = player.getLocation();
-
                 String locationName = arguments[0];
 
                 config.set("locations." + locationName + ".x", location.getX());
@@ -29,7 +28,6 @@ public class SetLokacja {
                 player.sendMessage("ustawiono lokacje " + locationName + " na wartosc: " + location);
 
                 Supporter.getPlugin().saveConfig();
-
                 return true;
             }
 

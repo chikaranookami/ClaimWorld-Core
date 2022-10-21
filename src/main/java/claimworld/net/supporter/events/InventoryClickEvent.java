@@ -3,14 +3,14 @@ package claimworld.net.supporter.events;
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.guis.Gui;
 import claimworld.net.supporter.utils.guis.GuiManager;
+import claimworld.net.supporter.utils.guis.StoredInventories;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-
-import java.util.logging.Level;
+import org.bukkit.inventory.ItemStack;
 
 import static org.bukkit.Bukkit.*;
 
@@ -32,8 +32,6 @@ public class InventoryClickEvent implements Listener {
             return;
         }
 
-        //if (clickedInventory == player.getInventory()) return;
-
         Inventory inventory = event.getInventory();
 
         if (inventory.getType() != InventoryType.CHEST) return;
@@ -44,6 +42,20 @@ public class InventoryClickEvent implements Listener {
         event.setCancelled(true);
 
         String title = event.getView().getTitle();
+
+        if (title.equals("Skrytka " + player.getName())) {
+            if (event.getCurrentItem() == null) return;
+            if (event.getCurrentItem().getType().isAir()) return;
+            if (player.getInventory().firstEmpty() == -1) return;
+            if (event.getClickedInventory() == player.getInventory()) return;
+
+            ItemStack item = event.getCurrentItem();
+
+            new StoredInventories().getStoredItems().get(player.getName()).remove(item);
+            inventory.removeItem(item);
+            player.getInventory().addItem(item);
+            return;
+        }
 
         if (title.equals("Menu")) {
             switch (slot) {
@@ -64,6 +76,9 @@ public class InventoryClickEvent implements Listener {
                     return;
                 case 37:
                     new GuiManager(player, new Gui(null, 54, "Ulatwienia dostepu"));
+                    return;
+                case 21:
+                    new GuiManager(player, new Gui(null, 54, "Skrytka " + player.getName()));
                     return;
             }
         }

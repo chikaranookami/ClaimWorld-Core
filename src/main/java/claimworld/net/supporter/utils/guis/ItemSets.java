@@ -68,6 +68,7 @@ public class ItemSets {
             itemMap.put(16, new CustomItem("&aCentrum Publiczne", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(21, new CustomItem("&aLasy Wschodnie", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(22, new CustomItem("&aNadmorska Szlachta", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
+            itemMap.put(23, new CustomItem("&aMonopoly", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             return itemMap;
         }
 
@@ -75,6 +76,7 @@ public class ItemSets {
             itemMap.put(53, readyItems.get("Cofnij"));
             itemMap.put(10, new CustomItem("&aPoziom morza", Material.WATER_BUCKET, Collections.singletonList(colorize("&7&oSprawdz poziom morza."))).getItem());
             itemMap.put(11, new CustomItem("&aKosz", Material.HOPPER_MINECART, Collections.singletonList(colorize("&7&oLatwo usun przedmioty."))).getItem());
+            itemMap.put(12, new CustomItem("&aRzut kostka", Material.REDSTONE_LAMP, Collections.singletonList(colorize("&7&oWyrzuc liczbe oczek."))).getItem());
             return itemMap;
         }
 

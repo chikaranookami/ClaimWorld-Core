@@ -57,6 +57,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new InventoryCloseEvent(), this);
 
         //commands
+        new Dice();
         new LoadLokacja();
         new SetLokacja();
         new CwAdmin();

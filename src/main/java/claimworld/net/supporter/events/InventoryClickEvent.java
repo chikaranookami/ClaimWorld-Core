@@ -139,6 +139,12 @@ public class InventoryClickEvent implements Listener {
                             Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " nadmorska_szlachta");
                         }, 1L);
                         return;
+                    case 23:
+                        player.closeInventory();
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+                            Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " monopoly");
+                        }, 1L);
+                        return;
                 }
             }
 
@@ -154,6 +160,12 @@ public class InventoryClickEvent implements Listener {
                         player.closeInventory();
                         getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
                             Bukkit.dispatchCommand(player, "disposal");
+                        }, 1L);
+                        return;
+                    case 12:
+                        player.closeInventory();
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+                            Bukkit.dispatchCommand(player, "dice");
                         }, 1L);
                 }
             }

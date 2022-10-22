@@ -54,12 +54,12 @@ public class Cws {
 
                 String value = arguments[0];
 
-                if (loadedWarehouse || moreFromOres || doubleXp || togglePhantoms || toggleEnd || pickupAll || doubledForce) {
-                    boosterAlreadyActive(value, player);
-                    return true;
-                }
-
                 if (value.equals("LoadedWarehouse")) {
+                    if (loadedWarehouse) {
+                        boosterAlreadyActive(value, player);
+                        return true;
+                    }
+
                     Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         loadedWarehouse = true;
                         Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + " &frozdal wszystkim troche blokow!"));
@@ -70,6 +70,10 @@ public class Cws {
                 }
 
                 if (value.equals("MoreFromOres")) {
+                    if (moreFromOres) {
+                        boosterAlreadyActive(value, player);
+                        return true;
+                    }
                     Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         moreFromOres = true;
                         Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + " &fwlasnie wlaczyl dodatkowe diamenty z rud do czasu kolejnego restartu serwera."));
@@ -78,6 +82,11 @@ public class Cws {
                 }
 
                 if (value.equals("DoubleXp")) {
+                    if (doubleXp) {
+                        boosterAlreadyActive(value, player);
+                        return true;
+                    }
+
                     Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         doubleXp = true;
                         Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + " &fwlasnie dwukrotnie zwiekszyl zdobywane doswiadczenie do czasu kolejnego restartu serwera."));
@@ -86,6 +95,11 @@ public class Cws {
                 }
 
                 if (value.equals("TogglePhantoms")) {
+                    if (togglePhantoms) {
+                        boosterAlreadyActive(value, player);
+                        return true;
+                    }
+
                     Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         togglePhantoms = true;
                         Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie wylaczyl pojawianie sie fantomow do czasu kolejnego restartu serwera."));
@@ -96,6 +110,11 @@ public class Cws {
                 }
 
                 if (value.equals("ToggleEnd")) {
+                    if (toggleEnd) {
+                        boosterAlreadyActive(value, player);
+                        return true;
+                    }
+
                     Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         toggleEnd = true;
                         Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie wlaczyl end do czasu kolejnego restartu serwera."));
@@ -104,6 +123,11 @@ public class Cws {
                 }
 
                 if (value.equals("PickupAll")) {
+                    if (pickupAll) {
+                        boosterAlreadyActive(value, player);
+                        return true;
+                    }
+
                     Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         pickupAll = true;
                         Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie mozliwosc podnoszenia wszystkich bytow do czasu kolejnego restartu serwera."));
@@ -112,6 +136,11 @@ public class Cws {
                 }
 
                 if (value.equals("DoubledForce")) {
+                    if (doubledForce) {
+                        boosterAlreadyActive(value, player);
+                        return true;
+                    }
+
                     Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         doubledForce = true;
                         Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie zwiekszyl sile rzucania bytami do czasu kolejnego restartu serwera."));

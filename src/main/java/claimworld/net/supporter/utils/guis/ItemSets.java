@@ -35,7 +35,7 @@ public class ItemSets {
                     "",
                     colorize("&fDolaczono: " + new Date(player.getFirstPlayed()) + "&f."),
                     "",
-                    colorize("&fOpoznienie: " + player.getPing() + "&fms.")
+                    colorize("&fPing: " + player.getPing() + "&fms.")
             )).getItem());
             itemMap.put(12, new CustomItem("&aTeleportacja", Material.COMPASS, Collections.singletonList(colorize("&7&oPrzenies sie szybko!"))).getItem());
             itemMap.put(13, new CustomItem("&aPunkty", Material.EXPERIENCE_BOTTLE, Collections.singletonList(colorize("&7&oZarzadzaj swoimi punktami!"))).getItem());

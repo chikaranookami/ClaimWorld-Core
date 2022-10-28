@@ -23,6 +23,7 @@ public class PlayerJoinEvent implements Listener {
 
     private final Ranks ranks = new Ranks();
     private final Scoreboard scoreboard = getScoreboardManager().getNewScoreboard();
+    private final Objective objective = scoreboard.registerNewObjective("poziomprzepustki", Criteria.DUMMY, "PKT Przepustki");
     private final Team adminTeam = scoreboard.registerNewTeam("admin");
     private final Team modTeam = scoreboard.registerNewTeam("mod");
     private final Team mvpTeam = scoreboard.registerNewTeam("mvp");
@@ -77,6 +78,8 @@ public class PlayerJoinEvent implements Listener {
         mvpTeam.setAllowFriendlyFire(true);
         modTeam.setAllowFriendlyFire(true);
         adminTeam.setAllowFriendlyFire(true);
+
+        objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
     }
 
     @EventHandler
@@ -84,7 +87,8 @@ public class PlayerJoinEvent implements Listener {
         Player player = event.getPlayer();
 
         //set tablist
-        player.setPlayerListHeader(colorize("\n &bClaimWorld&f.net \n"));
+        player.setPlayerListHeader(colorize("\n &a❤ Claim&fWorld&a.net \n"));
+        //player.setPlayerListFooter(colorize("\n &aPing: &f" + player.getPing() + "ms   &a|   Ostatnia smierc: &f" + player.getStatistic(Statistic.TIME_SINCE_DEATH) + " \n"));
 
         //set menu item
         ItemStack menu = new ReadyItems().get("Menu");
@@ -99,6 +103,11 @@ public class PlayerJoinEvent implements Listener {
             player.setScoreboard(scoreboard);
             updatePlayerNametag(player);
         }, 10L);
+
+        getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
+            Score score = objective.getScore(player.getName());
+            if (!score.isScoreSet()) score.setScore(0);
+        }, 20L);
 
         //end available?
         if (Supporter.toggleEnd) {

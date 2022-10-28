@@ -26,7 +26,7 @@ public class Goal {
     private void renderRewardByGoal(int currentGoal) {
         switch (currentGoal) {
             case 250:
-                dispatchCommand(getConsoleSender(), "gamerule playersSleepingPercentage 60");
+                dispatchCommand(getConsoleSender(), "gamerule playersSleepingPercentage 50");
                 broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &eprocent osob, potrzebnych do przespania nocy zostal zmniejszony&f."));
                 break;
             case 500:

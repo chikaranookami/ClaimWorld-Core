@@ -2,6 +2,7 @@ package claimworld.net.supporter.utils.guis;
 
 import claimworld.net.supporter.utils.CustomItem;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
@@ -56,6 +57,18 @@ public class ReadyItems {
 
         if (name.equals("$1")) {
             return new CustomItem("&a$1", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("uncommon"))), 10).getItem();
+        }
+
+        if (name.equals("Halloweenowa zupa")) {
+            return new CustomItem("&dHalloweenowa Zupa", Material.PUMPKIN_PIE, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.KNOCKBACK, 3).getItem();
+        }
+
+        if (name.equals("Halloweenowy odbijacz")) {
+            return new CustomItem("&dHalloweenowy Odbijacz", Material.CARVED_PUMPKIN, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.THORNS, 8).getItem();
+        }
+
+        if (name.equals("Ksiazka unbreaking4")) {
+            return new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.DURABILITY, 4).getItem();
         }
 
         if (name.equals("Uniwersalny bilet")) {

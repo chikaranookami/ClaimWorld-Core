@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.*;
 
 import static claimworld.net.supporter.utils.StringUtils.colorize;
+import static org.bukkit.Bukkit.getOnlinePlayers;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class CwAdmin {
@@ -35,6 +36,17 @@ public class CwAdmin {
                     Chicken chicken = (Chicken) player.getWorld().spawnEntity(player.getLocation(), EntityType.CHICKEN);
                     chicken.setAware(false);
                     sender.sendMessage("ball has been spawned at " + player.getLocation());
+                    return true;
+                }
+
+                if (action.equals("playGhastScream")) {
+                    for (Player onlinePlayer : getOnlinePlayers()) {
+                        onlinePlayer.playSound(player, Sound.ENTITY_GHAST_SCREAM, 1.2f, 1.2f);
+                        onlinePlayer.playSound(player, Sound.ENTITY_GHAST_HURT, 1.2f, 1.2f);
+                        onlinePlayer.playSound(player, Sound.ENTITY_GHAST_SCREAM, 1.2f, 1.2f);
+                        onlinePlayer.playSound(player, Sound.ENTITY_GHAST_HURT, 1.2f, 1.2f);
+                    }
+                    sender.sendMessage("ghast scream has been played");
                     return true;
                 }
 

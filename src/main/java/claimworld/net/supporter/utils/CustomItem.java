@@ -29,10 +29,15 @@ public class CustomItem {
         ItemMeta itemMeta = item.getItemMeta();
         assert itemMeta != null;
 
-        //TU JEST BLAD
         itemMeta.setDisplayName(colorize(name));
 
-        if (enchantment != null) ((EnchantmentStorageMeta) itemMeta).addStoredEnchant(enchantment, enchantmentLevel, true);
+        if (enchantment != null) {
+            if (item.getType() == Material.ENCHANTED_BOOK) {
+                ((EnchantmentStorageMeta) itemMeta).addStoredEnchant(enchantment, enchantmentLevel, true);
+            } else {
+                itemMeta.addEnchant(enchantment, enchantmentLevel, true);
+            }
+        }
 
         if (customModelData > 0) itemMeta.setCustomModelData(customModelData);
 

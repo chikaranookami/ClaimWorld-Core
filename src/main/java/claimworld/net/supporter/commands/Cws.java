@@ -7,9 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static claimworld.net.supporter.Supporter.*;
 import static claimworld.net.supporter.utils.Messages.getBroadcastPrefix;
@@ -29,7 +27,8 @@ public class Cws {
     }
 
     public Cws() {
-        boostPointPrices.put("LoadedWarehouse", 20);
+        boostPointPrices.put("BlocksWarehouse", 20);
+        boostPointPrices.put("XpBottleWarehouse", 5);
         boostPointPrices.put("MoreFromOres", 30);
         boostPointPrices.put("DoubleXp", 30);
         boostPointPrices.put("TogglePhantoms", 15);
@@ -54,18 +53,20 @@ public class Cws {
 
                 String value = arguments[0];
 
-                if (value.equals("LoadedWarehouse")) {
+                if (value.equals("BlocksWarehouse")) {
                     if (loadedWarehouse) {
                         boosterAlreadyActive(value, player);
                         return true;
                     }
+                    loadedWarehouse = true;
+                    Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + player.getDisplayName() + " &frozdal troche blokow!"));
+                    Bukkit.dispatchCommand(getConsoleSender(), "fillupwarehouse blocks");
+                    return true;
+                }
 
-                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                        loadedWarehouse = true;
-                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + " &frozdal wszystkim troche blokow!"));
-                    }, 20L);
-
-                    Bukkit.dispatchCommand(getConsoleSender(), "fillupwarehouse");
+                if (value.equals("XpBottleWarehouse")) {
+                    Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + player.getDisplayName() + " &frozdal troche expa!"));
+                    Bukkit.dispatchCommand(getConsoleSender(), "fillupwarehouse xpBottle");
                     return true;
                 }
 
@@ -74,10 +75,8 @@ public class Cws {
                         boosterAlreadyActive(value, player);
                         return true;
                     }
-                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                        moreFromOres = true;
-                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + " &fwlasnie wlaczyl dodatkowe diamenty z rud do czasu kolejnego restartu serwera."));
-                    }, 20L);
+                    moreFromOres = true;
+                    Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + player.getDisplayName() + " &fwlaczyl dodatkowe diamenty z rud!"));
                     return true;
                 }
 
@@ -86,11 +85,8 @@ public class Cws {
                         boosterAlreadyActive(value, player);
                         return true;
                     }
-
-                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                        doubleXp = true;
-                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + " &fwlasnie dwukrotnie zwiekszyl zdobywane doswiadczenie do czasu kolejnego restartu serwera."));
-                    }, 20L);
+                    doubleXp = true;
+                    Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + player.getDisplayName() + " &f2x zwiekszyl zdobywane doswiadczenie!"));
                     return true;
                 }
 
@@ -99,12 +95,8 @@ public class Cws {
                         boosterAlreadyActive(value, player);
                         return true;
                     }
-
-                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                        togglePhantoms = true;
-                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie wylaczyl pojawianie sie fantomow do czasu kolejnego restartu serwera."));
-                    }, 20L);
-
+                    togglePhantoms = true;
+                    Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + player.getDisplayName() + " &fwylaczyl fantomy!"));
                     Bukkit.dispatchCommand(getConsoleSender(), "gamerule doInsomnia false");
                     return true;
                 }
@@ -114,11 +106,8 @@ public class Cws {
                         boosterAlreadyActive(value, player);
                         return true;
                     }
-
-                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                        toggleEnd = true;
-                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie wlaczyl end do czasu kolejnego restartu serwera."));
-                    }, 20L);
+                    toggleEnd = true;
+                    Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + player.getDisplayName() + " &fwlaczyl end!"));
                     return true;
                 }
 
@@ -127,11 +116,8 @@ public class Cws {
                         boosterAlreadyActive(value, player);
                         return true;
                     }
-
-                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                        pickupAll = true;
-                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie mozliwosc podnoszenia wszystkich bytow do czasu kolejnego restartu serwera."));
-                    }, 20L);
+                    pickupAll = true;
+                    Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + player.getDisplayName() + " &fwlaczyl podnoszenie wiekszosci bytow!"));
                     return true;
                 }
 
@@ -140,11 +126,8 @@ public class Cws {
                         boosterAlreadyActive(value, player);
                         return true;
                     }
-
-                    Bukkit.getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                        doubledForce = true;
-                        Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + "Gracz&e " + player.getDisplayName() + "&f wlasnie zwiekszyl sile rzucania bytami do czasu kolejnego restartu serwera."));
-                    }, 20L);
+                    doubledForce = true;
+                    Bukkit.broadcastMessage(colorize(getBroadcastPrefix() + player.getDisplayName() + " &fzwiekszyl sile rzucania bytami!"));
                     return true;
                 }
 

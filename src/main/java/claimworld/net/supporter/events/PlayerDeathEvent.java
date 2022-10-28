@@ -11,7 +11,7 @@ public class PlayerDeathEvent implements Listener {
         event.getEntity().getWorld().strikeLightningEffect(event.getEntity().getLocation());
 
         for (ItemStack item : event.getDrops()) {
-            if (!item.hasItemMeta()) continue;
+            if (!(item.hasItemMeta())) continue;
             if (!item.getItemMeta().hasCustomModelData()) continue;
             if (item.getItemMeta().getCustomModelData() != 1) continue;
             event.getDrops().remove(item);

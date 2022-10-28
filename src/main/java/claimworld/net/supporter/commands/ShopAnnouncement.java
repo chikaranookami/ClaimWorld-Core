@@ -16,7 +16,8 @@ public class ShopAnnouncement {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
                 BossBar bossBar = Bukkit.createBossBar(colorize("&e✦ " + String.join(" ", arguments) + " &e✦"), BarColor.YELLOW, BarStyle.SOLID);
-                new ActiveBossBar(bossBar);
+                ActiveBossBar activeBossBar = new ActiveBossBar();
+                activeBossBar.render(bossBar);
                 return true;
             }
 

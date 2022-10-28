@@ -8,6 +8,7 @@ import claimworld.net.supporter.utils.guis.ReadyItems;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WanderingTrader;
 import org.bukkit.event.EventHandler;
@@ -77,31 +78,41 @@ public class EntitySpawnEvent implements Listener {
         return updatedRecipes;
     }
 
+    private final List<EntityType> entityTypes = new ArrayList<>();
+
     public EntitySpawnEvent() {
         traderName.put(0, colorize("&a&lEmeraldowy Handlarz"));
         traderName.put(1, colorize("&d&lFantomowy Handlarz"));
+        entityTypes.add(EntityType.ZOMBIE);
+        entityTypes.add(EntityType.SKELETON);
+        entityTypes.add(EntityType.WITHER_SKELETON);
     }
 
     @EventHandler
     public void entitySpawnEvent(org.bukkit.event.entity.EntitySpawnEvent event) {
-        if (!event.getEntityType().equals(EntityType.WANDERING_TRADER)) return;
         if (getOnlinePlayers().size() < 1) return;
 
-        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-            int chance = new Random().nextInt(2);
+        if (entityTypes.contains(event.getEntityType())) {
+            ((LivingEntity) event.getEntity()).setCanPickupItems(false);
+        }
 
-            for (Player onlinePlayer : getOnlinePlayers()) {
-                player = onlinePlayer;
-                break;
-            }
+        if (event.getEntityType().equals(EntityType.WANDERING_TRADER)) {
+            getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+                int chance = new Random().nextInt(2);
 
-            WanderingTrader trader = (WanderingTrader) event.getEntity();
-            trader.setCustomNameVisible(true);
-            trader.setDespawnDelay(12000);
-            trader.setRecipes(getRecipeSets(chance));
-            trader.setCustomName(traderName.get(chance));
+                for (Player onlinePlayer : getOnlinePlayers()) {
+                    player = onlinePlayer;
+                    break;
+                }
 
-            broadcastMessage(colorize(Messages.getBroadcastPrefix() + traderName.get(chance) + "&f wlasnie pojawil sie na koordynatach &ex" + Math.round(trader.getLocation().getX()) + " &foraz &ez" + Math.round(trader.getLocation().getZ()) + "&f."));
-        }, 30L);
+                WanderingTrader trader = (WanderingTrader) event.getEntity();
+                trader.setCustomNameVisible(true);
+                trader.setDespawnDelay(12000);
+                trader.setRecipes(getRecipeSets(chance));
+                trader.setCustomName(traderName.get(chance));
+
+                broadcastMessage(colorize(Messages.getBroadcastPrefix() + traderName.get(chance) + "&f wlasnie pojawil sie na koordynatach &ex" + Math.round(trader.getLocation().getX()) + " &foraz &ez" + Math.round(trader.getLocation().getZ()) + "&f."));
+            }, 30L);
+        }
     }
 }

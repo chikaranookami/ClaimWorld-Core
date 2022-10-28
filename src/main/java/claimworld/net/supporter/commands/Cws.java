@@ -28,7 +28,6 @@ public class Cws {
 
     public Cws() {
         boostPointPrices.put("BlocksWarehouse", 20);
-        boostPointPrices.put("XpBottleWarehouse", 5);
         boostPointPrices.put("MoreFromOres", 30);
         boostPointPrices.put("DoubleXp", 30);
         boostPointPrices.put("TogglePhantoms", 15);

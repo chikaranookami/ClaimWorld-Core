@@ -10,7 +10,7 @@ import static org.bukkit.Bukkit.getOnlinePlayers;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class ActiveBossBar {
-    public ActiveBossBar(BossBar bossBar) {
+    public void render(BossBar bossBar) {
         bossBar.setProgress(0.0);
 
         for (Player player : getOnlinePlayers()) {
@@ -20,7 +20,6 @@ public class ActiveBossBar {
         AtomicReference<Double> d = new AtomicReference<>(0.0);
 
         getScheduler().scheduleSyncRepeatingTask(Supporter.getPlugin(), () -> {
-
             if (d.get() >= 1.0) {
                 bossBar.removeAll();
                 return;

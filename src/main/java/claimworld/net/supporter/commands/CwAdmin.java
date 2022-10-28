@@ -41,10 +41,10 @@ public class CwAdmin {
 
                 if (action.equals("playGhastScream")) {
                     for (Player onlinePlayer : getOnlinePlayers()) {
-                        onlinePlayer.playSound(player, Sound.ENTITY_GHAST_SCREAM, 1.2f, 1.2f);
-                        onlinePlayer.playSound(player, Sound.ENTITY_GHAST_HURT, 1.2f, 1.2f);
-                        onlinePlayer.playSound(player, Sound.ENTITY_GHAST_SCREAM, 1.2f, 1.2f);
-                        onlinePlayer.playSound(player, Sound.ENTITY_GHAST_HURT, 1.2f, 1.2f);
+                        onlinePlayer.playSound(onlinePlayer, Sound.ENTITY_GHAST_SCREAM, 1.2f, 1.2f);
+                        onlinePlayer.playSound(onlinePlayer, Sound.ENTITY_GHAST_HURT, 1.2f, 1.2f);
+                        onlinePlayer.playSound(onlinePlayer, Sound.ENTITY_GHAST_SCREAM, 1.2f, 1.2f);
+                        onlinePlayer.playSound(onlinePlayer, Sound.ENTITY_GHAST_HURT, 1.2f, 1.2f);
                     }
                     sender.sendMessage("ghast scream has been played");
                     return true;

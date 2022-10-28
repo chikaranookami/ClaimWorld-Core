@@ -13,7 +13,7 @@ public class InventoryCloseEvent implements Listener {
 
     @EventHandler
     public void inventoryCloseEvent(org.bukkit.event.inventory.InventoryCloseEvent event) {
-        if (!event.getView().getTitle().equals("Schowek " + event.getPlayer().getName())) return;
+        if (!event.getView().getTitle().equals("Skrytka " + event.getPlayer().getName())) return;
 
         getLogger().log(Level.INFO, "Saving stored contents of " + event.getPlayer().getName() + "...");
         new StoredInventories().updateStoredItems(event.getPlayer().getName(), Arrays.asList(event.getInventory().getContents()));

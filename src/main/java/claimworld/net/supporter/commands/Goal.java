@@ -19,6 +19,7 @@ public class Goal {
         for (int goal : goals) {
             if (!(currentGoal < goal)) continue;
             configuration.set("goals.active_goal", goal);
+            Supporter.getPlugin().saveConfig();
             break;
         }
     }

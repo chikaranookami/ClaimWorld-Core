@@ -3,6 +3,7 @@ package claimworld.net.supporter.events;
 import org.bukkit.Material;
 import org.bukkit.entity.Chicken;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -43,7 +44,7 @@ public class EntityDeathEvent implements Listener {
         if (entityTypes.contains(event.getEntityType())) {
             if (event.getDrops().isEmpty()) return;
             for (ItemStack item : event.getDrops()) {
-                event.getEntity().getWorld().dropItem(event.getEntity().getLocation(), item);
+                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), item);
             }
         }
     }

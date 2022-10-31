@@ -81,7 +81,7 @@ public class ItemSets {
         }
 
         if (inventoryName.equals("Skrytka " + player.getName())) {
-            List<ItemStack> items = new StoredInventories().getStoredItems().get(player.getName());
+            List<ItemStack> items = Locker.getInstance().getLockerMap().get(player.getName());
 
             if (items == null) {
                 itemMap.put(0, new ItemStack(Material.AIR));

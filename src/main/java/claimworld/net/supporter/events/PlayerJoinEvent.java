@@ -3,8 +3,8 @@ package claimworld.net.supporter.events;
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.Messages;
 import claimworld.net.supporter.utils.Ranks;
+import claimworld.net.supporter.utils.guis.Locker;
 import claimworld.net.supporter.utils.guis.ReadyItems;
-import claimworld.net.supporter.utils.guis.StoredInventories;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -23,7 +23,7 @@ public class PlayerJoinEvent implements Listener {
 
     private final Ranks ranks = new Ranks();
     private final Scoreboard scoreboard = getScoreboardManager().getNewScoreboard();
-    private final Objective objective = scoreboard.registerNewObjective("poziomprzepustki", Criteria.DUMMY, "PKT Przepustki");
+    private final Objective objective = scoreboard.registerNewObjective("poziomprzepustki", Criteria.DUMMY, "PP");
     private final Team adminTeam = scoreboard.registerNewTeam("admin");
     private final Team modTeam = scoreboard.registerNewTeam("mod");
     private final Team mvpTeam = scoreboard.registerNewTeam("mvp");
@@ -115,7 +115,7 @@ public class PlayerJoinEvent implements Listener {
             return;
         }
 
-        HashMap<String, List<ItemStack>> storedItems = new StoredInventories().getStoredItems();
+        HashMap<String, List<ItemStack>> storedItems = Locker.getInstance().getLockerMap();
         if (storedItems.get(player.getName()) != null) {
             if (storedItems.get(player.getName()).size() < 1) return;
 

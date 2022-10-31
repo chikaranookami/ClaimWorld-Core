@@ -4,8 +4,8 @@ import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.Messages;
 import claimworld.net.supporter.utils.Ranks;
+import claimworld.net.supporter.utils.guis.Locker;
 import claimworld.net.supporter.utils.guis.ReadyItems;
-import claimworld.net.supporter.utils.guis.StoredInventories;
 import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Chicken;
@@ -80,8 +80,8 @@ public class CwAdmin {
                     return true;
                 }
 
-                StoredInventories storedInventories = new StoredInventories();
-                HashMap<String, List<ItemStack>> items = storedInventories.getStoredItems();
+                Locker locker = Locker.getInstance();
+                HashMap<String, List<ItemStack>> items = locker.getLockerMap();
 
                 if (action.equals("manuallyAddToStored")) {
                     String message = "W Twojej Skrytce cos jest. Odbierz to, zanim zniknie!";
@@ -101,7 +101,7 @@ public class CwAdmin {
                     if (items.get(playerName) == null) {
                         List<ItemStack> content = new ArrayList<>();
                         content.add(item);
-                        storedInventories.updateStoredItems(playerName, content);
+                        locker.updateStoredItems(playerName, content);
                     } else {
                         items.get(playerName).add(item);
                     }
@@ -112,7 +112,9 @@ public class CwAdmin {
 
                 if (action.equals("checkStored")) {
                     for (Map.Entry<String, List<ItemStack>> entry : items.entrySet()) {
-                        sender.sendMessage(colorize("&7&oSI " + entry.getKey() + ": " + entry.getValue()));
+                        boolean isNull = false;
+                        if (entry.getKey() == null) isNull = true;
+                        sender.sendMessage(colorize("&7&oSI " + entry.getKey() + " (isEmpty: " + entry.getKey().isEmpty() +  ", isNull: " + isNull + ", length: " + entry.getKey().length() + ": " + entry.getValue()));
                     }
 
                     return true;

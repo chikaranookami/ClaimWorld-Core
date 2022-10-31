@@ -3,7 +3,7 @@ package claimworld.net.supporter.events;
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.guis.Gui;
 import claimworld.net.supporter.utils.guis.GuiManager;
-import claimworld.net.supporter.utils.guis.StoredInventories;
+import claimworld.net.supporter.utils.guis.Locker;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,9 +12,14 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
+import java.util.List;
+
 import static org.bukkit.Bukkit.*;
 
 public class InventoryClickEvent implements Listener {
+
+    Locker locker = Locker.getInstance();
 
     @EventHandler
     public void inventoryClickEvent(org.bukkit.event.inventory.InventoryClickEvent event) {
@@ -23,8 +28,9 @@ public class InventoryClickEvent implements Listener {
         int slot = event.getSlot();
         Player player = (Player) event.getWhoClicked();
         Inventory clickedInventory = event.getClickedInventory();
+        Inventory playerInventory = player.getInventory();
 
-        if (slot == 17 && clickedInventory == player.getInventory()) {
+        if (slot == 17 && clickedInventory == playerInventory) {
             event.setCancelled(true);
             getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
                 new GuiManager(player, new Gui(null, 54, "Menu"));
@@ -46,14 +52,18 @@ public class InventoryClickEvent implements Listener {
         if (title.equals("Skrytka " + player.getName())) {
             if (event.getCurrentItem() == null) return;
             if (event.getCurrentItem().getType().isAir()) return;
-            if (player.getInventory().firstEmpty() == -1) return;
-            if (event.getClickedInventory() == player.getInventory()) return;
+            if (playerInventory.firstEmpty() == -1) return;
+            if (event.getClickedInventory() == playerInventory) return;
 
             ItemStack item = event.getCurrentItem();
+            String playerName = player.getName();
 
-            new StoredInventories().getStoredItems().get(player.getName()).remove(item);
+            HashMap<String, List<ItemStack>> lockerMap = locker.getLockerMap();
+            if (lockerMap.get(playerName).size() < 1) return;
+            if (lockerMap.get(playerName) == null) return;
+
             inventory.removeItem(item);
-            player.getInventory().addItem(item);
+            playerInventory.addItem(item);
             return;
         }
 

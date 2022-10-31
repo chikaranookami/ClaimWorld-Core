@@ -2,7 +2,7 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.Messages;
-import claimworld.net.supporter.utils.guis.StoredInventories;
+import claimworld.net.supporter.utils.guis.Locker;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -17,8 +17,6 @@ public class FillUpWarehouse {
     private final String blocksName = "blocks";
     private final String xpPotionName = "xpBottle";
     private final String usageName = "/fillupwarehouse <value>";
-
-    private final StoredInventories storedInventories = new StoredInventories();
     
     private final List<ItemStack> blockSet = Arrays.asList(
         new ItemStack(Material.STONE, 64),
@@ -49,15 +47,21 @@ public class FillUpWarehouse {
     }
 
     private void renderItems(List<ItemStack> items) {
+        HashMap<String, List<ItemStack>> itemMap = Locker.getInstance().getLockerMap();
+
         for (Player player : getOnlinePlayers()) {
             player.sendMessage(Messages.getUserPrefix() + "Otrzymales przedmiot. Wez go ze skrytki zanim zniknie!");
 
-            if (storedInventories.getStoredItems().get(player.getName()) == null) {
-                storedInventories.getStoredItems().put(player.getName(), items);
+            String playerName = player.getName();
+
+            if (player.getOpenInventory().getTitle().equals("Skrytka " + playerName)) player.closeInventory();
+
+            if (itemMap.get(playerName) == null) {
+                itemMap.put(playerName, items);
                 continue;
             }
 
-            storedInventories.getStoredItems().get(player.getName()).addAll(items);
+            itemMap.get(playerName).addAll(items);
         }
     }
 

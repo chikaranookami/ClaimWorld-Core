@@ -14,14 +14,6 @@ import java.util.Random;
 
 public class EntityDeathEvent implements Listener {
 
-    private final List<EntityType> entityTypes = new ArrayList<>();
-
-    public EntityDeathEvent() {
-        entityTypes.add(EntityType.ZOMBIE);
-        entityTypes.add(EntityType.SKELETON);
-        entityTypes.add(EntityType.WITHER_SKELETON);
-    }
-
     @EventHandler
     public void entityDeathEvent(org.bukkit.event.entity.EntityDeathEvent event) {
         if (event.getEntityType() == EntityType.CHICKEN) {
@@ -32,20 +24,12 @@ public class EntityDeathEvent implements Listener {
             return;
         }
 
-        if (event.getEntityType() == EntityType.ZOMBIFIED_PIGLIN) {
-            int random = new Random().nextInt(10);
+        if (!(event.getEntityType() == EntityType.ZOMBIFIED_PIGLIN)) return;
 
-            if (random > 0) return;
+        int random = new Random().nextInt(10);
 
-            event.getDrops().add(new ItemStack(Material.NETHER_WART));
-            return;
-        }
+        if (random > 0) return;
 
-        if (entityTypes.contains(event.getEntityType())) {
-            if (event.getDrops().isEmpty()) return;
-            for (ItemStack item : event.getDrops()) {
-                event.getEntity().getWorld().dropItemNaturally(event.getEntity().getLocation(), item);
-            }
-        }
+        event.getDrops().add(new ItemStack(Material.NETHER_WART));
     }
 }

@@ -56,7 +56,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new PrepareAnvilEvent(), this);
         pluginManager.registerEvents(new InventoryCloseEvent(), this);
         pluginManager.registerEvents(new PlayerTeleportEvent(), this);
-        pluginManager.registerEvents(new PlayerResourcePackStatusEvent(), this);
+        //pluginManager.registerEvents(new PlayerResourcePackStatusEvent(), this);
 
         //commands
         new Wydarzenie();

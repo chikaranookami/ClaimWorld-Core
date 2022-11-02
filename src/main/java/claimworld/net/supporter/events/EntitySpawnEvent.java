@@ -41,14 +41,14 @@ public class EntitySpawnEvent implements Listener {
 
         ItemStack dolar = readyItems.get("$1");
 
-        updatedRecipes.add(getCustomRecipe(new ItemStack(Material.BAT_SPAWN_EGG), 8, new ItemStack(Material.JACK_O_LANTERN), null));
+        //updatedRecipes.add(getCustomRecipe(new ItemStack(Material.BAT_SPAWN_EGG), 8, new ItemStack(Material.JACK_O_LANTERN), null));
 
         if (set == 0) {
             ItemStack ramka = readyItems.get("Niewidzialna ramka");
             ItemStack dolar2x = readyItems.get("$1", 2);
             ItemStack unbreaking4 = readyItems.get("Ksiazka unbreaking4");
             ItemStack glowa = new CustomHead("&fGlowa " + player.getName(), player, 1, Collections.singletonList(colorize(readyItems.getLore("common")))).getItem();
-            ItemStack halloweenowyOdbijacz = readyItems.get("Halloweenowy odbijacz");
+            //ItemStack halloweenowyOdbijacz = readyItems.get("Halloweenowy odbijacz");
 
             //Emeraldowy Handlarz
             updatedRecipes.add(getCustomRecipe(ramka, 2, new ItemStack(Material.EMERALD, 24), new ItemStack(Material.ITEM_FRAME)));
@@ -57,7 +57,7 @@ public class EntitySpawnEvent implements Listener {
             updatedRecipes.add(getCustomRecipe(new ItemStack(Material.BAT_SPAWN_EGG), 1, new ItemStack(Material.EMERALD, 32), null));
             updatedRecipes.add(getCustomRecipe(dolar, 2, new ItemStack(Material.EMERALD, 64), null));
             updatedRecipes.add(getCustomRecipe(unbreaking4, 1, new ItemStack(Material.EMERALD, 16), dolar2x));
-            updatedRecipes.add(getCustomRecipe(halloweenowyOdbijacz, 2, new ItemStack(Material.JACK_O_LANTERN, 16), null));
+            //updatedRecipes.add(getCustomRecipe(halloweenowyOdbijacz, 2, new ItemStack(Material.JACK_O_LANTERN, 16), null));
         }
 
         if (set == 1) {
@@ -71,7 +71,7 @@ public class EntitySpawnEvent implements Listener {
             updatedRecipes.add(getCustomRecipe(dolar, 2, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
             updatedRecipes.add(getCustomRecipe(new ItemStack(Material.ELYTRA), 1, new ItemStack(Material.PHANTOM_MEMBRANE, 64), dolar64x));
             updatedRecipes.add(getCustomRecipe(new ItemStack(Material.END_ROD), 4, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
-            updatedRecipes.add(getCustomRecipe(halloweenowaZupa, 4, new ItemStack(Material.JACK_O_LANTERN, 4), null));
+            //updatedRecipes.add(getCustomRecipe(halloweenowaZupa, 4, new ItemStack(Material.JACK_O_LANTERN, 4), null));
 
         }
 

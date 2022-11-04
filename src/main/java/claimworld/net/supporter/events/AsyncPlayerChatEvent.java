@@ -17,8 +17,9 @@ public class AsyncPlayerChatEvent implements Listener {
 
         if (event.getPlayer().hasPermission("claimworld.mvp")) {
             event.setFormat(event.getPlayer().getDisplayName() + ChatColor.GRAY + ": " + ChatColor.RESET + colorize(event.getMessage()));
-        } else {
-            event.setFormat(event.getPlayer().getDisplayName() + ChatColor.GRAY + ": " + ChatColor.RESET + event.getMessage());
+            return;
         }
+
+        event.setFormat(event.getPlayer().getDisplayName() + ChatColor.GRAY + ": " + ChatColor.RESET + event.getMessage());
     }
 }

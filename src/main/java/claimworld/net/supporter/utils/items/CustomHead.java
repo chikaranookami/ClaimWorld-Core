@@ -1,4 +1,4 @@
-package claimworld.net.supporter.utils;
+package claimworld.net.supporter.utils.items;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -6,7 +6,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.List;
 
-public class CustomHead extends CustomItem{
+public class CustomHead extends CustomItem {
     private Player player;
 
     public Player getPlayer() {

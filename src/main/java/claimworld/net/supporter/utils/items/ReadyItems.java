@@ -1,6 +1,5 @@
-package claimworld.net.supporter.utils.guis;
+package claimworld.net.supporter.utils.items;
 
-import claimworld.net.supporter.utils.CustomItem;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;

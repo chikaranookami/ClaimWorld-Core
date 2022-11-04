@@ -1,4 +1,4 @@
-package claimworld.net.supporter.utils;
+package claimworld.net.supporter.utils.announcers;
 
 import claimworld.net.supporter.Supporter;
 import org.bukkit.boss.BossBar;
@@ -13,9 +13,11 @@ public class ActiveBossBar {
     public void render(BossBar bossBar) {
         bossBar.setProgress(0.0);
 
-        for (Player player : getOnlinePlayers()) {
-            bossBar.addPlayer(player);
-        }
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+            for (Player player : getOnlinePlayers()) {
+                bossBar.addPlayer(player);
+            }
+        });
 
         AtomicReference<Double> d = new AtomicReference<>(0.0);
 

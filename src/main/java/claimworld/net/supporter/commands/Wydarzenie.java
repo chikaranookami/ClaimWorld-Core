@@ -46,6 +46,6 @@ public class Wydarzenie {
             public String getUsage() {
                 return "/wydarzenie";
             }
-        }.setPermission("claimworld.player");
+        }.setPermission("claimworld.admin");
     }
 }

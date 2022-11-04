@@ -9,22 +9,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
+
 import static org.bukkit.Bukkit.getScheduler;
 
 public final class Supporter extends JavaPlugin implements Listener {
 
     private static Supporter plugin;
-
     public static Supporter getPlugin() {
         return plugin;
     }
-    public static boolean togglePhantoms;
-    public static boolean toggleEnd;
-    public static boolean doubleXp;
-    public static boolean pickupAll;
-    public static boolean doubledForce;
-    public static boolean moreFromOres;
-    public static boolean loadedWarehouse;
 
     @Override
     public void onEnable() {
@@ -33,8 +27,6 @@ public final class Supporter extends JavaPlugin implements Listener {
         this.saveDefaultConfig();
 
         PluginManager pluginManager = getServer().getPluginManager();
-
-        //below name text & prefixes
 
         //events
         pluginManager.registerEvents(new PlayerRespawnEvent(), this);
@@ -56,10 +48,10 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new PrepareAnvilEvent(), this);
         pluginManager.registerEvents(new InventoryCloseEvent(), this);
         pluginManager.registerEvents(new PlayerTeleportEvent(), this);
-        //pluginManager.registerEvents(new PlayerResourcePackStatusEvent(), this);
+        pluginManager.registerEvents(new PlayerResourcePackStatusEvent(), this);
 
         //commands
-        new Wydarzenie();
+        //new Wydarzenie();
         new Dice();
         new LoadLokacja();
         new SetLokacja();
@@ -82,10 +74,5 @@ public final class Supporter extends JavaPlugin implements Listener {
         getScheduler().runTaskLater(this, () -> {
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true");
         }, 100L);
-    }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
     }
 }

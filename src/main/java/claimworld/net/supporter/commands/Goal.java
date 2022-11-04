@@ -8,7 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.util.List;
 import java.util.logging.Level;
 
-import static claimworld.net.supporter.utils.Messages.getBroadcastPrefix;
+import static claimworld.net.supporter.utils.MessageUtils.getBroadcastPrefix;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.*;
 import static org.bukkit.Bukkit.getConsoleSender;

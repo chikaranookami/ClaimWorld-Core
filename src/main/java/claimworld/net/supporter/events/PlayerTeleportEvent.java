@@ -10,11 +10,11 @@ public class PlayerTeleportEvent implements Listener {
     @EventHandler
     public void playerTeleportEvent(org.bukkit.event.player.PlayerTeleportEvent event) {
         if (!(event.getCause() == org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.ENDER_PEARL)) return;
+        if (event.getTo() == null) return;
 
         Player player = event.getPlayer();
 
         if (!(player.getWorld().getEnvironment() == World.Environment.THE_END)) return;
-        if (event.getTo() == null) return;
         if (player.getWorld().getWorldBorder().isInside(event.getTo())) return;
 
         event.setCancelled(true);

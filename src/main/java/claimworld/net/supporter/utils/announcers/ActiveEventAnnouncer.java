@@ -1,4 +1,4 @@
-package claimworld.net.supporter.utils;
+package claimworld.net.supporter.utils.announcers;
 
 import claimworld.net.supporter.Supporter;
 import org.bukkit.Sound;

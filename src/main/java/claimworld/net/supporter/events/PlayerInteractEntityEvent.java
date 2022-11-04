@@ -1,6 +1,7 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.guis.BonusManager;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -16,10 +17,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static claimworld.net.supporter.Supporter.doubledForce;
-import static claimworld.net.supporter.Supporter.pickupAll;
 import static org.bukkit.Bukkit.*;
 public class PlayerInteractEntityEvent implements Listener {
+
+    BonusManager bonusManager = BonusManager.getInstance();
 
     private final List<EntityType> entityTypes = Arrays.asList(EntityType.COW, EntityType.SHEEP, EntityType.PIG, EntityType.CHICKEN);
     private final List<EntityType> blockedEntityTypes = Arrays.asList(EntityType.ENDER_DRAGON, EntityType.ENDER_CRYSTAL);
@@ -27,7 +28,7 @@ public class PlayerInteractEntityEvent implements Listener {
     private final List<Player> delayedPlayers = new ArrayList<>();
 
     private void showParticles(Entity entity) {
-        getScheduler().runTaskLater(Supporter.getPlugin(), () -> new BukkitRunnable() {
+        getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> new BukkitRunnable() {
             int i = 0;
 
             @Override
@@ -57,7 +58,7 @@ public class PlayerInteractEntityEvent implements Listener {
         Player player = event.getPlayer();
 
         if (!entityTypes.contains(event.getRightClicked().getType())) {
-            if (!pickupAll) return;
+            if (!bonusManager.getBonuses().get("Podnoszenie+")) return;
             if (blockedEntityTypes.contains(event.getRightClicked().getType())) return;
             if (fixedEntityTypes.contains(event.getRightClicked().getType())) return;
             if (!event.getRightClicked().hasGravity()) return;
@@ -97,7 +98,7 @@ public class PlayerInteractEntityEvent implements Listener {
                 } else {
                     number = 1.25;
                 }
-                if (doubledForce) number++;
+                if (bonusManager.getBonuses().get("Rzucanie+")) number++;
 
                 entity.setVelocity(direction.multiply(number));
 

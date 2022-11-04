@@ -1,29 +1,28 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.Messages;
-import claimworld.net.supporter.utils.Ranks;
-import claimworld.net.supporter.utils.guis.Locker;
-import claimworld.net.supporter.utils.guis.ReadyItems;
+import claimworld.net.supporter.utils.MessageUtils;
+import claimworld.net.supporter.utils.RankUtils;
+import claimworld.net.supporter.utils.guis.BonusManager;
+import claimworld.net.supporter.utils.items.ReadyItems;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.*;
-
-import java.util.HashMap;
-import java.util.List;
 
 import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.*;
 
 public class PlayerJoinEvent implements Listener {
 
-    private final Ranks ranks = new Ranks();
+    private final RankUtils ranks = new RankUtils();
+
     private final Scoreboard scoreboard = getScoreboardManager().getNewScoreboard();
-    private final Objective objective = scoreboard.registerNewObjective("poziomprzepustki", Criteria.DUMMY, "PP");
+    private final Objective objective = scoreboard.registerNewObjective("poziomprzepustki", Criteria.DUMMY, "CP");
     private final Team adminTeam = scoreboard.registerNewTeam("admin");
     private final Team modTeam = scoreboard.registerNewTeam("mod");
     private final Team mvpTeam = scoreboard.registerNewTeam("mvp");
@@ -91,9 +90,12 @@ public class PlayerJoinEvent implements Listener {
         //player.setPlayerListFooter(colorize("\n &aPing: &f" + player.getPing() + "ms   &a|   Ostatnia smierc: &f" + player.getStatistic(Statistic.TIME_SINCE_DEATH) + " \n"));
 
         //set menu item
-        ItemStack menu = new ReadyItems().get("Menu");
+        player.getInventory().setItem(17, new ReadyItems().get("Menu"));
 
-        player.getInventory().setItem(17, menu);
+        //mvp join bonus
+        if (player.hasPermission("claimworld.mvp")) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 200, 1, true, false, false));
+        }
 
         //set ranks
         getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> ranks.updateRank(player), 10L);
@@ -109,29 +111,16 @@ public class PlayerJoinEvent implements Listener {
             if (!score.isScoreSet()) score.setScore(0);
         }, 20L);
 
-        //end available?
-        if (Supporter.toggleEnd) {
-            player.sendMessage(Messages.getUserPrefix() + "End jest obecnie wlaczony. Korzystaj, poki mozesz!");
-            return;
-        }
-
-        HashMap<String, List<ItemStack>> storedItems = Locker.getInstance().getLockerMap();
-        if (storedItems.get(player.getName()) != null) {
-            if (storedItems.get(player.getName()).size() < 1) return;
-
-            player.sendMessage(Messages.getUserPrefix() + "W Twojej Skrytce cos jest. Odbierz to, zanim zniknie!");
-        }
-
         //end location fix
         if (player.getWorld().getEnvironment() == World.Environment.THE_END) {
             if (player.getLocation().getY() < -128) {
                 player.setHealth(0);
-                player.sendMessage(Messages.getUserPrefix() + "End jest obecnie wylaczony, a Ty byles gleboko w voidzie, wiec zginales.");
+                player.sendMessage(MessageUtils.getUserPrefix() + "End jest obecnie wylaczony, a Ty byles gleboko w voidzie, wiec zginales.");
                 return;
             }
 
             Bukkit.dispatchCommand(player, "spawn");
-            player.sendMessage(Messages.getUserPrefix() + "End jest obecnie wylaczony. Przeteleportowano na spawn.");
+            player.sendMessage(MessageUtils.getUserPrefix() + "End jest obecnie wylaczony. Przeteleportowano na spawn.");
         }
     }
 }

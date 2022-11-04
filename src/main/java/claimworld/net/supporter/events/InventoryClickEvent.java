@@ -3,7 +3,7 @@ package claimworld.net.supporter.events;
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.guis.Gui;
 import claimworld.net.supporter.utils.guis.GuiManager;
-import claimworld.net.supporter.utils.guis.Locker;
+import claimworld.net.supporter.utils.items.Locker;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,6 +12,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,13 +22,21 @@ public class InventoryClickEvent implements Listener {
 
     Locker locker = Locker.getInstance();
 
+    private final List<String> fixedEquipments = new ArrayList<>();
+
+    public InventoryClickEvent() {
+        fixedEquipments.add("Kosz");
+        fixedEquipments.add("NPC Equipment");
+    }
+
     @EventHandler
     public void inventoryClickEvent(org.bukkit.event.inventory.InventoryClickEvent event) {
+        Inventory clickedInventory = event.getClickedInventory();
+
         if (event.getClickedInventory() == null) return;
 
         int slot = event.getSlot();
         Player player = (Player) event.getWhoClicked();
-        Inventory clickedInventory = event.getClickedInventory();
         Inventory playerInventory = player.getInventory();
 
         if (slot == 17 && clickedInventory == playerInventory) {
@@ -43,9 +52,11 @@ public class InventoryClickEvent implements Listener {
         if (inventory.getType() != InventoryType.CHEST) return;
         if (inventory.getLocation() != null) return;
         if (inventory.getSize() < 9) return;
-        if (event.getView().getTitle().equals("Kosz")) return;
+        if (fixedEquipments.contains(event.getView().getTitle())) return;
 
         event.setCancelled(true);
+
+        if (!(event.isLeftClick())) return;
 
         String title = event.getView().getTitle();
 

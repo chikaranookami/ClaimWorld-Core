@@ -2,10 +2,10 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.Messages;
-import claimworld.net.supporter.utils.Ranks;
-import claimworld.net.supporter.utils.guis.Locker;
-import claimworld.net.supporter.utils.guis.ReadyItems;
+import claimworld.net.supporter.utils.MessageUtils;
+import claimworld.net.supporter.utils.RankUtils;
+import claimworld.net.supporter.utils.items.Locker;
+import claimworld.net.supporter.utils.items.ReadyItems;
 import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Chicken;
@@ -20,6 +20,16 @@ import static org.bukkit.Bukkit.getOnlinePlayers;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class CwAdmin {
+
+    private void renderGhastScream() {
+        for (Player onlinePlayer : getOnlinePlayers()) {
+            onlinePlayer.playSound(onlinePlayer, Sound.ENTITY_GHAST_SCREAM, 1.2f, 1.2f);
+            onlinePlayer.playSound(onlinePlayer, Sound.ENTITY_GHAST_HURT, 1.2f, 1.2f);
+            onlinePlayer.playSound(onlinePlayer, Sound.ENTITY_GHAST_SCREAM, 1.2f, 1.2f);
+            onlinePlayer.playSound(onlinePlayer, Sound.ENTITY_GHAST_HURT, 1.2f, 1.2f);
+        }
+    }
+
     public CwAdmin() {
         new CommandBase("cwadmin", 2, false) {
             @Override
@@ -40,12 +50,9 @@ public class CwAdmin {
                 }
 
                 if (action.equals("playGhastScream")) {
-                    for (Player onlinePlayer : getOnlinePlayers()) {
-                        onlinePlayer.playSound(onlinePlayer, Sound.ENTITY_GHAST_SCREAM, 1.2f, 1.2f);
-                        onlinePlayer.playSound(onlinePlayer, Sound.ENTITY_GHAST_HURT, 1.2f, 1.2f);
-                        onlinePlayer.playSound(onlinePlayer, Sound.ENTITY_GHAST_SCREAM, 1.2f, 1.2f);
-                        onlinePlayer.playSound(onlinePlayer, Sound.ENTITY_GHAST_HURT, 1.2f, 1.2f);
-                    }
+                    getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
+                        renderGhastScream();
+                    }, 10L);
                     sender.sendMessage("ghast scream has been played");
                     return true;
                 }
@@ -53,13 +60,10 @@ public class CwAdmin {
                 if (action.equals("updateRank")) {
                     String displayName = player.getDisplayName();
 
-                    sender.sendMessage("Trying to update rank of " + displayName);
-
                     getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                        new Ranks().updateRank(player);
-
+                        new RankUtils().updateRank(player);
                         sender.sendMessage("Rank has been updated for " + displayName);
-                    }, 40L);
+                    }, 20L);
                     return true;
                 }
 
@@ -106,7 +110,7 @@ public class CwAdmin {
                         items.get(playerName).add(item);
                     }
 
-                    player.sendMessage(Messages.getUserPrefix() + message);
+                    player.sendMessage(MessageUtils.getUserPrefix() + message);
                     return true;
                 }
 

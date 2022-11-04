@@ -16,20 +16,16 @@ public class EntityDeathEvent implements Listener {
 
     @EventHandler
     public void entityDeathEvent(org.bukkit.event.entity.EntityDeathEvent event) {
-        if (event.getEntityType() == EntityType.CHICKEN) {
-            Chicken chicken = (Chicken) event.getEntity();
-            if (chicken.isAware()) return;
-            event.getDrops().clear();
-            event.setDroppedExp(0);
-            return;
+        if (event.getEntityType() == EntityType.ZOMBIFIED_PIGLIN) {
+            if (new Random().nextInt(10) > 0) return;
+
+            event.getDrops().add(new ItemStack(Material.NETHER_WART));
         }
 
-        if (!(event.getEntityType() == EntityType.ZOMBIFIED_PIGLIN)) return;
+        if (!(event.getEntityType() == EntityType.CHICKEN)) return;
+        if (((Chicken) event.getEntity()).isAware()) return;
 
-        int random = new Random().nextInt(10);
-
-        if (random > 0) return;
-
-        event.getDrops().add(new ItemStack(Material.NETHER_WART));
+        event.getDrops().clear();
+        event.setDroppedExp(0);
     }
 }

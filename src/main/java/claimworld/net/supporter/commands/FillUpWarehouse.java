@@ -1,8 +1,8 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.Messages;
-import claimworld.net.supporter.utils.guis.Locker;
+import claimworld.net.supporter.utils.MessageUtils;
+import claimworld.net.supporter.utils.items.Locker;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -42,7 +42,7 @@ public class FillUpWarehouse {
 
     private List<ItemStack> getExperienceBottleItems() {
         List<ItemStack> items = new ArrayList<>();
-        items.add(new ItemStack(Material.EXPERIENCE_BOTTLE));
+        items.add(new ItemStack(Material.EXPERIENCE_BOTTLE, 5));
         return items;
     }
 
@@ -50,7 +50,7 @@ public class FillUpWarehouse {
         HashMap<String, List<ItemStack>> itemMap = Locker.getInstance().getLockerMap();
 
         for (Player player : getOnlinePlayers()) {
-            player.sendMessage(Messages.getUserPrefix() + "Otrzymales przedmiot. Wez go ze skrytki zanim zniknie!");
+            player.sendMessage(MessageUtils.getUserPrefix() + "Otrzymales przedmiot. Wez go ze skrytki zanim zniknie!");
 
             String playerName = player.getName();
 

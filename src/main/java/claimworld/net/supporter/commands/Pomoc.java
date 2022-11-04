@@ -47,7 +47,7 @@ public class Pomoc {
                 bookMeta.setPage(8, "Odgorne zezwolenia na wykorzystywanie bledow\n\n§1+§0 Wychodzenie na sufit w netherze\n\n\nWykorzystywanie bledow, ktore nie daja przewagi w rozgrywce §njest dozwolone§0.");
                 bookMeta.setPage(9, "Zarezerwowane wzory sztandardow\n\n§1+§0 Wszystkie zajete wzory sztandardow dostepne sa do wgladu w specjalnym miejscu obok spawnu (patrz mapa).");
                 bookMeta.setPage(10, "Progi zakupow w sklepie\n\n§1+§0 Za osiagniecie okreslonego progu przewidziane sa specjalne bonusy, o ktorych gracze zostana poinformowani po osiagnieciu wybranego celu.");
-                bookMeta.setPage(11, "Farmy\n\n§1+§0 Zloto [-128 253 -84 Nether]\n§1+§0 Blazy [-334 72 -3 Nether]\n§1+§0 Owce [656 -703 Overworld]\n§1+§0 Kaktusy [409 289 Overworld]\n§1+§0 Trzcina [1096 -185 Overworld]");
+                bookMeta.setPage(11, "Farmy\n\n§1+§0 Zloto [-128 253 -84 Nether]\n§1+§0 Blazy [-334 72 -3 Nether]\n§1+§0 Owce [656 -703 Overworld]\n§1+§0 Kaktusy [409 289 Overworld]\n§1+§0 Trzcina [1096 -185 Overworld]\n§1+§0 Wiesniaki [310 -1979 Overworld]");
                 bookMeta.setPage(12, "Projekt §1Claim World§0 stawia na dlugoterminowosc i z czasem zmian bedzie wiecej, jednak naszym celem jest utrzymanie rozgrywki w klimatach klasycznego Minecrafta tak bardzo, jak tylko sie da.");
                 book.setItemMeta(bookMeta);
 

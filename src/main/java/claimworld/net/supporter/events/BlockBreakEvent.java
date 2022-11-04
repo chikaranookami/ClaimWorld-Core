@@ -1,6 +1,7 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.guis.BonusManager;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
@@ -13,6 +14,8 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class BlockBreakEvent implements Listener {
 
+    BonusManager bonusManager = BonusManager.getInstance();
+
     private void dropItem(World world, Location location) {
         world.dropItem(location, new ItemStack(Material.DIAMOND));
         world.playSound(location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.7f, 0.75f);
@@ -21,23 +24,21 @@ public class BlockBreakEvent implements Listener {
 
     @EventHandler
     public void blockBreakEvent(org.bukkit.event.block.BlockBreakEvent event) {
-        if (Supporter.doubleXp) {
+        if (bonusManager.getBonuses().get("DoubleXP")) {
             if (event.getExpToDrop() <= 0 )return;
             event.setExpToDrop(event.getExpToDrop() * 2);
         }
 
-        if (Supporter.moreFromOres) {
-            if (!(event.getBlock().getType() == Material.DIAMOND_ORE || event.getBlock().getType() == Material.DEEPSLATE_DIAMOND_ORE)) return;
-            if (event.getPlayer().getInventory().getItemInMainHand().getEnchantmentLevel(Enchantment.SILK_TOUCH) != 0) return;
+        if (!bonusManager.getBonuses().get("Diaxy+")) return;
+        if (!(event.getBlock().getType() == Material.DIAMOND_ORE || event.getBlock().getType() == Material.DEEPSLATE_DIAMOND_ORE)) return;
+        if (event.getPlayer().getInventory().getItemInMainHand().getEnchantmentLevel(Enchantment.SILK_TOUCH) != 0) return;
 
+        dropItem(event.getPlayer().getWorld(), event.getBlock().getLocation());
+
+        if (new Random().nextInt(5) != 0) return;
+
+        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
             dropItem(event.getPlayer().getWorld(), event.getBlock().getLocation());
-
-            if (new Random().nextInt(5) != 0) return;
-
-            getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                dropItem(event.getPlayer().getWorld(), event.getBlock().getLocation());
-            }, 4L);
-
-        }
+        }, 4L);
     }
 }

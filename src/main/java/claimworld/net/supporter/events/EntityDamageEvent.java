@@ -1,5 +1,6 @@
 package claimworld.net.supporter.events;
 
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,6 +18,7 @@ public class EntityDamageEvent implements Listener {
 
     @EventHandler
     public void entityDamageEvent(org.bukkit.event.entity.EntityDamageEvent event) {
+        if (!(event.getEntity().getType() == EntityType.PLAYER)) return;
         if (event.getEntity().getWorld().getWorldBorder().isInside(event.getEntity().getLocation())) return;
         if (!event.getCause().equals(org.bukkit.event.entity.EntityDamageEvent.DamageCause.SUFFOCATION)) return;
 

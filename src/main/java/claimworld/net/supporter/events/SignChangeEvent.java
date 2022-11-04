@@ -1,6 +1,7 @@
 package claimworld.net.supporter.events;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -10,10 +11,7 @@ public class SignChangeEvent implements Listener {
 
     @EventHandler
     public void signChangeEvent(org.bukkit.event.block.SignChangeEvent event) {
-        String[] lines = event.getLines();
-
-        if (lines.length < 1) return;
-
-        Bukkit.getConsoleSender().sendMessage("Player " + event.getPlayer().getDisplayName() + " napisal na tabliczce (lokalizacja " + event.getPlayer().getLocation() + ": " + Arrays.toString(lines) + " (ilosc znakow " + lines.length + ")");
+        Player player = event.getPlayer();
+        Bukkit.getConsoleSender().sendMessage("Player " + player.getDisplayName() + " napisal na tabliczce (lokalizacja " + player.getLocation() + ": " + String.join(" ", event.getLines()));
     }
 }

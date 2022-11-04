@@ -1,6 +1,6 @@
 package claimworld.net.supporter.commands;
 
-import claimworld.net.supporter.utils.ActiveBossBar;
+import claimworld.net.supporter.utils.announcers.ActiveBossBar;
 import claimworld.net.supporter.utils.CommandBase;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;

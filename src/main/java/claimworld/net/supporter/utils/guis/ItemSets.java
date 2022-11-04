@@ -1,8 +1,11 @@
 package claimworld.net.supporter.utils.guis;
 
-import claimworld.net.supporter.utils.CustomHead;
-import claimworld.net.supporter.utils.CustomItem;
-import claimworld.net.supporter.utils.Ranks;
+import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.items.CustomHead;
+import claimworld.net.supporter.utils.items.CustomItem;
+import claimworld.net.supporter.utils.RankUtils;
+import claimworld.net.supporter.utils.items.Locker;
+import claimworld.net.supporter.utils.items.ReadyItems;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -17,8 +20,8 @@ public class ItemSets {
     
     private final HashMap<Integer, ItemStack> itemMap = new HashMap<>();
     private final ReadyItems readyItems = new ReadyItems();
-    private final Ranks ranks = new Ranks();
-    
+    private final RankUtils ranks = new RankUtils();
+
     public HashMap<Integer, ItemStack> initializeInventoryContent(Player player, String inventoryName) {
         if (inventoryName == null || inventoryName.isEmpty()) {
             getLogger().log(Level.INFO, "initializing error - inventoryName is empty or null");
@@ -44,21 +47,12 @@ public class ItemSets {
             itemMap.put(16, new CustomItem("&bPanel VIP", Material.ENCHANTING_TABLE, Arrays.asList(colorize("&7&oTajemnicze miejsce!"), colorize("&7&oDostepna juz niebawem!"))).getItem());
             itemMap.put(28, new CustomItem("&fOgnisko u Mariana", Material.CAMPFIRE, Collections.singletonList(colorize("&7&oCentrum pomocy."))).getItem());
             itemMap.put(37, new CustomItem("&fUlatwienia dostepu", Material.NAME_TAG, Collections.singletonList(colorize("&7&oDodatkowe ustawienia."))).getItem());
-            itemMap.put(43, new CustomItem("&a#1 Eventowe Tournée", Material.BOOK, Arrays.asList(
-                    colorize("&7&oSzczegoly na Discordzie."),"",
-                    colorize("&a> Turniej Kosza 2v2"), colorize("&7&oData: 1.10.2022"), "",
-                    colorize("&a> Turniej Zbijaka"), colorize("&7&oData: 8.10.2022"), "",
-                    colorize("&a> Zabawa W Chowanego"), colorize("&7&oData: 15.10.2022"), "",
-                    colorize("&a> Monopoly by CW"), colorize("&7&oData: 22.10.2022"), "",
-                    colorize("&a> Konkurs Talentow"), colorize("&7&oData: 29.10.2022")
-            )).getItem());
             itemMap.put(21, new CustomItem("&bSkrytka", Material.ENDER_CHEST, Collections.singletonList(colorize("&7&oTwoje dodatkowe przedmioty."))).getItem());
             return itemMap;
         }
 
         if (inventoryName.equals("Teleportacja")) {
             String lore = colorize("&7&oUzyj, by sie przeteleportowac.");
-
             itemMap.put(53, readyItems.get("Cofnij"));
             itemMap.put(10, new CustomItem("&fUstaw dom", Material.WHITE_BED, Collections.singletonList(colorize("&7&oUzyj, by ustawic dom."))).getItem());
             itemMap.put(12, new CustomItem("&aDom", Material.LIME_BED, Collections.singletonList(lore)).getItem());

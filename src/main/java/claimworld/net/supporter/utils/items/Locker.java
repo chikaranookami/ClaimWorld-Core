@@ -1,9 +1,12 @@
-package claimworld.net.supporter.utils.guis;
+package claimworld.net.supporter.utils.items;
 
+import claimworld.net.supporter.Supporter;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.List;
+
+import static org.bukkit.Bukkit.getScheduler;
 
 public class Locker {
     private static Locker instance = null;
@@ -14,8 +17,10 @@ public class Locker {
     }
 
     public void updateStoredItems(String playerName, List<ItemStack> items) {
-        lockerMap.remove(playerName);
-        lockerMap.put(playerName, items);
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+            lockerMap.remove(playerName);
+            lockerMap.put(playerName, items);
+        });
     }
 
     public static Locker getInstance() {

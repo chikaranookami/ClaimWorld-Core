@@ -98,14 +98,14 @@ public abstract class CommandBase extends BukkitCommand implements CommandExecut
 
         String permission = getPermission();
         if (permission != null && !(sender.hasPermission(permission))) {
-            sender.sendMessage(Messages.getUserPrefix() + "Brak uprawnien.");
+            sender.sendMessage(MessageUtils.getUserPrefix() + "Brak uprawnien.");
             return true;
         }
 
         if (delayedPlayers != null && sender instanceof Player) {
             Player player = (Player) sender;
             if (delayedPlayers.contains(player.getName()) && !player.hasPermission("claimworld.mod")) {
-                player.sendMessage(Messages.getUserPrefix() + "Musisz odczekac chwile, zanim bedziesz mogl uzyc tej komendy ponownie.");
+                player.sendMessage(MessageUtils.getUserPrefix() + "Musisz odczekac chwile, zanim bedziesz mogl uzyc tej komendy ponownie.");
                 return true;
             }
 

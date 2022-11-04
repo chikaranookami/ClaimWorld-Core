@@ -2,7 +2,7 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.wip.ErrorMessages;
-import claimworld.net.supporter.utils.Messages;
+import claimworld.net.supporter.utils.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -72,7 +72,7 @@ public class DajPunkty {
                 Bukkit.dispatchCommand(sender, "adminvote User " + player.getName() + " AddPoints " + total);
 
                 sender.sendMessage(ChatColor.GREEN + "Pomyslnie dodano graczowi " + player.getDisplayName() + ChatColor.GREEN + " " + points + ChatColor.GREEN + " punktow (multipler " + multipler + ChatColor.GREEN + ")");
-                player.sendMessage(Messages.getUserPrefix() + "Otrzymano " + total + " punktow.");
+                player.sendMessage(MessageUtils.getUserPrefix() + "Otrzymano " + total + " punktow.");
 
                 return true;
             }

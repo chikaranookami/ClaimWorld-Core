@@ -38,7 +38,7 @@ public class Pomoc {
 
                 bookMeta.setPages(pages);
                 bookMeta.setPage(1, "Informacje\n\nW tym poradniku znajdziesz m.in:§1\n- Komendy\n- Zmiany w rozgrywce\n\n §0Masz pytania? Smialo, kieruj je na Discorda.");
-                bookMeta.setPage(2, "Komendy gracza\n\n§1/lwc§0 - zabawy z zabezpieczeniami skrzynek\n§1/msg§0 - prywatna wiadomosc");
+                bookMeta.setPage(2, "Komendy gracza\n\n§1/lwc§0 - zabawy z zabezpieczeniami skrzynek\n§1/msg§0 - prywatna wiadomosc\n§1/ogloszenia§0 - najwazniejsze informacje");
                 bookMeta.setPage(3, "Dodatkowe komendy VIP\n\n§1/playtime§0 - czas online\n§1/me§0 - opis postaci (RP)\n§1/skin§0 - zmien swojego skina\n§1/hat§0 - zaloz na glowe trzymany blok");
                 bookMeta.setPage(4, "Dodatkowe komendy VIP+\n\n§1/sit§0,§1 /lay§0,§1 /crawl§0, §1/spin§0, §1/bellyflop§0 - animacje postaci\n\nVIP+ ma rowniez wszystkie komendy VIP.");
                 bookMeta.setPage(5, "Dodatkowe komendy MVP+\n\n§1/pp§0 - konsola efektow\n§1/fw§0 - fajerwerk pod nogami\n\nMVP ma rowniez wszystkie komendy VIP+ i VIP.");

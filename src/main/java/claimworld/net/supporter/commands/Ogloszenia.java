@@ -1,11 +1,7 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.hover.content.Text;
+import claimworld.net.supporter.utils.announcers.JoinAnnouncer;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -14,7 +10,7 @@ import org.bukkit.inventory.meta.BookMeta;
 
 import java.util.ArrayList;
 
-public class Wydarzenie {
+public class Ogloszenia {
 
     private ItemStack getBook() {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK, 1);
@@ -22,7 +18,7 @@ public class Wydarzenie {
 
         assert bookMeta != null;
         bookMeta.setAuthor("Chikaraa");
-        bookMeta.setTitle("Pomoc");
+        bookMeta.setTitle("Ogloszenia");
 
         ArrayList<String> pages = new ArrayList<>();
         pages.add("§c§lOkres Halloween\n\n§c§l- §rWiekszy drop ze szkieletow, zombie i witherowych szkieletow\n§c§l- §rTylko Emeraldowy i Fantomowy Handlarz z dodatkowymi ofertami\n§c§l- §rWieczory z Globalnymi Boosterami!\n§c§l- §rHalloweenowe dekoracje\n§c§l- §rNiespodzianka!");
@@ -33,19 +29,18 @@ public class Wydarzenie {
         return book;
     }
 
-    public Wydarzenie() {
-        new CommandBase("wydarzenie", true) {
+    public Ogloszenia() {
+        new CommandBase("ogloszenia", true) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
-                Player player = (Player) sender;
-                player.openBook(getBook());
+                new JoinAnnouncer((Player) sender);
                 return true;
             }
 
             @Override
             public String getUsage() {
-                return "/wydarzenie";
+                return "/ogloszenia";
             }
-        }.setPermission("claimworld.admin");
+        }.setPermission("claimworld.player");
     }
 }

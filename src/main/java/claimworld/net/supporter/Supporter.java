@@ -51,7 +51,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new PlayerResourcePackStatusEvent(), this);
 
         //commands
-        //new Wydarzenie();
+        new Ogloszenia();
         new Dice();
         new LoadLokacja();
         new SetLokacja();

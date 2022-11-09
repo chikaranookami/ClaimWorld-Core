@@ -29,7 +29,8 @@ public class InventoryCloseEvent implements Listener {
 
         List<ItemStack> items = new ArrayList<>();
 
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () ->{
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+            if (lockerItems.get(playerName) == null) return;
             if (!(lockerItems.get(playerName).size() < 1)) {
                 for (ItemStack item : event.getInventory().getContents()) {
                     if (item == null) continue;

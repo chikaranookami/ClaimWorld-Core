@@ -47,21 +47,24 @@ public class FillUpWarehouse {
     }
 
     private void renderItems(List<ItemStack> items) {
+        //poprawione? sprawdzic dokladnie
         HashMap<String, List<ItemStack>> itemMap = Locker.getInstance().getLockerMap();
 
         for (Player player : getOnlinePlayers()) {
             player.sendMessage(MessageUtils.getUserPrefix() + "Otrzymales przedmiot. Wez go ze skrytki zanim zniknie!");
 
             String playerName = player.getName();
+            List<ItemStack> fixedItems = new ArrayList<>(items);
 
             if (player.getOpenInventory().getTitle().equals("Skrytka " + playerName)) player.closeInventory();
 
             if (itemMap.get(playerName) == null) {
-                itemMap.put(playerName, items);
+                itemMap.put(playerName, fixedItems);
+                fixedItems.clear();
                 continue;
             }
 
-            itemMap.get(playerName).addAll(items);
+            itemMap.get(playerName).addAll(fixedItems);
         }
     }
 

@@ -1,13 +1,11 @@
 package claimworld.net.supporter.utils.announcers;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.RankUtils;
 import claimworld.net.supporter.utils.guis.BonusManager;
+import claimworld.net.supporter.utils.tasks.Task;
+import claimworld.net.supporter.utils.tasks.TaskManager;
 import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -17,18 +15,29 @@ import org.bukkit.inventory.meta.BookMeta;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static claimworld.net.supporter.utils.StringUtils.colorize;
+import static claimworld.net.supporter.utils.MessageUtils.getBattlepassIcon;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class JoinAnnouncer {
 
+    TaskManager taskManager = TaskManager.getInstance();
     private final List<Sound> sounds = Collections.singletonList(Sound.ENTITY_PILLAGER_CELEBRATE);
+
+    private String getActiveQuests() {
+        List<String> infoList = new ArrayList<>();
+
+        for (Task task : taskManager.getActiveTasks()) {
+            infoList.add("§c-§8 " + task.getName() + "\n\n");
+        }
+
+        return String.join(" ", infoList);
+    }
 
     private String getActiveBonuses() {
         List<String> keys = new ArrayList<>();
 
         for (Map.Entry<String, Boolean> entry : BonusManager.getInstance().getBonuses().entrySet()) {
-            if (entry.getValue()) keys.add("§c-§0" + entry.getKey());
+            if (entry.getValue()) keys.add("§c-§8" + entry.getKey() + "\n");
         }
 
         return String.join(" ", keys);
@@ -37,16 +46,25 @@ public class JoinAnnouncer {
     private ItemStack getBook() {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta bookMeta = (BookMeta) book.getItemMeta();
+        assert bookMeta != null;
 
-        BaseComponent[] shopComponent = new ComponentBuilder()
-                .append("§cOstatnie Zmiany\n")
-                .append("§0Glownie poprawki i optymalizacje.")
-                .append("\n\n§cAktywne Bonusy\n")
+        BaseComponent[] pageComponent = new ComponentBuilder()
+                .append("§cNotka od admina\n")
+                .append("§8Do konca roku jeszcze sporo zmian. Stay tuned!")
+                .create();
+        bookMeta.spigot().addPage(pageComponent);
+
+        pageComponent = new ComponentBuilder()
+                .append("§cAktywne zadania\n")
+                .append(getActiveQuests())
+                .create();
+        bookMeta.spigot().addPage(pageComponent);
+
+        pageComponent = new ComponentBuilder()
+                .append("§cAktywne Bonusy\n")
                 .append(getActiveBonuses())
                 .create();
-
-        assert bookMeta != null;
-        bookMeta.spigot().addPage(shopComponent);
+        bookMeta.spigot().addPage(pageComponent);
 
         bookMeta.setTitle("Witaj na CW!");
         bookMeta.setAuthor("Chikaraa");

@@ -17,12 +17,12 @@ public class ShopCommands {
         String vipLink = "https://claimworld.net/sklep";
 
         BaseComponent[] shopComponent = new ComponentBuilder()
-                .append("\n§1Sklep\n")
-                .append("§0§o> Kliknij tutaj")
+                .append("§cSklep\n")
+                .append("§8§o> Kliknij tutaj")
                 .event(new ClickEvent(ClickEvent.Action.OPEN_URL, shopLink))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(shopLink)))
-                .append("\n\n\n§1Rangi Premium\n")
-                .append("§0§o> Kliknij tutaj")
+                .append("\n\n§cWiecej o rangach\n")
+                .append("§8§o> Kliknij tutaj")
                 .event(new ClickEvent(ClickEvent.Action.OPEN_URL, vipLink))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(vipLink)))
                 .create();

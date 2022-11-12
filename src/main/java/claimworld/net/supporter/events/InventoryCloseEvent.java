@@ -1,6 +1,5 @@
 package claimworld.net.supporter.events;
 
-import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.items.Locker;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.logging.Level;
 
 import static org.bukkit.Bukkit.getLogger;
-import static org.bukkit.Bukkit.getScheduler;
 
 public class InventoryCloseEvent implements Listener {
 
@@ -29,16 +27,14 @@ public class InventoryCloseEvent implements Listener {
 
         List<ItemStack> items = new ArrayList<>();
 
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            if (lockerItems.get(playerName) == null) return;
-            if (!(lockerItems.get(playerName).size() < 1)) {
-                for (ItemStack item : event.getInventory().getContents()) {
-                    if (item == null) continue;
-                    if (item.getType().isAir()) continue;
-                    items.add(item);
-                }
+        if (lockerItems.get(playerName) == null) return;
+        if (!(lockerItems.get(playerName).size() < 1)) {
+            for (ItemStack item : event.getInventory().getContents()) {
+                if (item == null) continue;
+                if (item.getType().isAir()) continue;
+                items.add(item);
             }
-        });
+        }
 
         Locker.getInstance().updateStoredItems(playerName, items);
         getLogger().log(Level.INFO, "Saving stored contents of " + playerName + "...");

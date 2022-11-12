@@ -37,18 +37,18 @@ public class Pomoc {
                 pages.add("Komendy 11");
 
                 bookMeta.setPages(pages);
-                bookMeta.setPage(1, "Informacje\n\nW tym poradniku znajdziesz m.in:§1\n- Komendy\n- Zmiany w rozgrywce\n\n §0Masz pytania? Smialo, kieruj je na Discorda.");
-                bookMeta.setPage(2, "Komendy gracza\n\n§1/lwc§0 - zabawy z zabezpieczeniami skrzynek\n§1/msg§0 - prywatna wiadomosc\n§1/ogloszenia§0 - najwazniejsze informacje");
-                bookMeta.setPage(3, "Dodatkowe komendy VIP\n\n§1/playtime§0 - czas online\n§1/me§0 - opis postaci (RP)\n§1/skin§0 - zmien swojego skina\n§1/hat§0 - zaloz na glowe trzymany blok");
-                bookMeta.setPage(4, "Dodatkowe komendy VIP+\n\n§1/sit§0,§1 /lay§0,§1 /crawl§0, §1/spin§0, §1/bellyflop§0 - animacje postaci\n\nVIP+ ma rowniez wszystkie komendy VIP.");
-                bookMeta.setPage(5, "Dodatkowe komendy MVP+\n\n§1/pp§0 - konsola efektow\n§1/fw§0 - fajerwerk pod nogami\n\nMVP ma rowniez wszystkie komendy VIP+ i VIP.");
-                bookMeta.setPage(6, "Wazniejsze zmiany w rozgrywce\n\n§1+§0 Skrzynie blokuja sie po postawieniu\n§1+§0 Limit sily na maszyny\n§1+§0 Brodawki z Piglinow\n§1+§0 Slabsze moby ze spawnerow\n§1+§0 Niektore moby mozna podnosic przy pomocy SHIFT+PPM");
-                bookMeta.setPage(7, "§1+§0 System lokacji\n§1+§0 Dodatkowi Handlarze\n§1+§0 Niestandardowe przedmioty\n§1+§0 Globalne wzmocnienia\n§1+§0 Nowe mechaniki\n§1+§0 Nieco inny spawn mobow\n§1+§0Wolniejsze, przerzucajace po 4 sztuki przedmiotow leje");
-                bookMeta.setPage(8, "Odgorne zezwolenia na wykorzystywanie bledow\n\n§1+§0 Wychodzenie na sufit w netherze\n\n\nWykorzystywanie bledow, ktore nie daja przewagi w rozgrywce §njest dozwolone§0.");
-                bookMeta.setPage(9, "Zarezerwowane wzory sztandardow\n\n§1+§0 Wszystkie zajete wzory sztandardow dostepne sa do wgladu w specjalnym miejscu obok spawnu (patrz mapa).");
-                bookMeta.setPage(10, "Progi zakupow w sklepie\n\n§1+§0 Za osiagniecie okreslonego progu przewidziane sa specjalne bonusy, o ktorych gracze zostana poinformowani po osiagnieciu wybranego celu.");
-                bookMeta.setPage(11, "Farmy\n\n§1+§0 Zloto [-128 253 -84 Nether]\n§1+§0 Blazy [-334 72 -3 Nether]\n§1+§0 Owce [656 -703 Overworld]\n§1+§0 Kaktusy [409 289 Overworld]\n§1+§0 Trzcina [1096 -185 Overworld]\n§1+§0 Wiesniaki [310 -1979 Overworld]");
-                bookMeta.setPage(12, "Projekt §1Claim World§0 stawia na dlugoterminowosc i z czasem zmian bedzie wiecej, jednak naszym celem jest utrzymanie rozgrywki w klimatach klasycznego Minecrafta tak bardzo, jak tylko sie da.");
+                bookMeta.setPage(1, "§8Informacje\n\nW tym poradniku znajdziesz m.in:§c\n- Komendy\n- Zmiany w rozgrywce\n\n §8Masz pytania? Smialo, kieruj je na Discorda.");
+                bookMeta.setPage(2, "§8Komendy\n\n§c/msg§8 - pw\n§c/ogloszenia§8 - bonusy, zadania, inne\n§c/cdefault <nick>§8 - dostep do wszystkich stawianych blokow\n§c/cmodify <nick>§8 - dostep do pojedynczego bloku");
+                bookMeta.setPage(3, "§8Komendy VIP\n\n§c/playtime§8 - czas online\n§c/me§8 - opis postaci (RP)\n§c/skin§8 - zmien swojego skina\n§c/hat§8 - zaloz na glowe trzymany blok");
+                bookMeta.setPage(4, "§8Komendy VIP+\n\n§c/sit§8,§c /lay§8,§c /crawl§8, §c/spin§8, §c/bellyflop§8 - animacje postaci\n\nVIP+ ma rowniez wszystkie komendy VIP.");
+                bookMeta.setPage(5, "§8Komendy MVP+\n\n§c/pp§8 - konsola efektow\n§c/fw§8 - fajerwerk pod nogami\n\nMVP ma rowniez wszystkie komendy VIP+ i VIP.");
+                bookMeta.setPage(6, "§8Zmiany w rozgrywce\n\n§c+§8 Skrzynie blokuja sie po postawieniu\n§c+§8 Limit sily na redstone\n§c+§8 Brodawki z Piglinow\n§c+§8 Moby bez AI ze spawnerow\n§c+§8 Wiekszosc bytow mozna podnosic przy pomocy SHIFT+PPM\n§c+§8 Dodatkowi Handlarze");
+                bookMeta.setPage(7, "§c+§8 System lokacji\n§c+§8 Niestandardowe przedmioty\n§c+§8 Globalne wzmocnienia\n§c+§8 Nowe mechaniki\n§c+§8 Inny spawn mobow, leje\n§c+§8 Limit bytow na chunk\n§c+§8 Niektore przedmioty znikaja szybciej");
+                bookMeta.setPage(8, "§8Odgorne zezwolenia na wykorzystywanie bledow\n\n§c+§8 Wychodzenie na sufit w netherze\n\n\nWykorzystywanie bledow, ktore nie daja przewagi w rozgrywce §njest dozwolone§8.");
+                bookMeta.setPage(9, "§8Zarezerwowane wzory sztandardow\n\n§c+§8 Wszystkie zajete wzory sztandardow dostepne sa do wgladu w specjalnym miejscu obok spawnu (patrz mapa).");
+                bookMeta.setPage(10, "§8Progi zakupow w sklepie\n\n§c+§8 Za osiagniecie okreslonego progu przewidziane sa specjalne bonusy, o ktorych gracze zostana poinformowani po osiagnieciu wybranego celu.");
+                bookMeta.setPage(11, "§8Farmy\n\n§c+§8 Zloto [-128 253 -84 Nether]\n§c+§8 Blazy [-334 72 -3 Nether]\n§c+§8 Owce [656 -703 Overworld]\n§c+§8 Kaktusy [409 289 Overworld]\n§c+§8 Trzcina [1096 -185 Overworld]\n§c+§8 Wiesniaki [310 -1979 Overworld]");
+                bookMeta.setPage(12, "§8Projekt §cClaim World§8 stawia na dlugoterminowosc.\n\nW przyszlosci zmian bedzie wiecej, jednak naszym celem jest utrzymanie rozgrywki w klimatach klasycznego Minecrafta tak bardzo, jak tylko sie da.");
                 book.setItemMeta(bookMeta);
 
                 Player player = (Player) sender;

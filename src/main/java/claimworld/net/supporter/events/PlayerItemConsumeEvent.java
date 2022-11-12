@@ -1,7 +1,10 @@
 package claimworld.net.supporter.events;
 
+import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.MessageUtils;
 import claimworld.net.supporter.utils.items.ReadyItems;
+import claimworld.net.supporter.utils.tasks.Task;
+import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.ThrownPotion;
@@ -17,6 +20,7 @@ import java.util.List;
 import java.util.Random;
 
 import static claimworld.net.supporter.utils.StringUtils.colorize;
+import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerItemConsumeEvent implements Listener {
 
@@ -60,21 +64,24 @@ public class PlayerItemConsumeEvent implements Listener {
     public void playerItemConsumeEvent(org.bukkit.event.player.PlayerItemConsumeEvent event) {
         if (blockedMaterials.contains(event.getItem().getType())) return;
 
-        int poopChance = new Random().nextInt(1000);
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+            int poopChance = new Random().nextInt(1000);
+            if (poopChance > 10) return;
 
-        if (poopChance > 10) return;
+            Player player = event.getPlayer();
+            World world = player.getWorld();
+            Location location = player.getLocation();
 
-        Player player = event.getPlayer();
-        World world = player.getWorld();
-        Location location = player.getLocation();
+            if (poopChance > 2) {
+                smallPoop(player, world, location);
+                return;
+            }
 
-        if (poopChance > 2) {
-            smallPoop(player, world, location);
-            return;
-        }
+            if (location.getBlock().getType() != Material.AIR) return;
 
-        if (location.getBlock().getType() != Material.AIR) return;
+            bigPoop(player, world, location);
 
-        bigPoop(player, world, location);
+            TaskManager.getInstance().tryFinishTask(player, new Task("Zrob kupe.", "", 0));
+        });
     }
 }

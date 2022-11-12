@@ -1,16 +1,15 @@
 package claimworld.net.supporter.commands;
 
+import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.MessageUtils;
-import claimworld.net.supporter.utils.items.Locker;
+import claimworld.net.supporter.utils.WarehouseUtils;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
-import static org.bukkit.Bukkit.getOnlinePlayers;
+import static org.bukkit.Bukkit.getScheduler;
 
 public class FillUpWarehouse {
 
@@ -41,31 +40,12 @@ public class FillUpWarehouse {
     }
 
     private List<ItemStack> getExperienceBottleItems() {
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+
+        });
         List<ItemStack> items = new ArrayList<>();
         items.add(new ItemStack(Material.EXPERIENCE_BOTTLE, 5));
         return items;
-    }
-
-    private void renderItems(List<ItemStack> items) {
-        //poprawione? sprawdzic dokladnie
-        HashMap<String, List<ItemStack>> itemMap = Locker.getInstance().getLockerMap();
-
-        for (Player player : getOnlinePlayers()) {
-            player.sendMessage(MessageUtils.getUserPrefix() + "Otrzymales przedmiot. Wez go ze skrytki zanim zniknie!");
-
-            String playerName = player.getName();
-            List<ItemStack> fixedItems = new ArrayList<>(items);
-
-            if (player.getOpenInventory().getTitle().equals("Skrytka " + playerName)) player.closeInventory();
-
-            if (itemMap.get(playerName) == null) {
-                itemMap.put(playerName, fixedItems);
-                fixedItems.clear();
-                continue;
-            }
-
-            itemMap.get(playerName).addAll(fixedItems);
-        }
     }
 
     public FillUpWarehouse() {
@@ -79,7 +59,7 @@ public class FillUpWarehouse {
                 String value = arguments[0];
                 if (!(itemSets.containsKey(value))) return false;
 
-                renderItems(itemSets.get(value));
+                new WarehouseUtils().addItemsGlobal(itemSets.get(value));
 
                 return true;
             }

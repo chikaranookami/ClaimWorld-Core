@@ -2,8 +2,11 @@ package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.guis.BonusManager;
+import claimworld.net.supporter.utils.tasks.Task;
+import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
@@ -24,21 +27,37 @@ public class BlockBreakEvent implements Listener {
 
     @EventHandler
     public void blockBreakEvent(org.bukkit.event.block.BlockBreakEvent event) {
+        if (!(event.getExpToDrop() > 0 )) return;
+
         if (bonusManager.getBonuses().get("DoubleXP")) {
-            if (event.getExpToDrop() <= 0 )return;
             event.setExpToDrop(event.getExpToDrop() * 2);
         }
 
-        if (!bonusManager.getBonuses().get("Diaxy+")) return;
-        if (!(event.getBlock().getType() == Material.DIAMOND_ORE || event.getBlock().getType() == Material.DEEPSLATE_DIAMOND_ORE)) return;
-        if (event.getPlayer().getInventory().getItemInMainHand().getEnchantmentLevel(Enchantment.SILK_TOUCH) != 0) return;
+        Player player = event.getPlayer();
+        if (player.getInventory().getItemInMainHand().getEnchantmentLevel(Enchantment.SILK_TOUCH) != 0) return;
 
-        dropItem(event.getPlayer().getWorld(), event.getBlock().getLocation());
+        if (event.getBlock().getType() == Material.DEEPSLATE_EMERALD_ORE || event.getBlock().getType() == Material.EMERALD_ORE) {
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+                TaskManager.getInstance().tryFinishTask(player, new Task("Rozkop kilka emeraldow.", "counter", 4));
+            });
+            return;
+        }
 
-        if (new Random().nextInt(5) != 0) return;
+        if (event.getBlock().getType() == Material.DIAMOND_ORE || event.getBlock().getType() == Material.DEEPSLATE_DIAMOND_ORE) {
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+                TaskManager.getInstance().tryFinishTask(player, new Task("Rozkop stack diaxow.", "counter", 64));
+            });
 
-        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-            dropItem(event.getPlayer().getWorld(), event.getBlock().getLocation());
-        }, 4L);
+            if (!bonusManager.getBonuses().get("Diaxy+")) return;
+
+            dropItem(player.getWorld(), event.getBlock().getLocation());
+
+            int random = new Random().nextInt(5);
+            if (random > 0) return;
+
+            getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+                dropItem(player.getWorld(), event.getBlock().getLocation());
+            }, 4L);
+        }
     }
 }

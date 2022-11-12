@@ -1,6 +1,8 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.battlepass.BattlePassManager;
+import claimworld.net.supporter.utils.battlepass.Skills;
 import claimworld.net.supporter.utils.guis.Gui;
 import claimworld.net.supporter.utils.guis.GuiManager;
 import claimworld.net.supporter.utils.items.Locker;
@@ -32,8 +34,7 @@ public class InventoryClickEvent implements Listener {
     @EventHandler
     public void inventoryClickEvent(org.bukkit.event.inventory.InventoryClickEvent event) {
         Inventory clickedInventory = event.getClickedInventory();
-
-        if (event.getClickedInventory() == null) return;
+        if (clickedInventory == null) return;
 
         int slot = event.getSlot();
         Player player = (Player) event.getWhoClicked();
@@ -80,10 +81,16 @@ public class InventoryClickEvent implements Listener {
 
         if (title.equals("Menu")) {
             switch (slot) {
-                case 28:
+                case 37:
                     player.closeInventory();
                     getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
                         Bukkit.dispatchCommand(player, "pomoc");
+                    }, 1L);
+                    return;
+                case 28:
+                    player.closeInventory();
+                    getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+                        Bukkit.dispatchCommand(player, "ogloszenia");
                     }, 1L);
                     return;
                 case 13:
@@ -95,11 +102,19 @@ public class InventoryClickEvent implements Listener {
                 case 12:
                     new GuiManager(player, new Gui(null, 54, "Teleportacja"));
                     return;
-                case 37:
+                case 43:
                     new GuiManager(player, new Gui(null, 54, "Ulatwienia dostepu"));
                     return;
                 case 21:
                     new GuiManager(player, new Gui(null, 54, "Skrytka " + player.getName()));
+                    return;
+                case 22:
+                    player.closeInventory();
+                    player.openBook(new Skills().getSkillBook(player));
+                    return;
+                case 14:
+                    player.closeInventory();
+                    player.openBook(new BattlePassManager().getBattlepassBook());
                     return;
             }
         }
@@ -164,6 +179,12 @@ public class InventoryClickEvent implements Listener {
                         player.closeInventory();
                         getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
                             Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " monopoly");
+                        }, 1L);
+                        return;
+                    case 24:
+                        player.closeInventory();
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+                            Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " wioska");
                         }, 1L);
                         return;
                 }

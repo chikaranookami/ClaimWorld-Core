@@ -10,7 +10,12 @@ import static org.bukkit.Bukkit.getOnlinePlayers;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class ActiveBossBar {
+
     public void render(BossBar bossBar) {
+        render(bossBar, 4);
+    }
+
+    public void render(BossBar bossBar, long period) {
         bossBar.setProgress(0.0);
 
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
@@ -30,6 +35,6 @@ public class ActiveBossBar {
             bossBar.setProgress(d.get());
             d.updateAndGet(v -> (v + 0.01));
 
-        }, 20L, 4L);
+        }, 20L, period);
     }
 }

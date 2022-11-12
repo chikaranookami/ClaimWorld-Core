@@ -9,8 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
-
 import static org.bukkit.Bukkit.getScheduler;
 
 public final class Supporter extends JavaPlugin implements Listener {
@@ -45,12 +43,23 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new HangingPlaceEvent(), this);
         pluginManager.registerEvents(new PlayerItemConsumeEvent(), this);
         pluginManager.registerEvents(new InventoryClickEvent(), this);
-        pluginManager.registerEvents(new PrepareAnvilEvent(), this);
         pluginManager.registerEvents(new InventoryCloseEvent(), this);
         pluginManager.registerEvents(new PlayerTeleportEvent(), this);
         pluginManager.registerEvents(new PlayerResourcePackStatusEvent(), this);
+        pluginManager.registerEvents(new EntityDamagedByEntityEvent(), this);
+        pluginManager.registerEvents(new PlayerInteractEvent(), this);
+        pluginManager.registerEvents(new PlayerFishEvent(), this);
+        pluginManager.registerEvents(new CraftItemEvent(), this);
+        pluginManager.registerEvents(new RaidFinishEvent(), this);
+        pluginManager.registerEvents(new PlayerItemBreakEvent(), this);
+        pluginManager.registerEvents(new PlayerBedLeaveEvent(), this);
+        pluginManager.registerEvents(new PlayerLocaleChangeEvent(), this);
 
         //commands
+        new AddAttribute();
+        new PrivateMessage();
+        new AddToWarehouse();
+        new Kowal();
         new Ogloszenia();
         new Dice();
         new LoadLokacja();

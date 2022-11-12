@@ -2,9 +2,8 @@ package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.MessageUtils;
-import claimworld.net.supporter.utils.RankUtils;
-import claimworld.net.supporter.utils.guis.BonusManager;
 import claimworld.net.supporter.utils.items.ReadyItems;
+import claimworld.net.supporter.utils.battlepass.BattlePassManager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -12,82 +11,18 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scoreboard.*;
+import org.bukkit.scoreboard.Team;
 
 import static claimworld.net.supporter.utils.StringUtils.colorize;
-import static org.bukkit.Bukkit.*;
+import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerJoinEvent implements Listener {
-
-    private final RankUtils ranks = new RankUtils();
-
-    private final Scoreboard scoreboard = getScoreboardManager().getNewScoreboard();
-    private final Objective objective = scoreboard.registerNewObjective("poziomprzepustki", Criteria.DUMMY, "CP");
-    private final Team adminTeam = scoreboard.registerNewTeam("admin");
-    private final Team modTeam = scoreboard.registerNewTeam("mod");
-    private final Team mvpTeam = scoreboard.registerNewTeam("mvp");
-    private final Team vippTeam = scoreboard.registerNewTeam("vip+");
-    private final Team vipTeam = scoreboard.registerNewTeam("vip");
-    private final Team playerTeam = scoreboard.registerNewTeam("player");
-
-    private void updatePlayerNametag(Player player) {
-        if (player.hasPermission("claimworld.admin")) {
-            adminTeam.addEntry(player.getName());
-            return;
-        }
-        if (player.hasPermission("claimworld.mod")) {
-            modTeam.addEntry(player.getName());
-            return;
-        }
-        if (player.hasPermission("claimworld.mvp")) {
-            mvpTeam.addEntry(player.getName());
-            return;
-        }
-        if (player.hasPermission("claimworld.vip+")) {
-            vippTeam.addEntry(player.getName());
-            return;
-        }
-        if (player.hasPermission("claimworld.vip")) {
-            vipTeam.addEntry(player.getName());
-            return;
-        }
-        if (player.hasPermission("claimworld.player")) {
-            playerTeam.addEntry(player.getName());
-        }
-    }
-
-    public PlayerJoinEvent() {
-        adminTeam.setPrefix(colorize(ranks.getRankName("admin") + " "));
-        modTeam.setPrefix(colorize(ranks.getRankName("moderator") + " "));
-        mvpTeam.setPrefix(colorize(ranks.getRankName("mvp") + " "));
-        vippTeam.setPrefix(colorize(ranks.getRankName("vip+") + " "));
-        vipTeam.setPrefix(colorize(ranks.getRankName("vip") + " "));
-        playerTeam.setPrefix(colorize(ranks.getRankName("player") + " "));
-
-        playerTeam.setCanSeeFriendlyInvisibles(false);
-        adminTeam.setCanSeeFriendlyInvisibles(false);
-        vipTeam.setCanSeeFriendlyInvisibles(false);
-        vippTeam.setCanSeeFriendlyInvisibles(false);
-        mvpTeam.setCanSeeFriendlyInvisibles(false);
-        modTeam.setCanSeeFriendlyInvisibles(false);
-
-        playerTeam.setAllowFriendlyFire(true);
-        vipTeam.setAllowFriendlyFire(true);
-        vippTeam.setAllowFriendlyFire(true);
-        mvpTeam.setAllowFriendlyFire(true);
-        modTeam.setAllowFriendlyFire(true);
-        adminTeam.setAllowFriendlyFire(true);
-
-        objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
-    }
 
     @EventHandler
     public void joinEvent(org.bukkit.event.player.PlayerJoinEvent event) {
         Player player = event.getPlayer();
-
-        //set tablist
-        player.setPlayerListHeader(colorize("\n &a❤ Claim&fWorld&a.net \n"));
-        //player.setPlayerListFooter(colorize("\n &aPing: &f" + player.getPing() + "ms   &a|   Ostatnia smierc: &f" + player.getStatistic(Statistic.TIME_SINCE_DEATH) + " \n"));
+        String playerName = player.getName();
+        player.setDisplayName(playerName);
 
         //set menu item
         player.getInventory().setItem(17, new ReadyItems().get("Menu"));
@@ -96,20 +31,6 @@ public class PlayerJoinEvent implements Listener {
         if (player.hasPermission("claimworld.mvp")) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 200, 1, true, false, false));
         }
-
-        //set ranks
-        getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> ranks.updateRank(player), 10L);
-
-        //set nametag
-        getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-            player.setScoreboard(scoreboard);
-            updatePlayerNametag(player);
-        }, 10L);
-
-        getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-            Score score = objective.getScore(player.getName());
-            if (!score.isScoreSet()) score.setScore(0);
-        }, 20L);
 
         //end location fix
         if (player.getWorld().getEnvironment() == World.Environment.THE_END) {
@@ -122,5 +43,19 @@ public class PlayerJoinEvent implements Listener {
             Bukkit.dispatchCommand(player, "spawn");
             player.sendMessage(MessageUtils.getUserPrefix() + "End jest obecnie wylaczony. Przeteleportowano na spawn.");
         }
+
+        //checking compatibility between permissions and displayed team
+        getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
+            Team team = player.getScoreboard().getEntryTeam(playerName);
+            if (team == null) return;
+            if (player.hasPermission("claimworld.vip")) return;
+            player.getScoreboard().getEntryTeam(playerName).removeEntry(playerName);
+        }, 20L);
+
+        //setlist
+        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+            player.setPlayerListHeader(colorize("\n&a❤ Claim&fWorld&a.net\n"));
+            BattlePassManager.getInstance().updateTablistFooter(player);
+        }, 30L);
     }
 }

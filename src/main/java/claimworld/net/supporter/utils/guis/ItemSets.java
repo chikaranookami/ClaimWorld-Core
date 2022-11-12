@@ -1,26 +1,29 @@
 package claimworld.net.supporter.utils.guis;
 
-import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.items.CustomHead;
 import claimworld.net.supporter.utils.items.CustomItem;
-import claimworld.net.supporter.utils.RankUtils;
 import claimworld.net.supporter.utils.items.Locker;
 import claimworld.net.supporter.utils.items.ReadyItems;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
 import java.util.*;
 import java.util.logging.Level;
 
+import static claimworld.net.supporter.utils.MessageUtils.getAttributeIcon;
+import static claimworld.net.supporter.utils.MessageUtils.getBattlepassIcon;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
+import static claimworld.net.supporter.utils.battlepass.BattlePassManager.attributesObjectiveName;
+import static claimworld.net.supporter.utils.battlepass.BattlePassManager.mainObjectiveName;
 import static org.bukkit.Bukkit.getLogger;
 
 public class ItemSets {
     
     private final HashMap<Integer, ItemStack> itemMap = new HashMap<>();
     private final ReadyItems readyItems = new ReadyItems();
-    private final RankUtils ranks = new RankUtils();
 
     public HashMap<Integer, ItemStack> initializeInventoryContent(Player player, String inventoryName) {
         if (inventoryName == null || inventoryName.isEmpty()) {
@@ -31,23 +34,35 @@ public class ItemSets {
         itemMap.clear();
 
         if (inventoryName.equals("Menu")) {
+            String rankName = "";
+            String playerName = player.getName();
+            Scoreboard scoreboard = player.getScoreboard();
+            Team team = player.getScoreboard().getEntryTeam(playerName);
+            if (team == null) {
+                rankName = colorize("Gracz");
+            } else {
+                rankName = team.getPrefix();
+            }
+
             itemMap.put(10, new CustomHead("&aInformacje", player, 1, Arrays.asList(
-                    colorize("&fNick: " + player.getName() + "&f."),
-                    colorize("&fRanga: " + ranks.getRankName(player) + "&f."),
-                    colorize("&fWyróżnienie: " + ranks.getSpecialRankName(player)),
+                    colorize("&fNick: " + playerName),
+                    colorize("&fRanga: " + rankName),
+                    colorize("&fDolaczono: "),
+                    colorize("&f" + new Date(player.getFirstPlayed())),
                     "",
-                    colorize("&fDolaczono: " + new Date(player.getFirstPlayed()) + "&f."),
-                    "",
-                    colorize("&fPing: " + player.getPing() + "&fms.")
+                    colorize("&fAtrybuty: " + scoreboard.getObjective(attributesObjectiveName).getScore(playerName).getScore() + getAttributeIcon()),
+                    colorize("&fPrzepustka: " + scoreboard.getObjective(mainObjectiveName).getScore(playerName).getScore() + getBattlepassIcon())
             )).getItem());
             itemMap.put(12, new CustomItem("&aTeleportacja", Material.COMPASS, Collections.singletonList(colorize("&7&oPrzenies sie szybko!"))).getItem());
             itemMap.put(13, new CustomItem("&aPunkty", Material.EXPERIENCE_BOTTLE, Collections.singletonList(colorize("&7&oZarzadzaj swoimi punktami!"))).getItem());
-            itemMap.put(14, new CustomItem("&aPrzepustka", Material.IRON_INGOT, Arrays.asList(colorize("&7&o- Jeszcze wiecej opcji!"), colorize("&7&oDostepna juz niebawem!"))).getItem());
+            itemMap.put(14, new CustomItem("&aPrzepustka", Material.IRON_INGOT, Collections.singletonList(colorize("&7&oOdblokuj nowe rzeczy!"))).getItem());
             itemMap.put(15, new CustomItem("&bPrzepustka Premium ✦", Material.DIAMOND, Arrays.asList(colorize("&7&o- Nowe, unikalne mozliwosci!"), colorize("&7&oDostepna juz niebawem!"))).getItem());
             itemMap.put(16, new CustomItem("&bPanel VIP", Material.ENCHANTING_TABLE, Arrays.asList(colorize("&7&oTajemnicze miejsce!"), colorize("&7&oDostepna juz niebawem!"))).getItem());
-            itemMap.put(28, new CustomItem("&fOgnisko u Mariana", Material.CAMPFIRE, Collections.singletonList(colorize("&7&oCentrum pomocy."))).getItem());
-            itemMap.put(37, new CustomItem("&fUlatwienia dostepu", Material.NAME_TAG, Collections.singletonList(colorize("&7&oDodatkowe ustawienia."))).getItem());
-            itemMap.put(21, new CustomItem("&bSkrytka", Material.ENDER_CHEST, Collections.singletonList(colorize("&7&oTwoje dodatkowe przedmioty."))).getItem());
+            itemMap.put(28, new CustomItem("&fOgloszenia", Material.BOOK, Collections.singletonList(colorize("&7&oNajnowsze informacje."))).getItem());
+            itemMap.put(37, new CustomItem("&fOgnisko u Mariana", Material.CAMPFIRE, Collections.singletonList(colorize("&7&oCentrum pomocy."))).getItem());
+            itemMap.put(43, new CustomItem("&fUlatwienia dostepu", Material.NAME_TAG, Collections.singletonList(colorize("&7&oDodatkowe ustawienia."))).getItem());
+            itemMap.put(21, new CustomItem("&aSkrytka", Material.ENDER_CHEST, Collections.singletonList(colorize("&7&oTwoje dodatkowe przedmioty."))).getItem());
+            itemMap.put(22, new CustomItem("&aUmiejetnosci", Material.ENDER_EYE, Collections.singletonList(colorize("&7&oTwoje umiejetnosci."))).getItem());
             return itemMap;
         }
 
@@ -63,6 +78,7 @@ public class ItemSets {
             itemMap.put(21, new CustomItem("&aLasy Wschodnie", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(22, new CustomItem("&aNadmorska Szlachta", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(23, new CustomItem("&aMonopoly", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
+            itemMap.put(24, new CustomItem("&aWioska", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             return itemMap;
         }
 

@@ -5,22 +5,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
 public class Gui {
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public InventoryHolder getOwner() {
-        return owner;
-    }
-
-    public void setOwner(InventoryHolder owner) {
-        this.owner = owner;
-    }
-
     public String getName() {
         return name;
     }

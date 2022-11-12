@@ -156,7 +156,7 @@ public class BattlePassManager {
 
         name = "Punkt";
         for (int pointIndex : pointIndexes) {
-            battlePassMap.put(pointIndex, new BattlePassLevel(pointIndex, "adminvote User <PLAYER> AddPoints 1", "[P] " + name));
+            battlePassMap.put(pointIndex, new BattlePassLevel(pointIndex, "dajpunkty <PLAYER> 1", "[P] " + name));
         }
 
         //attributes

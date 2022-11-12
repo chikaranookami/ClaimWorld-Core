@@ -43,8 +43,8 @@ public class PlayerItemConsumeEvent implements Listener {
 
         location.getBlock().setType(Material.DIRT);
 
-        world.dropItem(location, kupa);
         renderPoopEffects(world, location);
+        world.dropItem(location, kupa);
         world.playSound(location, Sound.BLOCK_ROOTED_DIRT_PLACE, 0.85f, 2f);
         world.playSound(location, Sound.BLOCK_ROOTED_DIRT_BREAK, 0.6f, 2f);
 
@@ -79,7 +79,9 @@ public class PlayerItemConsumeEvent implements Listener {
 
             if (location.getBlock().getType() != Material.AIR) return;
 
-            bigPoop(player, world, location);
+            getScheduler().runTask(Supporter.getPlugin(), () -> {
+                bigPoop(player, world, location);
+            });
 
             TaskManager.getInstance().tryFinishTask(player, new Task("Zrob kupe.", "", 0));
         });

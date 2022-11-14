@@ -62,7 +62,7 @@ public class Skills {
     public Skills() {
         List<Skill> skillList = new ArrayList<>();
         skillList.add(new Skill("Punkty bywalca", 30, "Szansa na dodatkowe punkty do Sklepu Punktowego przy wejsciu na serwer."));
-        skillList.add(new Skill("Mob Killer", 60, "Szansa na zadanie podwojnych niemal wszystkim bytom."));
+        skillList.add(new Skill("Mob Killer", 60, "Szansa na zadanie podwojnych obrazen niemal wszystkim bytom."));
         skillList.add(new Skill("Twoj spawner", 90, "Mozliwosc aktualizacji moba w spawnerze za pomoca jaja spawnujacego."));
 
         for (Skill skill : skillList) {

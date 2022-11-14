@@ -2,6 +2,8 @@ package claimworld.net.supporter.utils.tasks;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.battlepass.BattlePassManager;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
@@ -33,9 +35,31 @@ public class TaskManager {
 
     public List<Task> getActiveTasks() {return activeTasks;}
 
-    public void renderNewTasks() {
+    private String getActiveQuests() {
+        List<String> infoList = new ArrayList<>();
+
+        for (Task task : getActiveTasks()) {
+            infoList.add("§c-§8 " + task.getName() + "\n\n");
+        }
+
+        return String.join(" ", infoList);
+    }
+
+    public BaseComponent[] getActiveTaskComponent() {
+        return new ComponentBuilder()
+                .append("§cAktywne zadania\n")
+                .append(getActiveQuests())
+                .append("§8Mozesz wykonac tylko jedno zadanie.")
+                .create();
+    }
+
+    public boolean renderNewTasks() {
+        if (playersWhoDidTask.size() > 0) return false;
+
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            for (int i = 0; i < 1; i++) {
+            if (activeTasks.size() > 0) activeTasks.clear();
+
+            for (int i = 0; i < 2; i++) {
                 Task task = taskList.get(new Random().nextInt(taskList.size()));
                 if (!activeTasks.contains(task)) {
                     activeTasks.add(task);
@@ -44,6 +68,8 @@ public class TaskManager {
                 i--;
             }
         });
+
+        return true;
     }
 
     public void tryFinishTask(Player player, Task task) {

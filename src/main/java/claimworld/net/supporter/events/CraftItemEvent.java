@@ -17,7 +17,7 @@ public class CraftItemEvent implements Listener {
         if (event.getRecipe().getResult().getType() != Material.BEACON) return;
 
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            TaskManager.getInstance().tryFinishTask((Player) event.getWhoClicked(), new Task("Zrob beacona.", null, 0));
+            TaskManager.getInstance().tryFinishTask((Player) event.getWhoClicked(), new Task("Zrob beacona.", "", 0));
         });
     }
 }

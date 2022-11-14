@@ -31,7 +31,6 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new PlayerLoginEvent(), this);
         pluginManager.registerEvents(new PlayerJoinEvent(), this);
         pluginManager.registerEvents(new PlayerDeathEvent(), this);
-        pluginManager.registerEvents(new PlayerChangedWorldEvent(), this);
         pluginManager.registerEvents(new EntityDeathEvent(), this);
         pluginManager.registerEvents(new BlockBreakEvent(), this);
         pluginManager.registerEvents(new TradeSelectEvent(), this);
@@ -56,6 +55,8 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new PlayerLocaleChangeEvent(), this);
 
         //commands
+        new Tasks();
+        new Zadania();
         new AddAttribute();
         new PrivateMessage();
         new AddToWarehouse();

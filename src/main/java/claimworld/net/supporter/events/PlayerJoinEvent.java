@@ -1,11 +1,8 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.MessageUtils;
 import claimworld.net.supporter.utils.items.ReadyItems;
 import claimworld.net.supporter.utils.battlepass.BattlePassManager;
-import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -32,24 +29,12 @@ public class PlayerJoinEvent implements Listener {
             player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 200, 1, true, false, false));
         }
 
-        //end location fix
-        if (player.getWorld().getEnvironment() == World.Environment.THE_END) {
-            if (player.getLocation().getY() < -128) {
-                player.setHealth(0);
-                player.sendMessage(MessageUtils.getUserPrefix() + "End jest obecnie wylaczony, a Ty byles gleboko w voidzie, wiec zginales.");
-                return;
-            }
-
-            Bukkit.dispatchCommand(player, "spawn");
-            player.sendMessage(MessageUtils.getUserPrefix() + "End jest obecnie wylaczony. Przeteleportowano na spawn.");
-        }
-
         //checking compatibility between permissions and displayed team
         getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
             Team team = player.getScoreboard().getEntryTeam(playerName);
             if (team == null) return;
             if (player.hasPermission("claimworld.vip")) return;
-            player.getScoreboard().getEntryTeam(playerName).removeEntry(playerName);
+            team.removeEntry(playerName);
         }, 20L);
 
         //setlist

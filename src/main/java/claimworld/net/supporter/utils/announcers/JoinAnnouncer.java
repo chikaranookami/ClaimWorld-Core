@@ -20,18 +20,7 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class JoinAnnouncer {
 
-    TaskManager taskManager = TaskManager.getInstance();
     private final List<Sound> sounds = Collections.singletonList(Sound.ENTITY_PILLAGER_CELEBRATE);
-
-    private String getActiveQuests() {
-        List<String> infoList = new ArrayList<>();
-
-        for (Task task : taskManager.getActiveTasks()) {
-            infoList.add("§c-§8 " + task.getName() + "\n\n");
-        }
-
-        return String.join(" ", infoList);
-    }
 
     private String getActiveBonuses() {
         List<String> keys = new ArrayList<>();
@@ -54,11 +43,7 @@ public class JoinAnnouncer {
                 .create();
         bookMeta.spigot().addPage(pageComponent);
 
-        pageComponent = new ComponentBuilder()
-                .append("§cAktywne zadania\n")
-                .append(getActiveQuests())
-                .create();
-        bookMeta.spigot().addPage(pageComponent);
+        bookMeta.spigot().addPage(TaskManager.getInstance().getActiveTaskComponent());
 
         pageComponent = new ComponentBuilder()
                 .append("§cAktywne Bonusy\n")

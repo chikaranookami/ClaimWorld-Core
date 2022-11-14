@@ -2,6 +2,7 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
+import claimworld.net.supporter.utils.WarehouseUtils;
 import claimworld.net.supporter.utils.items.ReadyItems;
 import claimworld.net.supporter.utils.tasks.Task;
 import claimworld.net.supporter.utils.tasks.TaskManager;
@@ -87,8 +88,11 @@ public class Kowal {
                         world.playSound(location, Sound.BLOCK_ANVIL_DESTROY, 0.75f, 0.75f);
                         player.sendMessage(getUserPrefix() + "Nie udalo sie - Kowal spalil Twoj przedmiot.");
                     } else {
-                        world.dropItemNaturally(player.getLocation(), item);
-                        world.dropItemNaturally(player.getLocation(), item);
+                        List<ItemStack> items = new ArrayList<>();
+                        items.add(item);
+                        items.add(item);
+                        new WarehouseUtils().addItemsSingle(player, items);
+
                         world.playSound(location, Sound.BLOCK_ANVIL_PLACE, 0.75f, 0.75f);
                         player.sendMessage(getUserPrefix() + "Sukces! Kowal podwoil Twoj przedmiot.");
 

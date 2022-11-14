@@ -63,6 +63,7 @@ public class ItemSets {
             itemMap.put(43, new CustomItem("&fUlatwienia dostepu", Material.NAME_TAG, Collections.singletonList(colorize("&7&oDodatkowe ustawienia."))).getItem());
             itemMap.put(21, new CustomItem("&aSkrytka", Material.ENDER_CHEST, Collections.singletonList(colorize("&7&oTwoje dodatkowe przedmioty."))).getItem());
             itemMap.put(22, new CustomItem("&aUmiejetnosci", Material.ENDER_EYE, Collections.singletonList(colorize("&7&oTwoje umiejetnosci."))).getItem());
+            itemMap.put(23, new CustomItem("&aZadania", Material.WRITABLE_BOOK, Collections.singletonList(colorize("&7&oAktywne zadania."))).getItem());
             return itemMap;
         }
 

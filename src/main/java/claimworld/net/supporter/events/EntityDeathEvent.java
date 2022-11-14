@@ -51,7 +51,7 @@ public class EntityDeathEvent implements Listener {
 
         if (entityType == EntityType.WARDEN) {
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-                TaskManager.getInstance().tryFinishTask(player, new Task("Pokonaj Wardena.", null, 0));
+                TaskManager.getInstance().tryFinishTask(player, new Task("Pokonaj Wardena.", "", 0));
             });
             return;
         }

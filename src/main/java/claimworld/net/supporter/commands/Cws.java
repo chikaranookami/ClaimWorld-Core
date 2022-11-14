@@ -2,6 +2,7 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.guis.BonusManager;
+import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -36,6 +37,12 @@ public class Cws {
                 if (!bonuses.containsKey(value)) return false;
 
                 if (bonuses.get(value)) {
+                    boosterAlreadyActive(value, player);
+                    return true;
+                }
+
+                //tasks
+                if (value.equals("Zadania") && !TaskManager.getInstance().renderNewTasks()) {
                     boosterAlreadyActive(value, player);
                     return true;
                 }

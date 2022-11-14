@@ -51,7 +51,7 @@ public class BattlePassManager {
         ComponentBuilder page = new ComponentBuilder().append("§cPrzepustka Bojowa§8\n\nBy awansowac, wykonuj zadania.\n\nSwoj poziom znajdziesz na tabliscie.\n\nZawartosc przepustki zwieksza sie z czasem.");
         componentPages.add(page.create());
 
-        page = new ComponentBuilder().append("§cLegenda\n\n§c[I]§8 Przedmiot\n§c[P]§8 Punkt\n§c[S]§8 Umiejetnosc\n§c[A]§8 Atrybut");
+        page = new ComponentBuilder().append("§cLegenda\n\n§c[I]§8 Przedmiot\n§c[P]§8 Punkt (z mnoznikiem)\n§c[S]§8 Umiejetnosc\n§c[A]§8 Atrybut");
         componentPages.add(page.create());
 
         page = new ComponentBuilder().append("§cPrzepustka Bojowa");

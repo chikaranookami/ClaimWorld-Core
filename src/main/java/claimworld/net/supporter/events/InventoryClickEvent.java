@@ -112,6 +112,12 @@ public class InventoryClickEvent implements Listener {
                     player.closeInventory();
                     player.openBook(new Skills().getSkillBook(player));
                     return;
+                case 23:
+                    player.closeInventory();
+                    getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+                        Bukkit.dispatchCommand(player, "zadania");
+                    }, 1L);
+                    return;
                 case 14:
                     player.closeInventory();
                     player.openBook(new BattlePassManager().getBattlepassBook());

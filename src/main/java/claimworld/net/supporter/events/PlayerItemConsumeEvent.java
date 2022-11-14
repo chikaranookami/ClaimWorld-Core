@@ -73,7 +73,9 @@ public class PlayerItemConsumeEvent implements Listener {
             Location location = player.getLocation();
 
             if (poopChance > 2) {
-                smallPoop(player, world, location);
+                getScheduler().runTask(Supporter.getPlugin(), () -> {
+                    smallPoop(player, world, location);
+                });
                 return;
             }
 

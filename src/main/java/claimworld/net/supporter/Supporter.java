@@ -27,6 +27,9 @@ public final class Supporter extends JavaPlugin implements Listener {
         PluginManager pluginManager = getServer().getPluginManager();
 
         //events
+        pluginManager.registerEvents(new RaidStopEvent(), this);
+        pluginManager.registerEvents(new LightningStrikeEvent(), this);
+        pluginManager.registerEvents(new PlayerAdvancementDoneEvent(), this);
         pluginManager.registerEvents(new PlayerRespawnEvent(), this);
         pluginManager.registerEvents(new PlayerLoginEvent(), this);
         pluginManager.registerEvents(new PlayerJoinEvent(), this);
@@ -38,7 +41,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new AsyncPlayerChatEvent(), this);
         pluginManager.registerEvents(new PlayerInteractEntityEvent(), this);
         pluginManager.registerEvents(new EntityDamageEvent(), this);
-        pluginManager.registerEvents(new EntitySpawnEvent(), this);
+        pluginManager.registerEvents(new CreatureSpawnEvent(), this);
         pluginManager.registerEvents(new HangingPlaceEvent(), this);
         pluginManager.registerEvents(new PlayerItemConsumeEvent(), this);
         pluginManager.registerEvents(new InventoryClickEvent(), this);
@@ -55,6 +58,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new PlayerLocaleChangeEvent(), this);
 
         //commands
+        new Seriafw();
         new Tasks();
         new Zadania();
         new AddAttribute();

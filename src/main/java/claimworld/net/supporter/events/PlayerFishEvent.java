@@ -20,8 +20,6 @@ public class PlayerFishEvent implements Listener {
         assert event.getCaught() != null;
         if (!(((Item) event.getCaught()).getItemStack().getType() == Material.INK_SAC)) return;
 
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            TaskManager.getInstance().tryFinishTask(event.getPlayer(), new Task("Wylow torbiel.", "", 0));
-        });
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(event.getPlayer(), new Task("Wylow torbiel.", "", 0)));
     }
 }

@@ -1,6 +1,8 @@
 package claimworld.net.supporter.utils.announcers;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.tasks.Task;
+import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 
@@ -21,6 +23,10 @@ public class ActiveBossBar {
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
             for (Player player : getOnlinePlayers()) {
                 bossBar.addPlayer(player);
+
+                getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
+                    TaskManager.getInstance().tryFinishTask(player, new Task("Wysluchaj ogloszen.", "", 0));
+                }, 100L);
             }
         });
 

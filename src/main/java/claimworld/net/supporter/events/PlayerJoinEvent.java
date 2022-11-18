@@ -33,7 +33,7 @@ public class PlayerJoinEvent implements Listener {
         getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
             Team team = player.getScoreboard().getEntryTeam(playerName);
             if (team == null) return;
-            if (player.hasPermission("claimworld.vip")) return;
+            if (player.hasPermission("claimworld.vip") || player.hasPermission("claimworld.mod")) return;
             team.removeEntry(playerName);
         }, 20L);
 

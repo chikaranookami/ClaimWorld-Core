@@ -1,9 +1,7 @@
 package claimworld.net.supporter.utils.battlepass;
 
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -17,7 +15,7 @@ import java.util.Map;
 
 import static claimworld.net.supporter.utils.battlepass.BattlePassManager.mainObjectiveName;
 
-public class Skills {
+public class SkillManager {
     private final HashMap<String, Skill> skillMap = new HashMap<>();
 
     public HashMap<String, Skill> getSkillMap() {
@@ -52,14 +50,14 @@ public class Skills {
         World world = location.getWorld();
         assert world != null;
         world.spawnParticle(Particle.SCULK_SOUL, location.add(0, 1, 0), 15);
-        world.playSound(location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.75f, 0.75f);
+        world.playSound(location, Sound.ENTITY_SHULKER_BULLET_HIT, 0.75f, 0.75f);
     }
 
     public boolean canActivateSkill(Player player, String skillName) {
         return player.getScoreboard().getObjective(mainObjectiveName).getScore(player.getName()).getScore() >= skillMap.get(skillName).getRequiredLevel();
     }
 
-    public Skills() {
+    public SkillManager() {
         List<Skill> skillList = new ArrayList<>();
         skillList.add(new Skill("Punkty bywalca", 30, "Szansa na dodatkowe punkty do Sklepu Punktowego przy wejsciu na serwer."));
         skillList.add(new Skill("Mob Killer", 60, "Szansa na zadanie podwojnych obrazen niemal wszystkim bytom."));

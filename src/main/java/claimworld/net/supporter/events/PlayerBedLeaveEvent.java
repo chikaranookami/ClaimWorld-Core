@@ -16,8 +16,6 @@ public class PlayerBedLeaveEvent implements Listener {
         Player player = event.getPlayer();
         if (player.getWorld().getTime() != 0) return;
 
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            TaskManager.getInstance().tryFinishTask(player, new Task("Przespij 4 noce.", "counter", 4));
-        });
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Przespij 3 noce.", "counter", 3)));
     }
 }

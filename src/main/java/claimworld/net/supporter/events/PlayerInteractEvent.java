@@ -1,7 +1,7 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.battlepass.Skills;
+import claimworld.net.supporter.utils.battlepass.SkillManager;
 import claimworld.net.supporter.utils.tasks.Task;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.Material;
@@ -45,19 +45,17 @@ public class PlayerInteractEvent implements Listener {
 
         Material itemType = item.getType();
         if (itemType == Material.WITCH_SPAWN_EGG) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-                TaskManager.getInstance().tryFinishTask(player, new Task("Zresp wiedzme.", "", 0));
-            });
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Zresp wiedzme.", "", 0)));
             return;
         }
 
-        Skills skills = new Skills();
+        SkillManager skillManager = new SkillManager();
 
-        if (!skills.canActivateSkill(player, "Twoj spawner")) {
+        if (!skillManager.canActivateSkill(player, "Twoj spawner")) {
             event.setCancelled(true);
         } else {
             player.getInventory().getItemInMainHand().setAmount(item.getAmount() - 1);
-            skills.renderSkillEffect(event.getClickedBlock().getLocation());
+            skillManager.renderSkillEffect(event.getClickedBlock().getLocation());
 
             if (itemType != Material.ZOMBIE_SPAWN_EGG) return;
 

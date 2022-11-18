@@ -64,11 +64,17 @@ public class PlayerItemConsumeEvent implements Listener {
     public void playerItemConsumeEvent(org.bukkit.event.player.PlayerItemConsumeEvent event) {
         if (blockedMaterials.contains(event.getItem().getType())) return;
 
+        Player player = event.getPlayer();
+
+        if (event.getItem().getType() == Material.SUSPICIOUS_STEW) {
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Nafaszeruj sie dziwna zupa.", "counter", 8)));
+            return;
+        }
+
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
             int poopChance = new Random().nextInt(1000);
             if (poopChance > 10) return;
 
-            Player player = event.getPlayer();
             World world = player.getWorld();
             Location location = player.getLocation();
 

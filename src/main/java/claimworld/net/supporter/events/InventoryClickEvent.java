@@ -2,7 +2,7 @@ package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.battlepass.BattlePassManager;
-import claimworld.net.supporter.utils.battlepass.Skills;
+import claimworld.net.supporter.utils.battlepass.SkillManager;
 import claimworld.net.supporter.utils.guis.Gui;
 import claimworld.net.supporter.utils.guis.GuiManager;
 import claimworld.net.supporter.utils.items.Locker;
@@ -110,7 +110,7 @@ public class InventoryClickEvent implements Listener {
                     return;
                 case 22:
                     player.closeInventory();
-                    player.openBook(new Skills().getSkillBook(player));
+                    player.openBook(new SkillManager().getSkillBook(player));
                     return;
                 case 23:
                     player.closeInventory();

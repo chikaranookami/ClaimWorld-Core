@@ -1,9 +1,13 @@
 package claimworld.net.supporter.events;
 
+import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.items.CustomHead;
 import claimworld.net.supporter.utils.MessageUtils;
 import claimworld.net.supporter.utils.items.ReadyItems;
+import claimworld.net.supporter.utils.tasks.Task;
+import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.WanderingTrader;
@@ -18,7 +22,7 @@ import java.util.logging.Level;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.*;
 
-public class EntitySpawnEvent implements Listener {
+public class CreatureSpawnEvent implements Listener {
 
     private final List<Player> players = new ArrayList<>();
     private final ReadyItems readyItems = new ReadyItems();
@@ -52,7 +56,7 @@ public class EntitySpawnEvent implements Listener {
             updatedRecipes.add(getCustomRecipe(glowa2, 1, new ItemStack(Material.EMERALD, 32), null));
             updatedRecipes.add(getCustomRecipe(new ItemStack(Material.ZOMBIE_SPAWN_EGG), 1, dolar64x, null));
             updatedRecipes.add(getCustomRecipe(new ItemStack(Material.CREEPER_SPAWN_EGG), 1, dolar64x, null));
-            updatedRecipes.add(getCustomRecipe(dolar, 2, new ItemStack(Material.EMERALD, 64), null));
+            updatedRecipes.add(getCustomRecipe(dolar, 4, new ItemStack(Material.EMERALD, 64), null));
             updatedRecipes.add(getCustomRecipe(unbreaking4, 1, new ItemStack(Material.EMERALD, 16), dolar2x));
             //updatedRecipes.add(getCustomRecipe(halloweenowyOdbijacz, 2, new ItemStack(Material.JACK_O_LANTERN, 16), null));
         }
@@ -65,7 +69,7 @@ public class EntitySpawnEvent implements Listener {
             //Fantomowy Handlarz
             updatedRecipes.add(getCustomRecipe(new ItemStack(Material.FIREWORK_ROCKET), 8, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
             updatedRecipes.add(getCustomRecipe(bilet, 2, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
-            updatedRecipes.add(getCustomRecipe(dolar, 2, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
+            updatedRecipes.add(getCustomRecipe(dolar, 4, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
             updatedRecipes.add(getCustomRecipe(new ItemStack(Material.SKELETON_SPAWN_EGG), 1, dolar64x, null));
             updatedRecipes.add(getCustomRecipe(new ItemStack(Material.WITCH_SPAWN_EGG), 1, dolar64x, null));
             updatedRecipes.add(getCustomRecipe(sharpnessBook, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 32), dolar64x));
@@ -77,13 +81,29 @@ public class EntitySpawnEvent implements Listener {
         return updatedRecipes;
     }
 
-    public EntitySpawnEvent() {
+    public CreatureSpawnEvent() {
         traderName.put(0, colorize("&a&lEmeraldowy Handlarz"));
         traderName.put(1, colorize("&d&lFantomowy Handlarz"));
     }
 
     @EventHandler
-    public void entitySpawnEvent(org.bukkit.event.entity.EntitySpawnEvent event) {
+    public void entitySpawnEvent(org.bukkit.event.entity.CreatureSpawnEvent event) {
+        if (event.getSpawnReason() == org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.ENDER_PEARL) {
+            for (Entity entity : event.getEntity().getNearbyEntities(5, 5, 5)) {
+                if (!(entity instanceof Player)) continue;
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Badz blisko 8 nowych endermitow.", "counter", 8)));
+            }
+            return;
+        }
+
+        if (event.getSpawnReason() == org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.CURED) {
+            for (Entity entity : event.getEntity().getNearbyEntities(3, 3, 3)) {
+                if (!(entity instanceof Player)) continue;
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Wesprzyj leczenie wiesniaka.", "", 0)));
+            }
+            return;
+        }
+
         if (event.getLocation().getChunk().getEntities().length > 125) {
             event.setCancelled(true);
             getLogger().log(Level.INFO, "cancelled spawn of " + event.getEntityType() + " at " + event.getLocation());

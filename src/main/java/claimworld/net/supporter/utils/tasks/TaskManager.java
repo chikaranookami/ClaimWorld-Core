@@ -102,7 +102,7 @@ public class TaskManager {
     }
 
     public TaskManager() {
-        //single
+        //first set
         taskList.add(new Task("Przemiesc sie o 100 metrow chorusem.", "", 0));
         taskList.add(new Task("Powies niewidzialna ramke.", "", 0));
         taskList.add(new Task("Zniszcz netherytowy miecz.", "", 0));
@@ -114,14 +114,29 @@ public class TaskManager {
         taskList.add(new Task("Podwoj przedmiot.", "", 0));
         taskList.add(new Task("Ustaw zombie w spawnerze.", "", 0));
         taskList.add(new Task("Zresp wiedzme.", "", 0));
-        //counter
-        taskList.add(new Task("Przespij 4 noce.", "counter", 4));
+        taskList.add(new Task("Przespij 3 noce.", "counter", 3));
         taskList.add(new Task("Aktywuj Mob Killera 32 razy.", "counter", 32));
         taskList.add(new Task("Dropnij 32 brodawki.", "counter", 32));
         taskList.add(new Task("Rozkop kilka emeraldow.", "counter", 4));
         taskList.add(new Task("Rozkop stack diaxow.", "counter", 64));
         taskList.add(new Task("Zabij 24 golemy.", "counter", 24));
         taskList.add(new Task("Zabij 208 potworow.", "counter", 208));
+
+        //second set
+        taskList.add(new Task("Pokonaj Smoka.", "", 0));
+        taskList.add(new Task("Umrzyj z glodu.", "", 0));
+        taskList.add(new Task("Oberwij od admina.", "", 0));
+        taskList.add(new Task("Przeczekaj swiatowy atak.", "", 0));
+        taskList.add(new Task("Ukoncz osiagniecie.", "", 0));
+        taskList.add(new Task("Wysluchaj ogloszen.", "", 0));
+        taskList.add(new Task("Spal 4 przedmioty.", "counter", 4));
+        taskList.add(new Task("Parszywa 12stka... 12 razy?", "counter", 12));
+        taskList.add(new Task("Nafaszeruj sie dziwna zupa.", "counter", 8));
+        taskList.add(new Task("Pooddychaj chwile smokiem.", "counter", 8));
+        taskList.add(new Task("Badz blisko 8 nowych endermitow.", "counter", 8));
+
+        //check if it's working
+        taskList.add(new Task("Wesprzyj leczenie wiesniaka.", "", 0));
 
         renderNewTasks();
     }

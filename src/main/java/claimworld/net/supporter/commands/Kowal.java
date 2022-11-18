@@ -87,6 +87,10 @@ public class Kowal {
                     if (chance > 0) {
                         world.playSound(location, Sound.BLOCK_ANVIL_DESTROY, 0.75f, 0.75f);
                         player.sendMessage(getUserPrefix() + "Nie udalo sie - Kowal spalil Twoj przedmiot.");
+
+                        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+                            TaskManager.getInstance().tryFinishTask(player, new Task("Spal 4 przedmioty.", "counter", 4));
+                        });
                     } else {
                         List<ItemStack> items = new ArrayList<>();
                         items.add(item);

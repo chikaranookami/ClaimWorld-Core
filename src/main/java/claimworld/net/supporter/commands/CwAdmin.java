@@ -43,6 +43,18 @@ public class CwAdmin {
                     return true;
                 }
 
+                if (action.equals("renderNewTasks")) {
+                    boolean value = TaskManager.getInstance().renderNewTasks();
+                    sender.sendMessage("rendering status: " + value);
+                    return true;
+                }
+
+                if (action.equals("forceNewTasks")) {
+                    boolean value = TaskManager.getInstance().renderNewTasks(true);
+                    sender.sendMessage("force rendering status: " + value);
+                    return true;
+                }
+
                 if (action.equals("spawnBall")) {
                     Chicken chicken = (Chicken) player.getWorld().spawnEntity(player.getLocation(), EntityType.CHICKEN);
                     chicken.setAware(false);

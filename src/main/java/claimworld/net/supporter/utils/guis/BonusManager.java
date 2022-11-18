@@ -32,12 +32,11 @@ public class BonusManager {
         bonusMessages.put("AntyFantom", "wylaczyl fantomy");
         bonusMessages.put("Podnoszenie+", "wlaczyl podnoszenie wiekszosci bytow");
         bonusMessages.put("Rzucanie+", "zwiekszyl sile rzucania bytami");
-        bonusMessages.put("Zadania", "odswiezyl zadania");
+        bonusMessages.put("Zadania", "wygenerowal nowe zadania");
 
         bonusCommands.put("Bloki", "fillupwarehouse blocks");
         bonusCommands.put("Butelki", "fillupwarehouse xpBottle");
         bonusCommands.put("AntyFantom", "gamerule doInsomnia false");
-        bonusMessages.put("Zadania", "rendernewtasks");
 
         bonusPointPrices.put("Butelki", 15);
         bonusPointPrices.put("Bloki", 20);

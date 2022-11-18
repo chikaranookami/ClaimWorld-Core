@@ -54,7 +54,11 @@ public class TaskManager {
     }
 
     public boolean renderNewTasks() {
-        if (playersWhoDidTask.size() > 0) return false;
+        return this.renderNewTasks(false);
+    }
+
+    public boolean renderNewTasks(boolean forced) {
+        if (!forced) if (playersWhoDidTask.size() > 0) return false;
 
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
             if (activeTasks.size() > 0) activeTasks.clear();

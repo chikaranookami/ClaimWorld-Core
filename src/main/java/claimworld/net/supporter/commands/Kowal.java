@@ -77,7 +77,7 @@ public class Kowal {
                 inventory.getItemInOffHand().setAmount(inventory.getItemInOffHand().getAmount() - 1);
                 inventory.getItemInMainHand().setAmount(item.getAmount() - 1);
 
-                int chance = new Random().nextInt(5);
+                int chance = new Random().nextInt(3);
                 World world = player.getWorld();
                 Location location = player.getLocation();
 

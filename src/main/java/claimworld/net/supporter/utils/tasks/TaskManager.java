@@ -93,6 +93,9 @@ public class TaskManager {
 
                     if (!(score.getScore() < task.getNumber())) {
                         playersWhoDidTask.add(playerName);
+                    }
+
+                    if (score.getScore() == task.getNumber()) {
                         BattlePassManager.getInstance().updatePoints(player, 1);
                     }
 
@@ -106,7 +109,7 @@ public class TaskManager {
     }
 
     public TaskManager() {
-        //first set
+        //first set (18)
         taskList.add(new Task("Przemiesc sie o 100 metrow chorusem.", "", 0));
         taskList.add(new Task("Powies niewidzialna ramke.", "", 0));
         taskList.add(new Task("Zniszcz netherytowy miecz.", "", 0));
@@ -126,21 +129,19 @@ public class TaskManager {
         taskList.add(new Task("Zabij 24 golemy.", "counter", 24));
         taskList.add(new Task("Zabij 208 potworow.", "counter", 208));
 
-        //second set
+        //second set (12)
         taskList.add(new Task("Pokonaj Smoka.", "", 0));
         taskList.add(new Task("Umrzyj z glodu.", "", 0));
         taskList.add(new Task("Oberwij od admina.", "", 0));
         taskList.add(new Task("Przeczekaj swiatowy atak.", "", 0));
         taskList.add(new Task("Ukoncz osiagniecie.", "", 0));
         taskList.add(new Task("Wysluchaj ogloszen.", "", 0));
+        taskList.add(new Task("Wesprzyj leczenie wiesniaka.", "", 0));
         taskList.add(new Task("Spal 4 przedmioty.", "counter", 4));
         taskList.add(new Task("Parszywa 12stka... 12 razy?", "counter", 12));
         taskList.add(new Task("Nafaszeruj sie dziwna zupa.", "counter", 8));
         taskList.add(new Task("Pooddychaj chwile smokiem.", "counter", 8));
         taskList.add(new Task("Badz blisko 8 nowych endermitow.", "counter", 8));
-
-        //check if it's working
-        taskList.add(new Task("Wesprzyj leczenie wiesniaka.", "", 0));
 
         renderNewTasks();
     }

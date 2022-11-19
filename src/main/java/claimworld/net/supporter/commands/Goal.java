@@ -43,8 +43,7 @@ public class Goal {
                 broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &epowiekszona zostala granica swiata&f."));
                 break;
             case 1250:
-                dispatchCommand(getConsoleSender(), "worldborder set 12000");
-                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &epowiekszona zostala granica swiata&f."));
+                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &ezwiekszono szybkosc lowienia&f."));
                 break;
             case 9999:
                 getLogger().log(Level.WARNING, "wplacone zostalo wiecej kasy, niz ustawionych celow");

@@ -1,6 +1,7 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.GoalUtils;
 import claimworld.net.supporter.utils.tasks.Task;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.Material;
@@ -14,6 +15,8 @@ public class PlayerFishEvent implements Listener {
 
     @EventHandler
     public void playerFishEvent(org.bukkit.event.player.PlayerFishEvent event) {
+        if (new GoalUtils().getShorterFishing()) event.getHook().setMaxWaitTime(500);
+
         if (!event.getHook().isInOpenWater()) return;
         if (event.getState() != org.bukkit.event.player.PlayerFishEvent.State.CAUGHT_FISH) return;
 

@@ -25,7 +25,6 @@ import static org.bukkit.Bukkit.*;
 public class CreatureSpawnEvent implements Listener {
 
     private final List<Player> players = new ArrayList<>();
-    private final ReadyItems readyItems = ReadyItems.getInstance();
     private final HashMap<Integer, String> traderName = new HashMap<>();
     private final List<org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason> checkedSpawnReasons = new ArrayList<>();
 
@@ -41,7 +40,8 @@ public class CreatureSpawnEvent implements Listener {
 
         int random = new Random().nextInt(8);
 
-        ItemStack dolar = readyItems.get("$1");
+        ReadyItems readyItems = ReadyItems.getInstance();
+        ItemStack dolarek = readyItems.get("$1");
         ItemStack dolar64x = readyItems.get("$1", 64);
         ItemStack skrzyniaSmoka = readyItems.get("Skrzynia_smoka");
         ItemStack glowa1 = new CustomHead("&fGlowa " + players.get(0).getName(), players.get(0), 1, Collections.singletonList(colorize(readyItems.getLore("common")))).getItem();
@@ -63,7 +63,8 @@ public class CreatureSpawnEvent implements Listener {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.CREEPER_SPAWN_EGG), 1, dolar64x, null));
             }
             if (random > 3) {
-                updatedRecipes.add(getCustomRecipe(dolar, 4, new ItemStack(Material.EMERALD, 64), null));
+                broadcast("rendering dolarek", "claimworld.admin");
+                updatedRecipes.add(getCustomRecipe(dolarek, 4, new ItemStack(Material.EMERALD, 64), null));
                 updatedRecipes.add(getCustomRecipe(skrzyniaSmoka, 2, new ItemStack(Material.EMERALD, 32), null));
             }
             if (random > 5) {
@@ -87,7 +88,7 @@ public class CreatureSpawnEvent implements Listener {
             updatedRecipes.add(getCustomRecipe(glowa2, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
             if (random > 1) {
                 updatedRecipes.add(getCustomRecipe(bilet, 2, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
-                updatedRecipes.add(getCustomRecipe(dolar, 4, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
+                updatedRecipes.add(getCustomRecipe(dolarek, 4, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
             }
             if (random > 4) {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.SKELETON_SPAWN_EGG), 1, dolar64x, null));
@@ -160,7 +161,6 @@ public class CreatureSpawnEvent implements Listener {
             trader.setDespawnDelay(12000);
             trader.setRecipes(getRecipeSets(chance));
             trader.setCustomName(traderName.get(chance));
-
             broadcastMessage(colorize(MessageUtils.getBroadcastPrefix() + traderName.get(chance) + "&f wlasnie pojawil sie na koordynatach &ex" + Math.round(trader.getLocation().getX()) + " &foraz &ez" + Math.round(trader.getLocation().getZ()) + "&f."));
 
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {

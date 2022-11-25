@@ -47,13 +47,15 @@ public class ReadyItems {
     }
 
     public ItemStack get(String name, int amount) {
-        ItemStack itemStack = get(name);
+        ItemStack itemStack = itemMap.get(name).getItem().clone();
         itemStack.setAmount(amount);
         return itemStack;
     }
 
     public ItemStack get(String name) {
-        return itemMap.get(name).getItem();
+        ItemStack itemStack = itemMap.get(name).getItem().clone();
+        itemStack.setAmount(1);
+        return itemStack;
     }
 
     public ReadyItems() {

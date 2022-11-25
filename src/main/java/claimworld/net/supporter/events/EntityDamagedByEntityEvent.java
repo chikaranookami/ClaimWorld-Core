@@ -1,9 +1,6 @@
 package claimworld.net.supporter.events;
 
-import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.battlepass.SkillManager;
-import claimworld.net.supporter.utils.tasks.Task;
-import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,9 +25,5 @@ public class EntityDamagedByEntityEvent implements Listener {
 
         event.setDamage(event.getDamage() * 2);
         skillManager.renderSkillEffect(event.getEntity().getLocation());
-
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            TaskManager.getInstance().tryFinishTask(player, new Task("Aktywuj Mob Killera 32 razy.", "counter", 32));
-        });
     }
 }

@@ -41,7 +41,7 @@ public class Dice {
                 }
 
                 if (number == 12) {
-                    getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> new Task("Parszywa 12stka... 12 razy?", "counter", 12));
+                    getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> new Task("Wyrzuc 12x12 na kostce.", "counter", 12));
                 }
 
                 return true;

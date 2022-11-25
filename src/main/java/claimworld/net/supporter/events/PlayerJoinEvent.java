@@ -22,7 +22,7 @@ public class PlayerJoinEvent implements Listener {
         player.setDisplayName(playerName);
 
         //set menu item
-        player.getInventory().setItem(17, new ReadyItems().get("Menu"));
+        player.getInventory().setItem(17, ReadyItems.getInstance().get("Menu"));
 
         //mvp join bonus
         if (player.hasPermission("claimworld.mvp")) {

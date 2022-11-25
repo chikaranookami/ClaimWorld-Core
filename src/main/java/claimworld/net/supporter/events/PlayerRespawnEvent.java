@@ -8,6 +8,6 @@ public class PlayerRespawnEvent implements Listener {
 
     @EventHandler
     public void playerRespawnEvent(org.bukkit.event.player.PlayerRespawnEvent event) {
-        event.getPlayer().getInventory().setItem(17, new ReadyItems().get("Menu"));
+        event.getPlayer().getInventory().setItem(17, ReadyItems.getInstance().get("Menu"));
     }
 }

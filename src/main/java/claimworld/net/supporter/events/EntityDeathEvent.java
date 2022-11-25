@@ -26,7 +26,7 @@ public class EntityDeathEvent implements Listener {
         Entity entity = event.getEntity();
 
         if (entity instanceof Monster) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Zabij 208 potworow.", "counter", 208)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Zabij 208 pelnych zycia potworow.", "counter", 208)));
         }
 
         if (entityType == EntityType.ZOMBIFIED_PIGLIN) {
@@ -34,12 +34,12 @@ public class EntityDeathEvent implements Listener {
 
             event.getDrops().add(new ItemStack(Material.NETHER_WART));
 
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Dropnij 32 brodawki.", "counter", 32)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Dropnij 32 brodawki z piglinow.", "counter", 32)));
             return;
         }
 
         if (entityType == EntityType.IRON_GOLEM) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Zabij 24 golemy.", "counter", 24)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Zabij 24 zelazne golemy.", "counter", 24)));
             return;
         }
 

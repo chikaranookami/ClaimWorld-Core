@@ -24,10 +24,14 @@ public class WarehouseUtils {
     }
 
     public void addItemsSingle(Player player, List<ItemStack> items) {
+        addItemsSingle(player, items, false);
+    }
+
+    public void addItemsSingle(Player player, List<ItemStack> items, boolean silent) {
         tryCloseInventory(player);
 
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            player.sendMessage(MessageUtils.getUserPrefix() + "Otrzymales przedmiot. Wez go ze skrytki zanim zniknie!");
+            if (!silent) player.sendMessage(MessageUtils.getUserPrefix() + "Otrzymales przedmiot. Wez go ze skrytki zanim zniknie!");
 
             String playerName = player.getName();
             List<ItemStack> fixedItems = new ArrayList<>(items);

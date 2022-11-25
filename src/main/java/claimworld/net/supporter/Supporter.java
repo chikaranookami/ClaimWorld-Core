@@ -55,7 +55,6 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new RaidFinishEvent(), this);
         pluginManager.registerEvents(new PlayerItemBreakEvent(), this);
         pluginManager.registerEvents(new PlayerBedLeaveEvent(), this);
-        pluginManager.registerEvents(new PlayerLocaleChangeEvent(), this);
 
         //commands
         new Seriafw();
@@ -80,6 +79,8 @@ public final class Supporter extends JavaPlugin implements Listener {
         new ShopAnnouncement();
         new Goal();
         new FillUpWarehouse();
+        new OpenChest();
+        new BuyChests();
 
         //systems
         new AutoMessages();

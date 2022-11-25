@@ -9,6 +9,10 @@ import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.List;
 
 import static org.bukkit.Bukkit.getScheduler;
 
@@ -16,11 +20,16 @@ public class HangingPlaceEvent implements Listener {
 
     @EventHandler
     public void hangingPlaceEvent(org.bukkit.event.hanging.HangingPlaceEvent event) {
-        if (event.getItemStack() == null) return;
-        if (event.getItemStack().getType() != Material.ITEM_FRAME) return;
-        if (event.getItemStack().getItemMeta() == null) return;
-        if (event.getItemStack().getItemMeta().getLore() == null) return;
-        if (!event.getItemStack().getItemMeta().getLore().equals(new ReadyItems().get("Niewidzialna_ramka").getItemMeta().getLore())) return;
+        ItemStack itemStack = event.getItemStack();
+        if (itemStack == null) return;
+        if (itemStack.getType() != Material.ITEM_FRAME) return;
+
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta == null) return;
+
+        List<String> lore = itemMeta.getLore();
+        if (lore == null) return;
+        if (!lore.equals(ReadyItems.getInstance().get("Niewidzialna_ramka").getItemMeta().getLore())) return;
 
         ((ItemFrame) event.getEntity()).setVisible(false);
 

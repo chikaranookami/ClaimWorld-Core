@@ -24,9 +24,7 @@ public class ActiveBossBar {
             for (Player player : getOnlinePlayers()) {
                 bossBar.addPlayer(player);
 
-                getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                    TaskManager.getInstance().tryFinishTask(player, new Task("Wysluchaj ogloszen.", "", 0));
-                }, 100L);
+                getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Wysluchaj serwerowych ogloszen.", "", 0)), 100L);
             }
         });
 

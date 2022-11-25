@@ -22,19 +22,14 @@ public class EntityDamageEvent implements Listener {
 
     @EventHandler
     public void entityDamageEvent(org.bukkit.event.entity.EntityDamageEvent event) {
-        if (!(event.getEntity().getType() == EntityType.PLAYER)) return;
+        if (event.getEntity().getType() != EntityType.PLAYER) return;
         if (event.getEntity().getWorld().getWorldBorder().isInside(event.getEntity().getLocation())) return;
 
         Player player = (Player) event.getEntity();
         org.bukkit.event.entity.EntityDamageEvent.DamageCause damageCause = event.getCause();
 
-        if (damageCause.equals(org.bukkit.event.entity.EntityDamageEvent.DamageCause.STARVATION)) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Umrzyj z glodu.", "", 0)));
-            return;
-        }
-
         if (damageCause.equals(org.bukkit.event.entity.EntityDamageEvent.DamageCause.DRAGON_BREATH)) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Pooddychaj chwile smokiem.", "counter", 8)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Pooddychaj przez chwile oparami smoka.", "counter", 6)));
             return;
         }
 

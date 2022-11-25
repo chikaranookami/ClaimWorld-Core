@@ -55,7 +55,7 @@ public class Kowal {
     }
 
     public Kowal() {
-        ReadyItems items = new ReadyItems();
+        ReadyItems items = ReadyItems.getInstance();
         lockedItems.add(items.get("$1"));
         lockedItems.add(items.get("Uniwersalny_bilet"));
 
@@ -89,7 +89,7 @@ public class Kowal {
                         player.sendMessage(getUserPrefix() + "Nie udalo sie - Kowal spalil Twoj przedmiot.");
 
                         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-                            TaskManager.getInstance().tryFinishTask(player, new Task("Spal 4 przedmioty.", "counter", 4));
+                            TaskManager.getInstance().tryFinishTask(player, new Task("Spal u kowala 3 przedmioty.", "counter", 3));
                         });
                     } else {
                         List<ItemStack> items = new ArrayList<>();
@@ -101,7 +101,7 @@ public class Kowal {
                         player.sendMessage(getUserPrefix() + "Sukces! Kowal podwoil Twoj przedmiot.");
 
                         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-                            TaskManager.getInstance().tryFinishTask(player, new Task("Podwoj przedmiot.", "", 0));
+                            TaskManager.getInstance().tryFinishTask(player, new Task("Sklonuj przedmiot u kowala.", "", 0));
                         });
                     }
                 }, 30L);

@@ -8,7 +8,7 @@ public class MessageUtils {
         return colorize("&7| ");
     }
     public static String getBroadcastPrefix() {
-        return colorize("&e[Ogloszenie]&f ");
+        return colorize("&7[Ogloszenie]&f ");
     }
 
     public static String getBattlepassIcon() {return "ღ";}

@@ -66,7 +66,7 @@ public class Seriafw {
 
                     counter.getAndIncrement();
 
-                }, 10L, random * 2L);
+                }, 0L, random * 2L);
 
                 return true;
             }

@@ -23,7 +23,7 @@ import static org.bukkit.Bukkit.getLogger;
 public class ItemSets {
     
     private final HashMap<Integer, ItemStack> itemMap = new HashMap<>();
-    private final ReadyItems readyItems = new ReadyItems();
+    private final ReadyItems readyItems = ReadyItems.getInstance();
 
     public HashMap<Integer, ItemStack> initializeInventoryContent(Player player, String inventoryName) {
         if (inventoryName == null || inventoryName.isEmpty()) {

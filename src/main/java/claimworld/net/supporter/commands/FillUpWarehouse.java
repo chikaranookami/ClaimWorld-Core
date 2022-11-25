@@ -26,7 +26,15 @@ public class FillUpWarehouse {
         new ItemStack(Material.TERRACOTTA, 64),
         new ItemStack(Material.GRANITE, 64),
         new ItemStack(Material.DIORITE, 64),
-        new ItemStack(Material.ANDESITE, 64)
+        new ItemStack(Material.WHITE_WOOL, 64),
+        new ItemStack(Material.ANDESITE, 64),
+        new ItemStack(Material.CLAY, 64),
+        new ItemStack(Material.QUARTZ_BLOCK, 64),
+        new ItemStack(Material.MOSSY_COBBLESTONE, 64),
+        new ItemStack(Material.GLASS, 64),
+        new ItemStack(Material.PURPUR_BLOCK, 64),
+        new ItemStack(Material.GRAVEL, 64),
+        new ItemStack(Material.GLASS, 64)
     );
 
     private List<ItemStack> getRandomItems() {

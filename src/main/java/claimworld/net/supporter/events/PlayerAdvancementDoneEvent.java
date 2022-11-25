@@ -12,6 +12,6 @@ public class PlayerAdvancementDoneEvent implements Listener {
 
     @EventHandler
     public void playerAdvancementDoneEvent(org.bukkit.event.player.PlayerAdvancementDoneEvent event) {
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(event.getPlayer(), new Task("Ukoncz osiagniecie.", "", 0)));
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(event.getPlayer(), new Task("Ukoncz dowolne osiagniecie.", "", 0)));
     }
 }

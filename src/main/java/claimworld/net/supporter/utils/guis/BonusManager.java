@@ -17,7 +17,6 @@ public class BonusManager {
     
     public BonusManager() {
         bonuses.put("Bloki", false);
-        bonuses.put("AntyFantom", false);
         bonuses.put("DoubleXP", false);
         bonuses.put("Podnoszenie+", false);
         bonuses.put("Diaxy+", false);
@@ -29,7 +28,6 @@ public class BonusManager {
         bonusMessages.put("Bloki", "rozdal troche blokow");
         bonusMessages.put("Diaxy+", "wlaczyl dodatkowe diamenty z rud");
         bonusMessages.put("DoubleXP", "2x zwiekszyl zdobywane doswiadczenie");
-        bonusMessages.put("AntyFantom", "wylaczyl fantomy");
         bonusMessages.put("Podnoszenie+", "wlaczyl podnoszenie wiekszosci bytow");
         bonusMessages.put("Rzucanie+", "zwiekszyl sile rzucania bytami");
         bonusMessages.put("Zadania", "wygenerowal nowe zadania");
@@ -42,7 +40,6 @@ public class BonusManager {
         bonusPointPrices.put("Bloki", 20);
         bonusPointPrices.put("Diaxy+", 30);
         bonusPointPrices.put("DoubleXP", 30);
-        bonusPointPrices.put("AntyFantom", 15);
         bonusPointPrices.put("Podnoszenie+", 30);
         bonusPointPrices.put("Rzucanie+", 30);
         bonusPointPrices.put("Zadania", 30);

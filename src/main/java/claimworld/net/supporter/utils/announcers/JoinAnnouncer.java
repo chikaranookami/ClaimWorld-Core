@@ -39,7 +39,7 @@ public class JoinAnnouncer {
 
         BaseComponent[] pageComponent = new ComponentBuilder()
                 .append("§cNotka od admina\n")
-                .append("§8Wszelkie propozycje, pomysly czy ewentualne bledy zglaszajcie prosze poprzez kanal #sprawa na discordzie.")
+                .append("§8Juz niebawem wracamy do standardowych mechanik, znanych Wam dobrze z vanilli. Wycisniemy z tej gry wszystko, co sie da!")
                 .create();
         bookMeta.spigot().addPage(pageComponent);
 

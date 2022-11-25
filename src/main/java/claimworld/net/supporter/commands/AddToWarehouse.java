@@ -25,7 +25,7 @@ public class AddToWarehouse {
                 List<String> fixedMessage = new ArrayList<>(Arrays.asList(arguments));
                 fixedMessage.remove(0);
 
-                ItemStack item = new ReadyItems().get(String.join(" ", fixedMessage));
+                ItemStack item = ReadyItems.getInstance().get(String.join(" ", fixedMessage));
                 if (item == null) return false;
 
                 List<ItemStack> itemStackList = new ArrayList<>();

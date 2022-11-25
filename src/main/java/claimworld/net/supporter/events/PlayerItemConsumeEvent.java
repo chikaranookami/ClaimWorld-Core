@@ -24,7 +24,7 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerItemConsumeEvent implements Listener {
 
-    private final List<Material> blockedMaterials = Arrays.asList(Material.SWEET_BERRIES, Material.MELON_SLICE, Material.DRIED_KELP);
+    private final List<Material> blockedMaterials = Arrays.asList(Material.SWEET_BERRIES, Material.CHORUS_FRUIT, Material.MELON_SLICE, Material.DRIED_KELP);
 
     private void renderPoopEffects(World world, Location location) {
         world.dropItem(location, new ItemStack(Material.DIRT, 2));
@@ -36,10 +36,14 @@ public class PlayerItemConsumeEvent implements Listener {
     private void smallPoop(Player player, World world, Location location) {
         renderPoopEffects(world, location);
         player.sendMessage(MessageUtils.getUserPrefix() + "Chyba zbiera Ci sie na cos ciezszego...");
+
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+            TaskManager.getInstance().tryFinishTask(player, new Task("Niech zbiera Ci sie na cos ciezszego.", "", 0));
+        });
     }
 
     private void bigPoop(Player player, World world, Location location) {
-        ItemStack kupa = new ReadyItems().get("Kupa");
+        ItemStack kupa = ReadyItems.getInstance().get("Kupa");
 
         location.getBlock().setType(Material.DIRT);
 
@@ -58,6 +62,10 @@ public class PlayerItemConsumeEvent implements Listener {
         thrownPotion.setItem(potion);
 
         Bukkit.broadcastMessage(colorize(MessageUtils.getBroadcastPrefix() + "Gracz " + player.getDisplayName() + " &fwlasnie sie... zesral."));
+
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+            TaskManager.getInstance().tryFinishTask(player, new Task("Zrob kupe.", "", 0));
+        });
     }
 
     @EventHandler
@@ -67,7 +75,7 @@ public class PlayerItemConsumeEvent implements Listener {
         Player player = event.getPlayer();
 
         if (event.getItem().getType() == Material.SUSPICIOUS_STEW) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Nafaszeruj sie dziwna zupa.", "counter", 8)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Zjedz 8 dziwnych zup.", "counter", 8)));
             return;
         }
 
@@ -79,19 +87,13 @@ public class PlayerItemConsumeEvent implements Listener {
             Location location = player.getLocation();
 
             if (poopChance > 2) {
-                getScheduler().runTask(Supporter.getPlugin(), () -> {
-                    smallPoop(player, world, location);
-                });
+                getScheduler().runTask(Supporter.getPlugin(), () -> smallPoop(player, world, location));
                 return;
             }
 
             if (location.getBlock().getType() != Material.AIR) return;
 
-            getScheduler().runTask(Supporter.getPlugin(), () -> {
-                bigPoop(player, world, location);
-            });
-
-            TaskManager.getInstance().tryFinishTask(player, new Task("Zrob kupe.", "", 0));
+            getScheduler().runTask(Supporter.getPlugin(), () -> bigPoop(player, world, location));
         });
     }
 }

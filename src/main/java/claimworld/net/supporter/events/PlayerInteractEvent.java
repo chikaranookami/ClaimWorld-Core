@@ -2,9 +2,11 @@ package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.battlepass.SkillManager;
+import claimworld.net.supporter.utils.items.ReadyItems;
 import claimworld.net.supporter.utils.tasks.Task;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,11 +17,12 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.bukkit.Bukkit.getScheduler;
+import static org.bukkit.Bukkit.*;
 
 public class PlayerInteractEvent implements Listener {
 
-    List<Material> allowedSpawnEggs = new ArrayList<>();
+    private final List<Material> allowedSpawnEggs = new ArrayList<>();
+    private final List<Player> delayedPlayers = new ArrayList<>();
 
     public PlayerInteractEvent() {
         allowedSpawnEggs.add(Material.ZOMBIE_SPAWN_EGG);
@@ -34,12 +37,25 @@ public class PlayerInteractEvent implements Listener {
         if (event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if (event.getClickedBlock() == null) return;
-        if (!allowedSpawnEggs.contains(event.getMaterial())) return;
 
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
         if (item == null) return;
 
+        if (item.equals(ReadyItems.getInstance().get("Skrzynia_smoka"))) {
+            if (delayedPlayers.contains(player)) return;
+            delayedPlayers.add(player);
+
+            event.setCancelled(true);
+            player.playSound(player, Sound.ENTITY_ITEM_PICKUP, 1f, 1f);
+            item.setAmount(item.getAmount() - 1);
+            dispatchCommand(getConsoleSender(), "openchest " + player.getName());
+
+            getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> delayedPlayers.remove(player), 100L);
+            return;
+        }
+
+        if (!allowedSpawnEggs.contains(event.getMaterial())) return;
         if (!(event.getClickedBlock().getLocation().distance(player.getLocation()) < 7)) return;
         if (event.getClickedBlock().getType() != Material.SPAWNER) return;
 
@@ -50,7 +66,6 @@ public class PlayerInteractEvent implements Listener {
         }
 
         SkillManager skillManager = new SkillManager();
-
         if (!skillManager.canActivateSkill(player, "Twoj spawner")) {
             event.setCancelled(true);
         } else {

@@ -18,7 +18,7 @@ public class LightningStrikeEvent implements Listener {
 
         for (Entity entity : event.getLightning().getNearbyEntities(5, 5, 5)) {
             if (!(entity instanceof Player)) continue;
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Oberwij od admina.", "", 0)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Oberwij piorunem od admina.", "", 0)));
         }
     }
 }

@@ -1,6 +1,8 @@
 package claimworld.net.supporter.utils.battlepass;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.WarehouseUtils;
+import claimworld.net.supporter.utils.items.ReadyItems;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -15,10 +17,7 @@ import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 
 import static claimworld.net.supporter.utils.MessageUtils.getBattlepassIcon;
@@ -107,6 +106,8 @@ public class BattlePassManager {
             String playerValue = "<PLAYER>";
             if (command.contains(playerValue)) command = command.replace(playerValue, player.getName());
             dispatchCommand(getConsoleSender(), command);
+
+            if (new Random().nextInt(2) == 0) new WarehouseUtils().addItemsSingle(player, Collections.singletonList(ReadyItems.getInstance().get("Skrzynia_smoka")));
         });
     }
 

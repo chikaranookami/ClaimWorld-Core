@@ -16,7 +16,7 @@ public class RaidStopEvent implements Listener {
         if (event.getReason() != org.bukkit.event.raid.RaidStopEvent.Reason.TIMEOUT) return;
 
         for (Player player : event.getWorld().getPlayers()) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Przeczekaj swiatowy atak.", "", 0)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Przeczekaj atak na wioske.", "", 0)));
         }
     }
 }

@@ -1,13 +1,17 @@
 package claimworld.net.supporter.commands;
 
+import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.MessageUtils;
+import claimworld.net.supporter.utils.tasks.Task;
+import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import static claimworld.net.supporter.utils.StringUtils.colorize;
+import static org.bukkit.Bukkit.getScheduler;
 
 public class Teleporter {
 
@@ -43,6 +47,8 @@ public class Teleporter {
 
                 player.sendMessage(MessageUtils.getUserPrefix() + "Przeszedles przez Magiczny Portal.");
                 sender.sendMessage("teleporter uzyty na " + player);
+
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Uzyj aktywnego Teleportera.", "", 0)));
                 return true;
             }
 

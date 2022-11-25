@@ -38,7 +38,7 @@ public class BlockBreakEvent implements Listener {
 
         if (event.getBlock().getType() == Material.DEEPSLATE_EMERALD_ORE || event.getBlock().getType() == Material.EMERALD_ORE) {
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-                TaskManager.getInstance().tryFinishTask(player, new Task("Rozkop kilka emeraldow.", "counter", 4));
+                TaskManager.getInstance().tryFinishTask(player, new Task("Rozkop 6 emeraldow.", "counter", 6));
             });
             return;
         }

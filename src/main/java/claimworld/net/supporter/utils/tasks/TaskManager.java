@@ -112,36 +112,42 @@ public class TaskManager {
         //first set (18)
         taskList.add(new Task("Przemiesc sie o 100 metrow chorusem.", "", 0));
         taskList.add(new Task("Powies niewidzialna ramke.", "", 0));
-        taskList.add(new Task("Zniszcz netherytowy miecz.", "", 0));
+        taskList.add(new Task("Zuzyj netherytowy miecz.", "", 0));
         taskList.add(new Task("Wylow torbiel.", "", 0));
         taskList.add(new Task("Pokonaj wardena.", "", 0));
         taskList.add(new Task("Zrob beacona.", "", 0));
         taskList.add(new Task("Zrob kupe.", "", 0));
         taskList.add(new Task("Ukoncz raida.", "", 0));
-        taskList.add(new Task("Podwoj przedmiot.", "", 0));
+        taskList.add(new Task("Sklonuj przedmiot u kowala.", "", 0));
         taskList.add(new Task("Ustaw zombie w spawnerze.", "", 0));
         taskList.add(new Task("Zresp wiedzme.", "", 0));
         taskList.add(new Task("Przespij 3 noce.", "counter", 3));
-        taskList.add(new Task("Aktywuj Mob Killera 32 razy.", "counter", 32));
-        taskList.add(new Task("Dropnij 32 brodawki.", "counter", 32));
-        taskList.add(new Task("Rozkop kilka emeraldow.", "counter", 4));
+        taskList.add(new Task("Dropnij 32 brodawki z piglinow.", "counter", 32));
+        taskList.add(new Task("Rozkop 6 emeraldow.", "counter", 6));
         taskList.add(new Task("Rozkop stack diaxow.", "counter", 64));
-        taskList.add(new Task("Zabij 24 golemy.", "counter", 24));
-        taskList.add(new Task("Zabij 208 potworow.", "counter", 208));
+        taskList.add(new Task("Zabij 24 zelazne golemy.", "counter", 24));
+        taskList.add(new Task("Zabij 208 pelnych zycia potworow.", "counter", 208));
 
         //second set (12)
         taskList.add(new Task("Pokonaj Smoka.", "", 0));
         taskList.add(new Task("Umrzyj z glodu.", "", 0));
-        taskList.add(new Task("Oberwij od admina.", "", 0));
-        taskList.add(new Task("Przeczekaj swiatowy atak.", "", 0));
-        taskList.add(new Task("Ukoncz osiagniecie.", "", 0));
-        taskList.add(new Task("Wysluchaj ogloszen.", "", 0));
-        taskList.add(new Task("Wesprzyj leczenie wiesniaka.", "", 0));
-        taskList.add(new Task("Spal 4 przedmioty.", "counter", 4));
-        taskList.add(new Task("Parszywa 12stka... 12 razy?", "counter", 12));
-        taskList.add(new Task("Nafaszeruj sie dziwna zupa.", "counter", 8));
-        taskList.add(new Task("Pooddychaj chwile smokiem.", "counter", 8));
-        taskList.add(new Task("Badz blisko 8 nowych endermitow.", "counter", 8));
+        taskList.add(new Task("Oberwij piorunem od admina.", "", 0));
+        taskList.add(new Task("Przeczekaj atak na wioske.", "", 0));
+        taskList.add(new Task("Ukoncz dowolne osiagniecie.", "", 0));
+        taskList.add(new Task("Wysluchaj serwerowych ogloszen.", "", 0));
+        taskList.add(new Task("Badz obok przemieniajacego sie wiesniaka.", "", 0));
+        taskList.add(new Task("Spal u kowala 3 przedmioty.", "counter", 3));
+        taskList.add(new Task("Wyrzuc 12x12 na kostce.", "counter", 12));
+        taskList.add(new Task("Zjedz 8 dziwnych zup.", "counter", 8));
+        taskList.add(new Task("Pooddychaj przez chwile oparami smoka.", "counter", 6));
+        taskList.add(new Task("Badz blisko 6 nowych endermitow.", "counter", 6));
+
+        //third set
+        taskList.add(new Task("Badz online, gdy pojawi sie handlarz.", "", 0));
+        taskList.add(new Task("Zuzyj diamentowy kilof.", "", 0));
+        taskList.add(new Task("Niech zbiera Ci sie na cos ciezszego.", "", 0));
+        //taskList.add(new Task("Natraf na Magiczna Skrzynke.", "", 0));
+        taskList.add(new Task("Uzyj aktywnego Teleportera.", "", 0));
 
         renderNewTasks();
     }

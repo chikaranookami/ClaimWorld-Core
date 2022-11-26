@@ -28,7 +28,7 @@ public class SkillManager {
         assert bookMeta != null;
 
         ComponentBuilder builder;
-        builder = new ComponentBuilder().append("§cUmiejetnosci");
+        builder = new ComponentBuilder().append("§cUmiejetnosci\n").append("§8Najedz na umiejetnosc, by wyswietlic szczegoly.\n");
 
         for (Map.Entry<String, Skill> entry : skillMap.entrySet()) {
             if (canActivateSkill(player, entry.getKey())) {

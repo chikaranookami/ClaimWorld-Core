@@ -198,8 +198,8 @@ public class OpenChest {
     }
 
     public OpenChest() {
-        //last amount update - 25.11.2022
-        //total amount < 150
+        //last amount update - 26.11.2022
+        //total amount > 350
         
         ReadyItems readyItems = ReadyItems.getInstance();
 
@@ -209,14 +209,16 @@ public class OpenChest {
         }
 
         randomItems.add(readyItems.get("$1", 32));
+        randomItems.add(readyItems.get("$1", 48));
         randomItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, 32));
+        randomItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, 48));
 
         randomItems.add(new ItemStack(Material.ELYTRA));
         randomItems.add(new ItemStack(Material.BEACON));
         randomItems.add(new ItemStack(Material.SHULKER_BOX));
         randomItems.add(new ItemStack(Material.ENDER_CHEST));
         
-        for (int i = 1; i < 5; i++) {
+        for (int i = 1; i < 6; i++) {
             randomItems.add(readyItems.get("$1", 4 * i));
             randomItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, 4 * i));
 
@@ -246,28 +248,51 @@ public class OpenChest {
             randomItems.add(new ItemStack(Material.COPPER_ORE, 4 * i));
             randomItems.add(new ItemStack(Material.COPPER_BLOCK, 4 * i));
             randomItems.add(new ItemStack(Material.COPPER_INGOT, 4 * i));
+            randomItems.add(new ItemStack(Material.SHROOMLIGHT, 4 * i));
+            randomItems.add(new ItemStack(Material.GRASS_BLOCK, 4 * i));
+            randomItems.add(new ItemStack(Material.GLOWSTONE, 4 * i));
+            randomItems.add(new ItemStack(Material.OBSIDIAN, 4 * i));
+            randomItems.add(new ItemStack(Material.CRYING_OBSIDIAN, 4 * i));
+            randomItems.add(new ItemStack(Material.FIREWORK_ROCKET, 4 * i));
+            randomItems.add(new ItemStack(Material.FIREWORK_ROCKET, 4 * i));
+            randomItems.add(new ItemStack(Material.MUD, 4 * i));
+            randomItems.add(new ItemStack(Material.RED_SAND, 4 * i));
+            randomItems.add(new ItemStack(Material.DRIPSTONE_BLOCK, 4 * i));
+            randomItems.add(new ItemStack(Material.AMETHYST_BLOCK, 4 * i));
+            randomItems.add(new ItemStack(Material.AMETHYST_SHARD, 4 * i));
+            randomItems.add(new ItemStack(Material.END_STONE, 4 * i));
+            randomItems.add(new ItemStack(Material.NETHER_BRICK, 4 * i));
+            randomItems.add(new ItemStack(Material.BLACKSTONE, 4 * i));
+            randomItems.add(new ItemStack(Material.STONE_BRICKS, 4 * i));
+            randomItems.add(new ItemStack(Material.REDSTONE, 4 * i));
+            randomItems.add(new ItemStack(Material.REDSTONE_BLOCK, 4 * i));
+            randomItems.add(new ItemStack(Material.TNT, 4 * i));
+            randomItems.add(new ItemStack(Material.EXPERIENCE_BOTTLE, 4 * i));
+            randomItems.add(new ItemStack(Material.SHULKER_SHELL, 4 * i));
+            randomItems.add(new ItemStack(Material.STONE, 4 * i));
+            randomItems.add(new ItemStack(Material.COBBLESTONE, 4 * i));
+            randomItems.add(new ItemStack(Material.DIRT, 4 * i));
+            randomItems.add(new ItemStack(Material.SAND, 4 * i));
+            randomItems.add(new ItemStack(Material.DEEPSLATE, 4 * i));
+            randomItems.add(new ItemStack(Material.GLASS, 4 * i));
+            randomItems.add(new ItemStack(Material.MOSSY_COBBLESTONE, 4 * i));
+            randomItems.add(new ItemStack(Material.PURPUR_BLOCK, 4 * i));
+            randomItems.add(new ItemStack(Material.TERRACOTTA, 4 * i));
+            randomItems.add(new ItemStack(Material.GRANITE, 4 * i));
+            randomItems.add(new ItemStack(Material.DIORITE, 4 * i));
+            randomItems.add(new ItemStack(Material.ANDESITE, 4 * i));
+            randomItems.add(new ItemStack(Material.CLAY, 4 * i));
+            randomItems.add(new ItemStack(Material.GRAVEL, 4 * i));
+            randomItems.add(new ItemStack(Material.SANDSTONE, 4 * i));
         }
 
         randomItems.add(new ItemStack(Material.GOLDEN_AXE));
         randomItems.add(new ItemStack(Material.IRON_PICKAXE));
+        randomItems.add(new ItemStack(Material.GOLDEN_PICKAXE));
         randomItems.add(new ItemStack(Material.DIAMOND_SHOVEL));
+        randomItems.add(new ItemStack(Material.DIAMOND_PICKAXE));
         randomItems.add(new ItemStack(Material.NAME_TAG));
         randomItems.add(new ItemStack(Material.SADDLE));
-        randomItems.add(new ItemStack(Material.STONE, 64));
-        randomItems.add(new ItemStack(Material.COBBLESTONE, 64));
-        randomItems.add(new ItemStack(Material.DIRT, 64));
-        randomItems.add(new ItemStack(Material.SAND, 64));
-        randomItems.add(new ItemStack(Material.DEEPSLATE, 64));
-        randomItems.add(new ItemStack(Material.GLASS, 64));
-        randomItems.add(new ItemStack(Material.MOSSY_COBBLESTONE, 64));
-        randomItems.add(new ItemStack(Material.PURPUR_BLOCK, 64));
-        randomItems.add(new ItemStack(Material.TERRACOTTA, 64));
-        randomItems.add(new ItemStack(Material.GRANITE, 64));
-        randomItems.add(new ItemStack(Material.DIORITE, 64));
-        randomItems.add(new ItemStack(Material.ANDESITE, 64));
-        randomItems.add(new ItemStack(Material.CLAY, 64));
-        randomItems.add(new ItemStack(Material.GRAVEL, 64));
-        randomItems.add(new ItemStack(Material.SANDSTONE, 64));
 
         new CommandBase("openchest", 1, false) {
             @Override

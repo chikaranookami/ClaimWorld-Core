@@ -27,8 +27,6 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class Kowal {
 
-    private final List<ItemStack> lockedItems = new ArrayList<>();
-
     private ItemStack getBook() {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta bookMeta = (BookMeta) book.getItemMeta();
@@ -55,10 +53,6 @@ public class Kowal {
     }
 
     public Kowal() {
-        ReadyItems items = ReadyItems.getInstance();
-        lockedItems.add(items.get("$1"));
-        lockedItems.add(items.get("Uniwersalny_bilet"));
-
         new CommandBase("kowal", 1, false) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
@@ -66,10 +60,11 @@ public class Kowal {
                 if (player == null) return false;
 
                 PlayerInventory inventory = player.getInventory();
-                ItemStack item = inventory.getItemInMainHand();
+                ItemStack item = inventory.getItemInMainHand().clone();
                 ItemStack offItem = inventory.getItemInOffHand();
+                ReadyItems readyItems = ReadyItems.getInstance();
 
-                if (item.getType().isAir() || item.getItemMeta() == null || item.getItemMeta().getLore() == null || item.getItemMeta().getLore().isEmpty() || lockedItems.contains(item) || offItem.getItemMeta() == null || (!(offItem.getItemMeta().getCustomModelData() == 12))) {
+                if (item.getType().isAir() || item.isSimilar(readyItems.get("$1")) || item.isSimilar(readyItems.get("Uniwersalny_bilet")) ||item.getItemMeta() == null || item.getItemMeta().getLore() == null || item.getItemMeta().getLore().isEmpty() || offItem.getItemMeta() == null || (!(offItem.getItemMeta().getCustomModelData() == 12))) {
                     player.openBook(getBook());
                     return true;
                 }
@@ -77,7 +72,7 @@ public class Kowal {
                 inventory.getItemInOffHand().setAmount(inventory.getItemInOffHand().getAmount() - 1);
                 inventory.getItemInMainHand().setAmount(item.getAmount() - 1);
 
-                int chance = new Random().nextInt(3);
+                int chance = new Random().nextInt(4);
                 World world = player.getWorld();
                 Location location = player.getLocation();
 
@@ -92,6 +87,8 @@ public class Kowal {
                             TaskManager.getInstance().tryFinishTask(player, new Task("Spal u kowala 3 przedmioty.", "counter", 3));
                         });
                     } else {
+                        item.setAmount(1);
+
                         List<ItemStack> items = new ArrayList<>();
                         items.add(item);
                         items.add(item);

@@ -11,11 +11,16 @@ import java.util.List;
 
 public class BuyChests {
     public BuyChests() {
-        new CommandBase("buychests", false) {
+        new CommandBase("buychests", 1, false) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
+                int amount = Integer.parseInt(arguments[0]);
+                if (amount == 0) amount = 1;
+
                 List<ItemStack> itemStackList = new ArrayList<>();
-                itemStackList.add(ReadyItems.getInstance().get("Skrzynia_smoka"));
+                for (int i = 0; i < amount; i++) {
+                    itemStackList.add(ReadyItems.getInstance().get("Skrzynia_smoka"));
+                }
 
                 new WarehouseUtils().addItemsGlobal(itemStackList);
                 return true;
@@ -23,7 +28,7 @@ public class BuyChests {
 
             @Override
             public String getUsage() {
-                return "/buychests";
+                return "/buychests <amount>";
             }
         }.setPermission("claimworld.admin");
     }

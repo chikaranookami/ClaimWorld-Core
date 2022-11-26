@@ -107,7 +107,7 @@ public class BattlePassManager {
             if (command.contains(playerValue)) command = command.replace(playerValue, player.getName());
             dispatchCommand(getConsoleSender(), command);
 
-            if (new Random().nextInt(2) == 0) new WarehouseUtils().addItemsSingle(player, Collections.singletonList(ReadyItems.getInstance().get("Skrzynia_smoka")));
+            new WarehouseUtils().addItemsSingle(player, Collections.singletonList(ReadyItems.getInstance().get("Skrzynia_smoka")));
         });
     }
 

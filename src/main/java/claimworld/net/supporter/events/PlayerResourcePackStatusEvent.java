@@ -27,7 +27,7 @@ public class PlayerResourcePackStatusEvent implements Listener {
 
         Player player = event.getPlayer();
 
-        new JoinAnnouncer(player);
+        getScheduler().runTaskLater(Supporter.getPlugin(), () -> new JoinAnnouncer(player), 20L);
 
         getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
             String playerName = player.getName();

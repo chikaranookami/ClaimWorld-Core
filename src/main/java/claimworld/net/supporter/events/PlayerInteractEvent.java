@@ -35,7 +35,6 @@ public class PlayerInteractEvent implements Listener {
     public void playerInteractEvent(org.bukkit.event.player.PlayerInteractEvent event) {
         if (event.getHand() == null) return;
         if (event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
-        if (event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
         if (event.getClickedBlock() == null) return;
 
         Player player = event.getPlayer();
@@ -56,14 +55,15 @@ public class PlayerInteractEvent implements Listener {
         }
 
         if (!allowedSpawnEggs.contains(event.getMaterial())) return;
-        if (!(event.getClickedBlock().getLocation().distance(player.getLocation()) < 7)) return;
-        if (event.getClickedBlock().getType() != Material.SPAWNER) return;
+        if (event.getClickedBlock().getLocation().distance(player.getLocation()) > 10) return;
 
         Material itemType = item.getType();
         if (itemType == Material.WITCH_SPAWN_EGG) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Zresp wiedzme.", "", 0)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Zresp wiedzme jajkiem.", "", 0)));
             return;
         }
+
+        if (event.getClickedBlock().getType() != Material.SPAWNER) return;
 
         SkillManager skillManager = new SkillManager();
         if (!skillManager.canActivateSkill(player, "Twoj spawner")) {

@@ -19,7 +19,7 @@ public class TaskManager {
     private static TaskManager instance = null;
 
     public static TaskManager getInstance() {
-        if (instance == null) {instance = new TaskManager();}
+        if (instance == null) instance = new TaskManager();
         return instance;
     }
 
@@ -120,7 +120,7 @@ public class TaskManager {
         taskList.add(new Task("Ukoncz raida.", "", 0));
         taskList.add(new Task("Sklonuj przedmiot u kowala.", "", 0));
         taskList.add(new Task("Ustaw zombie w spawnerze.", "", 0));
-        taskList.add(new Task("Zresp wiedzme.", "", 0));
+        taskList.add(new Task("Zresp wiedzme jajkiem.", "", 0));
         taskList.add(new Task("Przespij 3 noce.", "counter", 3));
         taskList.add(new Task("Dropnij 32 brodawki z piglinow.", "counter", 32));
         taskList.add(new Task("Rozkop 6 emeraldow.", "counter", 6));
@@ -135,7 +135,7 @@ public class TaskManager {
         taskList.add(new Task("Przeczekaj atak na wioske.", "", 0));
         taskList.add(new Task("Ukoncz dowolne osiagniecie.", "", 0));
         taskList.add(new Task("Wysluchaj serwerowych ogloszen.", "", 0));
-        taskList.add(new Task("Badz obok przemieniajacego sie wiesniaka.", "", 0));
+        taskList.add(new Task("Badz obok przemieniajacego sie zombie.", "", 0));
         taskList.add(new Task("Spal u kowala 3 przedmioty.", "counter", 3));
         taskList.add(new Task("Wyrzuc 12x12 na kostce.", "counter", 12));
         taskList.add(new Task("Zjedz 8 dziwnych zup.", "counter", 8));

@@ -65,7 +65,7 @@ public class CreatureSpawnEvent implements Listener {
             if (random > 3) {
                 broadcast("rendering dolarek", "claimworld.admin");
                 updatedRecipes.add(getCustomRecipe(dolarek, 4, new ItemStack(Material.EMERALD, 64), null));
-                updatedRecipes.add(getCustomRecipe(skrzyniaSmoka, 2, new ItemStack(Material.EMERALD, 32), null));
+                updatedRecipes.add(getCustomRecipe(skrzyniaSmoka, 4, new ItemStack(Material.EMERALD, 32), null));
             }
             if (random > 5) {
                 updatedRecipes.add(getCustomRecipe(unbreaking4, 1, new ItemStack(Material.EMERALD, 16), dolar64x));
@@ -96,7 +96,7 @@ public class CreatureSpawnEvent implements Listener {
             }
             if (random > 5) {
                 updatedRecipes.add(getCustomRecipe(sharpnessBook, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), dolar64x));
-                updatedRecipes.add(getCustomRecipe(skrzyniaSmoka, 2, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
+                updatedRecipes.add(getCustomRecipe(skrzyniaSmoka, 4, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
             }
             if (random > 6) {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.ELYTRA), 1, new ItemStack(Material.PHANTOM_MEMBRANE, 64), dolar64x));
@@ -123,7 +123,7 @@ public class CreatureSpawnEvent implements Listener {
         if (spawnReason == org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.ENDER_PEARL) {
             for (Entity entity : event.getEntity().getNearbyEntities(3, 3, 3)) {
                 if (!(entity instanceof Player)) continue;
-                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Badz blisko 8 nowych endermitow.", "counter", 8)));
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Badz blisko 6 nowych endermitow.", "counter", 6)));
             }
             return;
         }
@@ -131,7 +131,7 @@ public class CreatureSpawnEvent implements Listener {
         if (spawnReason == org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.CURED) {
             for (Entity entity : event.getEntity().getNearbyEntities(3, 3, 3)) {
                 if (!(entity instanceof Player)) continue;
-                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Wesprzyj leczenie wiesniaka.", "", 0)));
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Badz obok przemieniajacego sie zombie.", "", 0)));
             }
             return;
         }

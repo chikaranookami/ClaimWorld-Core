@@ -18,10 +18,6 @@ import static claimworld.net.supporter.utils.battlepass.BattlePassManager.mainOb
 public class SkillManager {
     private final HashMap<String, Skill> skillMap = new HashMap<>();
 
-    public HashMap<String, Skill> getSkillMap() {
-        return skillMap;
-    }
-
     public ItemStack getSkillBook(Player player) {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta bookMeta = (BookMeta) book.getItemMeta();
@@ -60,8 +56,8 @@ public class SkillManager {
     public SkillManager() {
         List<Skill> skillList = new ArrayList<>();
         skillList.add(new Skill("Punkty bywalca", 30, "Szansa na dodatkowe punkty do Sklepu Punktowego przy wejsciu na serwer."));
-        skillList.add(new Skill("Mob Killer", 60, "Szansa na zadanie podwojnych obrazen niemal wszystkim bytom."));
         skillList.add(new Skill("Twoj spawner", 90, "Mozliwosc aktualizacji moba w spawnerze za pomoca jaja spawnujacego."));
+        skillList.add(new Skill("Mob Killer", 60, "Szansa na zadanie podwojnych obrazen niemal wszystkim bytom."));
 
         for (Skill skill : skillList) {
             skillMap.put(skill.getName(), skill);

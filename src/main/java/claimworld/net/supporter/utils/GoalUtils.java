@@ -7,8 +7,6 @@ import java.util.HashMap;
 
 public class GoalUtils {
 
-    private final FileConfiguration config = Supporter.getPlugin().getConfig();
-
     private final HashMap<Integer, String> rewardsMap = new HashMap<>();
 
     private boolean shorterFishing;
@@ -22,6 +20,7 @@ public class GoalUtils {
     }
 
     public GoalUtils() {
+        FileConfiguration config = Supporter.getPlugin().getConfig();
         if (config.getInt("goals.total") >= 1250) shorterFishing = true;
 
         rewardsMap.put(250, "Mniej spiacych osob, by ustawic dzien");
@@ -29,6 +28,7 @@ public class GoalUtils {
         rewardsMap.put(750, "Nieco wiekszy randomTickSpeed");
         rewardsMap.put(1000, "Powiekszenie borderu (Overworld)");
         rewardsMap.put(1250, "Szybsze lowienie");
+        rewardsMap.put(1750, "Efekty krwawienia");
         rewardsMap.put(9999, "-");
     }
 }

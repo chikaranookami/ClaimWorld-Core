@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import static claimworld.net.supporter.utils.MessageUtils.getUserPrefix;
 import static org.bukkit.Bukkit.*;
@@ -34,9 +35,9 @@ public class PlayerResourcePackStatusEvent implements Listener {
             SkillManager skillManager = new SkillManager();
 
             if (skillManager.canActivateSkill(player, "Punkty bywalca")) {
-                if (!lockedPlayerList.contains(playerName)) {
+                if (!lockedPlayerList.contains(playerName) || new Random().nextInt(2) == 0) {
                     lockedPlayerList.add(playerName);
-                    dispatchCommand(getConsoleSender(), "adminvote User " + playerName + " AddPoints 1");
+                    getScheduler().runTask(Supporter.getPlugin(), () -> dispatchCommand(getConsoleSender(), "adminvote User " + playerName + " AddPoints 1"));
                     player.sendMessage(getUserPrefix() + "Otrzymales dodatkowy punkt za logowanie.");
                     skillManager.renderSkillEffect(player.getLocation());
                 }

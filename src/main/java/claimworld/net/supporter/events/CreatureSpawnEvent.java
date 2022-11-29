@@ -63,7 +63,6 @@ public class CreatureSpawnEvent implements Listener {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.CREEPER_SPAWN_EGG), 1, dolar64x, null));
             }
             if (random > 3) {
-                broadcast("rendering dolarek", "claimworld.admin");
                 updatedRecipes.add(getCustomRecipe(dolarek, 4, new ItemStack(Material.EMERALD, 64), null));
                 updatedRecipes.add(getCustomRecipe(skrzyniaSmoka, 4, new ItemStack(Material.EMERALD, 32), null));
             }
@@ -131,7 +130,7 @@ public class CreatureSpawnEvent implements Listener {
         if (spawnReason == org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.CURED) {
             for (Entity entity : event.getEntity().getNearbyEntities(3, 3, 3)) {
                 if (!(entity instanceof Player)) continue;
-                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Badz obok przemieniajacego sie zombie.", "", 0)));
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Przemien zombie w wiesniaka, bedac blisko niego.", "", 0)));
             }
             return;
         }

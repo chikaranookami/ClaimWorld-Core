@@ -135,7 +135,7 @@ public class TaskManager {
         taskList.add(new Task("Przeczekaj atak na wioske.", "", 0));
         taskList.add(new Task("Ukoncz dowolne osiagniecie.", "", 0));
         taskList.add(new Task("Wysluchaj serwerowych ogloszen.", "", 0));
-        taskList.add(new Task("Badz obok przemieniajacego sie zombie.", "", 0));
+        taskList.add(new Task("Przemien zombie w wiesniaka, bedac blisko niego.", "", 0));
         taskList.add(new Task("Spal u kowala 3 przedmioty.", "counter", 3));
         taskList.add(new Task("Wyrzuc 12x12 na kostce.", "counter", 12));
         taskList.add(new Task("Zjedz 8 dziwnych zup.", "counter", 8));

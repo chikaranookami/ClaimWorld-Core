@@ -11,9 +11,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.*;
 
-public class AutoMessages {
+public class AutoMessageTimer {
 
-    public AutoMessages() {
+    public AutoMessageTimer() {
         getServer().getConsoleSender().sendMessage("Przygotowywanie bossbarow...");
 
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () ->{

@@ -13,6 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AddToWarehouse {
+
+    WarehouseUtils warehouseUtils = new WarehouseUtils();
+
     public AddToWarehouse() {
         new CommandBase("addtowarehouse", 2, false) {
             @Override
@@ -30,7 +33,7 @@ public class AddToWarehouse {
                 List<ItemStack> itemStackList = new ArrayList<>();
                 itemStackList.add(item);
 
-                new WarehouseUtils().addItemsSingle(player, itemStackList);
+                warehouseUtils.addItemsSingle(player, itemStackList);
 
                 return true;
             }

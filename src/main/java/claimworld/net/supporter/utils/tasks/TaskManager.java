@@ -117,7 +117,7 @@ public class TaskManager {
         taskList.add(new Task("Pokonaj wardena.", "", 0));
         taskList.add(new Task("Zrob beacona.", "", 0));
         taskList.add(new Task("Zrob kupe.", "", 0));
-        taskList.add(new Task("Ukoncz raida.", "", 0));
+        taskList.add(new Task("Wygraj raida.", "", 0));
         taskList.add(new Task("Sklonuj przedmiot u kowala.", "", 0));
         taskList.add(new Task("Ustaw zombie w spawnerze.", "", 0));
         taskList.add(new Task("Zresp wiedzme jajkiem.", "", 0));
@@ -131,14 +131,14 @@ public class TaskManager {
         //second set (12)
         taskList.add(new Task("Pokonaj Smoka.", "", 0));
         taskList.add(new Task("Umrzyj z glodu.", "", 0));
-        taskList.add(new Task("Oberwij piorunem od admina.", "", 0));
+        taskList.add(new Task("Oberwij piorunem.", "", 0));
         taskList.add(new Task("Przeczekaj atak na wioske.", "", 0));
         taskList.add(new Task("Ukoncz dowolne osiagniecie.", "", 0));
         taskList.add(new Task("Wysluchaj serwerowych ogloszen.", "", 0));
         taskList.add(new Task("Przemien zombie w wiesniaka, bedac blisko niego.", "", 0));
         taskList.add(new Task("Spal u kowala 3 przedmioty.", "counter", 3));
         taskList.add(new Task("Wyrzuc 12x12 na kostce.", "counter", 12));
-        taskList.add(new Task("Zjedz 8 dziwnych zup.", "counter", 8));
+        taskList.add(new Task("Zjedz 8 podejrzanych potrawek.", "counter", 8));
         taskList.add(new Task("Pooddychaj przez chwile oparami smoka.", "counter", 6));
         taskList.add(new Task("Badz blisko 6 nowych endermitow.", "counter", 6));
 
@@ -146,8 +146,12 @@ public class TaskManager {
         taskList.add(new Task("Badz online, gdy pojawi sie handlarz.", "", 0));
         taskList.add(new Task("Zuzyj diamentowy kilof.", "", 0));
         taskList.add(new Task("Niech zbiera Ci sie na cos ciezszego.", "", 0));
-        //taskList.add(new Task("Natraf na Magiczna Skrzynke.", "", 0));
+        taskList.add(new Task("Otworz Magiczna Skrzynke.", "", 0));
         taskList.add(new Task("Uzyj aktywnego Teleportera.", "", 0));
+
+        //fourth set
+        taskList.add(new Task("Otrzymaj Swiateczne Blogoslawienstwo, po prostu grajac.", "", 0));
+        taskList.add(new Task("Otrzymaj Prezent od Swietego Mikolaja, po prostu grajac.", "", 0));
 
         renderNewTasks();
     }

@@ -101,13 +101,20 @@ public class BattlePassManager {
 
     public void renderReward(Player player, int level) {
         getScheduler().runTask(Supporter.getPlugin(), () -> {
-            // -1?
             String command = battlePassMap.get(level - 1).getCommand();
             String playerValue = "<PLAYER>";
             if (command.contains(playerValue)) command = command.replace(playerValue, player.getName());
             dispatchCommand(getConsoleSender(), command);
 
-            new WarehouseUtils().addItemsSingle(player, Collections.singletonList(ReadyItems.getInstance().get("Skrzynia_smoka")));
+            getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+                ReadyItems readyItems = ReadyItems.getInstance();
+                List<ItemStack> items = new ArrayList<>();
+                items.add(readyItems.get("Skrzynia_smoka"));
+
+                if (new Random().nextBoolean()) items.add(readyItems.get("Prezent"));
+
+                new WarehouseUtils().addItemsSingle(player, items);
+            }, 10L);
         });
     }
 
@@ -117,14 +124,15 @@ public class BattlePassManager {
         player.playSound(location, Sound.ENTITY_PILLAGER_CELEBRATE, 0.75f, 0.75f);
     }
 
-    public void renderPlayerDoneQuestInfo(Player player, int points) {
-        getLogger().log(Level.INFO, "Updated battlepass score of " + player.getName() + " to " + points);
-
+    public void renderPlayerDoneQuestInfo(Player player) {
         player.sendTitle("", colorize("&aWykonales zadanie, gratulacje!"), 10, 60, 20);
-        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(colorize("&aZaktualizowano punkty przepustki&f (" + points + getBattlepassIcon() + ")")));
     }
 
     public void updatePoints(Player player, int value) {
+        updatePoints(player, value, true);
+    }
+
+    public void updatePoints(Player player, int value, boolean byQuest) {
         String playerName = player.getName();
         Score score = player.getScoreboard().getObjective(mainObjectiveName).getScore(playerName);
 
@@ -132,9 +140,14 @@ public class BattlePassManager {
         if (updatedScore > rewardLimit) return;
 
         score.setScore(updatedScore);
+        getLogger().log(Level.INFO, "Updated battlepass score of " + player.getName() + " to " + updatedScore);
 
-        renderPlayerDoneQuestInfo(player, updatedScore);
-        renderPlayerDoneQuestEffect(player);
+        if (byQuest) {
+            renderPlayerDoneQuestInfo(player);
+            renderPlayerDoneQuestEffect(player);
+        }
+
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(colorize("&aZaktualizowano punkty przepustki&f (" + updatedScore + getBattlepassIcon() + ")")));
         updateTablistFooter(player);
 
         tryReward(player, updatedScore);
@@ -225,10 +238,5 @@ public class BattlePassManager {
             if (battlePassMap.containsKey(i)) continue;
             battlePassMap.put(i, new BattlePassLevel(i, "addtowarehouse <PLAYER> $1", "[I] $1"));
         }
-        //<PLAYER>
-        //if !containskey(i) put single dollar
-        //for (int i = 0; i < 100; i++) {
-        //    battlePassMap.put(i, new BattlePassLevel(i, "say <PLAYER> mowi, ze dzis jest slonecznie.", "$1"));
-        //}
     }
 }

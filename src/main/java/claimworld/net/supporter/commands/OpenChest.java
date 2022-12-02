@@ -14,7 +14,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
 
 import static claimworld.net.supporter.utils.MessageUtils.getBroadcastPrefix;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
@@ -23,6 +22,7 @@ import static org.bukkit.Bukkit.*;
 public class OpenChest {
 
     private final List<ItemStack> randomItems = new ArrayList<>();
+    private final List<ItemStack> prezentItems = new ArrayList<>();
 
     private void playVisuals(World world, Location location) {
         //faze1
@@ -197,6 +197,22 @@ public class OpenChest {
         getScheduler().runTaskLater(Supporter.getPlugin(), () -> world.playSound(location, Sound.ENTITY_GENERIC_EXPLODE, volume, volume), delay);
     }
 
+    private void updateItemEntitySettings(Player player, Item item) {
+        item.setPickupDelay(30);
+        item.setVisualFire(true);
+        item.setCustomNameVisible(true);
+        item.setOwner(player.getUniqueId());
+
+        ItemMeta itemMeta = item.getItemStack().getItemMeta();
+        String displayName = itemMeta.getDisplayName();
+        item.setCustomName(displayName);
+    }
+
+    private void renderLateEffects(Location location, World world) {
+        world.playSound(location, Sound.ENTITY_ITEM_PICKUP, 1f, 1f);
+        world.playSound(location, Sound.ITEM_BUNDLE_DROP_CONTENTS, 1f, 1f);
+    }
+
     public OpenChest() {
         //last amount update - 26.11.2022
         //total amount > 350
@@ -208,82 +224,88 @@ public class OpenChest {
             randomItems.add(entry.getValue().getItem());
         }
 
+        randomItems.add(readyItems.get("Kupa"));
+        randomItems.add(readyItems.get("Uniwersalny_bilet"));
+
+        randomItems.add(readyItems.get("$1"));
+        randomItems.add(readyItems.get("$1", 24));
         randomItems.add(readyItems.get("$1", 32));
-        randomItems.add(readyItems.get("$1", 48));
+        randomItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, 24));
         randomItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, 32));
-        randomItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, 48));
 
         randomItems.add(new ItemStack(Material.ELYTRA));
         randomItems.add(new ItemStack(Material.BEACON));
         randomItems.add(new ItemStack(Material.SHULKER_BOX));
         randomItems.add(new ItemStack(Material.ENDER_CHEST));
         
+        int baseAmount = 2;
         for (int i = 1; i < 6; i++) {
-            randomItems.add(readyItems.get("$1", 4 * i));
-            randomItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, 4 * i));
+            randomItems.add(readyItems.get("$1", baseAmount * i));
+            randomItems.add(readyItems.get("Skarpeta", baseAmount * i));
 
-            randomItems.add(new ItemStack(Material.NETHER_WART, 4 * i));
-            randomItems.add(new ItemStack(Material.NETHER_WART_BLOCK, 4 * i));
-            randomItems.add(new ItemStack(Material.BROWN_MUSHROOM_BLOCK, 4 * i));
-            randomItems.add(new ItemStack(Material.RED_MUSHROOM_BLOCK, 4 * i));
-            randomItems.add(new ItemStack(Material.ACACIA_WOOD, 4 * i));
-            randomItems.add(new ItemStack(Material.BIRCH_WOOD, 4 * i));
-            randomItems.add(new ItemStack(Material.DARK_OAK_WOOD, 4 * i));
-            randomItems.add(new ItemStack(Material.JUNGLE_WOOD, 4 * i));
-            randomItems.add(new ItemStack(Material.MANGROVE_WOOD, 4 * i));
-            randomItems.add(new ItemStack(Material.OAK_WOOD, 4 * i));
-            randomItems.add(new ItemStack(Material.SPRUCE_WOOD, 4 * i));
-            randomItems.add(new ItemStack(Material.DIAMOND, 4 * i));
-            randomItems.add(new ItemStack(Material.EMERALD, 4 * i));
-            randomItems.add(new ItemStack(Material.EMERALD_BLOCK, 4 * i));
-            randomItems.add(new ItemStack(Material.IRON_BLOCK, 4 * i));
-            randomItems.add(new ItemStack(Material.IRON_INGOT, 4 * i));
-            randomItems.add(new ItemStack(Material.GOLD_INGOT, 4 * i));
-            randomItems.add(new ItemStack(Material.GOLD_BLOCK, 4 * i));
-            randomItems.add(new ItemStack(Material.JACK_O_LANTERN, 4 * i));
-            randomItems.add(new ItemStack(Material.LAPIS_LAZULI, 4 * i));
-            randomItems.add(new ItemStack(Material.LAPIS_BLOCK, 4 * i));
-            randomItems.add(new ItemStack(Material.CHARCOAL, 4 * i));
-            randomItems.add(new ItemStack(Material.COAL, 4 * i));
-            randomItems.add(new ItemStack(Material.COPPER_ORE, 4 * i));
-            randomItems.add(new ItemStack(Material.COPPER_BLOCK, 4 * i));
-            randomItems.add(new ItemStack(Material.COPPER_INGOT, 4 * i));
-            randomItems.add(new ItemStack(Material.SHROOMLIGHT, 4 * i));
-            randomItems.add(new ItemStack(Material.GRASS_BLOCK, 4 * i));
-            randomItems.add(new ItemStack(Material.GLOWSTONE, 4 * i));
-            randomItems.add(new ItemStack(Material.OBSIDIAN, 4 * i));
-            randomItems.add(new ItemStack(Material.CRYING_OBSIDIAN, 4 * i));
-            randomItems.add(new ItemStack(Material.FIREWORK_ROCKET, 4 * i));
-            randomItems.add(new ItemStack(Material.FIREWORK_ROCKET, 4 * i));
-            randomItems.add(new ItemStack(Material.MUD, 4 * i));
-            randomItems.add(new ItemStack(Material.RED_SAND, 4 * i));
-            randomItems.add(new ItemStack(Material.DRIPSTONE_BLOCK, 4 * i));
-            randomItems.add(new ItemStack(Material.AMETHYST_BLOCK, 4 * i));
-            randomItems.add(new ItemStack(Material.AMETHYST_SHARD, 4 * i));
-            randomItems.add(new ItemStack(Material.END_STONE, 4 * i));
-            randomItems.add(new ItemStack(Material.NETHER_BRICK, 4 * i));
-            randomItems.add(new ItemStack(Material.BLACKSTONE, 4 * i));
-            randomItems.add(new ItemStack(Material.STONE_BRICKS, 4 * i));
-            randomItems.add(new ItemStack(Material.REDSTONE, 4 * i));
-            randomItems.add(new ItemStack(Material.REDSTONE_BLOCK, 4 * i));
-            randomItems.add(new ItemStack(Material.TNT, 4 * i));
-            randomItems.add(new ItemStack(Material.EXPERIENCE_BOTTLE, 4 * i));
-            randomItems.add(new ItemStack(Material.SHULKER_SHELL, 4 * i));
-            randomItems.add(new ItemStack(Material.STONE, 4 * i));
-            randomItems.add(new ItemStack(Material.COBBLESTONE, 4 * i));
-            randomItems.add(new ItemStack(Material.DIRT, 4 * i));
-            randomItems.add(new ItemStack(Material.SAND, 4 * i));
-            randomItems.add(new ItemStack(Material.DEEPSLATE, 4 * i));
-            randomItems.add(new ItemStack(Material.GLASS, 4 * i));
-            randomItems.add(new ItemStack(Material.MOSSY_COBBLESTONE, 4 * i));
-            randomItems.add(new ItemStack(Material.PURPUR_BLOCK, 4 * i));
-            randomItems.add(new ItemStack(Material.TERRACOTTA, 4 * i));
-            randomItems.add(new ItemStack(Material.GRANITE, 4 * i));
-            randomItems.add(new ItemStack(Material.DIORITE, 4 * i));
-            randomItems.add(new ItemStack(Material.ANDESITE, 4 * i));
-            randomItems.add(new ItemStack(Material.CLAY, 4 * i));
-            randomItems.add(new ItemStack(Material.GRAVEL, 4 * i));
-            randomItems.add(new ItemStack(Material.SANDSTONE, 4 * i));
+            randomItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.NETHER_WART, baseAmount * i));
+            randomItems.add(new ItemStack(Material.NETHER_WART_BLOCK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.BROWN_MUSHROOM_BLOCK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.RED_MUSHROOM_BLOCK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.ACACIA_WOOD, baseAmount * i));
+            randomItems.add(new ItemStack(Material.BIRCH_WOOD, baseAmount * i));
+            randomItems.add(new ItemStack(Material.DARK_OAK_WOOD, baseAmount * i));
+            randomItems.add(new ItemStack(Material.JUNGLE_WOOD, baseAmount * i));
+            randomItems.add(new ItemStack(Material.MANGROVE_WOOD, baseAmount * i));
+            randomItems.add(new ItemStack(Material.OAK_WOOD, baseAmount * i));
+            randomItems.add(new ItemStack(Material.SPRUCE_WOOD, baseAmount * i));
+            randomItems.add(new ItemStack(Material.DIAMOND, baseAmount * i));
+            randomItems.add(new ItemStack(Material.EMERALD, baseAmount * i));
+            randomItems.add(new ItemStack(Material.EMERALD_BLOCK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.IRON_BLOCK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.IRON_INGOT, baseAmount * i));
+            randomItems.add(new ItemStack(Material.GOLD_INGOT, baseAmount * i));
+            randomItems.add(new ItemStack(Material.GOLD_BLOCK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.JACK_O_LANTERN, baseAmount * i));
+            randomItems.add(new ItemStack(Material.LAPIS_LAZULI, baseAmount * i));
+            randomItems.add(new ItemStack(Material.LAPIS_BLOCK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.CHARCOAL, baseAmount * i));
+            randomItems.add(new ItemStack(Material.COAL, baseAmount * i));
+            randomItems.add(new ItemStack(Material.COPPER_ORE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.COPPER_BLOCK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.COPPER_INGOT, baseAmount * i));
+            randomItems.add(new ItemStack(Material.SHROOMLIGHT, baseAmount * i));
+            randomItems.add(new ItemStack(Material.GRASS_BLOCK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.GLOWSTONE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.OBSIDIAN, baseAmount * i));
+            randomItems.add(new ItemStack(Material.CRYING_OBSIDIAN, baseAmount * i));
+            randomItems.add(new ItemStack(Material.FIREWORK_ROCKET, baseAmount * i));
+            randomItems.add(new ItemStack(Material.FIREWORK_ROCKET, baseAmount * i));
+            randomItems.add(new ItemStack(Material.MUD, baseAmount * i));
+            randomItems.add(new ItemStack(Material.RED_SAND, baseAmount * i));
+            randomItems.add(new ItemStack(Material.DRIPSTONE_BLOCK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.AMETHYST_BLOCK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.AMETHYST_SHARD, baseAmount * i));
+            randomItems.add(new ItemStack(Material.END_STONE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.NETHER_BRICK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.BLACKSTONE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.STONE_BRICKS, baseAmount * i));
+            randomItems.add(new ItemStack(Material.REDSTONE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.REDSTONE_BLOCK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.TNT, baseAmount * i));
+            randomItems.add(new ItemStack(Material.EXPERIENCE_BOTTLE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.SHULKER_SHELL, baseAmount * i));
+            randomItems.add(new ItemStack(Material.STONE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.COBBLESTONE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.DIRT, baseAmount * i));
+            randomItems.add(new ItemStack(Material.SAND, baseAmount * i));
+            randomItems.add(new ItemStack(Material.DEEPSLATE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.GLASS, baseAmount * i));
+            randomItems.add(new ItemStack(Material.MOSSY_COBBLESTONE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.PURPUR_BLOCK, baseAmount * i));
+            randomItems.add(new ItemStack(Material.TERRACOTTA, baseAmount * i));
+            randomItems.add(new ItemStack(Material.GRANITE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.DIORITE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.ANDESITE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.CLAY, baseAmount * i));
+            randomItems.add(new ItemStack(Material.GRAVEL, baseAmount * i));
+            randomItems.add(new ItemStack(Material.SANDSTONE, baseAmount * i));
         }
 
         randomItems.add(new ItemStack(Material.GOLDEN_AXE));
@@ -293,11 +315,27 @@ public class OpenChest {
         randomItems.add(new ItemStack(Material.DIAMOND_PICKAXE));
         randomItems.add(new ItemStack(Material.NAME_TAG));
         randomItems.add(new ItemStack(Material.SADDLE));
+        randomItems.add(new ItemStack(Material.REINFORCED_DEEPSLATE));
 
-        new CommandBase("openchest", 1, false) {
+        prezentItems.add(readyItems.get("Skrzynia_smoka"));
+        prezentItems.add(readyItems.get("Kupa"));
+        prezentItems.add(readyItems.get("Uniwersalny_bilet"));
+        prezentItems.add(readyItems.get("$1"));
+
+        for (int i = 1; i < 5; i++) {
+            prezentItems.add(readyItems.get("$1", i));
+        }
+
+        prezentItems.add(new ItemStack(Material.EMERALD, 16));
+        prezentItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, 16));
+
+        new CommandBase("openchest", 2, false) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
-                Player player = Bukkit.getPlayer(arguments[0]);
+                ItemStack itemStack = readyItems.get(arguments[0]);
+                if (itemStack == null) return false;
+
+                Player player = Bukkit.getPlayer(arguments[1]);
                 if (player == null) {
                     sender.sendMessage("player is null");
                     return true;
@@ -307,38 +345,49 @@ public class OpenChest {
                 location.setY(player.getLocation().getY() + 1);
 
                 World world = location.getWorld();
-                playVisuals(world, location);
-                playSounds(world, location);
 
-                getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                    assert world != null;
-                    getScheduler().runTask(Supporter.getPlugin(), () -> {
-                        world.playSound(location, Sound.ENTITY_ITEM_PICKUP, 1f, 1f);
-                        world.playSound(location, Sound.ITEM_BUNDLE_DROP_CONTENTS, 1f, 1f);
+                if (itemStack.equals(readyItems.get("Skrzynia_smoka"))) {
+                    playVisuals(world, location);
+                    playSounds(world, location);
 
-                        Item item = world.dropItem(location, randomItems.get(new Random().nextInt(randomItems.size())));
-                        item.setPickupDelay(40);
-                        item.setVisualFire(true);
-                        item.setCustomNameVisible(true);
-                        item.setOwner(player.getUniqueId());
+                    getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
+                        assert world != null;
+                        getScheduler().runTask(Supporter.getPlugin(), () -> {
+                            renderLateEffects(location, world);
 
-                        ItemMeta itemMeta = item.getItemStack().getItemMeta();
-                        String displayName = itemMeta.getDisplayName();
-                        item.setCustomName(displayName);
+                            Item item = world.dropItem(location, randomItems.get(new Random().nextInt(randomItems.size())));
+                            updateItemEntitySettings(player, item);
 
-                        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-                            String playerName = player.getName();
-                            if (itemMeta.hasDisplayName()) broadcastMessage(getBroadcastPrefix() + colorize(playerName + " znalazl " + item.getItemStack().getAmount() +  "x " + displayName + "&f w &cSkrzyni Smoka"));
+                            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+                                ItemMeta itemMeta = item.getItemStack().getItemMeta();
+                                if (itemMeta.hasDisplayName()) broadcastMessage(getBroadcastPrefix() + colorize(player.getName() + " znalazl " + item.getItemStack().getAmount() +  "x " + itemMeta.getDisplayName() + "&f w &cSkrzyni Smoka"));
+                            });
                         });
-                    });
-                }, 100);
+                    }, 100);
+
+                    return true;
+                }
+
+                if (itemStack.equals(readyItems.get("Prezent"))) {
+                    assert world != null;
+                    renderLateEffects(location, world);
+
+                    //dodac tu inne rzeczy
+                    int chance = new Random().nextInt(4);
+                    if (chance > 1) {
+                        Item item = world.dropItem(location, prezentItems.get(new Random().nextInt(prezentItems.size())));
+                        updateItemEntitySettings(player, item);
+                    } else {
+                        dispatchCommand(getConsoleSender(), "dajpunkty " + player.getName() + " 3");
+                    }
+                }
 
                 return true;
             }
 
             @Override
             public String getUsage() {
-                return "/openchest <nick>";
+                return "/openchest Prezent/Skrzynia_smoka <nick>";
             }
         }.setPermission("claimworld.admin");
     }

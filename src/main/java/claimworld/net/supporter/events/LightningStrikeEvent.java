@@ -14,11 +14,9 @@ public class LightningStrikeEvent implements Listener {
 
     @EventHandler
     public void lightningStrikeEvent(org.bukkit.event.weather.LightningStrikeEvent event) {
-        if (event.getCause() != org.bukkit.event.weather.LightningStrikeEvent.Cause.COMMAND) return;
-
-        for (Entity entity : event.getLightning().getNearbyEntities(5, 5, 5)) {
+        for (Entity entity : event.getLightning().getNearbyEntities(2, 2, 2)) {
             if (!(entity instanceof Player)) continue;
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Oberwij piorunem od admina.", "", 0)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Oberwij piorunem.", "", 0)));
         }
     }
 }

@@ -2,6 +2,7 @@ package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.guis.BonusManager;
+import claimworld.net.supporter.utils.items.ReadyItems;
 import claimworld.net.supporter.utils.tasks.Task;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.*;
@@ -11,13 +12,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static org.bukkit.Bukkit.getScheduler;
 
 public class BlockBreakEvent implements Listener {
 
-    BonusManager bonusManager = BonusManager.getInstance();
+    private final List<Material> decemberBonusMaterials = new ArrayList<>();
 
     private void dropItem(World world, Location location) {
         world.dropItem(location, new ItemStack(Material.DIAMOND));
@@ -25,10 +28,20 @@ public class BlockBreakEvent implements Listener {
         world.spawnParticle(Particle.EXPLOSION_NORMAL, location, 1);
     }
 
+    public BlockBreakEvent() {
+        //enable at 6, 24, 25, 26 and 31 of december
+        decemberBonusMaterials.add(Material.DIAMOND_ORE);
+        decemberBonusMaterials.add(Material.DEEPSLATE_DIAMOND_ORE);
+        decemberBonusMaterials.add(Material.EMERALD_ORE);
+        decemberBonusMaterials.add(Material.DEEPSLATE_EMERALD_ORE);
+        decemberBonusMaterials.add(Material.ANCIENT_DEBRIS);
+    }
+
     @EventHandler
     public void blockBreakEvent(org.bukkit.event.block.BlockBreakEvent event) {
         if (!(event.getExpToDrop() > 0 )) return;
 
+        BonusManager bonusManager = BonusManager.getInstance();
         if (bonusManager.getBonuses().get("DoubleXP")) {
             event.setExpToDrop(event.getExpToDrop() * 2);
         }
@@ -36,27 +49,31 @@ public class BlockBreakEvent implements Listener {
         Player player = event.getPlayer();
         if (player.getInventory().getItemInMainHand().getEnchantmentLevel(Enchantment.SILK_TOUCH) != 0) return;
 
-        if (event.getBlock().getType() == Material.DEEPSLATE_EMERALD_ORE || event.getBlock().getType() == Material.EMERALD_ORE) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-                TaskManager.getInstance().tryFinishTask(player, new Task("Rozkop 6 emeraldow.", "counter", 6));
-            });
+        World world = player.getWorld();
+        Location location = event.getBlock().getLocation();
+        Material material = event.getBlock().getType();
+        //enable at 6, 24, 25, 26 and 31 of december
+        //if (decemberBonusMaterials.contains(material)) {
+        //    if (new Random().nextInt(14) == 0) world.dropItem(location, ReadyItems.getInstance().get("Prezent"));
+        //}
+
+        if (material == Material.DEEPSLATE_EMERALD_ORE || material == Material.EMERALD_ORE) {
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Rozkop 6 emeraldow.", "counter", 6)));
             return;
         }
 
-        if (event.getBlock().getType() == Material.DIAMOND_ORE || event.getBlock().getType() == Material.DEEPSLATE_DIAMOND_ORE) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-                TaskManager.getInstance().tryFinishTask(player, new Task("Rozkop stack diaxow.", "counter", 64));
-            });
+        if (material == Material.DIAMOND_ORE || material == Material.DEEPSLATE_DIAMOND_ORE) {
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Rozkop stack diaxow.", "counter", 64)));
 
             if (!bonusManager.getBonuses().get("Diaxy+")) return;
 
-            dropItem(player.getWorld(), event.getBlock().getLocation());
+            dropItem(world, location);
 
             int random = new Random().nextInt(5);
             if (random > 0) return;
 
             getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                dropItem(player.getWorld(), event.getBlock().getLocation());
+                dropItem(world, location);
             }, 4L);
         }
     }

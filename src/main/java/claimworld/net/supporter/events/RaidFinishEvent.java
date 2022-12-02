@@ -15,7 +15,7 @@ public class RaidFinishEvent implements Listener {
     public void raidFinishEvent(org.bukkit.event.raid.RaidFinishEvent event) {
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () ->{
             for (Player player : event.getWinners()) {
-                TaskManager.getInstance().tryFinishTask(player, new Task("Ukoncz raida.", "", 0));
+                TaskManager.getInstance().tryFinishTask(player, new Task("Wygraj raida.", "", 0));
             }
         });
     }

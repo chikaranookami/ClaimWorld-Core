@@ -1,6 +1,7 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.announcers.JoinAnnouncer;
 import claimworld.net.supporter.utils.items.ReadyItems;
 import claimworld.net.supporter.utils.battlepass.BattlePassManager;
 import org.bukkit.entity.Player;
@@ -28,6 +29,12 @@ public class PlayerJoinEvent implements Listener {
         if (player.hasPermission("claimworld.mvp")) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 200, 1, true, false, false));
         }
+
+        //announcer
+        getScheduler().runTaskLater(Supporter.getPlugin(), () -> new JoinAnnouncer(player), 10L);
+
+        //enable at 6, 24, 25, 26 and 31 of december
+        //getScheduler().runTaskLater(Supporter.getPlugin(), () -> player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 432000, 1, true, false, false)), 10L);
 
         //checking compatibility between permissions and displayed team
         getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {

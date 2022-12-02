@@ -40,6 +40,7 @@ public class InventoryClickEvent implements Listener {
         Player player = (Player) event.getWhoClicked();
         Inventory playerInventory = player.getInventory();
 
+        //shulker inventory == player inventory - sprawdzone, tak jest
         if (slot == 17 && clickedInventory == playerInventory) {
             event.setCancelled(true);
             getScheduler().runTaskLater(Supporter.getPlugin(), () -> {

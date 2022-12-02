@@ -23,12 +23,17 @@ public class PlayerInteractEvent implements Listener {
 
     private final List<Material> allowedSpawnEggs = new ArrayList<>();
     private final List<Player> delayedPlayers = new ArrayList<>();
+    private final List<ItemStack> chests = new ArrayList<>();
 
     public PlayerInteractEvent() {
         allowedSpawnEggs.add(Material.ZOMBIE_SPAWN_EGG);
         allowedSpawnEggs.add(Material.SKELETON_SPAWN_EGG);
         allowedSpawnEggs.add(Material.WITCH_SPAWN_EGG);
         allowedSpawnEggs.add(Material.CREEPER_SPAWN_EGG);
+
+        ReadyItems readyItems = ReadyItems.getInstance();
+        chests.add(readyItems.get("Skrzynia_smoka"));
+        chests.add(readyItems.get("Prezent"));
     }
 
     @EventHandler
@@ -41,16 +46,31 @@ public class PlayerInteractEvent implements Listener {
         ItemStack item = event.getItem();
         if (item == null) return;
 
-        if (item.equals(ReadyItems.getInstance().get("Skrzynia_smoka"))) {
+        ReadyItems readyItems = ReadyItems.getInstance();
+
+        if (chests.contains(item) || item.isSimilar(readyItems.get("Prezent"))) {
             if (delayedPlayers.contains(player)) return;
             delayedPlayers.add(player);
 
             event.setCancelled(true);
             player.playSound(player, Sound.ENTITY_ITEM_PICKUP, 1f, 1f);
-            item.setAmount(item.getAmount() - 1);
-            dispatchCommand(getConsoleSender(), "openchest " + player.getName());
 
-            getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> delayedPlayers.remove(player), 100L);
+            long delay = 100;
+
+            if (item.equals(readyItems.get("Skrzynia_smoka"))) {
+                dispatchCommand(getConsoleSender(), "openchest Skrzynia_smoka " + player.getName());
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Otworz Magiczna Skrzynke.", "", 0)));
+            }
+
+            if (item.isSimilar(readyItems.get("Prezent"))) {
+                delay = 10;
+                dispatchCommand(getConsoleSender(), "openchest Prezent " + player.getName());
+            }
+
+            item.setAmount(item.getAmount() - 1);
+
+            getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> delayedPlayers.remove(player), delay);
+
             return;
         }
 

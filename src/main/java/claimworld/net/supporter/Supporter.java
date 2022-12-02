@@ -2,8 +2,9 @@ package claimworld.net.supporter;
 
 import claimworld.net.supporter.commands.*;
 import claimworld.net.supporter.events.*;
-import claimworld.net.supporter.timers.AutoMessages;
+import claimworld.net.supporter.timers.AutoMessageTimer;
 import claimworld.net.supporter.commands.Goal;
+import claimworld.net.supporter.timers.WinterEventTimers;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
@@ -83,11 +84,10 @@ public final class Supporter extends JavaPlugin implements Listener {
         new BuyChests();
 
         //systems
-        new AutoMessages();
+        new AutoMessageTimer();
+        new WinterEventTimers();
 
         //others
-        getScheduler().runTaskLater(this, () -> {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true");
-        }, 100L);
+        getScheduler().runTaskLater(this, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true"), 100L);
     }
 }

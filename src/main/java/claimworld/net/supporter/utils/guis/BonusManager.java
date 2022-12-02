@@ -1,6 +1,12 @@
 package claimworld.net.supporter.utils.guis;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import java.util.HashMap;
+
+import static claimworld.net.supporter.utils.MessageUtils.getUserPrefix;
+import static org.bukkit.Bukkit.getConsoleSender;
 
 public class BonusManager {
 
@@ -40,7 +46,7 @@ public class BonusManager {
         bonusPointPrices.put("Bloki", 20);
         bonusPointPrices.put("Diaxy+", 30);
         bonusPointPrices.put("DoubleXP", 30);
-        bonusPointPrices.put("Podnoszenie+", 30);
+        bonusPointPrices.put("Podnoszenie+", 20);
         bonusPointPrices.put("Rzucanie+", 30);
         bonusPointPrices.put("Zadania", 30);
     }
@@ -59,5 +65,11 @@ public class BonusManager {
 
     public HashMap<String, String> getBonusCommands() {
         return this.bonusCommands;
+    }
+
+    public void boosterAlreadyActive(String variableName, Player player) {
+        Bukkit.dispatchCommand(getConsoleSender(), "adminvote User " + player.getName() + " AddPoints " + getPointPrices().get(variableName));
+        getConsoleSender().sendMessage(variableName + " is already true");
+        player.sendMessage(getUserPrefix() + "Ktos juz aktywowal ten bonus. Punkty zostaly zwrocone.");
     }
 }

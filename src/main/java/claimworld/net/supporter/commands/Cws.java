@@ -17,12 +17,6 @@ import static org.bukkit.Bukkit.*;
 public class Cws {
     BonusManager bonusManager = BonusManager.getInstance();
 
-    private void boosterAlreadyActive(String variableName, Player player) {
-        Bukkit.dispatchCommand(getConsoleSender(), "adminvote User " + player.getName() + " AddPoints " + bonusManager.getPointPrices().get(variableName));
-        getConsoleSender().sendMessage(variableName + " is already true");
-        player.sendMessage(getUserPrefix() + "Ktos juz aktywowal ten bonus. Punkty zostaly zwrocone.");
-    }
-
     public Cws() {
         new CommandBase("cws", 1, 3, false) {
             @Override
@@ -37,13 +31,13 @@ public class Cws {
                 if (!bonuses.containsKey(value)) return false;
 
                 if (bonuses.get(value)) {
-                    boosterAlreadyActive(value, player);
+                    bonusManager.boosterAlreadyActive(value, player);
                     return true;
                 }
 
                 //tasks
                 if (value.equals("Zadania") && !TaskManager.getInstance().renderNewTasks()) {
-                    boosterAlreadyActive(value, player);
+                    bonusManager.boosterAlreadyActive(value, player);
                     return true;
                 }
 

@@ -66,6 +66,9 @@ public class ReadyItems {
         itemMap.put("Ruda_diamentu", new CustomItem("", Material.DIAMOND_ORE, null));
         itemMap.put("Sztabka_netherytu", new CustomItem("", Material.NETHERITE_INGOT, null));
 
+        itemMap.put("Prezent", new CustomItem("&dPrezent", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("rare"))), 13));
+        itemMap.put("Skarpeta", new CustomItem("&dSkarpeta", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("rare"))), 14));
+
         //itemMap.put("Halloweenowa_zupa", new CustomItem("&dHalloweenowa Zupa", Material.PUMPKIN_PIE, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.KNOCKBACK, 3));
         //itemMap.put("Halloweenowy_odbijacz", new CustomItem("&dHalloweenowy Odbijacz", Material.CARVED_PUMPKIN, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.THORNS, 8));
 

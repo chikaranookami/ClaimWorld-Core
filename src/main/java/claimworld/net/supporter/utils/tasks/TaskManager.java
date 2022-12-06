@@ -139,9 +139,9 @@ public class TaskManager {
         taskList.add(new Task("Wysluchaj serwerowych ogloszen.", "", 0));
         taskList.add(new Task("Przemien zombie w wiesniaka, bedac blisko niego.", "", 0));
         taskList.add(new Task("Spal u kowala 3 przedmioty.", "counter", 3));
-        taskList.add(new Task("Wyrzuc 12x12 na kostce.", "counter", 12));
+        taskList.add(new Task("Wyrzuc 12 razy liczbe 12 na kostce.", "counter", 12));
         taskList.add(new Task("Zjedz 8 podejrzanych potrawek.", "counter", 8));
-        taskList.add(new Task("Pooddychaj przez chwile oparami smoka.", "counter", 6));
+        taskList.add(new Task("Bezposrednio oberwij 6 od smoka.", "counter", 6));
         taskList.add(new Task("Badz blisko 6 nowych endermitow.", "counter", 6));
 
         //third set

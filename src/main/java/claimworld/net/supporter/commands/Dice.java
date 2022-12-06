@@ -3,6 +3,7 @@ package claimworld.net.supporter.commands;
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.tasks.Task;
+import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -40,9 +41,7 @@ public class Dice {
                     nearbyPlayer.sendMessage(colorize("&7[Rzut Kostka]&f Gracz &7" + player.getName() + " &fwlasnie wyrzucil liczbe &7" + number + "&f."));
                 }
 
-                if (number == 12) {
-                    getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> new Task("Wyrzuc 12x12 na kostce.", "counter", 12));
-                }
+                if (number == 12) getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Wyrzuc 12 razy liczbe 12 na kostce.", "counter", 12)));
 
                 return true;
             }

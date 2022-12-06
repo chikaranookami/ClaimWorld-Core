@@ -21,8 +21,8 @@ public class AutoMessageTimer {
             int currentValue = config.getInt("goals.total");
             int currentGoal = config.getInt("goals.active_goal");
 
+            org.bukkit.boss.BossBar vipBossbar = Bukkit.createBossBar(colorize("Podoba Ci sie projekt? Chcesz, by sie rozwijal? Kup &c/vip&f"), BarColor.RED, BarStyle.SOLID);
             org.bukkit.boss.BossBar shopGoalBossbar = Bukkit.createBossBar(colorize("Cel w Sklepie: &b" + new GoalUtils().getReward(currentGoal) + "&f. Postep: &b" + currentValue + "&f/&b" + currentGoal), BarColor.BLUE, BarStyle.SOLID);
-            org.bukkit.boss.BossBar vipBossbar = Bukkit.createBossBar(colorize("Nadchodzaca &cprzepustka bojowa&f i jeszcze wiecej mozliwosci! &c/vip"), BarColor.RED, BarStyle.SOLID);
             ActiveBossBar activeBossBar = new ActiveBossBar();
 
             //2h

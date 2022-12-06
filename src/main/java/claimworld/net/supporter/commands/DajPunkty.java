@@ -12,11 +12,12 @@ import java.util.Random;
 
 public class DajPunkty {
 
+    ErrorMessages errorMessages = new ErrorMessages();
+
     public DajPunkty() {
         new CommandBase("dajpunkty", 2, false) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
-                ErrorMessages errorMessages = new ErrorMessages();
                 Player player = Bukkit.getPlayer(arguments[0]);
 
                 if (player == null) {

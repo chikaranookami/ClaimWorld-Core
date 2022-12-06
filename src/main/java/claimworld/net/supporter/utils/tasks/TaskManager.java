@@ -11,6 +11,7 @@ import org.bukkit.scoreboard.Score;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
 
 import static org.bukkit.Bukkit.*;
 
@@ -90,6 +91,7 @@ public class TaskManager {
 
                     Score score = objective.getScore(playerName);
                     score.setScore(score.getScore() + 1);
+                    getLogger().log(Level.INFO, "updated counter score of task " + task.getName() + " to value " + score.getScore());
 
                     if (!(score.getScore() < task.getNumber())) {
                         playersWhoDidTask.add(playerName);
@@ -114,7 +116,7 @@ public class TaskManager {
         taskList.add(new Task("Powies niewidzialna ramke.", "", 0));
         taskList.add(new Task("Zuzyj netherytowy miecz.", "", 0));
         taskList.add(new Task("Wylow torbiel.", "", 0));
-        taskList.add(new Task("Pokonaj wardena.", "", 0));
+        taskList.add(new Task("Pokonaj Wardena.", "", 0));
         taskList.add(new Task("Zrob beacona.", "", 0));
         taskList.add(new Task("Zrob kupe.", "", 0));
         taskList.add(new Task("Wygraj raida.", "", 0));

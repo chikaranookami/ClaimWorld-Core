@@ -53,9 +53,9 @@ public class BlockBreakEvent implements Listener {
         Location location = event.getBlock().getLocation();
         Material material = event.getBlock().getType();
         //enable at 6, 24, 25, 26 and 31 of december
-        //if (decemberBonusMaterials.contains(material)) {
-        //    if (new Random().nextInt(14) == 0) world.dropItem(location, ReadyItems.getInstance().get("Prezent"));
-        //}
+        if (decemberBonusMaterials.contains(material)) {
+            if (new Random().nextInt(10) == 0) world.dropItem(location, ReadyItems.getInstance().get("Prezent"));
+        }
 
         if (material == Material.DEEPSLATE_EMERALD_ORE || material == Material.EMERALD_ORE) {
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Rozkop 6 emeraldow.", "counter", 6)));

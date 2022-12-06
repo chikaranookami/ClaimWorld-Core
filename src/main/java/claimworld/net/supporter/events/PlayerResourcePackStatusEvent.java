@@ -19,7 +19,6 @@ import static org.bukkit.Bukkit.*;
 
 public class PlayerResourcePackStatusEvent implements Listener {
 
-    HashMap<String, List<ItemStack>> storedItems = Locker.getInstance().getLockerMap();
     private final List<String> lockedPlayerList = new ArrayList<>();
 
     @EventHandler
@@ -27,24 +26,16 @@ public class PlayerResourcePackStatusEvent implements Listener {
         if (event.getStatus() == org.bukkit.event.player.PlayerResourcePackStatusEvent.Status.ACCEPTED) return;
 
         Player player = event.getPlayer();
+        String playerName = player.getName();
+        SkillManager skillManager = new SkillManager();
 
-        getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-            String playerName = player.getName();
-            SkillManager skillManager = new SkillManager();
+        if (!skillManager.canActivateSkill(player, "Punkty bywalca")) return;
+        if (new Random().nextInt(2) != 0) return;
+        if (lockedPlayerList.contains(playerName)) return;
+        lockedPlayerList.add(playerName);
 
-            if (skillManager.canActivateSkill(player, "Punkty bywalca")) {
-                if (!lockedPlayerList.contains(playerName) || new Random().nextInt(2) == 0) {
-                    lockedPlayerList.add(playerName);
-                    getScheduler().runTask(Supporter.getPlugin(), () -> dispatchCommand(getConsoleSender(), "adminvote User " + playerName + " AddPoints 1"));
-                    player.sendMessage(getUserPrefix() + "Otrzymales dodatkowy punkt za logowanie.");
-                    skillManager.renderSkillEffect(player.getLocation());
-                }
-            }
-
-            if (storedItems.get(playerName) == null) return;
-            if (storedItems.get(playerName).size() < 1) return;
-
-            player.sendMessage(getUserPrefix() + "W Twojej Skrytce cos jest. Odbierz to, zanim zniknie!");
-        }, 100L);
+        getScheduler().runTask(Supporter.getPlugin(), () -> dispatchCommand(getConsoleSender(), "adminvote User " + playerName + " AddPoints 1"));
+        player.sendMessage(getUserPrefix() + "Otrzymales dodatkowy punkt za logowanie.");
+        skillManager.renderSkillEffect(player.getLocation());
     }
 }

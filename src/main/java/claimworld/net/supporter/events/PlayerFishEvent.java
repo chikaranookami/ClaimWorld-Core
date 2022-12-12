@@ -13,6 +13,8 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerFishEvent implements Listener {
 
+    TaskManager taskManager = TaskManager.getInstance();
+
     @EventHandler
     public void playerFishEvent(org.bukkit.event.player.PlayerFishEvent event) {
         if (new GoalUtils().getShorterFishing()) event.getHook().setMaxWaitTime(500);
@@ -23,6 +25,6 @@ public class PlayerFishEvent implements Listener {
         assert event.getCaught() != null;
         if (!(((Item) event.getCaught()).getItemStack().getType() == Material.INK_SAC)) return;
 
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(event.getPlayer(), new Task("Wylow torbiel.", "", 0)));
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(event.getPlayer(), taskManager.getTaskMap().get("fishOutInkSac")));
     }
 }

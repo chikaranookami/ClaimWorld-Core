@@ -14,11 +14,14 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import static org.bukkit.Bukkit.getScheduler;
 
 public class BlockBreakEvent implements Listener {
+
+    TaskManager taskManager = TaskManager.getInstance();
 
     private final List<Material> decemberBonusMaterials = new ArrayList<>();
 
@@ -53,17 +56,19 @@ public class BlockBreakEvent implements Listener {
         Location location = event.getBlock().getLocation();
         Material material = event.getBlock().getType();
         //enable at 6, 24, 25, 26 and 31 of december
-        if (decemberBonusMaterials.contains(material)) {
-            if (new Random().nextInt(10) == 0) world.dropItem(location, ReadyItems.getInstance().get("Prezent"));
-        }
+        //if (decemberBonusMaterials.contains(material)) {
+            //if (new Random().nextInt(10) == 0) world.dropItem(location, ReadyItems.getInstance().get("Prezent"));
+        //}
+
+        Map<String, Task> taskMap = taskManager.getTaskMap();
 
         if (material == Material.DEEPSLATE_EMERALD_ORE || material == Material.EMERALD_ORE) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Rozkop 6 emeraldow.", "counter", 6)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("breakEmeralds")));
             return;
         }
 
         if (material == Material.DIAMOND_ORE || material == Material.DEEPSLATE_DIAMOND_ORE) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Rozkop stack diaxow.", "counter", 64)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("breakDiamonds")));
 
             if (!bonusManager.getBonuses().get("Diaxy+")) return;
 

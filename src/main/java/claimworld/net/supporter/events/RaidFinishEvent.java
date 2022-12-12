@@ -11,11 +11,13 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class RaidFinishEvent implements Listener {
 
+    TaskManager taskManager = TaskManager.getInstance();
+
     @EventHandler
     public void raidFinishEvent(org.bukkit.event.raid.RaidFinishEvent event) {
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () ->{
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
             for (Player player : event.getWinners()) {
-                TaskManager.getInstance().tryFinishTask(player, new Task("Wygraj raida.", "", 0));
+                taskManager.tryFinishTask(player, taskManager.getTaskMap().get("winRaid"));
             }
         });
     }

@@ -14,6 +14,8 @@ import static org.bukkit.Bukkit.*;
 
 public class EntityDamageEvent implements Listener {
 
+    TaskManager taskManager = TaskManager.getInstance();
+
     private void killPlayer(Player player) {
         player.setHealth(0);
         getLogger().log(Level.WARNING, "Player " + player.getDisplayName() + " has tried to cross the border.");
@@ -21,13 +23,13 @@ public class EntityDamageEvent implements Listener {
 
     @EventHandler
     public void entityDamageEvent(org.bukkit.event.entity.EntityDamageEvent event) {
-        if (event.getEntity().getType() != EntityType.PLAYER) return;
+        if (event.getEntityType() != EntityType.PLAYER) return;
 
         Player player = (Player) event.getEntity();
         org.bukkit.event.entity.EntityDamageEvent.DamageCause damageCause = event.getCause();
 
         if (damageCause.equals(org.bukkit.event.entity.EntityDamageEvent.DamageCause.ENTITY_ATTACK)) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Bezposrednio oberwij 6 od smoka.", "counter", 6)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("getHitByDragon")));
             return;
         }
 

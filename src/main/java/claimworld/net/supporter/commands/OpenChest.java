@@ -1,6 +1,7 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.ChestCounterUtils;
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.items.CustomItem;
 import claimworld.net.supporter.utils.items.ReadyItems;
@@ -238,7 +239,7 @@ public class OpenChest {
         randomItems.add(new ItemStack(Material.SHULKER_BOX));
         randomItems.add(new ItemStack(Material.ENDER_CHEST));
         
-        int baseAmount = 2;
+        int baseAmount = 3;
         for (int i = 1; i < 6; i++) {
             randomItems.add(readyItems.get("$1", baseAmount * i));
             randomItems.add(readyItems.get("Skarpeta", baseAmount * i));
@@ -345,6 +346,7 @@ public class OpenChest {
                 location.setY(player.getLocation().getY() + 1);
 
                 World world = location.getWorld();
+                ChestCounterUtils chestCounterUtils = new ChestCounterUtils();
 
                 if (itemStack.equals(readyItems.get("Skrzynia_smoka"))) {
                     playVisuals(world, location);
@@ -357,6 +359,8 @@ public class OpenChest {
 
                             Item item = world.dropItem(location, randomItems.get(new Random().nextInt(randomItems.size())));
                             updateItemEntitySettings(player, item);
+
+                            chestCounterUtils.addOne(player);
 
                             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
                                 ItemMeta itemMeta = item.getItemStack().getItemMeta();
@@ -372,7 +376,8 @@ public class OpenChest {
                     assert world != null;
                     renderLateEffects(location, world);
 
-                    //dodac tu inne rzeczy
+                    chestCounterUtils.addOne(player);
+
                     int chance = new Random().nextInt(4);
                     if (chance > 1) {
                         Item item = world.dropItem(location, prezentItems.get(new Random().nextInt(prezentItems.size())));

@@ -6,13 +6,13 @@ import claimworld.net.supporter.utils.battlepass.BattlePassManager;
 import claimworld.net.supporter.utils.items.ReadyItems;
 import claimworld.net.supporter.utils.tasks.Task;
 import claimworld.net.supporter.utils.tasks.TaskManager;
-import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -21,6 +21,8 @@ import static claimworld.net.supporter.utils.MessageUtils.getUserPrefix;
 import static org.bukkit.Bukkit.*;
 
 public class WinterEventTimers {
+
+    TaskManager taskManager = TaskManager.getInstance();
 
     private Player getPlayer() {
         Optional<? extends Player> optionalPlayer = getOnlinePlayers().stream().findFirst();
@@ -63,6 +65,8 @@ public class WinterEventTimers {
     public WinterEventTimers() {
         getServer().getConsoleSender().sendMessage("Przygotowywanie swiatecznych timerow...");
 
+        Map<String, Task> taskMap = taskManager.getTaskMap();
+
         //1h
         long prezentTime = 72000;
         getScheduler().runTaskTimerAsynchronously(Supporter.getPlugin(), () -> {
@@ -73,7 +77,7 @@ public class WinterEventTimers {
             renderSnow(player);
 
             getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                TaskManager.getInstance().tryFinishTask(player, new Task("Otrzymaj Prezent od Swietego Mikolaja, po prostu grajac.", "", 0));
+                taskManager.tryFinishTask(player, taskMap.get("getPrezent"));
                 player.sendMessage(getUserPrefix() + "Otrzymales prezent od Swietego Mikolaja!");
             }, 10L);
 
@@ -91,7 +95,7 @@ public class WinterEventTimers {
             getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                 player.sendMessage(getUserPrefix() + "Otrzymales Swiateczne Blogoslawienstwo.");
 
-                TaskManager.getInstance().tryFinishTask(player, new Task("Otrzymaj Swiateczne Blogoslawienstwo, po prostu grajac.", "", 0));
+                taskManager.tryFinishTask(player, taskMap.get("obtainChristmasBlessing"));
                 new WarehouseUtils().addItemsSingle(player, Collections.singletonList(ReadyItems.getInstance().get("Prezent")));
                 renderSnow(player);
 

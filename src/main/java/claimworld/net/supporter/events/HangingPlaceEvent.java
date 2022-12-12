@@ -18,6 +18,8 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class HangingPlaceEvent implements Listener {
 
+    TaskManager taskManager = TaskManager.getInstance();
+
     @EventHandler
     public void hangingPlaceEvent(org.bukkit.event.hanging.HangingPlaceEvent event) {
         ItemStack itemStack = event.getItemStack();
@@ -37,7 +39,7 @@ public class HangingPlaceEvent implements Listener {
             Player player = event.getPlayer();
             if (player == null) return;
 
-            TaskManager.getInstance().tryFinishTask(player, new Task("Powies niewidzialna ramke.", "", 0));
+            taskManager.tryFinishTask(player, taskManager.getTaskMap().get("placeInvisibleFrame"));
         });
     }
 }

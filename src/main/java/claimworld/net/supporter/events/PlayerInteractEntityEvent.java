@@ -2,6 +2,7 @@ package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.guis.BonusManager;
+import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -20,6 +21,7 @@ import java.util.Random;
 import static org.bukkit.Bukkit.*;
 public class PlayerInteractEntityEvent implements Listener {
 
+    TaskManager taskManager = TaskManager.getInstance();
     BonusManager bonusManager = BonusManager.getInstance();
 
     private final List<EntityType> entityTypes = Arrays.asList(EntityType.COW, EntityType.SHEEP, EntityType.PIG, EntityType.CHICKEN);
@@ -77,6 +79,8 @@ public class PlayerInteractEntityEvent implements Listener {
 
                 player.addPassenger(entity);
                 player.playSound(player, Sound.ITEM_ARMOR_EQUIP_ELYTRA, 0.7f, 1.0f);
+
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("pickupCreeper")));
 
                 delayedPlayers.add(player);
                 removeDelayedPlayer(player);

@@ -14,6 +14,8 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerBedLeaveEvent implements Listener {
 
+    TaskManager taskManager = TaskManager.getInstance();
+
     private final List<Player> delayedPlayers = new ArrayList<>();
 
     @EventHandler
@@ -24,11 +26,9 @@ public class PlayerBedLeaveEvent implements Listener {
 
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
             delayedPlayers.add(player);
-            TaskManager.getInstance().tryFinishTask(player, new Task("Przespij 3 noce.", "counter", 3));
+            taskManager.tryFinishTask(player, taskManager.getTaskMap().get("sleepThruNights"));
 
-            getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                delayedPlayers.remove(player);
-            }, 11000);
+            getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> delayedPlayers.remove(player), 11000);
         });
     }
 }

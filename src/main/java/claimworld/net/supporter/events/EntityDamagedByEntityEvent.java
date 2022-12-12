@@ -15,7 +15,13 @@ public class EntityDamagedByEntityEvent implements Listener {
 
     @EventHandler
     public void entityDamagedByEntityEvent(EntityDamageByEntityEvent event) {
-        if (event.getDamager().getType() != EntityType.PLAYER) return;
+        EntityType entityType = event.getDamager().getType();
+        if (entityType == EntityType.SNOWMAN) {
+            event.setDamage(event.getDamage() * 6);
+            return;
+        }
+
+        if (entityType != EntityType.PLAYER) return;
 
         Player player = (Player) event.getDamager();
         SkillManager skillManager = new SkillManager();

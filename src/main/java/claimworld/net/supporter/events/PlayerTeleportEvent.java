@@ -1,6 +1,6 @@
 package claimworld.net.supporter.events;
 
-import claimworld.net.supporter.utils.tasks.Task;
+import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -8,7 +8,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
+import static org.bukkit.Bukkit.getScheduler;
+
 public class PlayerTeleportEvent implements Listener {
+
+    TaskManager taskManager = TaskManager.getInstance();
 
     @EventHandler
     public void playerTeleportEvent(org.bukkit.event.player.PlayerTeleportEvent event) {
@@ -19,7 +23,7 @@ public class PlayerTeleportEvent implements Listener {
 
         if (teleportCause == org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT) {
             if (to.distance(event.getFrom()) < 100) return;
-            TaskManager.getInstance().tryFinishTask(player, new Task("Przemiesc sie o 100 metrow chorusem.", "", 0));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("useChorus")));
             return;
         }
 

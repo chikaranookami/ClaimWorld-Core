@@ -12,11 +12,13 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class LightningStrikeEvent implements Listener {
 
+    TaskManager taskManager = TaskManager.getInstance();
+
     @EventHandler
     public void lightningStrikeEvent(org.bukkit.event.weather.LightningStrikeEvent event) {
         for (Entity entity : event.getLightning().getNearbyEntities(2, 2, 2)) {
             if (!(entity instanceof Player)) continue;
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Oberwij piorunem.", "", 0)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask((Player) entity, taskManager.getTaskMap().get("getHitByLightningStrike")));
         }
     }
 }

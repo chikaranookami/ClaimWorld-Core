@@ -30,9 +30,10 @@ public class PlayerResourcePackStatusEvent implements Listener {
         SkillManager skillManager = new SkillManager();
 
         if (!skillManager.canActivateSkill(player, "Punkty bywalca")) return;
-        if (new Random().nextInt(2) != 0) return;
         if (lockedPlayerList.contains(playerName)) return;
         lockedPlayerList.add(playerName);
+
+        if (new Random().nextInt(2) != 0) return;
 
         getScheduler().runTask(Supporter.getPlugin(), () -> dispatchCommand(getConsoleSender(), "adminvote User " + playerName + " AddPoints 1"));
         player.sendMessage(getUserPrefix() + "Otrzymales dodatkowy punkt za logowanie.");

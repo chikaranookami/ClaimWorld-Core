@@ -45,7 +45,9 @@ public class SkillManager {
     public void renderSkillEffect(Location location) {
         World world = location.getWorld();
         assert world != null;
-        world.spawnParticle(Particle.SCULK_SOUL, location.add(0, 1, 0), 15);
+        Location newLocation = location.add(0, 1, 0);
+        world.spawnParticle(Particle.FLASH, newLocation, 3, 1, 1, 1, 0.5);
+        world.spawnParticle(Particle.SCULK_SOUL, newLocation, 20, 0.65, 0.65, 0.65, 0.5);
         world.playSound(location, Sound.ENTITY_SHULKER_BULLET_HIT, 0.75f, 0.75f);
     }
 

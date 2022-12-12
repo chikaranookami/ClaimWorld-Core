@@ -15,6 +15,8 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class Teleporter {
 
+    TaskManager taskManager = TaskManager.getInstance();
+
     private Location location;
 
     public Teleporter() {
@@ -48,7 +50,7 @@ public class Teleporter {
                 player.sendMessage(MessageUtils.getUserPrefix() + "Przeszedles przez Magiczny Portal.");
                 sender.sendMessage("teleporter uzyty na " + player);
 
-                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Uzyj aktywnego Teleportera.", "", 0)));
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("useActiveTeleporter")));
                 return true;
             }
 

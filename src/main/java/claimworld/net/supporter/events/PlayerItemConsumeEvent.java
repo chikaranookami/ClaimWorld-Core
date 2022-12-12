@@ -17,12 +17,17 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerItemConsumeEvent implements Listener {
+
+    TaskManager taskManager = TaskManager.getInstance();
+
+    Map<String, Task> taskMap = taskManager.getTaskMap();
 
     private final List<Material> blockedMaterials = Arrays.asList(Material.SWEET_BERRIES, Material.CHORUS_FRUIT, Material.MELON_SLICE, Material.DRIED_KELP);
 
@@ -37,9 +42,7 @@ public class PlayerItemConsumeEvent implements Listener {
         renderPoopEffects(world, location);
         player.sendMessage(MessageUtils.getUserPrefix() + "Chyba zbiera Ci sie na cos ciezszego...");
 
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            TaskManager.getInstance().tryFinishTask(player, new Task("Niech zbiera Ci sie na cos ciezszego.", "", 0));
-        });
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("doSmallShit")));
     }
 
     private void bigPoop(Player player, World world, Location location) {
@@ -63,9 +66,7 @@ public class PlayerItemConsumeEvent implements Listener {
 
         Bukkit.broadcastMessage(colorize(MessageUtils.getBroadcastPrefix() + "Gracz " + player.getDisplayName() + " &fwlasnie sie... zesral."));
 
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            TaskManager.getInstance().tryFinishTask(player, new Task("Zrob kupe.", "", 0));
-        });
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("doShit")));
     }
 
     @EventHandler
@@ -75,7 +76,7 @@ public class PlayerItemConsumeEvent implements Listener {
         Player player = event.getPlayer();
 
         if (event.getItem().getType() == Material.SUSPICIOUS_STEW) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Zjedz 8 podejrzanych potrawek.", "counter", 8)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("eatSuspiciousStew")));
             return;
         }
 

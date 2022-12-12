@@ -11,11 +11,14 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import static org.bukkit.Bukkit.getScheduler;
 
 public class EntityDeathEvent implements Listener {
+    
+    TaskManager taskManager = TaskManager.getInstance();
 
     @EventHandler
     public void entityDeathEvent(org.bukkit.event.entity.EntityDeathEvent event) {
@@ -25,8 +28,10 @@ public class EntityDeathEvent implements Listener {
         EntityType entityType = event.getEntityType();
         Entity entity = event.getEntity();
 
+        Map<String, Task> taskMap = taskManager.getTaskMap();
+
         if (entity instanceof Monster) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Zabij 208 pelnych zycia potworow.", "counter", 208)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("killSomeMobs")));
         }
 
         if (entityType == EntityType.ZOMBIFIED_PIGLIN) {
@@ -34,22 +39,22 @@ public class EntityDeathEvent implements Listener {
 
             event.getDrops().add(new ItemStack(Material.NETHER_WART));
 
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Dropnij 32 brodawki z piglinow.", "counter", 32)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("obtainNetherWarts")));
             return;
         }
 
         if (entityType == EntityType.IRON_GOLEM) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Zabij 24 zelazne golemy.", "counter", 24)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("killIronGolems")));
             return;
         }
 
         if (entityType == EntityType.WARDEN) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Pokonaj Wardena.", "", 0)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("killWarden")));
             return;
         }
 
         if (entityType == EntityType.ENDER_DRAGON) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Pokonaj Smoka.", "", 0)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("killDragon")));
             return;
         }
 

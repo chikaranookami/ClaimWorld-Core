@@ -1,5 +1,6 @@
 package claimworld.net.supporter.utils.guis;
 
+import claimworld.net.supporter.utils.ChestCounterUtils;
 import claimworld.net.supporter.utils.items.CustomHead;
 import claimworld.net.supporter.utils.items.CustomItem;
 import claimworld.net.supporter.utils.items.Locker;
@@ -45,13 +46,17 @@ public class ItemSets {
             }
 
             itemMap.put(10, new CustomHead("&aInformacje", player, 1, Arrays.asList(
-                    colorize("&fNick: " + playerName),
-                    colorize("&fRanga: " + rankName),
-                    colorize("&fDolaczono: "),
-                    colorize("&f" + new Date(player.getFirstPlayed())),
+                    colorize("&7Ping: &a" + player.getPing() + "ms"),
                     "",
-                    colorize("&fAtrybuty: " + scoreboard.getObjective(attributesObjectiveName).getScore(playerName).getScore() + getAttributeIcon()),
-                    colorize("&fPrzepustka: " + scoreboard.getObjective(mainObjectiveName).getScore(playerName).getScore() + getBattlepassIcon())
+                    colorize("&7Nick: &a" + playerName),
+                    colorize("&7Ranga: " + rankName),
+                    colorize("&7Dolaczono: "),
+                    colorize("&a" + new Date(player.getFirstPlayed())),
+                    "",
+                    colorize("&7Atrybuty: &a" + scoreboard.getObjective(attributesObjectiveName).getScore(playerName).getScore() + getAttributeIcon()),
+                    colorize("&7Przepustka: &a" + scoreboard.getObjective(mainObjectiveName).getScore(playerName).getScore() + getBattlepassIcon()),
+                    "",
+                    colorize("&7Skrzynki: &a" + new ChestCounterUtils().get(player))
             )).getItem());
             itemMap.put(12, new CustomItem("&aTeleportacja", Material.COMPASS, Collections.singletonList(colorize("&7&oPrzenies sie szybko!"))).getItem());
             itemMap.put(13, new CustomItem("&aPunkty", Material.EXPERIENCE_BOTTLE, Collections.singletonList(colorize("&7&oZarzadzaj swoimi punktami!"))).getItem());

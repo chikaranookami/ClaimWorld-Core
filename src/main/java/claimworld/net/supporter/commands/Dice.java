@@ -15,6 +15,8 @@ import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class Dice {
+    TaskManager taskManager = TaskManager.getInstance();
+
     private ArrayList<Player> getNearbyPlayers(Player pl){
         ArrayList<Player> nearby = new ArrayList<>();
         double range = 50;
@@ -41,7 +43,7 @@ public class Dice {
                     nearbyPlayer.sendMessage(colorize("&7[Rzut Kostka]&f Gracz &7" + player.getName() + " &fwlasnie wyrzucil liczbe &7" + number + "&f."));
                 }
 
-                if (number == 12) getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Wyrzuc 12 razy liczbe 12 na kostce.", "counter", 12)));
+                if (number == 12) getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("throwNumberUsingDice")));
 
                 return true;
             }
@@ -49,6 +51,6 @@ public class Dice {
             public String getUsage() {
                 return "/dice";
             }
-        }.enableDelay(15).setPermission("claimworld.player");
+        }.enableDelay(10).setPermission("claimworld.player");
     }
 }

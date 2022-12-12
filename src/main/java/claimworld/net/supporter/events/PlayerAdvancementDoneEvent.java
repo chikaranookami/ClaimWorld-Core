@@ -10,8 +10,10 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerAdvancementDoneEvent implements Listener {
 
+    TaskManager taskManager = TaskManager.getInstance();
+
     @EventHandler
     public void playerAdvancementDoneEvent(org.bukkit.event.player.PlayerAdvancementDoneEvent event) {
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(event.getPlayer(), new Task("Ukoncz dowolne osiagniecie.", "", 0)));
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(event.getPlayer(), taskManager.getTaskMap().get("getAchievementDone")));
     }
 }

@@ -13,6 +13,7 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerDeathEvent implements Listener {
 
+    TaskManager taskManager = TaskManager.getInstance();
     BonusManager bonusManager = BonusManager.getInstance();
 
     @EventHandler
@@ -22,7 +23,7 @@ public class PlayerDeathEvent implements Listener {
 
         assert player.getLastDamageCause() != null;
         if (player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.STARVATION) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Umrzyj z glodu.", "", 0)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("starveToDeath")));
             return;
         }
 

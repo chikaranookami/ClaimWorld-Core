@@ -136,6 +136,8 @@ public class BattlePassManager {
         String playerName = player.getName();
         Score score = player.getScoreboard().getObjective(mainObjectiveName).getScore(playerName);
 
+        getLogger().log(Level.INFO, "Trying to update battlepass score for " + player.getName() + "...");
+
         int updatedScore = score.getScore() + value;
         if (updatedScore > rewardLimit) return;
 

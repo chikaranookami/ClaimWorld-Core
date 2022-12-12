@@ -13,6 +13,8 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class ActiveBossBar {
 
+    TaskManager taskManager = TaskManager.getInstance();
+
     public void render(BossBar bossBar) {
         render(bossBar, 4);
     }
@@ -24,7 +26,7 @@ public class ActiveBossBar {
             for (Player player : getOnlinePlayers()) {
                 bossBar.addPlayer(player);
 
-                getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Wysluchaj serwerowych ogloszen.", "", 0)), 100L);
+                getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("listenToBossbar")), 100L);
             }
         });
 

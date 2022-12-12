@@ -11,12 +11,14 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class RaidStopEvent implements Listener {
 
+    TaskManager taskManager = TaskManager.getInstance();
+
     @EventHandler
     public void raidStopEvent(org.bukkit.event.raid.RaidStopEvent event) {
         if (event.getReason() != org.bukkit.event.raid.RaidStopEvent.Reason.TIMEOUT) return;
 
         for (Player player : event.getWorld().getPlayers()) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Przeczekaj atak na wioske.", "", 0)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("timeoutRaid")));
         }
     }
 }

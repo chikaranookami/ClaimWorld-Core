@@ -24,6 +24,8 @@ import static org.bukkit.Bukkit.*;
 
 public class CreatureSpawnEvent implements Listener {
 
+    TaskManager taskManager = TaskManager.getInstance();
+
     private final List<Player> players = new ArrayList<>();
     private final HashMap<Integer, String> traderName = new HashMap<>();
     private final List<org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason> checkedSpawnReasons = new ArrayList<>();
@@ -118,11 +120,12 @@ public class CreatureSpawnEvent implements Listener {
     @EventHandler
     public void creatureSpawnEvent(org.bukkit.event.entity.CreatureSpawnEvent event) {
         org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason spawnReason = event.getSpawnReason();
+        Map<String, Task> taskMap = taskManager.getTaskMap();
 
         if (spawnReason == org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.ENDER_PEARL) {
             for (Entity entity : event.getEntity().getNearbyEntities(3, 3, 3)) {
                 if (!(entity instanceof Player)) continue;
-                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Badz blisko 6 nowych endermitow.", "counter", 6)));
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask((Player) entity, taskMap.get("stayCloseToSomeNewEndermite")));
             }
             return;
         }
@@ -130,7 +133,7 @@ public class CreatureSpawnEvent implements Listener {
         if (spawnReason == org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.CURED) {
             for (Entity entity : event.getEntity().getNearbyEntities(3, 3, 3)) {
                 if (!(entity instanceof Player)) continue;
-                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask((Player) entity, new Task("Przemien zombie w wiesniaka, bedac blisko niego.", "", 0)));
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask((Player) entity, taskMap.get("transformZombieToVillager")));
             }
             return;
         }
@@ -164,7 +167,7 @@ public class CreatureSpawnEvent implements Listener {
 
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
                 for (Player player : getOnlinePlayers()) {
-                    TaskManager.getInstance().tryFinishTask(player, new Task("Badz online, gdy pojawi sie handlarz.", "", 0));
+                    taskManager.tryFinishTask(player, taskMap.get("beOnlineWhenTraderSpawns"));
                 }
             });
         }, 20L);

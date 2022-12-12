@@ -12,12 +12,12 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class CraftItemEvent implements Listener {
 
+    TaskManager taskManager = TaskManager.getInstance();
+
     @EventHandler
     public void craftItemEvent(org.bukkit.event.inventory.CraftItemEvent event) {
         if (event.getRecipe().getResult().getType() != Material.BEACON) return;
 
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            TaskManager.getInstance().tryFinishTask((Player) event.getWhoClicked(), new Task("Zrob beacona.", "", 0));
-        });
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask((Player) event.getWhoClicked(), taskManager.getTaskMap().get("craftBeacon")));
     }
 }

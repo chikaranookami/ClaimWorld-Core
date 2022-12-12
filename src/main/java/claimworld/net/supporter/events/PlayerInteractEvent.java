@@ -16,10 +16,14 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.bukkit.Bukkit.*;
 
 public class PlayerInteractEvent implements Listener {
+
+    TaskManager taskManager = TaskManager.getInstance();
+    ReadyItems readyItems = ReadyItems.getInstance();
 
     private final List<Material> allowedSpawnEggs = new ArrayList<>();
     private final List<Player> delayedPlayers = new ArrayList<>();
@@ -46,7 +50,7 @@ public class PlayerInteractEvent implements Listener {
         ItemStack item = event.getItem();
         if (item == null) return;
 
-        ReadyItems readyItems = ReadyItems.getInstance();
+        Map<String, Task> taskMap = taskManager.getTaskMap();
 
         if (chests.contains(item) || item.isSimilar(readyItems.get("Prezent"))) {
             if (delayedPlayers.contains(player)) return;
@@ -59,7 +63,7 @@ public class PlayerInteractEvent implements Listener {
 
             if (item.equals(readyItems.get("Skrzynia_smoka"))) {
                 dispatchCommand(getConsoleSender(), "openchest Skrzynia_smoka " + player.getName());
-                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Otworz Magiczna Skrzynke.", "", 0)));
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("openDragonChest")));
             }
 
             if (item.isSimilar(readyItems.get("Prezent"))) {
@@ -79,7 +83,7 @@ public class PlayerInteractEvent implements Listener {
 
         Material itemType = item.getType();
         if (itemType == Material.WITCH_SPAWN_EGG) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> TaskManager.getInstance().tryFinishTask(player, new Task("Zresp wiedzme jajkiem.", "", 0)));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("spawnWitch")));
             return;
         }
 
@@ -94,9 +98,7 @@ public class PlayerInteractEvent implements Listener {
 
             if (itemType != Material.ZOMBIE_SPAWN_EGG) return;
 
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-                TaskManager.getInstance().tryFinishTask(player, new Task("Ustaw zombie w spawnerze.", "", 0));
-            });
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("setSpawnerToZombie")));
         }
     }
 }

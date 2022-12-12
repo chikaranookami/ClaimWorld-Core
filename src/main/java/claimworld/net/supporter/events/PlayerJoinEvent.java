@@ -42,10 +42,10 @@ public class PlayerJoinEvent implements Listener {
         getScheduler().runTaskLater(Supporter.getPlugin(), () -> new JoinAnnouncer(player), 10L);
 
         //enable at 6, 24, 25, 26 and 31 of december
-        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 432000, 1, true, false, true));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.HERO_OF_THE_VILLAGE, 432000, 1, true, false, true));
-        }, 10L);
+        //getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+            //player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 432000, 1, true, false, true));
+            //player.addPotionEffect(new PotionEffect(PotionEffectType.HERO_OF_THE_VILLAGE, 432000, 1, true, false, true));
+        //}, 10L);
 
         //checking compatibility between permissions and displayed team
         getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {

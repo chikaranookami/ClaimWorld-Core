@@ -1,4 +1,4 @@
-package claimworld.net.supporter.utils.guis;
+package claimworld.net.supporter.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -29,18 +29,21 @@ public class BonusManager {
         bonuses.put("Rzucanie+", false);
         bonuses.put("Butelki", false);
         bonuses.put("Zadania", false);
+        bonuses.put("Skrzynka", false);
 
-        bonusMessages.put("Butelki", "rozdal troche butelki");
+        bonusMessages.put("Butelki", "rozdal troche butelek");
         bonusMessages.put("Bloki", "rozdal troche blokow");
         bonusMessages.put("Diaxy+", "wlaczyl dodatkowe diamenty z rud");
         bonusMessages.put("DoubleXP", "2x zwiekszyl zdobywane doswiadczenie");
         bonusMessages.put("Podnoszenie+", "wlaczyl podnoszenie wiekszosci bytow");
         bonusMessages.put("Rzucanie+", "zwiekszyl sile rzucania bytami");
         bonusMessages.put("Zadania", "wygenerowal nowe zadania");
+        bonusMessages.put("Skrzynka", "wlaczyl darmowa skrzynke");
 
         bonusCommands.put("Bloki", "fillupwarehouse blocks");
         bonusCommands.put("Butelki", "fillupwarehouse xpBottle");
         bonusCommands.put("AntyFantom", "gamerule doInsomnia false");
+        bonusCommands.put("Skrzynka", "globalfreechest");
 
         bonusPointPrices.put("Butelki", 15);
         bonusPointPrices.put("Bloki", 20);
@@ -49,6 +52,7 @@ public class BonusManager {
         bonusPointPrices.put("Podnoszenie+", 20);
         bonusPointPrices.put("Rzucanie+", 30);
         bonusPointPrices.put("Zadania", 30);
+        bonusPointPrices.put("Skrzynka", 20);
     }
 
     public HashMap<String, Boolean> getBonuses() {

@@ -1,8 +1,7 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.guis.BonusManager;
-import claimworld.net.supporter.utils.tasks.Task;
+import claimworld.net.supporter.utils.BonusManager;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +21,12 @@ public class PlayerDeathEvent implements Listener {
         event.getEntity().getWorld().strikeLightningEffect(player.getLocation());
 
         assert player.getLastDamageCause() != null;
-        if (player.getLastDamageCause().getCause() == EntityDamageEvent.DamageCause.STARVATION) {
+        EntityDamageEvent.DamageCause damageCause = player.getLastDamageCause().getCause();
+        if (damageCause == EntityDamageEvent.DamageCause.FIRE_TICK || damageCause == EntityDamageEvent.DamageCause.FIRE) {
+         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("dieDueToFire")));
+            return;
+        }
+        if (damageCause == EntityDamageEvent.DamageCause.STARVATION) {
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("starveToDeath")));
             return;
         }

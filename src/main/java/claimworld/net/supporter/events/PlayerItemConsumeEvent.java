@@ -75,7 +75,12 @@ public class PlayerItemConsumeEvent implements Listener {
 
         Player player = event.getPlayer();
 
-        if (event.getItem().getType() == Material.SUSPICIOUS_STEW) {
+        Material material = event.getItem().getType();
+        if (material == Material.ROTTEN_FLESH) {
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("eatRottenFlashes")));
+            return;
+        }
+        if (material == Material.SUSPICIOUS_STEW) {
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("eatSuspiciousStew")));
             return;
         }

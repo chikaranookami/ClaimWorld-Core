@@ -3,10 +3,12 @@ package claimworld.net.supporter.events;
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.items.CustomHead;
 import claimworld.net.supporter.utils.MessageUtils;
+import claimworld.net.supporter.utils.items.CustomItem;
 import claimworld.net.supporter.utils.items.ReadyItems;
 import claimworld.net.supporter.utils.tasks.Task;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -54,6 +56,8 @@ public class CreatureSpawnEvent implements Listener {
             ItemStack ramka = readyItems.get("Niewidzialna_ramka");
             ItemStack unbreaking4 = readyItems.get("Ksiazka_unbreaking4");
             ItemStack protection5 = readyItems.get("Ksiazka_protection5");
+            ItemStack fireaspect3 = readyItems.get("Ksiazka_fireaspect3");
+            ItemStack power6 = readyItems.get("Ksiazka_power6");
             //ItemStack halloweenowyOdbijacz = readyItems.get("Halloweenowy odbijacz");
 
             //Emeraldowy Handlarz
@@ -67,13 +71,16 @@ public class CreatureSpawnEvent implements Listener {
             if (random > 3) {
                 updatedRecipes.add(getCustomRecipe(dolarek, 4, new ItemStack(Material.EMERALD, 64), null));
                 updatedRecipes.add(getCustomRecipe(skrzyniaSmoka, 4, new ItemStack(Material.EMERALD, 32), null));
+                updatedRecipes.add(getCustomRecipe(fireaspect3, 1, new ItemStack(Material.EMERALD, 16), dolar64x));
             }
             if (random > 5) {
                 updatedRecipes.add(getCustomRecipe(unbreaking4, 1, new ItemStack(Material.EMERALD, 16), dolar64x));
                 updatedRecipes.add(getCustomRecipe(protection5, 1, new ItemStack(Material.EMERALD, 16), dolar64x));
+                updatedRecipes.add(getCustomRecipe(new ItemStack(Material.SPONGE, 4), 1, new ItemStack(Material.EMERALD, 16), null));
             }
             if (random > 6) {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.ELYTRA), 1, new ItemStack(Material.EMERALD, 64), dolar64x));
+                updatedRecipes.add(getCustomRecipe(power6, 1, new ItemStack(Material.EMERALD, 16), dolar64x));
             }
             //updatedRecipes.add(getCustomRecipe(halloweenowyOdbijacz, 2, new ItemStack(Material.JACK_O_LANTERN, 16), null));
         }
@@ -81,6 +88,8 @@ public class CreatureSpawnEvent implements Listener {
         if (set == 1) {
             ItemStack bilet = readyItems.get("Uniwersalny_bilet");
             ItemStack sharpnessBook = readyItems.get("Ksiazka_sharpness6");
+            ItemStack looting4 = readyItems.get("Ksiazka_looting4");
+            ItemStack thorns5 = readyItems.get("Ksiazka_thorns5");
             //ItemStack halloweenowaZupa = readyItems.get("Halloweenowa zupa");
 
             //Fantomowy Handlarz
@@ -94,13 +103,16 @@ public class CreatureSpawnEvent implements Listener {
             if (random > 4) {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.SKELETON_SPAWN_EGG), 1, dolar64x, null));
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.WITCH_SPAWN_EGG), 1, dolar64x, null));
+                updatedRecipes.add(getCustomRecipe(looting4, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), dolar64x));
             }
             if (random > 5) {
                 updatedRecipes.add(getCustomRecipe(sharpnessBook, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), dolar64x));
                 updatedRecipes.add(getCustomRecipe(skrzyniaSmoka, 4, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
+                updatedRecipes.add(getCustomRecipe(thorns5, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), dolar64x));
             }
             if (random > 6) {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.ELYTRA), 1, new ItemStack(Material.PHANTOM_MEMBRANE, 64), dolar64x));
+                updatedRecipes.add(getCustomRecipe(new ItemStack(Material.SPONGE, 4), 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
             }
             //updatedRecipes.add(getCustomRecipe(halloweenowaZupa, 4, new ItemStack(Material.JACK_O_LANTERN, 4), null));
 
@@ -114,7 +126,7 @@ public class CreatureSpawnEvent implements Listener {
         traderName.put(1, colorize("&d&lFantomowy Handlarz"));
 
         checkedSpawnReasons.add(org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.BREEDING);
-        checkedSpawnReasons.add(org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.DISPENSE_EGG);
+        checkedSpawnReasons.add(org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason.EGG);
     }
 
     @EventHandler

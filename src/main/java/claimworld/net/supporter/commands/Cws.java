@@ -1,7 +1,7 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.guis.BonusManager;
+import claimworld.net.supporter.utils.BonusManager;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 
 import static claimworld.net.supporter.utils.MessageUtils.getBroadcastPrefix;
-import static claimworld.net.supporter.utils.MessageUtils.getUserPrefix;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.*;
 

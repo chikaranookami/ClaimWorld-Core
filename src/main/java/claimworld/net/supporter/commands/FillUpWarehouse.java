@@ -40,7 +40,7 @@ public class FillUpWarehouse {
     private List<ItemStack> getRandomItems() {
         List<ItemStack> items = new ArrayList<>();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 6; i++) {
             items.add(blockSet.get(new Random().nextInt(blockSet.size())));
         }
 
@@ -52,7 +52,7 @@ public class FillUpWarehouse {
 
         });
         List<ItemStack> items = new ArrayList<>();
-        items.add(new ItemStack(Material.EXPERIENCE_BOTTLE, 5));
+        items.add(new ItemStack(Material.EXPERIENCE_BOTTLE, 8));
         return items;
     }
 

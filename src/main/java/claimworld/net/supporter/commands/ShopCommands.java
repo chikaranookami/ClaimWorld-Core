@@ -1,6 +1,7 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
+import claimworld.net.supporter.utils.GeyserUtils;
 import net.md_5.bungee.api.chat.*;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Material;
@@ -9,11 +10,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
+import static claimworld.net.supporter.utils.MessageUtils.getUserPrefix;
+
 public class ShopCommands {
+
+    private final GeyserUtils geyserUtils = new GeyserUtils();
+
+    private final String shopLink = "https://shop.claimworld.net/";
+
     private ItemStack getBook() {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta bookMeta = (BookMeta) book.getItemMeta();
-        String shopLink = "https://shop.claimworld.net/";
         String vipLink = "https://claimworld.net/sklep";
 
         BaseComponent[] shopComponent = new ComponentBuilder()
@@ -42,7 +49,11 @@ public class ShopCommands {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
                 Player player = (Player) sender;
-                player.openBook(getBook());
+                if (geyserUtils.isPlayerFromGeyser(player.getUniqueId())) {
+                    player.sendMessage(getUserPrefix() + "Adres sklepu: " + shopLink);
+                } else {
+                    player.openBook(getBook());
+                }
                 return true;
             }
 

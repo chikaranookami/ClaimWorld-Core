@@ -1,8 +1,8 @@
 package claimworld.net.supporter.utils.announcers;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.guis.BonusManager;
-import claimworld.net.supporter.utils.tasks.Task;
+import claimworld.net.supporter.utils.GeyserUtils;
+import claimworld.net.supporter.utils.BonusManager;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -15,14 +15,19 @@ import org.bukkit.inventory.meta.BookMeta;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static claimworld.net.supporter.utils.MessageUtils.getBattlepassIcon;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class JoinAnnouncer {
 
+    private final GeyserUtils geyserUtils = new GeyserUtils();
+
     private final List<Sound> sounds = Collections.singletonList(Sound.ENTITY_PILLAGER_CELEBRATE);
 
-    private String getActiveBonuses() {
+    public String getAdminNote() {
+        return "§8Grudzien to miesiac, w trakcie ktorego na serwerze aktywne jest §cWydarzenie Zimowe§8! Czekaja na Was §cPrezenty§8, §cSkarpety§8, a nawet snieg!\n\nOsoba z najwieksza iloscia Skarpet w tym roku otrzyma §cKose Na Moby§8!";
+    }
+
+    public String getActiveBonuses() {
         List<String> keys = new ArrayList<>();
 
         for (Map.Entry<String, Boolean> entry : BonusManager.getInstance().getBonuses().entrySet()) {
@@ -39,7 +44,7 @@ public class JoinAnnouncer {
 
         BaseComponent[] pageComponent = new ComponentBuilder()
                 .append("§cNotka od admina\n")
-                .append("§8Jak dobrze pojdzie to do konca miesiaca wracamy do wiekszosci ustawien prosto z vanilli.\n\n§8Grudzien to miesiac, w trakcie ktorego na serwerze aktywne jest §cWydarzenie Zimowe§8.")
+                .append(getAdminNote())
                 .create();
         bookMeta.spigot().addPage(pageComponent);
 
@@ -58,7 +63,18 @@ public class JoinAnnouncer {
         return book;
     }
 
-    public JoinAnnouncer(Player player) {
+    public void render(Player player) {
+        if (geyserUtils.isPlayerFromGeyser(player.getUniqueId())) {
+            player.sendMessage("Notka od admina");
+            player.sendMessage(getAdminNote());
+
+            player.spigot().sendMessage(TaskManager.getInstance().getActiveTaskComponent());
+
+            player.sendMessage("Aktywne Bonusy");
+            player.sendMessage(getActiveBonuses());
+            return;
+        }
+
         player.openBook(getBook());
 
         AtomicInteger i = new AtomicInteger();

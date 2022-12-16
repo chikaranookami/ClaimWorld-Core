@@ -1,8 +1,7 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.guis.BonusManager;
-import claimworld.net.supporter.utils.items.ReadyItems;
+import claimworld.net.supporter.utils.BonusManager;
 import claimworld.net.supporter.utils.tasks.Task;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.*;

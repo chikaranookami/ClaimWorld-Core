@@ -1,5 +1,7 @@
 package claimworld.net.supporter.events;
 
+import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,8 +12,11 @@ import java.util.logging.Level;
 
 import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.getLogger;
+import static org.bukkit.Bukkit.getScheduler;
 
 public class AsyncPlayerChatEvent implements Listener {
+
+    TaskManager taskManager = TaskManager.getInstance();
 
     @EventHandler
     public void asyncPlayerChatEvent(org.bukkit.event.player.AsyncPlayerChatEvent event) {
@@ -28,5 +33,9 @@ public class AsyncPlayerChatEvent implements Listener {
         }
 
         event.setFormat(team.getPrefix() + ChatColor.RESET + playerName + ChatColor.GRAY + ": " + ChatColor.RESET + colorize(message));
+
+        if (!message.contains("zagadka") && !message.contains("Zagadka")) return;
+
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("writeZagadka")));
     }
 }

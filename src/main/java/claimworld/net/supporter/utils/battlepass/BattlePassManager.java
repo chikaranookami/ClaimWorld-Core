@@ -1,6 +1,7 @@
 package claimworld.net.supporter.utils.battlepass;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.AttributesManager;
 import claimworld.net.supporter.utils.WarehouseUtils;
 import claimworld.net.supporter.utils.items.ReadyItems;
 import net.md_5.bungee.api.ChatMessageType;
@@ -27,17 +28,18 @@ import static org.bukkit.Bukkit.*;
 
 public class BattlePassManager {
 
+    private final AttributesManager attributesManager = new AttributesManager();
+
     public static final String checkingObjectiveName = "odebranybattlepass";
     public static final String mainObjectiveName = "punktyprzepustki";
-    public static final String attributesObjectiveName = "atrybuty";
     public static final int rewardLimit = 100;
-
-    private static BattlePassManager instance = null;
 
     public static BattlePassManager getInstance() {
         if (instance == null) instance = new BattlePassManager();
         return instance;
     }
+
+    private static BattlePassManager instance = null;
 
     private final HashMap<Integer, BattlePassLevel> battlePassMap = new HashMap<>();
 
@@ -114,6 +116,8 @@ public class BattlePassManager {
                 if (new Random().nextBoolean()) items.add(readyItems.get("Prezent"));
 
                 new WarehouseUtils().addItemsSingle(player, items);
+
+                attributesManager.tryUpdateStats(player);
             }, 10L);
         });
     }

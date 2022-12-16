@@ -14,10 +14,10 @@ import org.bukkit.scoreboard.Team;
 import java.util.*;
 import java.util.logging.Level;
 
+import static claimworld.net.supporter.utils.AttributesManager.*;
 import static claimworld.net.supporter.utils.MessageUtils.getAttributeIcon;
 import static claimworld.net.supporter.utils.MessageUtils.getBattlepassIcon;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
-import static claimworld.net.supporter.utils.battlepass.BattlePassManager.attributesObjectiveName;
 import static claimworld.net.supporter.utils.battlepass.BattlePassManager.mainObjectiveName;
 import static org.bukkit.Bukkit.getLogger;
 
@@ -46,17 +46,19 @@ public class ItemSets {
             }
 
             itemMap.put(10, new CustomHead("&aInformacje", player, 1, Arrays.asList(
-                    colorize("&7Ping: &a" + player.getPing() + "ms"),
-                    "",
                     colorize("&7Nick: &a" + playerName),
                     colorize("&7Ranga: " + rankName),
-                    colorize("&7Dolaczono: "),
-                    colorize("&a" + new Date(player.getFirstPlayed())),
                     "",
-                    colorize("&7Atrybuty: &a" + scoreboard.getObjective(attributesObjectiveName).getScore(playerName).getScore() + getAttributeIcon()),
+                    colorize("&7Atrybut HP: &a" + scoreboard.getObjective(hpAttributeObjectiveName).getScore(playerName).getScore() + getAttributeIcon()),
+                    colorize("&7Atrybut DMG: &a" + scoreboard.getObjective(damageAttributeObjectiveName).getScore(playerName).getScore() + getAttributeIcon()),
                     colorize("&7Przepustka: &a" + scoreboard.getObjective(mainObjectiveName).getScore(playerName).getScore() + getBattlepassIcon()),
                     "",
-                    colorize("&7Skrzynki: &a" + new ChestCounterUtils().get(player))
+                    colorize("&7Otworzone Skrzynki: &a" + new ChestCounterUtils().get(player)),
+                    "",
+                    colorize("&7Ping: &a" + player.getPing() + "ms"),
+                    "",
+                    colorize("&7Dolaczono: "),
+                    colorize("&a" + new Date(player.getFirstPlayed()))
             )).getItem());
             itemMap.put(12, new CustomItem("&aTeleportacja", Material.COMPASS, Collections.singletonList(colorize("&7&oPrzenies sie szybko!"))).getItem());
             itemMap.put(13, new CustomItem("&aPunkty", Material.EXPERIENCE_BOTTLE, Collections.singletonList(colorize("&7&oZarzadzaj swoimi punktami!"))).getItem());

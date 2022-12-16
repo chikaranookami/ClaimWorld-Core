@@ -77,6 +77,10 @@ public class ReadyItems {
         itemMap.put("Ksiazka_fortune4", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.LOOT_BONUS_BLOCKS, 4));
         itemMap.put("Ksiazka_sharpness6", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.DAMAGE_ALL, 6));
         itemMap.put("Ksiazka_swiftsneak4", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.SWIFT_SNEAK, 4));
+        itemMap.put("Ksiazka_looting4", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.LOOT_BONUS_MOBS, 4));
+        itemMap.put("Ksiazka_thorns5", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.THORNS, 5));
+        itemMap.put("Ksiazka_power6", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.ARROW_DAMAGE, 6));
+        itemMap.put("Ksiazka_fireaspect3", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.FIRE_ASPECT, 3));
 
         itemMap.put("Skrzynia_smoka", new CustomItem("&cSkrzynia Smoka", Material.CHEST_MINECART, Collections.singletonList(colorize(getLore("unique"))), 0));
         itemMap.put("Niewidzialna_ramka", new CustomItem("&aNiewidzialna ramka", Material.ITEM_FRAME, Arrays.asList(colorize(getLore("uncommon")), "", colorize(getLore("oneTimeUse")))));

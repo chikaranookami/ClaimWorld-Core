@@ -6,6 +6,7 @@ import claimworld.net.supporter.utils.battlepass.SkillManager;
 import claimworld.net.supporter.utils.guis.Gui;
 import claimworld.net.supporter.utils.guis.GuiManager;
 import claimworld.net.supporter.utils.items.Locker;
+import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,6 +24,7 @@ import static org.bukkit.Bukkit.*;
 public class InventoryClickEvent implements Listener {
 
     Locker locker = Locker.getInstance();
+    TaskManager taskManager = TaskManager.getInstance();
 
     private final List<String> fixedEquipments = new ArrayList<>();
 
@@ -43,9 +45,7 @@ public class InventoryClickEvent implements Listener {
         //shulker inventory == player inventory - sprawdzone, tak jest
         if (slot == 17 && clickedInventory == playerInventory) {
             event.setCancelled(true);
-            getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                new GuiManager(player, new Gui(null, 54, "Menu"));
-            }, 1L);
+            getScheduler().runTaskLater(Supporter.getPlugin(), () -> new GuiManager(player, new Gui(null, 54, "Menu")), 1L);
             return;
         }
 
@@ -115,9 +115,7 @@ public class InventoryClickEvent implements Listener {
                     return;
                 case 23:
                     player.closeInventory();
-                    getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                        Bukkit.dispatchCommand(player, "zadania");
-                    }, 1L);
+                    getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(player, "zadania"), 1L);
                     return;
                 case 14:
                     player.closeInventory();
@@ -136,63 +134,43 @@ public class InventoryClickEvent implements Listener {
                 switch (slot) {
                     case 10:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                            Bukkit.dispatchCommand(player, "sethome");
-                        }, 1L);
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(player, "sethome"), 1L);
                         return;
                     case 12:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                            Bukkit.dispatchCommand(player, "home");
-                        }, 1L);
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(player, "home"), 1L);
                         return;
                     case 13:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                            Bukkit.dispatchCommand(player, "spawn");
-                        }, 1L);
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(player, "spawn"), 1L);
                         return;
                     case 14:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                            Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " autostrada_polnocna");
-                        }, 1L);
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " autostrada_polnocna"), 1L);
                         return;
                     case 15:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                            Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " autostrada_poludniowa");
-                        }, 1L);
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " autostrada_poludniowa"), 1L);
                         return;
                     case 16:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                            Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " centrum_publiczne");
-                        }, 1L);
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " centrum_publiczne"), 1L);
                         return;
                     case 21:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                            Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " lasy_wschodnie");
-                        }, 1L);
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " lasy_wschodnie"), 1L);
                         return;
                     case 22:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                            Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " nadmorska_szlachta");
-                        }, 1L);
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " nadmorska_szlachta"), 1L);
                         return;
                     case 23:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                            Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " monopoly");
-                        }, 1L);
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " monopoly"), 1L);
                         return;
                     case 24:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                            Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " wioska");
-                        }, 1L);
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " wioska"), 1L);
                         return;
                 }
             }
@@ -201,21 +179,16 @@ public class InventoryClickEvent implements Listener {
                 switch (slot) {
                     case 10:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                            Bukkit.dispatchCommand(player, "depth");
-                        }, 1L);
+                        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("checkSeaLevel")));
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(player, "depth"), 1L);
                         return;
                     case 11:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                            Bukkit.dispatchCommand(player, "disposal");
-                        }, 1L);
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(player, "disposal"), 1L);
                         return;
                     case 12:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                            Bukkit.dispatchCommand(player, "dice");
-                        }, 1L);
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(player, "dice"), 1L);
                 }
             }
         }

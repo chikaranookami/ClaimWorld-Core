@@ -28,9 +28,9 @@ public class SkillManager {
 
         for (Map.Entry<String, Skill> entry : skillMap.entrySet()) {
             if (canActivateSkill(player, entry.getKey())) {
-                builder.append("\n§2§o+§8§o" + entry.getKey()).event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(entry.getValue().getHelp())));
+                builder.append("\n§c§o+§8§o " + entry.getKey()).event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(entry.getValue().getHelp())));
             } else {
-                builder.append("\n§c§o-§8§o" + entry.getKey()).event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(entry.getValue().getHelp())));
+                builder.append("\n§8§o+ " + entry.getKey()).event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(entry.getValue().getHelp())));
             }
         }
 

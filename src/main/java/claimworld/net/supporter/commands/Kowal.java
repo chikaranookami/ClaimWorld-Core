@@ -2,6 +2,7 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
+import claimworld.net.supporter.utils.GeyserUtils;
 import claimworld.net.supporter.utils.WarehouseUtils;
 import claimworld.net.supporter.utils.items.ReadyItems;
 import claimworld.net.supporter.utils.tasks.Task;
@@ -35,24 +36,31 @@ public class Kowal {
     TaskManager taskManager = TaskManager.getInstance();
     ReadyItems readyItems = ReadyItems.getInstance();
 
+    private final GeyserUtils geyserUtils = new GeyserUtils();
+
     //stary spawn
-    private final Location kowalLocation = new Location(Bukkit.getWorld("1"), 264, 63, 405);
+    private final Location kowalLocation = new Location(Bukkit.getWorld("1"), 264, 63, 405).add(0, 2, 0);
+
+    private final String kowalDescription = "Ulepsza / podwaja Twoje przedmioty - ma na to 50% szans.\nJesli mu sie nie uda, Twoje przedmioty zostana zniszczone.";
+    private final String upgradeTutorial = "Wez do glownej reki przedmiot, ktory chcesz ulepszyc, a do drugiej wybrane ulepszenie.";
+    private final String cloneTutorial = "Wez do glownej reki przedmiot, ktory chcesz podwoic, a do drugiej Uniwersalny Bilet.";
+    private final String upgradeCommand = "/kowalexecute upgrade";
+    private final String cloneCommand = "/kowalexecute clone";
 
     private ItemStack getBook(Player player) {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta bookMeta = (BookMeta) book.getItemMeta();
-        String playerName = player.getName();
 
         BaseComponent[] shopComponent = new ComponentBuilder()
                 .append("§cKowal\n")
-                .append("§8Ulepsza / podwaja Twoje przedmioty (33% szans).\n\nJesli mu sie nie uda, Twoje przedmioty zostana zniszczone.\n\n")
+                .append("§8" + kowalDescription + "\n\n")
                 .append("§c§n> §8§oChce wzmocnic swoj przedmiot.")
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("Wez do glownej reki przedmiot, ktory chcesz ulepszyc, a do drugiej wybrane ulepszenie.")))
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/kowalexecute upgrade " + playerName))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(upgradeTutorial)))
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, upgradeCommand))
                 .append("\n\n")
                 .append("§c§n> §8§oChce podwoic swoj przedmiot.")
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text("Wez do glownej reki przedmiot, ktory chcesz podwoic, a do drugiej Uniwersalny Bilet.")))
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/kowalexecute clone " + playerName))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(cloneTutorial)))
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, cloneCommand))
                 .create();
 
         assert bookMeta != null;
@@ -74,6 +82,8 @@ public class Kowal {
     }
 
     private void playEnchantingEffect(Location location, World world) {
+        world.spawnParticle(Particle.WHITE_ASH, location, 15, 0.75, 0.75, 0.75, 0.75);
+        world.spawnParticle(Particle.EXPLOSION_NORMAL, location, 1, 0.75, 0.75, 0.75, 0.75);
         world.playSound(location, Sound.BLOCK_ANVIL_USE, 0.75f, 0.75f);
     }
 
@@ -89,7 +99,10 @@ public class Kowal {
             Map<String, Task> taskMap = taskManager.getTaskMap();
 
             if (!successful) {
-                getScheduler().runTask(Supporter.getPlugin(), () -> world.playSound(location, Sound.BLOCK_ANVIL_DESTROY, 0.75f, 0.75f));
+                getScheduler().runTask(Supporter.getPlugin(), () -> {
+                    world.spawnParticle(Particle.ASH, location, 15, 0.75, 0.75, 0.75, 0.75);
+                    world.playSound(location, Sound.BLOCK_ANVIL_DESTROY, 0.75f, 0.75f);
+                });
 
                 player.sendMessage(getUserPrefix() + "Nie udalo sie - Kowal spalil Twoje przedmioty.");
                 taskManager.tryFinishTask(player, taskMap.get("destroyItemsAtBlacksmith"));
@@ -99,6 +112,8 @@ public class Kowal {
 
             getScheduler().runTask(Supporter.getPlugin(), () -> {
                 item.setAmount(1);
+                world.spawnParticle(Particle.FIREWORKS_SPARK, location, 10, 0.75, 0.75, 0.75, 0.75);
+                world.spawnParticle(Particle.SPELL, location, 15, 0.4, 0.4, 0.4, 0.4);
                 world.playSound(location, Sound.BLOCK_ANVIL_PLACE, 0.75f, 0.75f);
             });
 
@@ -141,8 +156,13 @@ public class Kowal {
                 Player player = Bukkit.getPlayer(arguments[0]);
                 if (player == null) return false;
 
-                player.openBook(getBook(player));
-
+                if (geyserUtils.isPlayerFromGeyser(player.getUniqueId())) {
+                    player.sendMessage(kowalDescription + "\n");
+                    player.sendMessage(getUserPrefix() + upgradeTutorial + "\n" + upgradeCommand + "\n");
+                    player.sendMessage(getUserPrefix() + cloneTutorial + "\n" + cloneCommand);
+                } else {
+                    player.openBook(getBook(player));
+                }
                 return true;
             }
 
@@ -152,15 +172,11 @@ public class Kowal {
             }
         }.setPermission("claimworld.admin");
 
-        new CommandBase("kowalexecute", 2, true) {
+        new CommandBase("kowalexecute", 1, true) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
                 getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-                    Player player = Bukkit.getPlayer(arguments[1]);
-                    if (player == null) {
-                        sender.sendMessage("player is null - aborting...");
-                        return;
-                    }
+                    Player player = (Player) sender;
 
                     String task = arguments[0];
                     if (!task.equals("clone") && !task.equals("upgrade")) {
@@ -188,7 +204,7 @@ public class Kowal {
                     }
 
                     World world = player.getWorld();
-                    Location location = player.getLocation();
+                    int random = new Random().nextInt(2);
 
                     if (task.equals("clone")) {
                         if (!offItem.isSimilar(readyItems.get("Uniwersalny_bilet"))) {
@@ -202,7 +218,7 @@ public class Kowal {
                             return;
                         }
 
-                        renderBlacksmithResult(player, location, world, inventory, item, offItem, task, null, 0, new Random().nextInt(5) < 2);
+                        renderBlacksmithResult(player, kowalLocation, world, inventory, item, offItem, task, null, 0, random == 0);
                         return;
                     }
 
@@ -233,7 +249,7 @@ public class Kowal {
                             return;
                         }
 
-                        renderBlacksmithResult(player, location, world, inventory, item, offItem, task, bookEnchantment, bookEnchantments.get(bookEnchantment), new Random().nextInt(3) == 0);
+                        renderBlacksmithResult(player, kowalLocation, world, inventory, item, offItem, task, bookEnchantment, bookEnchantments.get(bookEnchantment), random == 0);
                     }
                 });
 
@@ -242,7 +258,7 @@ public class Kowal {
 
             @Override
             public String getUsage() {
-                return "/kowalexecute <player>";
+                return "/kowalexecute clone/upgrade";
             }
         }.setPermission("claimworld.player");
     }

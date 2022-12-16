@@ -19,11 +19,8 @@ public class AutoMessageTimer {
         getServer().getConsoleSender().sendMessage("Przygotowywanie bossbarow...");
 
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () ->{
-            FileConfiguration config = Supporter.getPlugin().getConfig();
-
-
             org.bukkit.boss.BossBar vipBossbar = Bukkit.createBossBar(colorize("Podoba Ci sie projekt? Chcesz, by sie rozwijal? Kup &c/vip&f"), BarColor.RED, BarStyle.SOLID);
-            org.bukkit.boss.BossBar shopGoalBossbar = Bukkit.createBossBar(colorize("Cel w Sklepie: &e" + goalUtils.getCurrentReward() + "&f. Postep: &e" + goalUtils.getPercentAmount() + "%"), BarColor.BLUE, BarStyle.SOLID);
+            org.bukkit.boss.BossBar shopGoalBossbar = Bukkit.createBossBar(colorize("Cel w Sklepie: &e" + goalUtils.getCurrentReward() + "&f. Postep: &e" + goalUtils.getPercentAmount() + "%"), BarColor.YELLOW, BarStyle.SOLID);
             ActiveBossBar activeBossBar = new ActiveBossBar();
 
             //2h

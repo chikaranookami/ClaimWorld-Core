@@ -1,7 +1,7 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.guis.BonusManager;
+import claimworld.net.supporter.utils.BonusManager;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -70,9 +70,10 @@ public class PlayerInteractEntityEvent implements Listener {
         if (delayedPlayers.contains(player)) return;
 
         if (player.isSneaking()) {
-            if (event.getRightClicked().getType() == EntityType.HORSE) event.setCancelled(true);
-            if (event.getRightClicked().getType() == EntityType.SKELETON_HORSE) event.setCancelled(true);
-            if (event.getRightClicked().getType() == EntityType.ZOMBIE_HORSE) event.setCancelled(true);
+            EntityType entityType = event.getRightClicked().getType();
+            if (entityType == EntityType.HORSE) event.setCancelled(true);
+            if (entityType == EntityType.SKELETON_HORSE) event.setCancelled(true);
+            if (entityType == EntityType.ZOMBIE_HORSE) event.setCancelled(true);
 
             if (player.getPassengers().isEmpty()) {
                 Entity entity = event.getRightClicked();
@@ -80,7 +81,7 @@ public class PlayerInteractEntityEvent implements Listener {
                 player.addPassenger(entity);
                 player.playSound(player, Sound.ITEM_ARMOR_EQUIP_ELYTRA, 0.7f, 1.0f);
 
-                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("pickupCreeper")));
+                if (entityType == EntityType.CREEPER) getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("pickupCreeper")));
 
                 delayedPlayers.add(player);
                 removeDelayedPlayer(player);

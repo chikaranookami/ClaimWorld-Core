@@ -1,10 +1,14 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.GeyserUtils;
+import claimworld.net.supporter.utils.GlobalUtils;
 import claimworld.net.supporter.utils.announcers.JoinAnnouncer;
+import claimworld.net.supporter.utils.BonusManager;
 import claimworld.net.supporter.utils.items.Locker;
 import claimworld.net.supporter.utils.items.ReadyItems;
 import claimworld.net.supporter.utils.battlepass.BattlePassManager;
+import claimworld.net.supporter.utils.AttributesManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,7 +26,12 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerJoinEvent implements Listener {
 
+    BonusManager bonusManager = BonusManager.getInstance();
+    GlobalUtils globalUtils = GlobalUtils.getInstance();
     HashMap<String, List<ItemStack>> storedItems = Locker.getInstance().getLockerMap();
+
+    private final GeyserUtils geyserUtils = new GeyserUtils();
+    private final AttributesManager attributesManager = new AttributesManager();
 
     @EventHandler
     public void joinEvent(org.bukkit.event.player.PlayerJoinEvent event) {
@@ -33,13 +42,22 @@ public class PlayerJoinEvent implements Listener {
         //set menu item
         player.getInventory().setItem(17, ReadyItems.getInstance().get("Menu"));
 
+        //attributes
+        attributesManager.updatePlayerHealth(player);
+
         //mvp join bonus
         if (player.hasPermission("claimworld.mvp")) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 200, 1, true, false, false));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 200, 1, false, false, true));
         }
 
         //announcer
-        getScheduler().runTaskLater(Supporter.getPlugin(), () -> new JoinAnnouncer(player), 10L);
+        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+            if (geyserUtils.isPlayerFromGeyser(player.getUniqueId())) {
+                player.sendMessage(getUserPrefix() + "\nClaim World dziala na Java Edition, wiec rozgrywka zostala odpowiednio dostosowana do Twojego wydania.\n");
+            } else {
+                new JoinAnnouncer().render(player);
+            }
+        }, 10L);
 
         //enable at 6, 24, 25, 26 and 31 of december
         //getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
@@ -61,11 +79,24 @@ public class PlayerJoinEvent implements Listener {
             BattlePassManager.getInstance().updateTablistFooter(player);
         }, 30L);
 
+        //check for any stored items
         getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
             if (storedItems.get(playerName) == null) return;
             if (storedItems.get(playerName).size() < 1) return;
 
             player.sendMessage(getUserPrefix() + "W Twojej Skrytce cos jest. Odbierz to, zanim zniknie!");
         }, 40L);
+
+        //manage global free chest
+        getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
+            if (!bonusManager.getBonuses().get("Skrzynka")) return;
+
+            List<String> playersWithFreeChest = globalUtils.getPlayersWithFreeChest();
+            if (playersWithFreeChest.contains(playerName)) return;
+
+            globalUtils.addFreeChest(player);
+        }, 100L);
+
+        getScheduler().runTaskLater(Supporter.getPlugin(), () -> attributesManager.tryUpdateStats(player), 300L);
     }
 }

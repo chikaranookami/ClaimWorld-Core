@@ -34,6 +34,11 @@ public class EntityDeathEvent implements Listener {
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("killSomeMobs")));
         }
 
+        if (entityType == EntityType.CAT) {
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("killCats")));
+            return;
+        }
+
         if (entityType == EntityType.ZOMBIFIED_PIGLIN) {
             if (new Random().nextInt(10) > 0) return;
 

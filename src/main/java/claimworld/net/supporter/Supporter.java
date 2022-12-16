@@ -56,12 +56,12 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new RaidFinishEvent(), this);
         pluginManager.registerEvents(new PlayerItemBreakEvent(), this);
         pluginManager.registerEvents(new PlayerBedLeaveEvent(), this);
+        pluginManager.registerEvents(new ServerListPingEvent(), this);
 
         //commands
         new Seriafw();
-        new Tasks();
         new Zadania();
-        new AddAttribute();
+        new Attributes();
         new PrivateMessage();
         new AddToWarehouse();
         new Kowal();
@@ -82,6 +82,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         new FillUpWarehouse();
         new OpenChest();
         new BuyChests();
+        new GlobalFreeChest();
 
         //systems
         new AutoMessageTimer();

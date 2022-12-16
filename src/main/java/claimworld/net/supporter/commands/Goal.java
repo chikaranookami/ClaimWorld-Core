@@ -2,6 +2,7 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
+import claimworld.net.supporter.utils.GoalUtils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -14,6 +15,8 @@ import static org.bukkit.Bukkit.*;
 import static org.bukkit.Bukkit.getConsoleSender;
 
 public class Goal {
+
+    GoalUtils goalUtils = GoalUtils.getInstance();
 
     private void increaseGoal(List<Integer> goals, int currentGoal, FileConfiguration configuration) {
         for (int goal : goals) {
@@ -28,25 +31,28 @@ public class Goal {
         switch (currentGoal) {
             case 250:
                 dispatchCommand(getConsoleSender(), "gamerule playersSleepingPercentage 50");
-                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &eprocent osob, potrzebnych do przespania nocy zostal zmniejszony&f."));
+                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto kolejny cel w sklepie. W nagrode &eprocent osob, potrzebnych do przespania nocy zostal zmniejszony&f."));
                 break;
             case 500:
                 dispatchCommand(getConsoleSender(), "worldborder set 8000");
-                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &epowiekszona zostala granica swiata&f."));
+                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto kolejny cel w sklepie. W nagrode &epowiekszona zostala granica swiata&f."));
                 break;
             case 750:
                 dispatchCommand(getConsoleSender(), "gamerule randomTickSpeed 5");
-                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &ezwiekszony zostal randomTickSpeed&f, dzieki czemu na przyklad uprawy beda rosly szybciej."));
+                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto kolejny cel w sklepie. W nagrode &ezwiekszony zostal randomTickSpeed&f, dzieki czemu na przyklad uprawy beda rosly szybciej."));
                 break;
             case 1000:
                 dispatchCommand(getConsoleSender(), "worldborder set 10000");
-                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &epowiekszona zostala granica swiata&f."));
+                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto kolejny cel w sklepie. W nagrode &epowiekszona zostala granica swiata&f."));
                 break;
             case 1250:
-                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &ezwiekszono szybkosc lowienia&f."));
+                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto kolejny cel w sklepie. W nagrode &ezwiekszono szybkosc lowienia&f."));
                 break;
             case 1750:
-                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto cel &e" + currentGoal + "zl&f w sklepie. W nagrode &eniedlugo pojawia sie efekty krwawienia.&f."));
+                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto kolejny cel w sklepie. W nagrode &eniedlugo pojawia sie efekty krwawienia.&f."));
+                break;
+            case 2000:
+                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto kolejny cel w sklepie. W nagrode &eniedlugo pojawi sie kalendarz z bonusami za logowanie.&f."));
                 break;
             case 9999:
                 getLogger().log(Level.WARNING, "wplacone zostalo wiecej kasy, niz ustawionych celow");
@@ -69,7 +75,6 @@ public class Goal {
                     if (number == 0) return false;
 
                     int newValue = config.getInt("goals.total");
-                    int currentGoal = config.getInt("goals.active_goal");
                     newValue = newValue + number;
 
                     config.set("goals.total", newValue);
@@ -77,7 +82,7 @@ public class Goal {
 
                     getScheduler().runTaskLater(Supporter.getPlugin(), () -> dispatchCommand(sender, "goal tryBonus 0"), 30L);
 
-                    broadcastMessage(colorize(getBroadcastPrefix() + "Postep obecnego celu w sklepie wynosi teraz &e" + newValue + "&f/&e" + currentGoal + "zl&f."));
+                    broadcastMessage(colorize(getBroadcastPrefix() + "Postep obecnego celu w sklepie wynosi teraz &e" + goalUtils.getPercentAmount() + "%&f."));
                     return true;
                 }
 

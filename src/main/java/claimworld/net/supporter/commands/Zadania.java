@@ -1,6 +1,7 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
+import claimworld.net.supporter.utils.GeyserUtils;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Material;
@@ -11,7 +12,11 @@ import org.bukkit.inventory.meta.BookMeta;
 
 import java.util.ArrayList;
 
+import static org.bukkit.Bukkit.dispatchCommand;
+
 public class Zadania {
+
+    private final GeyserUtils geyserUtils = new GeyserUtils();
 
     private ItemStack getBook() {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK, 1);
@@ -34,7 +39,12 @@ public class Zadania {
         new CommandBase("zadania", true) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
-                ((Player) sender).openBook(getBook());
+                Player player = (Player) sender;
+                if (geyserUtils.isPlayerFromGeyser(player.getUniqueId())) {
+                    dispatchCommand(player, "ogloszenia");
+                } else {
+                    ((Player) sender).openBook(getBook());
+                }
                 return true;
             }
 

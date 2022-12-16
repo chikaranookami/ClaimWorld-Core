@@ -136,7 +136,7 @@ public class TaskManager {
     }
 
     public TaskManager() {
-        //first set (17)
+        //first set
         taskMap.put("useChorus", new Task("Przemiesc sie o 100 metrow chorusem.", "", 0));
         taskMap.put("placeInvisibleFrame", new Task("Powies niewidzialna ramke.", "", 0));
         taskMap.put("destroyNetheriteSword", new Task("Zuzyj netherytowy miecz.", "", 0));
@@ -155,7 +155,7 @@ public class TaskManager {
         taskMap.put("killIronGolems", new Task("Zabij 24 zelazne golemy.", "counter", 24));
         taskMap.put("killSomeMobs", new Task("Zabij 100 dowolnych potworow.", "counter", 100));
 
-        //second set (12)
+        //second set
         taskMap.put("killDragon", new Task("Pokonaj Smoka.", "", 0));
         taskMap.put("starveToDeath", new Task("Umrzyj z glodu.", "", 0));
         taskMap.put("getHitByLightningStrike", new Task("Oberwij piorunem.", "", 0));
@@ -169,14 +169,14 @@ public class TaskManager {
         taskMap.put("eatSuspiciousStew", new Task("Zjedz 8 podejrzanych potrawek.", "counter", 8));
         taskMap.put("getHitByDragon", new Task("Bezposrednio oberwij od smoka 6 razy.", "counter", 6));
 
-        //third set (5)
+        //third set
         taskMap.put("beOnlineWhenTraderSpawns", new Task("Badz online, gdy pojawi sie handlarz.", "", 0));
         taskMap.put("destroyDiamondPickaxe", new Task("Zuzyj diamentowy kilof.", "", 0));
         taskMap.put("doSmallShit", new Task("Niech zbiera Ci sie na cos ciezszego.", "", 0));
-        taskMap.put("openDragonChest", new Task("Otworz Magiczna Skrzynke.", "", 0));
+        taskMap.put("openDragonChest", new Task("Otworz Skrzynie Smoka.", "", 0));
         taskMap.put("useActiveTeleporter", new Task("Uzyj aktywnego Teleportera.", "", 0));
 
-        //fourth set (2)
+        //fourth set
         taskMap.put("obtainChristmasBlessing", new Task("Otrzymaj Swiateczne Blogoslawienstwo, po prostu grajac.", "", 0));
         taskMap.put("getPrezent", new Task("Otrzymaj Prezent od Swietego Mikolaja, po prostu grajac.", "", 0));
 
@@ -185,6 +185,15 @@ public class TaskManager {
         taskMap.put("upgradeItemAtBlacksmith", new Task("Ulepsz przedmiot u kowala.", "", 0));
         taskMap.put("pressTrader", new Task("Wybierz oferte u dowolnego wiesniaka / handlarza.", "", 0));
         taskMap.put("writeHeartOnSign", new Task("Postaw \"serduszko\" w pierwszej linijce dowolnej tabliczki.", "", 0));
+
+        //sixth set (not ready)
+        taskMap.put("dieDueToFire", new Task("Splon zywcem.", "", 0));
+        taskMap.put("killCats", new Task("Zabij 4 koty.", "counter", 4));
+        taskMap.put("checkSeaLevel", new Task("Sprawdz poziom morza.", "", 0));
+        taskMap.put("writeZagadka", new Task("Napisz zagadke na czacie.", "", 0));
+        taskMap.put("teleportYourself", new Task("Przeteleportuj sie w dowolne miejsce.", "", 0));
+        taskMap.put("eatRottenFlashes", new Task("Zjedz 64 sztuki zgnilego miesa.", "counter", 64));
+        taskMap.put("beOnlineWhenPlayerBuysFromShop", new Task("Badz online, gdy ktos kupi cos ze sklepu (Chikaraa chetnie rozda voucher!).", "", 0));
 
         //prepare list of tasks
         for (Map.Entry<String, Task> entry : taskMap.entrySet()) taskList.add(entry.getValue());

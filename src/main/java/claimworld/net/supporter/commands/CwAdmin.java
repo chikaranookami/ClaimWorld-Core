@@ -2,8 +2,6 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.MessageUtils;
-import claimworld.net.supporter.utils.guis.BonusManager;
 import claimworld.net.supporter.utils.items.CustomItem;
 import claimworld.net.supporter.utils.items.Locker;
 import claimworld.net.supporter.utils.items.ReadyItems;
@@ -19,6 +17,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Level;
 
 import static claimworld.net.supporter.utils.MessageUtils.getUserPrefix;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
@@ -39,6 +38,20 @@ public class CwAdmin {
     }
 
     public CwAdmin() {
+        new CommandBase("rendernewtasks", false) {
+            @Override
+            public boolean onCommand(CommandSender sender, String[] arguments) {
+                TaskManager.getInstance().renderNewTasks();
+                getLogger().log(Level.INFO, "trying to render a new set of tasks");
+                return true;
+            }
+
+            @Override
+            public String getUsage() {
+                return "/rendernewtasks";
+            }
+        }.setPermission("claimworld.admin");
+
         new CommandBase("cwadmin", 2, false) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {

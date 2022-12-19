@@ -25,6 +25,8 @@ public class PlayerInteractEvent implements Listener {
     TaskManager taskManager = TaskManager.getInstance();
     ReadyItems readyItems = ReadyItems.getInstance();
 
+    SkillManager skillManager = new SkillManager();
+
     private final List<Material> allowedSpawnEggs = new ArrayList<>();
     private final List<Player> delayedPlayers = new ArrayList<>();
     private final List<ItemStack> chests = new ArrayList<>();
@@ -88,16 +90,15 @@ public class PlayerInteractEvent implements Listener {
         }
 
         if (event.getClickedBlock().getType() != Material.SPAWNER) return;
-
-        SkillManager skillManager = new SkillManager();
         if (!skillManager.canActivateSkill(player, "Twoj spawner")) {
             event.setCancelled(true);
-        } else {
-            player.getInventory().getItemInMainHand().setAmount(item.getAmount() - 1);
-            skillManager.renderSkillEffect(event.getClickedBlock().getLocation());
+            return;
+        }
 
-            if (itemType != Material.ZOMBIE_SPAWN_EGG) return;
+        skillManager.renderSkillEffect(event.getClickedBlock().getLocation());
+        getScheduler().runTaskLater(Supporter.getPlugin(), () -> player.getInventory().getItemInMainHand().setAmount(item.getAmount() - 1), 1L);
 
+        if (itemType == Material.ZOMBIE_SPAWN_EGG) {
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("setSpawnerToZombie")));
         }
     }

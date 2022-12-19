@@ -1,6 +1,7 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.items.ReadyItems;
 import claimworld.net.supporter.utils.tasks.Task;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.Material;
@@ -19,6 +20,7 @@ import static org.bukkit.Bukkit.getScheduler;
 public class EntityDeathEvent implements Listener {
     
     TaskManager taskManager = TaskManager.getInstance();
+    ReadyItems readyItems = ReadyItems.getInstance();
 
     @EventHandler
     public void entityDeathEvent(org.bukkit.event.entity.EntityDeathEvent event) {
@@ -32,6 +34,10 @@ public class EntityDeathEvent implements Listener {
 
         if (entity instanceof Monster) {
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("killSomeMobs")));
+
+            if (entityType != EntityType.ENDERMAN) {
+                if (new Random().nextInt(100) == 1) player.getWorld().dropItem(entity.getLocation(), readyItems.get("Prezent"));
+            }
         }
 
         if (entityType == EntityType.CAT) {

@@ -24,6 +24,7 @@ public class OpenChest {
 
     private final List<ItemStack> randomItems = new ArrayList<>();
     private final List<ItemStack> prezentItems = new ArrayList<>();
+    private final List<Material> rareMaterials = new ArrayList<>();
 
     private void playVisuals(World world, Location location) {
         //faze1
@@ -214,6 +215,14 @@ public class OpenChest {
         world.playSound(location, Sound.ITEM_BUNDLE_DROP_CONTENTS, 1f, 1f);
     }
 
+    private void tryRenderMessage(Player player, ItemStack itemStack, ItemMeta itemMeta) {
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+            if (!itemMeta.hasDisplayName() && !rareMaterials.contains(itemStack.getType())) return;
+
+            broadcastMessage(getBroadcastPrefix() + colorize(player.getName() + " znalazl " + itemStack.getAmount() +  "x " + itemMeta.getDisplayName() + "&f w &cSkrzyni Smoka"));
+        });
+    }
+
     public OpenChest() {
         //last amount update - 26.11.2022
         //total amount > 350
@@ -221,7 +230,6 @@ public class OpenChest {
         ReadyItems readyItems = ReadyItems.getInstance();
 
         for (Map.Entry<String, CustomItem> entry : readyItems.getItemMap().entrySet()) {
-            if (entry.getKey().equals("Menu") || entry.getKey().equals("Cofnij")) continue;
             randomItems.add(entry.getValue().getItem());
         }
 
@@ -230,17 +238,14 @@ public class OpenChest {
 
         randomItems.add(readyItems.get("$1"));
         randomItems.add(readyItems.get("$1", 24));
-        randomItems.add(readyItems.get("$1", 32));
         randomItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, 24));
-        randomItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, 32));
 
         randomItems.add(new ItemStack(Material.ELYTRA));
-        randomItems.add(new ItemStack(Material.BEACON));
         randomItems.add(new ItemStack(Material.SHULKER_BOX));
         randomItems.add(new ItemStack(Material.ENDER_CHEST));
         
         int baseAmount = 3;
-        for (int i = 1; i < 6; i++) {
+        for (int i = 2; i < 6; i++) {
             randomItems.add(readyItems.get("$1", baseAmount * i));
             randomItems.add(readyItems.get("Skarpeta", baseAmount * i));
 
@@ -309,26 +314,43 @@ public class OpenChest {
             randomItems.add(new ItemStack(Material.SANDSTONE, baseAmount * i));
         }
 
-        randomItems.add(new ItemStack(Material.GOLDEN_AXE));
-        randomItems.add(new ItemStack(Material.IRON_PICKAXE));
-        randomItems.add(new ItemStack(Material.GOLDEN_PICKAXE));
-        randomItems.add(new ItemStack(Material.DIAMOND_SHOVEL));
-        randomItems.add(new ItemStack(Material.DIAMOND_PICKAXE));
+        randomItems.add(new ItemStack(Material.NETHERITE_AXE));
+        randomItems.add(new ItemStack(Material.NETHERITE_PICKAXE));
+        randomItems.add(new ItemStack(Material.NETHERITE_SHOVEL));
+        randomItems.add(new ItemStack(Material.NETHERITE_SWORD));
+        randomItems.add(new ItemStack(Material.NETHERITE_HOE));
+        randomItems.add(new ItemStack(Material.NETHERITE_CHESTPLATE));
+        randomItems.add(new ItemStack(Material.NETHERITE_LEGGINGS));
+        randomItems.add(new ItemStack(Material.NETHERITE_BOOTS));
+        randomItems.add(new ItemStack(Material.NETHERITE_HELMET));
+
         randomItems.add(new ItemStack(Material.NAME_TAG));
         randomItems.add(new ItemStack(Material.SADDLE));
         randomItems.add(new ItemStack(Material.REINFORCED_DEEPSLATE));
 
-        prezentItems.add(readyItems.get("Skrzynia_smoka"));
-        prezentItems.add(readyItems.get("Kupa"));
-        prezentItems.add(readyItems.get("Uniwersalny_bilet"));
-        prezentItems.add(readyItems.get("$1"));
-
-        for (int i = 1; i < 5; i++) {
+        for (Map.Entry<String, CustomItem> entry : readyItems.getItemMap().entrySet()) {
+            prezentItems.add(entry.getValue().getItem());
+        }
+        for (int i = 1; i < 10; i++) {
             prezentItems.add(readyItems.get("$1", i));
         }
-
         prezentItems.add(new ItemStack(Material.EMERALD, 16));
         prezentItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, 16));
+
+        rareMaterials.add(Material.ELYTRA);
+        rareMaterials.add(Material.BEACON);
+        rareMaterials.add(Material.ENDER_CHEST);
+        rareMaterials.add(Material.PHANTOM_MEMBRANE);
+
+        rareMaterials.add(Material.NETHERITE_AXE);
+        rareMaterials.add(Material.NETHERITE_PICKAXE);
+        rareMaterials.add(Material.NETHERITE_SHOVEL);
+        rareMaterials.add(Material.NETHERITE_SWORD);
+        rareMaterials.add(Material.NETHERITE_HOE);
+        rareMaterials.add(Material.NETHERITE_CHESTPLATE);
+        rareMaterials.add(Material.NETHERITE_LEGGINGS);
+        rareMaterials.add(Material.NETHERITE_BOOTS);
+        rareMaterials.add(Material.NETHERITE_HELMET);
 
         new CommandBase("openchest", 2, false) {
             @Override
@@ -362,10 +384,8 @@ public class OpenChest {
 
                             chestCounterUtils.addOne(player);
 
-                            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-                                ItemMeta itemMeta = item.getItemStack().getItemMeta();
-                                if (itemMeta.hasDisplayName()) broadcastMessage(getBroadcastPrefix() + colorize(player.getName() + " znalazl " + item.getItemStack().getAmount() +  "x " + itemMeta.getDisplayName() + "&f w &cSkrzyni Smoka"));
-                            });
+                            ItemStack droppedItemStack = item.getItemStack();
+                            tryRenderMessage(player, droppedItemStack, droppedItemStack.getItemMeta());
                         });
                     }, 100);
 

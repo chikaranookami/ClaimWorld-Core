@@ -44,13 +44,14 @@ public class Pomoc {
         helpMessages.add("§8Senat\n\n§cSenat§8 to organizacja, ktora zajmuje sie obsluga graczy.\n\n§cSiedziba Senatu§8 jest obecnie w przygotowaniu, dlatego jesli czegos potrzebujesz to pisz bezposrednio do Senatora.");
         helpMessages.add("§8Senat\n\n§cSenatorowie§8: kinia_98, _NeKoToJa_, MarJan_Lubi_Kuce, Mr_PogromcA, xCaptain865, rtygta, Chikaraa.\n\nU Senatorow mozecie zakupic nastepujace uslugi:");
         helpMessages.add("§8Senat\n\n§c+§8 Niestandardowe ustawienia dzialki ($16/ustawienie/chunk)\n§c+§8 Zmiane biomu na dzialce ($16/chunk za biom z Overworlda lub $64/chunk za inny biom)");
-        helpMessages.add("§8Senat\n\n§c+§8 Rezerwacja baneru ($5 za standardowy lub $15 za niestandardowy wzor)\n§c+§8 Niestandardowy baner ($1/sztuka)\n§c+§8 Wlasna grafika na mapach ($8/mape).");
+        helpMessages.add("§8Senat\n\n§c+§8 Zmiane biomu na zimowy (ZA DARMO DO KONCA ROKU!)\n§c+§8 Rezerwacja baneru ($5 za standardowy lub $15 za niestandardowy wzor)\n§c+§8 Niestandardowy baner ($1/sztuka)\n§c+§8 Wlasna grafika na mapach ($8/mape).");
         helpMessages.add("§8Senat\n\nSenatorowi mozecie rowniez zglosic swoja §cfarme§8, by dodal ja do spisu farm publicznych ($5/farma).\n\nRaz w miesiacu wybierana jest farma danego typu, a jej wlasciciel otrzymuje §cdolary§8.");
         helpMessages.add("§8Wybrane Farmy\n\nNastepna aktualizacja: 30.12.2022\n\nZglos farme Senatorowi, by miec szanse na dodatkowy zarobek!\n\n§c+§8 Zelazo [365 49 -284 Nether]\n§c+§8 Zloto [-128 253 -84 Nether]");
         helpMessages.add("§8Wybrane Farmy\n\n§c+§8 Blazy [-334 72 -3 Nether]\n§c+§8 Owce [656 -703 Overworld]\n§c+§8 Kaktusy [409 289 Overworld]\n§c+§8 Trzcina [1096 -185 Overworld]\n§c+§8 Wiesniaki [310 -1979 Overworld]");
         helpMessages.add("§8Sztandary\n\nZajete §cwzory§8 sztandardow dostepne sa do wgladu w specjalnym miejscu obok spawnu (285x, 432z).\n\nKazdy moze zarezerwowac swoj wzor u Senatora.");
         helpMessages.add("§8Zakupy w Sklepie\n\n§c+§8 Za osiagniecie progu w sklepie gracze odblokowuja dodatkowe rzeczy.\n\nKolejna nagroda: §c" + goalUtils.getCurrentReward() + "\n\n§8Do celu brakuje: §c" + goalUtils.getMissingAmount() + "zl");
         helpMessages.add("§8Osiagniecia\n\nZa zrealizowanie wszystkich osiagniec Senat moze przydzielic graczowi specjalna §cstatuetke§8.\n\nWystarczy wyslac odpowiednie screeny na Discorda i oznaczyc Senatora.");
+        helpMessages.add("§8Skrzynki\n\nZawieraja rozne przedmioty. Najciekawsze z nich to:\n§c+§8 Elytra, Beacon, ShulkerBox (~0.4%)\n§c+§8 Netherytowe Narzedzia (~3%)\n§c+§8 Niestandardowe Przedmioty (~9%)");
         helpMessages.add("§8O Serwerze\n\n§cClaim World§8 stawia przede wszystkim na dlugoterminowosc.\n\nChcemy utrzymac rozgrywke w klimatach klasycznego Minecrafta, jednoczesnie caly czas nieco ja urozmaicajac.");
         
         new CommandBase("pomoc", true) {

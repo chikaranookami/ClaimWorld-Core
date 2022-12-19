@@ -2,6 +2,7 @@ package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.BonusManager;
+import claimworld.net.supporter.utils.items.ReadyItems;
 import claimworld.net.supporter.utils.tasks.Task;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.*;
@@ -20,6 +21,7 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class BlockBreakEvent implements Listener {
 
+    ReadyItems readyItems = ReadyItems.getInstance();
     TaskManager taskManager = TaskManager.getInstance();
 
     private final List<Material> decemberBonusMaterials = new ArrayList<>();
@@ -55,9 +57,9 @@ public class BlockBreakEvent implements Listener {
         Location location = event.getBlock().getLocation();
         Material material = event.getBlock().getType();
         //enable at 6, 24, 25, 26 and 31 of december
-        //if (decemberBonusMaterials.contains(material)) {
-            //if (new Random().nextInt(10) == 0) world.dropItem(location, ReadyItems.getInstance().get("Prezent"));
-        //}
+        if (decemberBonusMaterials.contains(material)) {
+            if (new Random().nextInt(12) == 0) world.dropItem(location, readyItems.get("Prezent"));
+        }
 
         Map<String, Task> taskMap = taskManager.getTaskMap();
 

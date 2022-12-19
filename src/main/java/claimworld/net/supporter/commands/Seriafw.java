@@ -2,8 +2,7 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
+import claimworld.net.supporter.utils.wip.FireworkUtils;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
@@ -11,34 +10,12 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.bukkit.Bukkit.getScheduler;
 
 public class Seriafw {
-
-    private FireworkEffect.Type getRandomType() {
-        List<FireworkEffect.Type> list = new ArrayList<>();
-        list.add(FireworkEffect.Type.BALL_LARGE);
-        list.add(FireworkEffect.Type.BALL);
-        list.add(FireworkEffect.Type.STAR);
-        list.add(FireworkEffect.Type.CREEPER);
-        list.add(FireworkEffect.Type.BURST);
-
-        return list.get(new Random().nextInt(list.size()));
-    }
-
-    private FireworkEffect getRandomEffect() {
-        return FireworkEffect.builder()
-                .with(getRandomType())
-                .withColor(Color.RED)
-                .flicker(new Random().nextBoolean())
-                .withColor(Color.WHITE).build();
-    }
-
     public Seriafw() {
         new CommandBase("seriafw", true) {
             @Override
@@ -47,10 +24,10 @@ public class Seriafw {
                 assert location.getWorld() != null;
 
                 AtomicInteger counter = new AtomicInteger();
-                int random = new Random().nextInt(3) + 6;
+                int random = new Random().nextInt(4) + 5;
 
                 getScheduler().scheduleSyncRepeatingTask(Supporter.getPlugin(), () -> {
-                    if (!(counter.get() < 10)) {
+                    if (!(counter.get() < 16)) {
                         return;
                     }
 
@@ -58,7 +35,7 @@ public class Seriafw {
                     FireworkMeta fireworkMeta = firework.getFireworkMeta();
 
                     fireworkMeta.setPower(random);
-                    fireworkMeta.addEffect(getRandomEffect());
+                    fireworkMeta.addEffect(new FireworkUtils().getRandomEffect());
                     firework.setFireworkMeta(fireworkMeta);
 
                     firework.setLife(random);
@@ -66,7 +43,7 @@ public class Seriafw {
 
                     counter.getAndIncrement();
 
-                }, 0L, random * 2L);
+                }, 0L, random);
 
                 return true;
             }
@@ -75,7 +52,7 @@ public class Seriafw {
             public String getUsage() {
                 return "/seriafw";
             }
-        }.enableDelay(10).setPermission("claimworld.mvp");
+        }.enableDelay(4).setPermission("claimworld.mvp");
     }
 
 }

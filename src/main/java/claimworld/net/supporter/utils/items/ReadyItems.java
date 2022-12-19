@@ -58,10 +58,11 @@ public class ReadyItems {
         return itemStack;
     }
 
-    public ReadyItems() {
-        itemMap.put("Cofnij", new CustomItem("&fCofnij", Material.ARROW, Collections.singletonList(colorize("&7&oPoprzednie menu."))));
-        itemMap.put("Menu", new CustomItem("&aMenu", Material.CLOCK, Collections.singletonList(colorize("&7&oPanel gracza.")), 1));
+    public ItemStack getMenuItem() {
+        return new CustomItem("&aMenu", Material.CLOCK, Collections.singletonList(colorize("&7&oPanel gracza.")), 1).getItem();
+    }
 
+    public ReadyItems() {
         itemMap.put("Kox", new CustomItem("", Material.ENCHANTED_GOLDEN_APPLE, null));
         itemMap.put("Ruda_diamentu", new CustomItem("", Material.DIAMOND_ORE, null));
         itemMap.put("Sztabka_netherytu", new CustomItem("", Material.NETHERITE_INGOT, null));

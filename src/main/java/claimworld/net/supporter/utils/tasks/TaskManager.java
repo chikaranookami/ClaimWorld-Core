@@ -137,10 +137,10 @@ public class TaskManager {
 
     public TaskManager() {
         //first set
-        taskMap.put("useChorus", new Task("Przemiesc sie o 100 metrow chorusem.", "", 0));
-        taskMap.put("placeInvisibleFrame", new Task("Powies niewidzialna ramke.", "", 0));
+        taskMap.put("useChorus", new Task("Przemiesc sie o 200 metrow chorusem.", "", 0));
+        taskMap.put("placeInvisibleFrame", new Task("Powies 2 niewidzialne ramki.", "counter", 2));
         taskMap.put("destroyNetheriteSword", new Task("Zuzyj netherytowy miecz.", "", 0));
-        taskMap.put("fishOutInkSac", new Task("Wylow torbiel.", "", 0));
+        taskMap.put("fishOutStick", new Task("Wylow patyk.", "", 0));
         taskMap.put("killWarden", new Task("Pokonaj Wardena.", "", 0));
         taskMap.put("craftBeacon", new Task("Zrob beacona.", "", 0));
         taskMap.put("doShit", new Task("Zrob kupe.", "", 0));
@@ -150,10 +150,10 @@ public class TaskManager {
         taskMap.put("spawnWitch", new Task("Zresp wiedzme jajkiem.", "", 0));
         taskMap.put("sleepThruNights", new Task("Przespij 3 noce.", "counter", 3));
         taskMap.put("obtainNetherWarts", new Task("Dropnij 32 brodawki z piglinow.", "counter", 32));
-        taskMap.put("breakEmeralds", new Task("Rozkop 6 emeraldow.", "counter", 6));
-        taskMap.put("breakDiamonds", new Task("Rozkop stack diaxow.", "counter", 64));
+        taskMap.put("breakEmeralds", new Task("Rozkop 4 emeraldy.", "counter", 4));
+        taskMap.put("breakDiamonds", new Task("Rozkop pol stacka diaxow.", "counter", 32));
         taskMap.put("killIronGolems", new Task("Zabij 24 zelazne golemy.", "counter", 24));
-        taskMap.put("killSomeMobs", new Task("Zabij 100 dowolnych potworow.", "counter", 100));
+        taskMap.put("killSomeMobs", new Task("Zabij 150 dowolnych potworow.", "counter", 150));
 
         //second set
         taskMap.put("killDragon", new Task("Pokonaj Smoka.", "", 0));
@@ -165,9 +165,9 @@ public class TaskManager {
         taskMap.put("transformZombieToVillager", new Task("Badz blisko nowego wiesniaka z przemienienia.", "", 0));
         taskMap.put("stayCloseToSomeNewEndermite", new Task("Badz blisko nowego endermita z ender perly.", "", 0));
         taskMap.put("destroyItemsAtBlacksmith", new Task("Spal u kowala 3 przedmioty.", "counter", 3));
-        taskMap.put("throwNumberUsingDice", new Task("Wyrzuc 12 razy liczbe 12 na kostce.", "counter", 12));
-        taskMap.put("eatSuspiciousStew", new Task("Zjedz 8 podejrzanych potrawek.", "counter", 8));
-        taskMap.put("getHitByDragon", new Task("Bezposrednio oberwij od smoka 6 razy.", "counter", 6));
+        taskMap.put("throwNumberUsingDice", new Task("Wyrzuc 6 razy liczbe 12 na kostce.", "counter", 6));
+        taskMap.put("eatSuspiciousStew", new Task("Zjedz 6 podejrzanych potrawek.", "counter", 6));
+        taskMap.put("getHitByDragon", new Task("Bezposrednio oberwij od smoka 4 razy.", "counter", 4));
 
         //third set
         taskMap.put("beOnlineWhenTraderSpawns", new Task("Badz online, gdy pojawi sie handlarz.", "", 0));
@@ -192,7 +192,7 @@ public class TaskManager {
         taskMap.put("checkSeaLevel", new Task("Sprawdz poziom morza.", "", 0));
         taskMap.put("writeZagadka", new Task("Napisz zagadke na czacie.", "", 0));
         taskMap.put("teleportYourself", new Task("Przeteleportuj sie w dowolne miejsce.", "", 0));
-        taskMap.put("eatRottenFlashes", new Task("Zjedz 64 sztuki zgnilego miesa.", "counter", 64));
+        taskMap.put("eatRottenFlashes", new Task("Zjedz 32 sztuki zgnilego miesa.", "counter", 32));
         taskMap.put("beOnlineWhenPlayerBuysFromShop", new Task("Badz online, gdy ktos kupi cos ze sklepu (Chikaraa chetnie rozda voucher!).", "", 0));
 
         //prepare list of tasks

@@ -1,14 +1,15 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
+import claimworld.net.supporter.utils.wip.FireworkUtils;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
+
+import java.util.Random;
 
 public class Fw {
     public Fw() {
@@ -22,10 +23,10 @@ public class Fw {
                 FireworkMeta fireworkMeta = firework.getFireworkMeta();
 
                 fireworkMeta.setPower(3);
-                fireworkMeta.addEffect(FireworkEffect.builder().withColor(Color.RED).flicker(true).withColor(Color.WHITE).build());
+                fireworkMeta.addEffect(new FireworkUtils().getRandomEffect());
                 firework.setFireworkMeta(fireworkMeta);
 
-                firework.detonate();
+                firework.setLife(new Random().nextInt(5) + 1);
                 return true;
             }
 
@@ -33,6 +34,6 @@ public class Fw {
             public String getUsage() {
                 return "/fw";
             }
-        }.enableDelay(10).setPermission("claimworld.mvp");
+        }.enableDelay(3).setPermission("claimworld.mvp");
     }
 }

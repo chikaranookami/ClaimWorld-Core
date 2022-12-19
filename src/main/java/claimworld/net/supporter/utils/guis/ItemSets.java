@@ -26,6 +26,8 @@ public class ItemSets {
     private final HashMap<Integer, ItemStack> itemMap = new HashMap<>();
     private final ReadyItems readyItems = ReadyItems.getInstance();
 
+    private final ItemStack cofnij = new CustomItem("&fCofnij", Material.ARROW, Collections.singletonList(colorize("&7&oPoprzednie menu."))).getItem();
+
     public HashMap<Integer, ItemStack> initializeInventoryContent(Player player, String inventoryName) {
         if (inventoryName == null || inventoryName.isEmpty()) {
             getLogger().log(Level.INFO, "initializing error - inventoryName is empty or null");
@@ -63,10 +65,10 @@ public class ItemSets {
             itemMap.put(12, new CustomItem("&aTeleportacja", Material.COMPASS, Collections.singletonList(colorize("&7&oPrzenies sie szybko!"))).getItem());
             itemMap.put(13, new CustomItem("&aPunkty", Material.EXPERIENCE_BOTTLE, Collections.singletonList(colorize("&7&oZarzadzaj swoimi punktami!"))).getItem());
             itemMap.put(14, new CustomItem("&aPrzepustka", Material.IRON_INGOT, Collections.singletonList(colorize("&7&oOdblokuj nowe rzeczy!"))).getItem());
-            itemMap.put(15, new CustomItem("&bPrzepustka Premium ✦", Material.DIAMOND, Arrays.asList(colorize("&7&o- Nowe, unikalne mozliwosci!"), colorize("&7&oDostepna juz niebawem!"))).getItem());
-            itemMap.put(16, new CustomItem("&bPanel VIP", Material.ENCHANTING_TABLE, Arrays.asList(colorize("&7&oTajemnicze miejsce!"), colorize("&7&oDostepna juz niebawem!"))).getItem());
+            //itemMap.put(15, new CustomItem("&bPrzepustka Premium ✦", Material.DIAMOND, Collections.singletonList(colorize("&7&oJeszcze wiecje zabawy!"))).getItem());
+            //itemMap.put(16, new CustomItem("&bPanel VIP", Material.ENCHANTING_TABLE, Collections.singletonList(colorize("&7&oTwoj VIP w jednym miejscu!"))).getItem());
             itemMap.put(28, new CustomItem("&fOgloszenia", Material.BOOK, Collections.singletonList(colorize("&7&oNajnowsze informacje."))).getItem());
-            itemMap.put(37, new CustomItem("&fOgnisko u Mariana", Material.CAMPFIRE, Collections.singletonList(colorize("&7&oCentrum pomocy."))).getItem());
+            itemMap.put(37, new CustomItem("&fPomoc", Material.CAMPFIRE, Collections.singletonList(colorize("&7&oCentrum pomocy."))).getItem());
             itemMap.put(43, new CustomItem("&fUlatwienia dostepu", Material.NAME_TAG, Collections.singletonList(colorize("&7&oDodatkowe ustawienia."))).getItem());
             itemMap.put(21, new CustomItem("&aSkrytka", Material.ENDER_CHEST, Collections.singletonList(colorize("&7&oTwoje dodatkowe przedmioty."))).getItem());
             itemMap.put(22, new CustomItem("&aUmiejetnosci", Material.ENDER_EYE, Collections.singletonList(colorize("&7&oTwoje umiejetnosci."))).getItem());
@@ -76,7 +78,7 @@ public class ItemSets {
 
         if (inventoryName.equals("Teleportacja")) {
             String lore = colorize("&7&oUzyj, by sie przeteleportowac.");
-            itemMap.put(53, readyItems.get("Cofnij"));
+            itemMap.put(53, cofnij);
             itemMap.put(10, new CustomItem("&fUstaw dom", Material.WHITE_BED, Collections.singletonList(colorize("&7&oUzyj, by ustawic dom."))).getItem());
             itemMap.put(12, new CustomItem("&aDom", Material.LIME_BED, Collections.singletonList(lore)).getItem());
             itemMap.put(13, new CustomItem("&aSpawn", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
@@ -91,7 +93,7 @@ public class ItemSets {
         }
 
         if (inventoryName.equals("Ulatwienia dostepu")) {
-            itemMap.put(53, readyItems.get("Cofnij"));
+            itemMap.put(53, cofnij);
             itemMap.put(10, new CustomItem("&aPoziom morza", Material.WATER_BUCKET, Collections.singletonList(colorize("&7&oSprawdz poziom morza."))).getItem());
             itemMap.put(11, new CustomItem("&aKosz", Material.HOPPER_MINECART, Collections.singletonList(colorize("&7&oLatwo usun przedmioty."))).getItem());
             itemMap.put(12, new CustomItem("&aRzut kostka", Material.REDSTONE_LAMP, Collections.singletonList(colorize("&7&oWyrzuc liczbe oczek."))).getItem());

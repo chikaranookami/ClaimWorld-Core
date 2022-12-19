@@ -198,7 +198,7 @@ public class Kowal {
                         return;
                     }
 
-                    if (item.isSimilar(readyItems.get("$1")) || item.isSimilar(readyItems.get("Uniwersalny_bilet"))) {
+                    if (item.isSimilar(readyItems.get("$1")) || item.isSimilar(readyItems.get("Uniwersalny_bilet")) || item.isSimilar(readyItems.get("Skrzynia_Smoka"))) {
                         player.sendMessage(getUserPrefix() + "Kowal nie obsluguje tego przedmiotu.");
                         return;
                     }

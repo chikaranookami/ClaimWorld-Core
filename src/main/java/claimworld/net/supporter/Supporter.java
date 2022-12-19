@@ -28,6 +28,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         PluginManager pluginManager = getServer().getPluginManager();
 
         //events
+        pluginManager.registerEvents(new PlayerQuitEvent(), this);
         pluginManager.registerEvents(new RaidStopEvent(), this);
         pluginManager.registerEvents(new LightningStrikeEvent(), this);
         pluginManager.registerEvents(new PlayerAdvancementDoneEvent(), this);

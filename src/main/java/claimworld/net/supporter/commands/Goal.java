@@ -82,7 +82,7 @@ public class Goal {
 
                     getScheduler().runTaskLater(Supporter.getPlugin(), () -> dispatchCommand(sender, "goal tryBonus 0"), 30L);
 
-                    broadcastMessage(colorize(getBroadcastPrefix() + "Postep obecnego celu w sklepie wynosi teraz &e" + goalUtils.getPercentAmount() + "%&f."));
+                    broadcastMessage(colorize(getBroadcastPrefix() + "Postep obecnego celu w sklepie wynosi teraz &e" + goalUtils.getPercentAmount() + "%&f. Brakuje jeszcze &e " + goalUtils.getMissingAmount() + "zl&f."));
                     return true;
                 }
 

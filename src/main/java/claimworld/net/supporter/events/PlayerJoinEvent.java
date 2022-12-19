@@ -1,14 +1,11 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.GeyserUtils;
-import claimworld.net.supporter.utils.GlobalUtils;
+import claimworld.net.supporter.utils.*;
 import claimworld.net.supporter.utils.announcers.JoinAnnouncer;
-import claimworld.net.supporter.utils.BonusManager;
 import claimworld.net.supporter.utils.items.Locker;
 import claimworld.net.supporter.utils.items.ReadyItems;
 import claimworld.net.supporter.utils.battlepass.BattlePassManager;
-import claimworld.net.supporter.utils.AttributesManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,8 +14,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Team;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static claimworld.net.supporter.utils.MessageUtils.getUserPrefix;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
@@ -26,21 +22,23 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerJoinEvent implements Listener {
 
+    ReadyItems readyItems = ReadyItems.getInstance();
     BonusManager bonusManager = BonusManager.getInstance();
     GlobalUtils globalUtils = GlobalUtils.getInstance();
-    HashMap<String, List<ItemStack>> storedItems = Locker.getInstance().getLockerMap();
 
     private final GeyserUtils geyserUtils = new GeyserUtils();
     private final AttributesManager attributesManager = new AttributesManager();
+
+    private final List<String> winterRewardedPlayers = new ArrayList<>();
 
     @EventHandler
     public void joinEvent(org.bukkit.event.player.PlayerJoinEvent event) {
         Player player = event.getPlayer();
         String playerName = player.getName();
-        player.setDisplayName(playerName);
+        event.setJoinMessage(colorize("&7" + playerName + " wlasnie wszeld na serwer, witamy!"));
 
         //set menu item
-        player.getInventory().setItem(17, ReadyItems.getInstance().get("Menu"));
+        player.getInventory().setItem(17, ReadyItems.getInstance().getMenuItem());
 
         //attributes
         attributesManager.updatePlayerHealth(player);
@@ -60,10 +58,14 @@ public class PlayerJoinEvent implements Listener {
         }, 10L);
 
         //enable at 6, 24, 25, 26 and 31 of december
-        //getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-            //player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 432000, 1, true, false, true));
-            //player.addPotionEffect(new PotionEffect(PotionEffectType.HERO_OF_THE_VILLAGE, 432000, 1, true, false, true));
-        //}, 10L);
+        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1, true, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.HERO_OF_THE_VILLAGE, Integer.MAX_VALUE, 1, true, false, true));
+            if (!winterRewardedPlayers.contains(playerName)) {
+                winterRewardedPlayers.add(playerName);
+                new WarehouseUtils().addItemsSingle(player, Collections.singletonList(readyItems.get("$1")));
+            }
+        }, 10L);
 
         //checking compatibility between permissions and displayed team
         getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
@@ -79,24 +81,14 @@ public class PlayerJoinEvent implements Listener {
             BattlePassManager.getInstance().updateTablistFooter(player);
         }, 30L);
 
-        //check for any stored items
-        getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-            if (storedItems.get(playerName) == null) return;
-            if (storedItems.get(playerName).size() < 1) return;
-
-            player.sendMessage(getUserPrefix() + "W Twojej Skrytce cos jest. Odbierz to, zanim zniknie!");
-        }, 40L);
-
         //manage global free chest
         getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-            if (!bonusManager.getBonuses().get("Skrzynka")) return;
-
             List<String> playersWithFreeChest = globalUtils.getPlayersWithFreeChest();
-            if (playersWithFreeChest.contains(playerName)) return;
-
-            globalUtils.addFreeChest(player);
+            if (bonusManager.getBonuses().get("Skrzynka") && !playersWithFreeChest.contains(playerName)) {
+                playersWithFreeChest.add(playerName);
+                globalUtils.addFreeChest(player);
+            }
         }, 100L);
-
         getScheduler().runTaskLater(Supporter.getPlugin(), () -> attributesManager.tryUpdateStats(player), 300L);
     }
 }

@@ -51,6 +51,6 @@ public class Dice {
             public String getUsage() {
                 return "/dice";
             }
-        }.enableDelay(10).setPermission("claimworld.player");
+        }.setPermission("claimworld.player");
     }
 }

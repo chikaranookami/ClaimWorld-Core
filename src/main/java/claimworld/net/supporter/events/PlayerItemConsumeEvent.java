@@ -32,15 +32,28 @@ public class PlayerItemConsumeEvent implements Listener {
     private final List<Material> blockedMaterials = Arrays.asList(Material.SWEET_BERRIES, Material.CHORUS_FRUIT, Material.MELON_SLICE, Material.DRIED_KELP);
 
     private void renderPoopEffects(World world, Location location) {
-        world.dropItem(location, new ItemStack(Material.DIRT, 2));
+        world.dropItem(location, new ItemStack(Material.DIRT, 1));
         world.playSound(location, Sound.ENTITY_SHEEP_AMBIENT, 0.6f, 2f);
-        world.spawnParticle(Particle.SPELL, location, 15, 0.75, 0.75, 0.75, 0);
+        world.spawnParticle(Particle.SPELL, location, 25, 0.75, 0.75, 0.75, 0);
         world.spawnParticle(Particle.SLIME, location, 15, 0.75, 0.75, 0.75);
+        world.spawnParticle(Particle.SQUID_INK, location, 5, 0.75, 0.75, 0.75);
+    }
+
+    private void renderPoopPoison(World world, Location location) {
+        ItemStack potion = new ItemStack(Material.LINGERING_POTION);
+        PotionMeta potionMeta = (PotionMeta) potion.getItemMeta();
+        assert potionMeta != null;
+        potionMeta.addCustomEffect(new PotionEffect(PotionEffectType.WITHER, 20, 0, true, true), false);
+        potion.setItemMeta(potionMeta);
+
+        ThrownPotion thrownPotion = world.spawn(location, ThrownPotion.class);
+        thrownPotion.setItem(potion);
     }
 
     private void smallPoop(Player player, World world, Location location) {
         renderPoopEffects(world, location);
-        player.sendMessage(MessageUtils.getUserPrefix() + "Chyba zbiera Ci sie na cos ciezszego...");
+        renderPoopPoison(world, location);
+        player.sendMessage(MessageUtils.getUserPrefix() + "TE, zwolnij tam, bo zaczynasz popuszczac!");
 
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("doSmallShit")));
     }
@@ -55,14 +68,7 @@ public class PlayerItemConsumeEvent implements Listener {
         world.playSound(location, Sound.BLOCK_ROOTED_DIRT_PLACE, 0.85f, 2f);
         world.playSound(location, Sound.BLOCK_ROOTED_DIRT_BREAK, 0.6f, 2f);
 
-        ItemStack potion = new ItemStack(Material.LINGERING_POTION);
-        PotionMeta potionMeta = (PotionMeta) potion.getItemMeta();
-        assert potionMeta != null;
-        potionMeta.addCustomEffect(new PotionEffect(PotionEffectType.WITHER, 20, 0, true, true), false);
-        potion.setItemMeta(potionMeta);
-
-        ThrownPotion thrownPotion = world.spawn(location, ThrownPotion.class);
-        thrownPotion.setItem(potion);
+        renderPoopPoison(world, location);
 
         Bukkit.broadcastMessage(colorize(MessageUtils.getBroadcastPrefix() + "Gracz " + player.getDisplayName() + " &fwlasnie sie... zesral."));
 
@@ -87,12 +93,12 @@ public class PlayerItemConsumeEvent implements Listener {
 
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
             int poopChance = new Random().nextInt(1000);
-            if (poopChance > 10) return;
+            if (poopChance > 16) return;
 
             World world = player.getWorld();
             Location location = player.getLocation();
 
-            if (poopChance > 2) {
+            if (poopChance > 4) {
                 getScheduler().runTask(Supporter.getPlugin(), () -> smallPoop(player, world, location));
                 return;
             }

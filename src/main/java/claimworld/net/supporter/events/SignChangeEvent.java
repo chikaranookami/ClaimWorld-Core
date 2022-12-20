@@ -8,8 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-import java.util.Arrays;
-
 import static org.bukkit.Bukkit.getScheduler;
 
 public class SignChangeEvent implements Listener {

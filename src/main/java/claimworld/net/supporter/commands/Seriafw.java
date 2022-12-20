@@ -24,10 +24,10 @@ public class Seriafw {
                 assert location.getWorld() != null;
 
                 AtomicInteger counter = new AtomicInteger();
-                int random = new Random().nextInt(4) + 5;
+                int random = new Random().nextInt(4) + 4;
 
                 getScheduler().scheduleSyncRepeatingTask(Supporter.getPlugin(), () -> {
-                    if (!(counter.get() < 16)) {
+                    if (!(counter.get() < 24)) {
                         return;
                     }
 
@@ -39,7 +39,7 @@ public class Seriafw {
                     firework.setFireworkMeta(fireworkMeta);
 
                     firework.setLife(random);
-                    firework.setMaxLife(50);
+                    firework.setMaxLife(45);
 
                     counter.getAndIncrement();
 

@@ -77,26 +77,30 @@ public class BattlePassManager {
     }
 
     public void updateTablistFooter(Player player) {
+        String playerName = player.getName();
         Scoreboard scoreboard = player.getScoreboard();
-        assert scoreboard.getEntryTeam(player.getName()) != null;
+        assert scoreboard.getEntryTeam(playerName) != null;
         int timePlayed = player.getStatistic(Statistic.TOTAL_WORLD_TIME) / 20 / 60 / 60;
 
-        if (scoreboard.getEntryTeam(player.getName()) == null)  {
-            player.setPlayerListFooter("\n" + colorize(scoreboard.getObjective(mainObjectiveName).getScore(player.getName()).getScore() + getBattlepassIcon() + " " + timePlayed + "h") + "\n");
+        if (scoreboard.getEntryTeam(playerName) == null)  {
+            player.setPlayerListFooter("\n" + colorize(scoreboard.getObjective(mainObjectiveName).getScore(playerName).getScore() + getBattlepassIcon() + " " + timePlayed + "h") + "\n");
         } else {
-            player.setPlayerListFooter("\n" + colorize(scoreboard.getEntryTeam(player.getName()).getPrefix() + "&a" + scoreboard.getObjective(mainObjectiveName).getScore(player.getName()).getScore() + getBattlepassIcon() + " &f" + timePlayed + "h") + "\n");
+            player.setPlayerListFooter("\n" + colorize(scoreboard.getEntryTeam(playerName).getPrefix() + "&a" + scoreboard.getObjective(mainObjectiveName).getScore(playerName).getScore() + getBattlepassIcon() + " &f" + timePlayed + "h") + "\n");
         }
     }
 
     public void tryReward(Player player, int level) {
-        if (!battlePassMap.containsKey(level)) return;
+        if (!battlePassMap.containsKey(level - 1)) return;
 
-        int hasBeenAchieved = player.getScoreboard().getObjective(checkingObjectiveName).getScore(player.getName()).getScore();
+        String playerName = player.getName();
+        int hasBeenAchieved = player.getScoreboard().getObjective(checkingObjectiveName).getScore(playerName).getScore();
         if (hasBeenAchieved == 1) return;
 
+        getLogger().log(Level.INFO, "Reward hasn't been achieved, continuing...");
+
         Scoreboard scoreboard = player.getScoreboard();
-        scoreboard.getObjective(checkingObjectiveName).getScore(player.getName()).setScore(0);
-        scoreboard.getObjective(getUserQuestDataObjectiveName).getScore(player.getName()).setScore(0);
+        scoreboard.getObjective(checkingObjectiveName).getScore(playerName).setScore(0);
+        scoreboard.getObjective(getUserQuestDataObjectiveName).getScore(playerName).setScore(0);
 
         renderReward(player, level);
     }
@@ -107,6 +111,8 @@ public class BattlePassManager {
             String playerValue = "<PLAYER>";
             if (command.contains(playerValue)) command = command.replace(playerValue, player.getName());
             dispatchCommand(getConsoleSender(), command);
+            
+            getLogger().log(Level.INFO, "Dispatching command for battlepass level " + level + " reward...");
 
             getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
                 ReadyItems readyItems = ReadyItems.getInstance();

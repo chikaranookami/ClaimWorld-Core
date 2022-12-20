@@ -51,7 +51,7 @@ public class Goal {
             case 1750:
                 broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto kolejny cel w sklepie. W nagrode &eniedlugo pojawia sie efekty krwawienia.&f."));
                 break;
-            case 2000:
+            case 2150:
                 broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto kolejny cel w sklepie. W nagrode &eniedlugo pojawi sie kalendarz z bonusami za logowanie.&f."));
                 break;
             case 9999:

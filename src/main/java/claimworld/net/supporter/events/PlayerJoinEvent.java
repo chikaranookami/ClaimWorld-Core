@@ -35,7 +35,7 @@ public class PlayerJoinEvent implements Listener {
     public void joinEvent(org.bukkit.event.player.PlayerJoinEvent event) {
         Player player = event.getPlayer();
         String playerName = player.getName();
-        event.setJoinMessage(colorize("&7" + playerName + " wlasnie wszeld na serwer, witamy!"));
+        event.setJoinMessage(colorize("&f> " + playerName + " wlasnie wszeld na serwer, witamy!"));
 
         //set menu item
         player.getInventory().setItem(17, ReadyItems.getInstance().getMenuItem());

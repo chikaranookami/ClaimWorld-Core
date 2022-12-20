@@ -23,7 +23,7 @@ public class PlayerDeathEvent implements Listener {
         assert player.getLastDamageCause() != null;
         EntityDamageEvent.DamageCause damageCause = player.getLastDamageCause().getCause();
         if (damageCause == EntityDamageEvent.DamageCause.FIRE_TICK || damageCause == EntityDamageEvent.DamageCause.FIRE) {
-         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("dieDueToFire")));
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("dieDueToFire")));
             return;
         }
         if (damageCause == EntityDamageEvent.DamageCause.STARVATION) {

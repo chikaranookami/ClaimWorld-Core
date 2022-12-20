@@ -10,17 +10,16 @@ import org.bukkit.event.Listener;
 
 import java.util.Random;
 
+import static org.bukkit.Bukkit.broadcastMessage;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerAdvancementDoneEvent implements Listener {
 
-    ReadyItems readyItems = ReadyItems.getInstance();
     TaskManager taskManager = TaskManager.getInstance();
 
     @EventHandler
     public void playerAdvancementDoneEvent(org.bukkit.event.player.PlayerAdvancementDoneEvent event) {
         Player player = event.getPlayer();
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("getAchievementDone")));
-        if (new Random().nextInt(10) == 1) player.getWorld().dropItem(player.getLocation(), readyItems.get("Prezent"));
     }
 }

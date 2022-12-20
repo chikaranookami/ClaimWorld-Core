@@ -9,8 +9,6 @@ import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 
-import java.util.Random;
-
 public class Fw {
     public Fw() {
         new CommandBase("fw", true) {
@@ -26,7 +24,7 @@ public class Fw {
                 fireworkMeta.addEffect(new FireworkUtils().getRandomEffect());
                 firework.setFireworkMeta(fireworkMeta);
 
-                firework.setLife(new Random().nextInt(5) + 1);
+                firework.detonate();
                 return true;
             }
 

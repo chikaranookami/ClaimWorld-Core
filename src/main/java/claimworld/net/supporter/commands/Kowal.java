@@ -33,8 +33,8 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class Kowal {
 
-    TaskManager taskManager = TaskManager.getInstance();
     ReadyItems readyItems = ReadyItems.getInstance();
+    TaskManager taskManager = TaskManager.getInstance();
 
     private final GeyserUtils geyserUtils = new GeyserUtils();
 
@@ -198,7 +198,7 @@ public class Kowal {
                         return;
                     }
 
-                    if (item.isSimilar(readyItems.get("$1")) || item.isSimilar(readyItems.get("Uniwersalny_bilet")) || item.isSimilar(readyItems.get("Skrzynia_Smoka"))) {
+                    if (item.isSimilar(readyItems.get("$1")) || item.isSimilar(readyItems.get("Uniwersalny_bilet")) || item.isSimilar(readyItems.get("Skrzynia_smoka"))) {
                         player.sendMessage(getUserPrefix() + "Kowal nie obsluguje tego przedmiotu.");
                         return;
                     }

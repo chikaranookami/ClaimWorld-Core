@@ -14,6 +14,7 @@ import org.bukkit.event.Listener;
 
 import java.util.Random;
 
+import static org.bukkit.Bukkit.broadcastMessage;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerFishEvent implements Listener {

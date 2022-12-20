@@ -9,6 +9,6 @@ public class PlayerQuitEvent implements Listener {
 
     @EventHandler
     public void playerQuitEvent(org.bukkit.event.player.PlayerQuitEvent event) {
-        event.setQuitMessage(colorize("&7" + event.getPlayer().getName() + " opuscil serwer"));
+        event.setQuitMessage(colorize("&f> " + event.getPlayer().getName() + " opuscil serwer."));
     }
 }

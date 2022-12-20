@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import static org.bukkit.Bukkit.broadcastMessage;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class EntityDeathEvent implements Listener {
@@ -35,9 +36,7 @@ public class EntityDeathEvent implements Listener {
         if (entity instanceof Monster) {
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("killSomeMobs")));
 
-            if (entityType != EntityType.ENDERMAN) {
-                if (new Random().nextInt(100) == 1) player.getWorld().dropItem(entity.getLocation(), readyItems.get("Prezent"));
-            }
+            if (entityType != EntityType.ENDERMAN) if (new Random().nextInt(100) == 1) player.getWorld().dropItem(entity.getLocation(), readyItems.get("Prezent"));
         }
 
         if (entityType == EntityType.CAT) {

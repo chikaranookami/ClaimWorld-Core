@@ -29,13 +29,13 @@ public class AsyncPlayerChatEvent implements Listener {
 
         if (team == null || team.getPrefix().isEmpty()) {
             event.setFormat(playerName + ChatColor.GRAY + ": " + ChatColor.RESET + message);
-            return;
+        } else {
+            event.setFormat(team.getPrefix() + ChatColor.RESET + playerName + ChatColor.GRAY + ": " + ChatColor.RESET + colorize(message));
         }
 
-        event.setFormat(team.getPrefix() + ChatColor.RESET + playerName + ChatColor.GRAY + ": " + ChatColor.RESET + colorize(message));
-
-        if (!message.contains("zagadka") && !message.contains("Zagadka")) return;
-
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("writeZagadka")));
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+            if (!message.contains("zagadka") && !message.contains("Zagadka")) return;
+            taskManager.tryFinishTask(player, taskManager.getTaskMap().get("writeZagadka"));
+        });
     }
 }

@@ -63,10 +63,7 @@ public class PlayerInteractEntityEvent implements Listener {
             if (!bonusManager.getBonuses().get("Podnoszenie+")) return;
             if (blockedEntityTypes.contains(event.getRightClicked().getType())) return;
             if (fixedEntityTypes.contains(event.getRightClicked().getType())) return;
-            if (!event.getRightClicked().hasGravity()) {
-                event.setCancelled(true);
-                return;
-            }
+            if (!event.getRightClicked().hasGravity()) return;
         }
 
         if (!player.getInventory().getItemInMainHand().getType().isAir()) return;

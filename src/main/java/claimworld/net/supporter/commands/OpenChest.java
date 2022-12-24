@@ -219,7 +219,16 @@ public class OpenChest {
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
             if (!itemMeta.hasDisplayName() && !rareMaterials.contains(itemStack.getType())) return;
 
-            broadcastMessage(getBroadcastPrefix() + colorize(player.getName() + " znalazl " + itemStack.getAmount() +  "x " + itemMeta.getDisplayName() + "&f w &cSkrzyni Smoka"));
+            String name;
+            if (itemMeta.hasDisplayName()) {
+                name = itemMeta.getDisplayName();
+            } if (itemMeta.hasLocalizedName()) {
+                name = itemMeta.getLocalizedName();
+            } else {
+                name = "fajny przedmiot";
+            }
+
+            broadcastMessage(getBroadcastPrefix() + colorize(player.getName() + " znalazl " + itemStack.getAmount() +  "x " + name + "&f w &cSkrzyni Smoka"));
         });
     }
 

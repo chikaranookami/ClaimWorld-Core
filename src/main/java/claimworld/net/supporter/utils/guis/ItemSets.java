@@ -67,6 +67,7 @@ public class ItemSets {
             itemMap.put(14, new CustomItem("&aPrzepustka", Material.IRON_INGOT, Collections.singletonList(colorize("&7&oOdblokuj nowe rzeczy!"))).getItem());
             //itemMap.put(15, new CustomItem("&bPrzepustka Premium ✦", Material.DIAMOND, Collections.singletonList(colorize("&7&oJeszcze wiecje zabawy!"))).getItem());
             //itemMap.put(16, new CustomItem("&bPanel VIP", Material.ENCHANTING_TABLE, Collections.singletonList(colorize("&7&oTwoj VIP w jednym miejscu!"))).getItem());
+            itemMap.put(16, new CustomItem("&aNowy Rok!", Material.FIREWORK_ROCKET, Collections.singletonList("")).getItem());
             itemMap.put(28, new CustomItem("&fOgloszenia", Material.BOOK, Collections.singletonList(colorize("&7&oNajnowsze informacje."))).getItem());
             itemMap.put(37, new CustomItem("&fPomoc", Material.CAMPFIRE, Collections.singletonList(colorize("&7&oCentrum pomocy."))).getItem());
             itemMap.put(43, new CustomItem("&fUlatwienia dostepu", Material.NAME_TAG, Collections.singletonList(colorize("&7&oDodatkowe ustawienia."))).getItem());
@@ -89,6 +90,8 @@ public class ItemSets {
             itemMap.put(22, new CustomItem("&aNadmorska Szlachta", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(23, new CustomItem("&aMonopoly", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(24, new CustomItem("&aWioska", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
+            itemMap.put(25, new CustomItem("&aLasy Polnocne", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
+
             return itemMap;
         }
 

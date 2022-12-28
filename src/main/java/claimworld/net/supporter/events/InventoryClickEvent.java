@@ -121,6 +121,10 @@ public class InventoryClickEvent implements Listener {
                     player.closeInventory();
                     player.openBook(new BattlePassManager().getBattlepassBook());
                     return;
+                case 16:
+                    player.closeInventory();
+                    dispatchCommand(player, "nowyrok");
+                    return;
             }
         }
 
@@ -171,6 +175,10 @@ public class InventoryClickEvent implements Listener {
                     case 24:
                         player.closeInventory();
                         getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " wioska"), 1L);
+                        return;
+                    case 25:
+                        player.closeInventory();
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " lasy_polnocne"), 1L);
                         return;
                 }
             }

@@ -157,13 +157,6 @@ public class CwAdmin {
                     return true;
                 }
 
-                if (action.equals("spawnBall")) {
-                    Chicken chicken = (Chicken) player.getWorld().spawnEntity(player.getLocation(), EntityType.CHICKEN);
-                    chicken.setAware(false);
-                    sender.sendMessage("ball has been spawned at " + player.getLocation());
-                    return true;
-                }
-
                 if (action.equals("playGhastScream")) {
                     getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
                         renderGhastScream();

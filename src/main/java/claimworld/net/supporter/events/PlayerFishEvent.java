@@ -19,7 +19,6 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerFishEvent implements Listener {
 
-    ReadyItems readyItems = ReadyItems.getInstance();
     TaskManager taskManager = TaskManager.getInstance();
 
     @EventHandler
@@ -32,7 +31,6 @@ public class PlayerFishEvent implements Listener {
         Player player = event.getPlayer();
         Entity entity = event.getCaught();
         assert entity != null;
-        if (new Random().nextInt(80) == 1) player.getWorld().dropItem(entity.getLocation(), readyItems.get("Prezent"));
 
         if (!(((Item) entity).getItemStack().getType() == Material.STICK)) return;
 

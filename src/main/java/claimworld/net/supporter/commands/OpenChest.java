@@ -222,8 +222,6 @@ public class OpenChest {
             String name;
             if (itemMeta.hasDisplayName()) {
                 name = itemMeta.getDisplayName();
-            } if (itemMeta.hasLocalizedName()) {
-                name = itemMeta.getLocalizedName();
             } else {
                 name = "fajny przedmiot";
             }

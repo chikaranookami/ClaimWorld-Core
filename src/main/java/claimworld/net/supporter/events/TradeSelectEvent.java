@@ -2,6 +2,7 @@ package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.tasks.TaskManager;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +20,8 @@ public class TradeSelectEvent implements Listener {
     public void tradeSelectEvent(org.bukkit.event.inventory.TradeSelectEvent event) {
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
             Player player = (Player) event.getWhoClicked();
-            getLogger().log(Level.INFO, "Villager press -> User: " + player.getDisplayName() + ", Location: " + player.getLocation());
+            Location location = player.getLocation();
+            getLogger().log(Level.INFO, "Trade press -> " + player.getDisplayName() + " (" + Math.round(location.getX()) + "x, " + Math.round(location.getY()) + "y, " + Math.round(location.getZ()) + "z)");
 
             taskManager.tryFinishTask(player, taskManager.getTaskMap().get("pressTrader"));
         });

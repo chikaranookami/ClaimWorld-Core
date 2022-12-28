@@ -1,6 +1,7 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.utils.StreamerUtils;
 import claimworld.net.supporter.utils.tasks.TaskManager;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -10,30 +11,40 @@ import org.bukkit.scoreboard.Team;
 
 import java.util.logging.Level;
 
+import static claimworld.net.supporter.utils.MessageUtils.getUserPrefix;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
-import static org.bukkit.Bukkit.getLogger;
-import static org.bukkit.Bukkit.getScheduler;
+import static org.bukkit.Bukkit.*;
 
 public class AsyncPlayerChatEvent implements Listener {
 
     TaskManager taskManager = TaskManager.getInstance();
+    StreamerUtils streamerUtils = StreamerUtils.getInstance();
 
     @EventHandler
     public void asyncPlayerChatEvent(org.bukkit.event.player.AsyncPlayerChatEvent event) {
         if (!event.isAsynchronous()) getLogger().log(Level.WARNING, "tried to use NOT async chat event");
 
-        Player player = event.getPlayer();
-        Team team = event.getPlayer().getScoreboard().getEntryTeam(player.getName());
-        String playerName = player.getName();
-        String message = event.getMessage();
-
-        if (team == null || team.getPrefix().isEmpty()) {
-            event.setFormat(playerName + ChatColor.GRAY + ": " + ChatColor.RESET + message);
-        } else {
-            event.setFormat(team.getPrefix() + ChatColor.RESET + playerName + ChatColor.GRAY + ": " + ChatColor.RESET + colorize(message));
-        }
+        event.setCancelled(true);
 
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+            Player player = event.getPlayer();
+            String message = event.getMessage();
+
+            for (String word : streamerUtils.getForbiddenWords()) {
+                if (!message.contains(word)) continue;
+                player.sendMessage(getUserPrefix() + "Wykryto niefajne okreslenie. Zablokowano wyslanie wiadomosci.");
+                return;
+            }
+
+            String playerName = player.getName();
+            Team team = event.getPlayer().getScoreboard().getEntryTeam(player.getName());
+
+            if (team == null || team.getPrefix().isEmpty()) {
+                broadcastMessage(playerName + ChatColor.GRAY + ": " + ChatColor.RESET + message);
+            } else {
+                broadcastMessage(team.getPrefix() + ChatColor.RESET + playerName + ChatColor.GRAY + ": " + ChatColor.RESET + colorize(message));
+            }
+
             if (!message.contains("zagadka") && !message.contains("Zagadka")) return;
             taskManager.tryFinishTask(player, taskManager.getTaskMap().get("writeZagadka"));
         });

@@ -183,7 +183,7 @@ public class TaskManager {
         //fifth set
         taskMap.put("pickupCreeper", new Task("Podnies Creepera.", "", 0));
         taskMap.put("upgradeItemAtBlacksmith", new Task("Ulepsz przedmiot u kowala.", "", 0));
-        taskMap.put("pressTrader", new Task("Wybierz oferte u dowolnego wiesniaka / handlarza.", "", 0));
+        taskMap.put("pressTrader", new Task("Zaznacz oferte u dowolnego wiesniaka / handlarza.", "", 0));
         taskMap.put("writeHeartOnSign", new Task("Postaw \"serduszko\" w pierwszej linijce dowolnej tabliczki.", "", 0));
 
         //sixth set (not ready)

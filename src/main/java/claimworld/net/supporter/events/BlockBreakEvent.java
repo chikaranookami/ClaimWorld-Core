@@ -22,24 +22,12 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class BlockBreakEvent implements Listener {
 
-    ReadyItems readyItems = ReadyItems.getInstance();
     TaskManager taskManager = TaskManager.getInstance();
-
-    private final List<Material> decemberBonusMaterials = new ArrayList<>();
 
     private void dropItem(World world, Location location) {
         world.dropItem(location, new ItemStack(Material.DIAMOND));
         world.playSound(location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 0.7f, 0.75f);
         world.spawnParticle(Particle.EXPLOSION_NORMAL, location, 1);
-    }
-
-    public BlockBreakEvent() {
-        //enable at 6, 24, 25, 26 and 31 of december
-        decemberBonusMaterials.add(Material.DIAMOND_ORE);
-        decemberBonusMaterials.add(Material.DEEPSLATE_DIAMOND_ORE);
-        decemberBonusMaterials.add(Material.EMERALD_ORE);
-        decemberBonusMaterials.add(Material.DEEPSLATE_EMERALD_ORE);
-        decemberBonusMaterials.add(Material.ANCIENT_DEBRIS);
     }
 
     @EventHandler
@@ -57,10 +45,6 @@ public class BlockBreakEvent implements Listener {
         World world = player.getWorld();
         Location location = event.getBlock().getLocation();
         Material material = event.getBlock().getType();
-        //enable at 6, 24, 25, 26 and 31 of december
-        if (decemberBonusMaterials.contains(material)) {
-            if (new Random().nextInt(12) == 0) world.dropItem(location, readyItems.get("Prezent"));
-        }
 
         Map<String, Task> taskMap = taskManager.getTaskMap();
 

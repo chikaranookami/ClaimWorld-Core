@@ -18,7 +18,7 @@ import java.util.*;
 
 import static claimworld.net.supporter.utils.MessageUtils.getUserPrefix;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
-import static org.bukkit.Bukkit.getScheduler;
+import static org.bukkit.Bukkit.*;
 
 public class PlayerJoinEvent implements Listener {
 
@@ -28,8 +28,6 @@ public class PlayerJoinEvent implements Listener {
 
     private final GeyserUtils geyserUtils = new GeyserUtils();
     private final AttributesManager attributesManager = new AttributesManager();
-
-    private final List<String> winterRewardedPlayers = new ArrayList<>();
 
     @EventHandler
     public void joinEvent(org.bukkit.event.player.PlayerJoinEvent event) {
@@ -48,22 +46,14 @@ public class PlayerJoinEvent implements Listener {
             player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 200, 1, false, false, true));
         }
 
-        //announcer
+        //announcer + skin clear
         getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
             if (geyserUtils.isPlayerFromGeyser(player.getUniqueId())) {
                 player.sendMessage(getUserPrefix() + "\nClaim World dziala na Java Edition, wiec rozgrywka zostala odpowiednio dostosowana do Twojego wydania.\n");
             } else {
                 new JoinAnnouncer().render(player);
-            }
-        }, 10L);
 
-        //enable at 6, 24, 25, 26 and 31 of december
-        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1, true, false, true));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.HERO_OF_THE_VILLAGE, Integer.MAX_VALUE, 1, true, false, true));
-            if (!winterRewardedPlayers.contains(playerName)) {
-                winterRewardedPlayers.add(playerName);
-                new WarehouseUtils().addItemsSingle(player, Collections.singletonList(readyItems.get("$1")));
+                dispatchCommand(getConsoleSender(), "skin clear " + player.getName());
             }
         }, 10L);
 
@@ -75,10 +65,12 @@ public class PlayerJoinEvent implements Listener {
             team.removeEntry(playerName);
         }, 20L);
 
-        //setlist
+        //setlist + skin update
         getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
             player.setPlayerListHeader(colorize("\n&a❤ Claim&fWorld&a.net\n"));
             BattlePassManager.getInstance().updateTablistFooter(player);
+
+            dispatchCommand(getConsoleSender(), "skin update " + player.getName());
         }, 30L);
 
         //manage global free chest

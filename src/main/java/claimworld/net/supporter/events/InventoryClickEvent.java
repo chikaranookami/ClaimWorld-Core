@@ -120,7 +120,7 @@ public class InventoryClickEvent implements Listener {
                     dispatchCommand(player, "nowyrok");
                     return;
                 case 16:
-                    new GuiManager(player, new Gui(null, 54, "Panel VIP"));
+                    if (player.hasPermission("claimworld.vip")) new GuiManager(player, new Gui(null, 54, "Panel VIP"));
                     return;
             }
 

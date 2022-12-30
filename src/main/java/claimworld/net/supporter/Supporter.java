@@ -4,11 +4,15 @@ import claimworld.net.supporter.commands.*;
 import claimworld.net.supporter.events.*;
 import claimworld.net.supporter.timers.AutoMessageTimer;
 import claimworld.net.supporter.commands.Goal;
+import claimworld.net.supporter.timers.RamMangerTimer;
 import claimworld.net.supporter.timers.WinterEventTimers;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.time.LocalTime;
+import java.util.logging.Level;
 
 import static org.bukkit.Bukkit.getScheduler;
 
@@ -60,6 +64,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new ServerListPingEvent(), this);
 
         //commands
+        new ChestBooster();
         new Seriafw();
         new Zadania();
         new Attributes();
@@ -86,10 +91,14 @@ public final class Supporter extends JavaPlugin implements Listener {
         new GlobalFreeChest();
 
         //systems
+        new RamMangerTimer();
         new AutoMessageTimer();
         new WinterEventTimers();
 
         //others
-        getScheduler().runTaskLater(this, () -> Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true"), 100L);
+        getScheduler().runTaskLater(this, () -> {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true");
+            getLogger().log(Level.INFO, "Lokalna godzina: " + LocalTime.now().getHour() + "h " + LocalTime.now().getMinute() + "m");
+        }, 100L);
     }
 }

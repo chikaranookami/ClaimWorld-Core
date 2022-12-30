@@ -3,6 +3,7 @@ package claimworld.net.supporter.commands;
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.ChestCounterUtils;
 import claimworld.net.supporter.utils.CommandBase;
+import claimworld.net.supporter.utils.FireworkUtils;
 import claimworld.net.supporter.utils.items.CustomItem;
 import claimworld.net.supporter.utils.items.ReadyItems;
 import org.bukkit.*;
@@ -22,6 +23,8 @@ import static org.bukkit.Bukkit.*;
 
 public class OpenChest {
 
+    private final FireworkUtils fireworkUtils = new FireworkUtils();
+
     private final List<ItemStack> randomItems = new ArrayList<>();
     private final List<ItemStack> prezentItems = new ArrayList<>();
     private final List<Material> rareMaterials = new ArrayList<>();
@@ -39,6 +42,7 @@ public class OpenChest {
 
                 counter.getAndIncrement();
                 if (counter.get() >= 3) {
+                    fireworkUtils.renderRandomFirework(location);
                     cancel();
                 }
             }
@@ -76,6 +80,7 @@ public class OpenChest {
 
                 counter.getAndIncrement();
                 if (counter.get() >= 9) {
+                    fireworkUtils.renderRandomFirework(location);
                     cancel();
                 }
             }
@@ -95,6 +100,7 @@ public class OpenChest {
 
                 counter.getAndIncrement();
                 if (counter.get() >= 15) {
+                    fireworkUtils.renderRandomFirework(location);
                     cancel();
                 }
             }

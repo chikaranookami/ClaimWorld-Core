@@ -84,21 +84,15 @@ public class InventoryClickEvent implements Listener {
             switch (slot) {
                 case 37:
                     player.closeInventory();
-                    getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                        Bukkit.dispatchCommand(player, "pomoc");
-                    }, 1L);
+                    getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(player, "pomoc"), 1L);
                     return;
                 case 28:
                     player.closeInventory();
-                    getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                        Bukkit.dispatchCommand(player, "ogloszenia");
-                    }, 1L);
+                    getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(player, "ogloszenia"), 1L);
                     return;
                 case 13:
                     player.closeInventory();
-                    getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                        Bukkit.dispatchCommand(player, "vote gui");
-                    }, 1L);
+                    getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(player, "vote gui"), 1L);
                     return;
                 case 12:
                     new GuiManager(player, new Gui(null, 54, "Teleportacja"));
@@ -121,16 +115,80 @@ public class InventoryClickEvent implements Listener {
                     player.closeInventory();
                     player.openBook(new BattlePassManager().getBattlepassBook());
                     return;
-                case 16:
+                case 15:
                     player.closeInventory();
                     dispatchCommand(player, "nowyrok");
                     return;
+                case 16:
+                    new GuiManager(player, new Gui(null, 54, "Panel VIP"));
+                    return;
             }
+
+            return;
         }
 
-        if (title.equals("Teleportacja") || title.equals("Ulatwienia dostepu")) {
+        if (title.equals("Teleportacja") || title.equals("Ulatwienia dostepu") || title.equals("Panel VIP")) {
             if (slot == 53) {
                 new GuiManager(player, new Gui(null, 54, "Menu"));
+                return;
+            }
+
+            if (title.equals("Panel VIP")) {
+                switch (slot) {
+                    case 0:
+                        player.closeInventory();
+                        dispatchCommand(player, "sit");
+                        return;
+                    case 1:
+                        player.closeInventory();
+                        dispatchCommand(player, "hat");
+                        return;
+                    case 2:
+                        player.closeInventory();
+                        dispatchCommand(player, "skin");
+                        return;
+                    case 3:
+                        player.closeInventory();
+                        dispatchCommand(player, "me");
+                        return;
+                    case 4:
+                        player.closeInventory();
+                        dispatchCommand(player, "playtime");
+                        return;
+                    case 18:
+                        player.closeInventory();
+                        dispatchCommand(player, "lay");
+                        return;
+                    case 19:
+                        player.closeInventory();
+                        dispatchCommand(player, "bellyflop");
+                        return;
+                    case 20:
+                        player.closeInventory();
+                        dispatchCommand(player, "crawl");
+                        return;
+                    case 21:
+                        player.closeInventory();
+                        dispatchCommand(player, "spin");
+                        return;
+                    case 22:
+                        player.closeInventory();
+                        dispatchCommand(player, "pp");
+                        return;
+                    case 23:
+                        player.closeInventory();
+                        dispatchCommand(player, "fw");
+                        return;
+                    case 24:
+                        player.closeInventory();
+                        dispatchCommand(player, "seriafw");
+                        return;
+                    case 25:
+                        player.closeInventory();
+                        dispatchCommand(player, "chestbooster");
+                        return;
+                }
+
                 return;
             }
 
@@ -181,6 +239,8 @@ public class InventoryClickEvent implements Listener {
                         getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " lasy_polnocne"), 1L);
                         return;
                 }
+
+                return;
             }
 
             if (title.equals("Ulatwienia dostepu")) {

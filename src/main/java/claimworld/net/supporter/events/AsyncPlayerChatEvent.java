@@ -20,16 +20,8 @@ public class AsyncPlayerChatEvent implements Listener {
     TaskManager taskManager = TaskManager.getInstance();
     StreamerUtils streamerUtils = StreamerUtils.getInstance();
 
-    @EventHandler
-    public void asyncPlayerChatEvent(org.bukkit.event.player.AsyncPlayerChatEvent event) {
-        if (!event.isAsynchronous()) getLogger().log(Level.WARNING, "tried to use NOT async chat event");
-
-        event.setCancelled(true);
-
+    private void renderFilteredMessage(Player player, String message) {
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            Player player = event.getPlayer();
-            String message = event.getMessage();
-
             for (String word : streamerUtils.getForbiddenWords()) {
                 if (!message.contains(word)) continue;
                 player.sendMessage(getUserPrefix() + "Wykryto niefajne okreslenie. Zablokowano wyslanie wiadomosci.");
@@ -37,16 +29,27 @@ public class AsyncPlayerChatEvent implements Listener {
             }
 
             String playerName = player.getName();
-            Team team = event.getPlayer().getScoreboard().getEntryTeam(player.getName());
+            Team team = player.getScoreboard().getEntryTeam(player.getName());
 
             if (team == null || team.getPrefix().isEmpty()) {
                 broadcastMessage(playerName + ChatColor.GRAY + ": " + ChatColor.RESET + message);
             } else {
                 broadcastMessage(team.getPrefix() + ChatColor.RESET + playerName + ChatColor.GRAY + ": " + ChatColor.RESET + colorize(message));
             }
-
-            if (!message.contains("zagadka") && !message.contains("Zagadka")) return;
-            taskManager.tryFinishTask(player, taskManager.getTaskMap().get("writeZagadka"));
         });
+    }
+
+    @EventHandler
+    public void asyncPlayerChatEvent(org.bukkit.event.player.AsyncPlayerChatEvent event) {
+        if (!event.isAsynchronous()) getLogger().log(Level.WARNING, "tried to use NOT async chat event");
+        event.setCancelled(true);
+
+        Player player = event.getPlayer();
+        String message = event.getMessage();
+
+        renderFilteredMessage(player, message);
+
+        if (!message.contains("zagadka") && !message.contains("Zagadka")) return;
+        taskManager.tryFinishTask(player, taskManager.getTaskMap().get("writeZagadka"));
     }
 }

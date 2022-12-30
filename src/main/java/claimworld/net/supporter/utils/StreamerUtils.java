@@ -25,6 +25,12 @@ public class StreamerUtils {
         forbiddenWords.add("inc3l");
         forbiddenWords.add("incl");
         forbiddenWords.add("1ncl");
+        forbiddenWords.add("imcel");
+        forbiddenWords.add("1mcel");
+        forbiddenWords.add("1mc3l");
+        forbiddenWords.add("imc3l");
+        forbiddenWords.add("imcl");
+        forbiddenWords.add("1mcl");
 
         forbiddenWords.add("virgin");
         forbiddenWords.add("v1rg1n");
@@ -41,18 +47,16 @@ public class StreamerUtils {
 
         forbiddenWords.add("simp");
         forbiddenWords.add("s1mp");
-
-        forbiddenWords.add("nigg4");
-        forbiddenWords.add("nigga");
-        forbiddenWords.add("niga");
-        forbiddenWords.add("nig4");
-        forbiddenWords.add("n1gga");
-        forbiddenWords.add("n1ga");
-        forbiddenWords.add("n1g4");
+        forbiddenWords.add("sinp");
+        forbiddenWords.add("s1np");
 
         forbiddenWords.add("pedal");
         forbiddenWords.add("p3dal");
         forbiddenWords.add("ped4l");
         forbiddenWords.add("p3d4l");
+        forbiddenWords.add("pedał");
+        forbiddenWords.add("p3dał");
+        forbiddenWords.add("ped4ł");
+        forbiddenWords.add("p3d4ł");
     }
 }

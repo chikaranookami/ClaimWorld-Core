@@ -20,15 +20,15 @@ import static org.bukkit.Bukkit.getScheduler;
 public class PlayerFishEvent implements Listener {
 
     TaskManager taskManager = TaskManager.getInstance();
+    GoalUtils goalUtils = new GoalUtils();
 
     @EventHandler
     public void playerFishEvent(org.bukkit.event.player.PlayerFishEvent event) {
-        if (new GoalUtils().getShorterFishing()) event.getHook().setMaxWaitTime(500);
+        if (goalUtils.getShorterFishing()) event.getHook().setMaxWaitTime(500);
 
         if (!event.getHook().isInOpenWater()) return;
         if (event.getState() != org.bukkit.event.player.PlayerFishEvent.State.CAUGHT_FISH) return;
 
-        Player player = event.getPlayer();
         Entity entity = event.getCaught();
         assert entity != null;
 

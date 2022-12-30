@@ -66,8 +66,8 @@ public class ItemSets {
             itemMap.put(13, new CustomItem("&aPunkty", Material.EXPERIENCE_BOTTLE, Collections.singletonList(colorize("&7&oZarzadzaj swoimi punktami!"))).getItem());
             itemMap.put(14, new CustomItem("&aPrzepustka", Material.IRON_INGOT, Collections.singletonList(colorize("&7&oOdblokuj nowe rzeczy!"))).getItem());
             //itemMap.put(15, new CustomItem("&bPrzepustka Premium ✦", Material.DIAMOND, Collections.singletonList(colorize("&7&oJeszcze wiecje zabawy!"))).getItem());
-            //itemMap.put(16, new CustomItem("&bPanel VIP", Material.ENCHANTING_TABLE, Collections.singletonList(colorize("&7&oTwoj VIP w jednym miejscu!"))).getItem());
-            itemMap.put(16, new CustomItem("&aNowy Rok!", Material.FIREWORK_ROCKET, Collections.singletonList("")).getItem());
+            itemMap.put(15, new CustomItem("&aNowy Rok!", Material.FIREWORK_ROCKET, Collections.singletonList("")).getItem());
+            itemMap.put(16, new CustomItem("&bPanel VIP", Material.ENCHANTING_TABLE, Collections.singletonList(colorize("&7&oWszystko w jednym miejscu!"))).getItem());
             itemMap.put(28, new CustomItem("&fOgloszenia", Material.BOOK, Collections.singletonList(colorize("&7&oNajnowsze informacje."))).getItem());
             itemMap.put(37, new CustomItem("&fPomoc", Material.CAMPFIRE, Collections.singletonList(colorize("&7&oCentrum pomocy."))).getItem());
             itemMap.put(43, new CustomItem("&fUlatwienia dostepu", Material.NAME_TAG, Collections.singletonList(colorize("&7&oDodatkowe ustawienia."))).getItem());
@@ -91,7 +91,26 @@ public class ItemSets {
             itemMap.put(23, new CustomItem("&aMonopoly", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(24, new CustomItem("&aWioska", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(25, new CustomItem("&aLasy Polnocne", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
+            return itemMap;
+        }
 
+        if (inventoryName.equals("Panel VIP")) {
+            itemMap.put(53, cofnij);
+            //vip
+            itemMap.put(0, new CustomItem("&fUsiadz sobie", Material.OAK_STAIRS, Collections.singletonList(colorize("&7&oPo prostu siadasz."))).getItem());
+            itemMap.put(1, new CustomItem("&fZaloz czapke", Material.ACACIA_LEAVES, Collections.singletonList(colorize("&7&oZaloz trzymany blok na glowe."))).getItem());
+            itemMap.put(2, new CustomItem("&f/skin", Material.NAME_TAG, Collections.singletonList(colorize("&7&oZarzadzaj swoim skinem."))).getItem());
+            itemMap.put(3, new CustomItem("&f/me <tresc>", Material.TRIPWIRE_HOOK, Collections.singletonList(colorize("&7&oClaim World RP? Hmm?"))).getItem());
+            itemMap.put(4, new CustomItem("&f/playtime <nick>", Material.WRITABLE_BOOK, Collections.singletonList(colorize("&7&oSprawdz czyjes godziny."))).getItem());
+            //mvp
+            itemMap.put(18, new CustomItem("&fPoloz sie", Material.RED_BED, Collections.singletonList(colorize("&7&oPo prostu sie kladziesz."))).getItem());
+            itemMap.put(19, new CustomItem("&fPoloz sie na brzuchu", Material.STONE, Collections.singletonList(colorize("&7&oBELLY FLOP!"))).getItem());
+            itemMap.put(20, new CustomItem("&fCzolgaj sie", Material.OAK_TRAPDOOR, Collections.singletonList(colorize("&7&oZaczynasz sie czolgac."))).getItem());
+            itemMap.put(21, new CustomItem("&fObracanko", Material.GLASS_PANE, Collections.singletonList(colorize("&7&oZaczynasz sie obracac."))).getItem());
+            itemMap.put(22, new CustomItem("&fKonsola efektow", Material.BEACON, Collections.singletonList(colorize("&7&oPodrasuj swoj wyglad."))).getItem());
+            itemMap.put(23, new CustomItem("&fMaly fajerwerk", Material.FIREWORK_STAR, Collections.singletonList(colorize("&7&oOdpal fajerwerka pod nogami."))).getItem());
+            itemMap.put(24, new CustomItem("&fSeria fajerwerkow", Material.FIREWORK_ROCKET, Collections.singletonList(colorize("&7&oTwoj maly pokaz."))).getItem());
+            itemMap.put(25, new CustomItem("&f10% Na Bonus", Material.NETHER_STAR, Arrays.asList(colorize("&7&oSprobuj zarzucic wszystkim"), colorize("&7&ograczom online po kilka"), colorize("&7&ododatkowych Skrzyn Smoka."), "", colorize("&7&oDostepne miedzy 12:00, a 00:00."))).getItem());
             return itemMap;
         }
 

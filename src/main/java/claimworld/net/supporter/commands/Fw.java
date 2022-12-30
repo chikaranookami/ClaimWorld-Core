@@ -1,7 +1,7 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.wip.FireworkUtils;
+import claimworld.net.supporter.utils.FireworkUtils;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
@@ -10,6 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 public class Fw {
+
+    private final FireworkUtils fireworkUtils = new FireworkUtils();
+
     public Fw() {
         new CommandBase("fw", true) {
             @Override
@@ -17,14 +20,8 @@ public class Fw {
                 Location location = ((Player) sender).getLocation();
                 assert location.getWorld() != null;
 
-                Firework firework = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
-                FireworkMeta fireworkMeta = firework.getFireworkMeta();
+                fireworkUtils.renderRandomFirework(location);
 
-                fireworkMeta.setPower(3);
-                fireworkMeta.addEffect(new FireworkUtils().getRandomEffect());
-                firework.setFireworkMeta(fireworkMeta);
-
-                firework.detonate();
                 return true;
             }
 

@@ -167,7 +167,7 @@ public class TaskManager {
         taskMap.put("destroyItemsAtBlacksmith", new Task("Spal u kowala 3 przedmioty.", "counter", 3));
         taskMap.put("throwNumberUsingDice", new Task("Wyrzuc 6 razy liczbe 12 na kostce.", "counter", 6));
         taskMap.put("eatSuspiciousStew", new Task("Zjedz 6 podejrzanych potrawek.", "counter", 6));
-        taskMap.put("getHitByDragon", new Task("Bezposrednio oberwij od smoka 4 razy.", "counter", 4));
+        taskMap.put("getHitByAnything", new Task("Oberwij od 40 razy.", "counter", 40));
 
         //third set
         taskMap.put("beOnlineWhenTraderSpawns", new Task("Badz online, gdy pojawi sie handlarz.", "", 0));

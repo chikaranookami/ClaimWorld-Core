@@ -26,16 +26,11 @@ public class EntityDamageEvent implements Listener {
         if (event.getEntityType() != EntityType.PLAYER) return;
 
         Player player = (Player) event.getEntity();
-        org.bukkit.event.entity.EntityDamageEvent.DamageCause damageCause = event.getCause();
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("getHitByAnything")));
 
-        if (damageCause.equals(org.bukkit.event.entity.EntityDamageEvent.DamageCause.ENTITY_ATTACK)) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("getHitByDragon")));
-            return;
-        }
+        if (player.getWorld().getWorldBorder().isInside(event.getEntity().getLocation())) return;
 
-        if (event.getEntity().getWorld().getWorldBorder().isInside(event.getEntity().getLocation())) return;
-
-        if (damageCause.equals(org.bukkit.event.entity.EntityDamageEvent.DamageCause.SUFFOCATION)) {
+        if (event.getCause().equals(org.bukkit.event.entity.EntityDamageEvent.DamageCause.SUFFOCATION)) {
             killPlayer(player);
         }
     }

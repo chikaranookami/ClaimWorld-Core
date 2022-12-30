@@ -2,13 +2,10 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.wip.FireworkUtils;
+import claimworld.net.supporter.utils.FireworkUtils;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.meta.FireworkMeta;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -34,15 +31,7 @@ public class Seriafw {
                         return;
                     }
 
-                    Firework firework = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
-                    FireworkMeta fireworkMeta = firework.getFireworkMeta();
-
-                    fireworkMeta.setPower(random);
-                    fireworkMeta.addEffect(fireworkUtils.getRandomEffect());
-                    firework.setFireworkMeta(fireworkMeta);
-
-                    firework.setLife(random);
-                    firework.setMaxLife(45);
+                    fireworkUtils.renderRandomFirework(location, 45);
 
                     counter.getAndIncrement();
 
@@ -71,15 +60,7 @@ public class Seriafw {
                         return;
                     }
 
-                    Firework firework = (Firework) location.getWorld().spawnEntity(location, EntityType.FIREWORK);
-                    FireworkMeta fireworkMeta = firework.getFireworkMeta();
-
-                    fireworkMeta.setPower(random);
-                    fireworkMeta.addEffect(fireworkUtils.getRandomEffect());
-                    firework.setFireworkMeta(fireworkMeta);
-
-                    firework.setLife(random);
-                    firework.setMaxLife(45);
+                    fireworkUtils.renderRandomFirework(location, 45);
 
                     counter.getAndIncrement();
 

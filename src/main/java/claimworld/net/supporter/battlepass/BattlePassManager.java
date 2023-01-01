@@ -119,8 +119,6 @@ public class BattlePassManager {
                 List<ItemStack> items = new ArrayList<>();
                 items.add(readyItems.get("Skrzynia_smoka"));
 
-                if (new Random().nextBoolean()) items.add(readyItems.get("Prezent"));
-
                 new WarehouseUtils().addItemsSingle(player, items);
 
                 attributesManager.tryUpdateStats(player);

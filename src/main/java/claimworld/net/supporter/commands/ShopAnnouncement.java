@@ -1,9 +1,9 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.announcers.ActiveBossBar;
+import claimworld.net.supporter.announcers.ActiveBossBar;
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.tasks.TaskManager;
+import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;

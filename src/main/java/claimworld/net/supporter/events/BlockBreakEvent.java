@@ -2,9 +2,8 @@ package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.BonusManager;
-import claimworld.net.supporter.utils.items.ReadyItems;
-import claimworld.net.supporter.utils.tasks.Task;
-import claimworld.net.supporter.utils.tasks.TaskManager;
+import claimworld.net.supporter.tasks.Task;
+import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -12,12 +11,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static org.bukkit.Bukkit.broadcastMessage;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class BlockBreakEvent implements Listener {
@@ -63,9 +59,7 @@ public class BlockBreakEvent implements Listener {
             int random = new Random().nextInt(5);
             if (random > 0) return;
 
-            getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-                dropItem(world, location);
-            }, 4L);
+            getScheduler().runTaskLater(Supporter.getPlugin(), () -> dropItem(world, location), 4L);
         }
     }
 }

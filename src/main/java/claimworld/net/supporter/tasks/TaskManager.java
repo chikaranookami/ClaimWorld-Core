@@ -1,12 +1,10 @@
-package claimworld.net.supporter.utils.tasks;
+package claimworld.net.supporter.tasks;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.battlepass.BattlePassManager;
+import claimworld.net.supporter.battlepass.BattlePassManager;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -175,10 +173,6 @@ public class TaskManager {
         taskMap.put("doSmallShit", new Task("Niech zbiera Ci sie na cos ciezszego.", "", 0));
         taskMap.put("openDragonChest", new Task("Otworz Skrzynie Smoka.", "", 0));
         taskMap.put("useActiveTeleporter", new Task("Uzyj aktywnego Teleportera.", "", 0));
-
-        //fourth set
-        taskMap.put("obtainChristmasBlessing", new Task("Otrzymaj Swiateczne Blogoslawienstwo, po prostu grajac.", "", 0));
-        taskMap.put("getPrezent", new Task("Otrzymaj Prezent od Swietego Mikolaja, po prostu grajac.", "", 0));
 
         //fifth set
         taskMap.put("pickupCreeper", new Task("Podnies Creepera.", "", 0));

@@ -1,21 +1,17 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.items.ReadyItems;
-import claimworld.net.supporter.utils.tasks.Task;
-import claimworld.net.supporter.utils.tasks.TaskManager;
+import claimworld.net.supporter.tasks.Task;
+import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static org.bukkit.Bukkit.broadcastMessage;
 import static org.bukkit.Bukkit.getScheduler;
 
 public class EntityDeathEvent implements Listener {

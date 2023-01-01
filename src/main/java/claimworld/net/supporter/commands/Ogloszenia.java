@@ -1,15 +1,9 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.GeyserUtils;
-import claimworld.net.supporter.utils.announcers.JoinAnnouncer;
-import org.bukkit.Material;
+import claimworld.net.supporter.announcers.JoinAnnouncer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BookMeta;
-
-import java.util.ArrayList;
 
 public class Ogloszenia {
     public Ogloszenia() {

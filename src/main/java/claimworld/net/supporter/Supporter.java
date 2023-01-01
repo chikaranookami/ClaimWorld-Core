@@ -5,7 +5,6 @@ import claimworld.net.supporter.events.*;
 import claimworld.net.supporter.timers.AutoMessageTimer;
 import claimworld.net.supporter.commands.Goal;
 import claimworld.net.supporter.timers.RamMangerTimer;
-import claimworld.net.supporter.timers.WinterEventTimers;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
@@ -93,7 +92,6 @@ public final class Supporter extends JavaPlugin implements Listener {
         //systems
         new RamMangerTimer();
         new AutoMessageTimer();
-        new WinterEventTimers();
 
         //others
         getScheduler().runTaskLater(this, () -> {

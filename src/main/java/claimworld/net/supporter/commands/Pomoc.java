@@ -14,10 +14,8 @@ import java.util.List;
 
 public class Pomoc {
 
-    GoalUtils goalUtils = GoalUtils.getInstance();
-
+    private final GoalUtils goalUtils = new GoalUtils();
     private final GeyserUtils geyserUtils = new GeyserUtils();
-    
     private final List<String> helpMessages = new ArrayList<>();
 
     private ItemStack getBook() {
@@ -39,11 +37,11 @@ public class Pomoc {
         helpMessages.add("§8Komendy VIP i MVP\n\nKomendy graczy z rangami VIP oraz MVP znajduja sie w Panelu VIP w Menu (zegarek w ekwipunku).");
         helpMessages.add("§8Dodatki / Zmiany\n\n§c+§8 Skrzynie blokuja sie po postawieniu\n§c+§8 Ograniczenie giga maszyn z redstone\n§c+§8 Brodawki wypadaja z piglinow\n§c+§8 Wiekszosc bytow mozna podnosic przy pomocy SHIFT+PPM\n§c+§8 Dodatkowi Handlarze\n§c+§8 System teleportacji");
         helpMessages.add("§8Dodatki / Zmiany\n\n§c+§8 Senat\n§c+§8 Globalne wzmocnienia\n§c+§8 Nieco spawn mobow, inne leje\n§c+§8 Limit bytow na chunk\n§c+§8 Battlepass i system zadan\n§c+§8 Umiejetnosci\n§c+§8Z mobow wypadaja ich glowy");
-        helpMessages.add("§8Dodatki / Zmiany\n\n§c+§8 Przedmioty i exp grupuja sie\n§c+§8 Niestandardowe przedmioty\n§c+§8 Wielofunkcyjny Kowal\n§c+§8 Wylaczone dmg fajerwerkow w overworldzie i netherze");
+        helpMessages.add("§8Dodatki / Zmiany\n\n§c+§8 Przedmioty i exp grupuja sie\n§c+§8 Niestandardowe przedmioty\n§c+§8 Wielofunkcyjny Kowal\n§c+§8 Wylaczone dmg fajerwerkow w overworldzie i netherze\n§c+§8 Efekty krwawienia");
         helpMessages.add("§8Senat\n\n§cSenat§8 to organizacja, ktora zajmuje sie obsluga graczy.\n\n§cSiedziba Senatu§8 jest obecnie w przygotowaniu, dlatego jesli czegos potrzebujesz to pisz bezposrednio do Senatora.");
         helpMessages.add("§8Senat\n\n§cSenatorowie§8: kinia_98, _NeKoToJa_, MarJan_Lubi_Kuce, Mr_PogromcA, xCaptain865, rtygta, Chikaraa.\n\nU Senatorow mozecie zakupic nastepujace uslugi:");
         helpMessages.add("§8Senat\n\n§c+§8 Niestandardowe ustawienia dzialki ($16/ustawienie/chunk)\n§c+§8 Zmiane biomu na dzialce ($16/chunk za biom z Overworlda lub $64/chunk za inny biom)\n§c+§8 Nieruchome moby ($16/moba)");
-        helpMessages.add("§8Senat\n\n§c+§8 Zmiane biomu na zimowy (ZA DARMO DO KONCA ROKU!)\n§c+§8 Rezerwacja baneru ($5 za standardowy lub $15 za niestandardowy wzor)\n§c+§8 Niestandardowy baner ($1/sztuka)\n§c+§8 Wlasna grafika na mapach ($8/mape).");
+        helpMessages.add("§8Senat\n\n§c+§8 Rezerwacja baneru ($5 za standardowy lub $15 za niestandardowy wzor)\n§c+§8 Niestandardowy baner ($1/sztuka)\n§c+§8 Wlasna grafika na mapach ($8/mape).");
         helpMessages.add("§8Senat\n\nSenatorowi mozecie rowniez zglosic swoja §cfarme§8, by dodal ja do spisu farm publicznych ($5/farma).\n\nRaz w miesiacu wybierana jest farma danego typu, a jej wlasciciel otrzymuje §cdolary§8.");
         helpMessages.add("§8Wybrane Farmy\n\nNastepna aktualizacja: 27.01.2023\n\nZglos farme Senatorowi, by miec szanse na dodatkowy zarobek!\n\n§c+§8 Zelazo [365 49 -284 Nether]\n§c+§8 Zloto [418 243 -443 Nether]");
         helpMessages.add("§8Wybrane Farmy\n\n§c+§8 Blazy [-334 72 -3 Nether]\n§c+§8 Owce [656 -703 Overworld]\n§c+§8 Kaktusy [409 289 Overworld]\n§c+§8 Trzcina [1096 -185 Overworld]\n§c+§8 Wiesniaki [310 -1979 Overworld]\n§c+§8 Jedzenie [3000 -2200 Overworld]");

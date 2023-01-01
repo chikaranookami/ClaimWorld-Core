@@ -1,4 +1,4 @@
-package claimworld.net.supporter.utils.tasks;
+package claimworld.net.supporter.tasks;
 
 public class Task {
     private final String name;

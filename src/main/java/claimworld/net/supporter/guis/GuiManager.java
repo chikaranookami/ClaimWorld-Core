@@ -1,4 +1,4 @@
-package claimworld.net.supporter.utils.guis;
+package claimworld.net.supporter.guis;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;

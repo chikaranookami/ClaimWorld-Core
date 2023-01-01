@@ -1,4 +1,4 @@
-package claimworld.net.supporter.utils.items;
+package claimworld.net.supporter.items;
 
 import claimworld.net.supporter.Supporter;
 import org.bukkit.inventory.ItemStack;

@@ -37,7 +37,7 @@ public class ChestBooster {
 
                 lockedPlayers.add(playerName);
 
-                int random = new Random().nextInt(10);
+                int random = new Random().nextInt(15);
                 if (random != 0) {
                     player.sendMessage(getUserPrefix() + "Niestety - nie udalo Ci sie wlaczyc dodatkowych skrzynek. Sprobuj ponownie po restarcie serwera.");
                     return true;

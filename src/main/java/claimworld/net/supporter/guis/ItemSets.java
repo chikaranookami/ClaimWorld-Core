@@ -1,10 +1,10 @@
-package claimworld.net.supporter.utils.guis;
+package claimworld.net.supporter.guis;
 
 import claimworld.net.supporter.utils.ChestCounterUtils;
-import claimworld.net.supporter.utils.items.CustomHead;
-import claimworld.net.supporter.utils.items.CustomItem;
-import claimworld.net.supporter.utils.items.Locker;
-import claimworld.net.supporter.utils.items.ReadyItems;
+import claimworld.net.supporter.items.CustomHead;
+import claimworld.net.supporter.items.CustomItem;
+import claimworld.net.supporter.items.Locker;
+import claimworld.net.supporter.items.ReadyItems;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,7 +18,7 @@ import static claimworld.net.supporter.utils.AttributesManager.*;
 import static claimworld.net.supporter.utils.MessageUtils.getAttributeIcon;
 import static claimworld.net.supporter.utils.MessageUtils.getBattlepassIcon;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
-import static claimworld.net.supporter.utils.battlepass.BattlePassManager.mainObjectiveName;
+import static claimworld.net.supporter.battlepass.BattlePassManager.mainObjectiveName;
 import static org.bukkit.Bukkit.getLogger;
 
 public class ItemSets {
@@ -66,7 +66,6 @@ public class ItemSets {
             itemMap.put(13, new CustomItem("&aPunkty", Material.EXPERIENCE_BOTTLE, Collections.singletonList(colorize("&7&oZarzadzaj swoimi punktami!"))).getItem());
             itemMap.put(14, new CustomItem("&aPrzepustka", Material.IRON_INGOT, Collections.singletonList(colorize("&7&oOdblokuj nowe rzeczy!"))).getItem());
             //itemMap.put(15, new CustomItem("&bPrzepustka Premium ✦", Material.DIAMOND, Collections.singletonList(colorize("&7&oJeszcze wiecje zabawy!"))).getItem());
-            itemMap.put(15, new CustomItem("&aNowy Rok!", Material.FIREWORK_ROCKET, Collections.singletonList("")).getItem());
             itemMap.put(16, new CustomItem("&bPanel VIP", Material.ENCHANTING_TABLE, Collections.singletonList(colorize("&7&oWszystko w jednym miejscu!"))).getItem());
             itemMap.put(28, new CustomItem("&fOgloszenia", Material.BOOK, Collections.singletonList(colorize("&7&oNajnowsze informacje."))).getItem());
             itemMap.put(37, new CustomItem("&fPomoc", Material.CAMPFIRE, Collections.singletonList(colorize("&7&oCentrum pomocy."))).getItem());
@@ -110,7 +109,7 @@ public class ItemSets {
             itemMap.put(22, new CustomItem("&fKonsola efektow", Material.BEACON, Collections.singletonList(colorize("&7&oPodrasuj swoj wyglad."))).getItem());
             itemMap.put(23, new CustomItem("&fMaly fajerwerk", Material.FIREWORK_STAR, Collections.singletonList(colorize("&7&oOdpal fajerwerka pod nogami."))).getItem());
             itemMap.put(24, new CustomItem("&fSeria fajerwerkow", Material.FIREWORK_ROCKET, Collections.singletonList(colorize("&7&oTwoj maly pokaz."))).getItem());
-            itemMap.put(25, new CustomItem("&f10% Na Bonus", Material.NETHER_STAR, Arrays.asList(colorize("&7&oSprobuj zarzucic wszystkim"), colorize("&7&ograczom online po kilka"), colorize("&7&ododatkowych Skrzyn Smoka."), "", colorize("&7&oDostepne miedzy 12:00, a 00:00."))).getItem());
+            itemMap.put(25, new CustomItem("&f7% Na Bonus", Material.NETHER_STAR, Arrays.asList(colorize("&7&oSprobuj zarzucic wszystkim"), colorize("&7&ograczom online po kilka"), colorize("&7&ododatkowych Skrzyn Smoka."), "", colorize("&7&oDostepne miedzy 12:00, a 00:00."))).getItem());
             return itemMap;
         }
 

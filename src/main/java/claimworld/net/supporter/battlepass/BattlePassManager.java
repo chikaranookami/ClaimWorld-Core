@@ -1,9 +1,9 @@
-package claimworld.net.supporter.utils.battlepass;
+package claimworld.net.supporter.battlepass;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.AttributesManager;
 import claimworld.net.supporter.utils.WarehouseUtils;
-import claimworld.net.supporter.utils.items.ReadyItems;
+import claimworld.net.supporter.items.ReadyItems;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -23,7 +23,7 @@ import java.util.logging.Level;
 
 import static claimworld.net.supporter.utils.MessageUtils.getBattlepassIcon;
 import static claimworld.net.supporter.utils.StringUtils.colorize;
-import static claimworld.net.supporter.utils.tasks.TaskManager.getUserQuestDataObjectiveName;
+import static claimworld.net.supporter.tasks.TaskManager.getUserQuestDataObjectiveName;
 import static org.bukkit.Bukkit.*;
 
 public class BattlePassManager {

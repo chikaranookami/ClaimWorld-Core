@@ -1,4 +1,4 @@
-package claimworld.net.supporter.utils.items;
+package claimworld.net.supporter.items;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -67,12 +67,13 @@ public class ReadyItems {
         itemMap.put("Ruda_diamentu", new CustomItem("", Material.DIAMOND_ORE, null));
         itemMap.put("Sztabka_netherytu", new CustomItem("", Material.NETHERITE_INGOT, null));
 
-        itemMap.put("Prezent", new CustomItem("&dPrezent", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("rare"))), 13));
-        itemMap.put("Skarpeta", new CustomItem("&dSkarpeta", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("rare"))), 14));
+        //itemMap.put("Prezent", new CustomItem("&dPrezent", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("rare"))), 13));
+        //itemMap.put("Skarpeta", new CustomItem("&dSkarpeta", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("rare"))), 14));
 
         //itemMap.put("Halloweenowa_zupa", new CustomItem("&dHalloweenowa Zupa", Material.PUMPKIN_PIE, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.KNOCKBACK, 3));
         //itemMap.put("Halloweenowy_odbijacz", new CustomItem("&dHalloweenowy Odbijacz", Material.CARVED_PUMPKIN, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.THORNS, 8));
 
+        itemMap.put("Niewidzialna_ramka", new CustomItem("&aNiewidzialna ramka", Material.ITEM_FRAME, Arrays.asList(colorize(getLore("uncommon")), "", colorize(getLore("oneTimeUse")))));
         itemMap.put("Ksiazka_unbreaking4", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.DURABILITY, 4));
         itemMap.put("Ksiazka_protection5", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.PROTECTION_ENVIRONMENTAL, 5));
         itemMap.put("Ksiazka_fortune4", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.LOOT_BONUS_BLOCKS, 4));
@@ -83,8 +84,9 @@ public class ReadyItems {
         itemMap.put("Ksiazka_power6", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.ARROW_DAMAGE, 6));
         itemMap.put("Ksiazka_fireaspect3", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.FIRE_ASPECT, 3));
 
+        itemMap.put("Kosa_na_moby", new CustomItem("", Material.GHAST_TEAR, 1, Collections.singletonList(colorize(getLore("rare"))), 15, Arrays.asList(Enchantment.DAMAGE_UNDEAD, Enchantment.DAMAGE_ARTHROPODS, Enchantment.DURABILITY, Enchantment.LOOT_BONUS_MOBS, Enchantment.MENDING), Arrays.asList(10, 10, 5, 5, 1)));
+
         itemMap.put("Skrzynia_smoka", new CustomItem("&cSkrzynia Smoka", Material.CHEST_MINECART, Collections.singletonList(colorize(getLore("unique"))), 0));
-        itemMap.put("Niewidzialna_ramka", new CustomItem("&aNiewidzialna ramka", Material.ITEM_FRAME, Arrays.asList(colorize(getLore("uncommon")), "", colorize(getLore("oneTimeUse")))));
         itemMap.put("Kupa", new CustomItem("&fKupa", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("common"))), 11));
         itemMap.put("$1", new CustomItem("&a$1", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("uncommon"))), 10));
         itemMap.put("Uniwersalny_bilet", new CustomItem("&fUniwersalny Bilet", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("common"))), 12));

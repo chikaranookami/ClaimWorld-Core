@@ -1,9 +1,8 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.items.ReadyItems;
-import claimworld.net.supporter.utils.tasks.Task;
-import claimworld.net.supporter.utils.tasks.TaskManager;
+import claimworld.net.supporter.items.ReadyItems;
+import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.Material;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;

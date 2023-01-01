@@ -2,8 +2,7 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.tasks.Task;
-import claimworld.net.supporter.utils.tasks.TaskManager;
+import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;

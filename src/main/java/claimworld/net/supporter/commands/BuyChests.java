@@ -2,7 +2,7 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.WarehouseUtils;
-import claimworld.net.supporter.utils.items.ReadyItems;
+import claimworld.net.supporter.items.ReadyItems;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
 

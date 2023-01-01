@@ -2,7 +2,7 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.GeyserUtils;
-import claimworld.net.supporter.utils.tasks.TaskManager;
+import claimworld.net.supporter.tasks.TaskManager;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;

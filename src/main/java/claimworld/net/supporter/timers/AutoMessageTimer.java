@@ -1,12 +1,11 @@
 package claimworld.net.supporter.timers;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.announcers.ActiveBossBar;
+import claimworld.net.supporter.announcers.ActiveBossBar;
 import claimworld.net.supporter.utils.GoalUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
-import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Random;
 

@@ -1,12 +1,12 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.battlepass.BattlePassManager;
-import claimworld.net.supporter.utils.battlepass.SkillManager;
-import claimworld.net.supporter.utils.guis.Gui;
-import claimworld.net.supporter.utils.guis.GuiManager;
-import claimworld.net.supporter.utils.items.Locker;
-import claimworld.net.supporter.utils.tasks.TaskManager;
+import claimworld.net.supporter.battlepass.BattlePassManager;
+import claimworld.net.supporter.battlepass.SkillManager;
+import claimworld.net.supporter.guis.Gui;
+import claimworld.net.supporter.guis.GuiManager;
+import claimworld.net.supporter.items.Locker;
+import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

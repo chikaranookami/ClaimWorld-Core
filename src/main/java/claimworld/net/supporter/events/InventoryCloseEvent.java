@@ -1,6 +1,6 @@
 package claimworld.net.supporter.events;
 
-import claimworld.net.supporter.utils.items.Locker;
+import claimworld.net.supporter.items.Locker;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;

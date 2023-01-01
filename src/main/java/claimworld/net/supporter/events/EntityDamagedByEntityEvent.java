@@ -1,6 +1,6 @@
 package claimworld.net.supporter.events;
 
-import claimworld.net.supporter.utils.battlepass.SkillManager;
+import claimworld.net.supporter.battlepass.SkillManager;
 import claimworld.net.supporter.utils.AttributesManager;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;

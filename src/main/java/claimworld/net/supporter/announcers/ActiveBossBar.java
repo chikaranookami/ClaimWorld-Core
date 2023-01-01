@@ -1,8 +1,7 @@
-package claimworld.net.supporter.utils.announcers;
+package claimworld.net.supporter.announcers;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.tasks.Task;
-import claimworld.net.supporter.utils.tasks.TaskManager;
+import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 

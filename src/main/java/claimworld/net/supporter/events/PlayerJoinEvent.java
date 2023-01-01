@@ -2,14 +2,12 @@ package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.*;
-import claimworld.net.supporter.utils.announcers.JoinAnnouncer;
-import claimworld.net.supporter.utils.items.Locker;
-import claimworld.net.supporter.utils.items.ReadyItems;
-import claimworld.net.supporter.utils.battlepass.BattlePassManager;
+import claimworld.net.supporter.announcers.JoinAnnouncer;
+import claimworld.net.supporter.items.ReadyItems;
+import claimworld.net.supporter.battlepass.BattlePassManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.Team;
@@ -53,7 +51,7 @@ public class PlayerJoinEvent implements Listener {
             } else {
                 new JoinAnnouncer().render(player);
 
-                dispatchCommand(getConsoleSender(), "skin clear " + player.getName());
+                if (!player.hasPermission("claimworld.vip")) dispatchCommand(getConsoleSender(), "skin clear " + player.getName());
             }
         }, 10L);
 
@@ -70,7 +68,7 @@ public class PlayerJoinEvent implements Listener {
             player.setPlayerListHeader(colorize("\n&a❤ Claim&fWorld&a.net\n"));
             BattlePassManager.getInstance().updateTablistFooter(player);
 
-            dispatchCommand(getConsoleSender(), "skin update " + player.getName());
+            if (!player.hasPermission("claimworld.vip")) dispatchCommand(getConsoleSender(), "skin update " + player.getName());
         }, 30L);
 
         //manage global free chest

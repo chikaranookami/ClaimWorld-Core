@@ -1,4 +1,4 @@
-package claimworld.net.supporter.utils.battlepass;
+package claimworld.net.supporter.battlepass;
 
 public class BattlePassLevel {
     private final int index;

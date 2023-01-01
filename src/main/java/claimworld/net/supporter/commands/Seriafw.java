@@ -45,35 +45,6 @@ public class Seriafw {
                 return "/seriafw";
             }
         }.enableDelay(7).setPermission("claimworld.mvp");
-
-        new CommandBase("nowyrok", true) {
-            @Override
-            public boolean onCommand(CommandSender sender, String[] arguments) {
-                Location location = ((Player) sender).getLocation();
-                assert location.getWorld() != null;
-
-                AtomicInteger counter = new AtomicInteger();
-                int random = new Random().nextInt(8) + 4;
-
-                getScheduler().scheduleSyncRepeatingTask(Supporter.getPlugin(), () -> {
-                    if (!(counter.get() < 60)) {
-                        return;
-                    }
-
-                    fireworkUtils.renderRandomFirework(location, 45);
-
-                    counter.getAndIncrement();
-
-                }, 0L, random);
-
-                return true;
-            }
-
-            @Override
-            public String getUsage() {
-                return "/nowyrok";
-            }
-        }.enableDelay(30).setPermission("claimworld.player");
     }
 
 }

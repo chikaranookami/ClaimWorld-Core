@@ -1,6 +1,6 @@
 package claimworld.net.supporter.events;
 
-import claimworld.net.supporter.utils.items.ReadyItems;
+import claimworld.net.supporter.items.ReadyItems;
 import claimworld.net.supporter.utils.AttributesManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

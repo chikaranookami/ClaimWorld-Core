@@ -3,9 +3,8 @@ package claimworld.net.supporter.commands;
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.ChestCounterUtils;
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.FireworkUtils;
-import claimworld.net.supporter.utils.items.CustomItem;
-import claimworld.net.supporter.utils.items.ReadyItems;
+import claimworld.net.supporter.items.CustomItem;
+import claimworld.net.supporter.items.ReadyItems;
 import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Item;
@@ -22,8 +21,6 @@ import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.*;
 
 public class OpenChest {
-
-    private final FireworkUtils fireworkUtils = new FireworkUtils();
 
     private final List<ItemStack> randomItems = new ArrayList<>();
     private final List<ItemStack> prezentItems = new ArrayList<>();
@@ -42,7 +39,6 @@ public class OpenChest {
 
                 counter.getAndIncrement();
                 if (counter.get() >= 3) {
-                    fireworkUtils.renderRandomFirework(location);
                     cancel();
                 }
             }
@@ -80,7 +76,6 @@ public class OpenChest {
 
                 counter.getAndIncrement();
                 if (counter.get() >= 9) {
-                    fireworkUtils.renderRandomFirework(location);
                     cancel();
                 }
             }
@@ -100,7 +95,6 @@ public class OpenChest {
 
                 counter.getAndIncrement();
                 if (counter.get() >= 15) {
-                    fireworkUtils.renderRandomFirework(location);
                     cancel();
                 }
             }
@@ -260,7 +254,6 @@ public class OpenChest {
         int baseAmount = 3;
         for (int i = 2; i < 6; i++) {
             randomItems.add(readyItems.get("$1", baseAmount * i));
-            randomItems.add(readyItems.get("Skarpeta", baseAmount * i));
 
             randomItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, baseAmount * i));
             randomItems.add(new ItemStack(Material.NETHER_WART, baseAmount * i));
@@ -341,15 +334,6 @@ public class OpenChest {
         randomItems.add(new ItemStack(Material.SADDLE));
         randomItems.add(new ItemStack(Material.REINFORCED_DEEPSLATE));
 
-        for (Map.Entry<String, CustomItem> entry : readyItems.getItemMap().entrySet()) {
-            prezentItems.add(entry.getValue().getItem());
-        }
-        for (int i = 1; i < 10; i++) {
-            prezentItems.add(readyItems.get("$1", i));
-        }
-        prezentItems.add(new ItemStack(Material.EMERALD, 16));
-        prezentItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, 16));
-
         rareMaterials.add(Material.ELYTRA);
         rareMaterials.add(Material.BEACON);
         rareMaterials.add(Material.ENDER_CHEST);
@@ -405,6 +389,7 @@ public class OpenChest {
                     return true;
                 }
 
+                /*
                 if (itemStack.equals(readyItems.get("Prezent"))) {
                     assert world != null;
                     renderLateEffects(location, world);
@@ -419,6 +404,7 @@ public class OpenChest {
                         dispatchCommand(getConsoleSender(), "dajpunkty " + player.getName() + " 3");
                     }
                 }
+                */
 
                 return true;
             }

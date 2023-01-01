@@ -1,9 +1,9 @@
-package claimworld.net.supporter.utils.announcers;
+package claimworld.net.supporter.announcers;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.GeyserUtils;
 import claimworld.net.supporter.utils.BonusManager;
-import claimworld.net.supporter.utils.tasks.TaskManager;
+import claimworld.net.supporter.tasks.TaskManager;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Material;
@@ -24,7 +24,7 @@ public class JoinAnnouncer {
     private final List<Sound> sounds = Collections.singletonList(Sound.ENTITY_PILLAGER_CELEBRATE);
 
     public String getAdminNote() {
-        return "§8Grudzien to miesiac, w trakcie ktorego na serwerze aktywne jest §cWydarzenie Zimowe§8! Czekaja na Was §cPrezenty§8, §cSkarpety§8, a nawet snieg!\n\nOsoba z najwieksza iloscia Skarpet w tym roku otrzyma §cKose Na Moby§8!";
+        return "§8Niedlugo pojawi sie nowy zwiastun projektu, a wraz z nim nasz pelnoprawny hymn!";
     }
 
     public String getActiveBonuses() {

@@ -1,4 +1,4 @@
-package claimworld.net.supporter.utils.battlepass;
+package claimworld.net.supporter.battlepass;
 
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static claimworld.net.supporter.utils.battlepass.BattlePassManager.mainObjectiveName;
 
 public class SkillManager {
     private final HashMap<String, Skill> skillMap = new HashMap<>();
@@ -52,7 +50,7 @@ public class SkillManager {
     }
 
     public boolean canActivateSkill(Player player, String skillName) {
-        return player.getScoreboard().getObjective(mainObjectiveName).getScore(player.getName()).getScore() >= skillMap.get(skillName).getRequiredLevel();
+        return player.getScoreboard().getObjective(BattlePassManager.mainObjectiveName).getScore(player.getName()).getScore() >= skillMap.get(skillName).getRequiredLevel();
     }
 
     public SkillManager() {

@@ -1,14 +1,12 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.items.CustomHead;
+import claimworld.net.supporter.items.CustomHead;
 import claimworld.net.supporter.utils.MessageUtils;
-import claimworld.net.supporter.utils.items.CustomItem;
-import claimworld.net.supporter.utils.items.ReadyItems;
-import claimworld.net.supporter.utils.tasks.Task;
-import claimworld.net.supporter.utils.tasks.TaskManager;
+import claimworld.net.supporter.items.ReadyItems;
+import claimworld.net.supporter.tasks.Task;
+import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;

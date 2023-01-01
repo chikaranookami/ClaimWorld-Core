@@ -19,18 +19,10 @@ public class GoalUtils {
         return instance;
     }
 
-    private boolean shorterFishing;
-
     private final HashMap<Integer, String> rewardsMap = new HashMap<>();
 
-    private void updateData() {
-        if (!(config.getInt("goals.total") >= 1250)) return;
-        shorterFishing = true;
-        getLogger().log(Level.INFO, "updated value shorterFishing to true");
-    }
-
     public boolean getShorterFishing() {
-        return shorterFishing;
+        return true;
     }
 
     public String getReward(int reward) {
@@ -59,8 +51,6 @@ public class GoalUtils {
     }
 
     public GoalUtils() {
-        updateData();
-
         rewardsMap.put(250, "Mniej spiacych osob, by ustawic dzien");
         rewardsMap.put(500, "Powiekszenie borderu (Overworld)");
         rewardsMap.put(750, "Nieco wiekszy randomTickSpeed");

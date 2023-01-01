@@ -1,7 +1,7 @@
 package claimworld.net.supporter.utils;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.items.Locker;
+import claimworld.net.supporter.items.Locker;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 

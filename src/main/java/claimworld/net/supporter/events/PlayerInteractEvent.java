@@ -1,16 +1,15 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.battlepass.SkillManager;
-import claimworld.net.supporter.utils.items.ReadyItems;
-import claimworld.net.supporter.utils.tasks.Task;
-import claimworld.net.supporter.utils.tasks.TaskManager;
+import claimworld.net.supporter.battlepass.SkillManager;
+import claimworld.net.supporter.items.ReadyItems;
+import claimworld.net.supporter.tasks.Task;
+import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
@@ -29,17 +28,12 @@ public class PlayerInteractEvent implements Listener {
 
     private final List<Material> allowedSpawnEggs = new ArrayList<>();
     private final List<Player> delayedPlayers = new ArrayList<>();
-    private final List<ItemStack> chests = new ArrayList<>();
 
     public PlayerInteractEvent() {
         allowedSpawnEggs.add(Material.ZOMBIE_SPAWN_EGG);
         allowedSpawnEggs.add(Material.SKELETON_SPAWN_EGG);
         allowedSpawnEggs.add(Material.WITCH_SPAWN_EGG);
         allowedSpawnEggs.add(Material.CREEPER_SPAWN_EGG);
-
-        ReadyItems readyItems = ReadyItems.getInstance();
-        chests.add(readyItems.get("Skrzynia_smoka"));
-        chests.add(readyItems.get("Prezent"));
     }
 
     @EventHandler
@@ -54,28 +48,19 @@ public class PlayerInteractEvent implements Listener {
 
         Map<String, Task> taskMap = taskManager.getTaskMap();
 
-        if (chests.contains(item) || item.isSimilar(readyItems.get("Prezent"))) {
+        if (item.equals(readyItems.get("Skrzynia_smoka"))) {
             if (delayedPlayers.contains(player)) return;
             delayedPlayers.add(player);
 
             event.setCancelled(true);
+            item.setAmount(item.getAmount() - 1);
             player.playSound(player, Sound.ENTITY_ITEM_PICKUP, 1f, 1f);
 
-            long delay = 100;
+            dispatchCommand(getConsoleSender(), "openchest Skrzynia_smoka " + player.getName());
 
-            if (item.equals(readyItems.get("Skrzynia_smoka"))) {
-                dispatchCommand(getConsoleSender(), "openchest Skrzynia_smoka " + player.getName());
-                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("openDragonChest")));
-            }
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("openDragonChest")));
 
-            if (item.isSimilar(readyItems.get("Prezent"))) {
-                delay = 10;
-                dispatchCommand(getConsoleSender(), "openchest Prezent " + player.getName());
-            }
-
-            item.setAmount(item.getAmount() - 1);
-
-            getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> delayedPlayers.remove(player), delay);
+            getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> delayedPlayers.remove(player), 100);
 
             return;
         }

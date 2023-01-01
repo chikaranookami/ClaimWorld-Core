@@ -80,7 +80,6 @@ public class Attributes {
                 if (player == null) return false;
 
                 dispatchCommand(getConsoleSender(), "scoreboard players add " + player.getName() + " " + attributesObjectiveName + " 1");
-                dispatchCommand(getConsoleSender(), "privateMessage " + player.getName() + " Otrzymales Atrybut. Za jego pomoca juz niebawem bedziesz w stanie rozwinac swoja postac.");
                 return true;
             }
 

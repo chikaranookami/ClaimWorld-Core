@@ -84,7 +84,7 @@ public class ReadyItems {
         itemMap.put("Ksiazka_power6", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.ARROW_DAMAGE, 6));
         itemMap.put("Ksiazka_fireaspect3", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.FIRE_ASPECT, 3));
 
-        itemMap.put("Kosa_na_moby", new CustomItem("", Material.GHAST_TEAR, 1, Collections.singletonList(colorize(getLore("rare"))), 15, Arrays.asList(Enchantment.DAMAGE_UNDEAD, Enchantment.DAMAGE_ARTHROPODS, Enchantment.DURABILITY, Enchantment.LOOT_BONUS_MOBS, Enchantment.MENDING), Arrays.asList(10, 10, 5, 5, 1)));
+        //itemMap.put("Kosa_na_moby", new CustomItem("", Material.GHAST_TEAR, 1, Collections.singletonList(colorize(getLore("rare"))), 15, Arrays.asList(Enchantment.DAMAGE_UNDEAD, Enchantment.DAMAGE_ARTHROPODS, Enchantment.DURABILITY, Enchantment.LOOT_BONUS_MOBS, Enchantment.MENDING), Arrays.asList(10, 10, 5, 5, 1)));
 
         itemMap.put("Skrzynia_smoka", new CustomItem("&cSkrzynia Smoka", Material.CHEST_MINECART, Collections.singletonList(colorize(getLore("unique"))), 0));
         itemMap.put("Kupa", new CustomItem("&fKupa", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("common"))), 11));

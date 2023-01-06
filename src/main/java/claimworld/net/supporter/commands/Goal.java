@@ -57,6 +57,9 @@ public class Goal {
             case 2500:
                 broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto kolejny cel w sklepie. W nagrode &eniedlugo dodany zostanie Zwoj Ognia.&f."));
                 break;
+            case 3100:
+                broadcastMessage(colorize(getBroadcastPrefix() + "Osiagnieto kolejny cel w sklepie. W nagrode &eniedlugo kupa bedzie troche bardziej smierdziec...&f."));
+                break;
             case 9999:
                 getLogger().log(Level.WARNING, "wplacone zostalo wiecej kasy, niz ustawionych celow");
         }

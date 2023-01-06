@@ -115,10 +115,6 @@ public class InventoryClickEvent implements Listener {
                     player.closeInventory();
                     player.openBook(new BattlePassManager().getBattlepassBook());
                     return;
-                case 15:
-                    player.closeInventory();
-                    dispatchCommand(player, "nowyrok");
-                    return;
                 case 16:
                     if (player.hasPermission("claimworld.vip")) new GuiManager(player, new Gui(null, 54, "Panel VIP"));
                     return;

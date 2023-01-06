@@ -47,9 +47,10 @@ public class Pomoc {
         helpMessages.add("§8Wybrane Farmy\n\n§c+§8 Blazy [-334 72 -3 Nether]\n§c+§8 Owce [656 -703 Overworld]\n§c+§8 Kaktusy [409 289 Overworld]\n§c+§8 Trzcina [1096 -185 Overworld]\n§c+§8 Wiesniaki [310 -1979 Overworld]\n§c+§8 Jedzenie [3000 -2200 Overworld]");
         helpMessages.add("§8Wybrane Farmy\n\n§c+§8 Proch [-33 64 -1324 Overworld]\n§c+§8 Bruk [3000 -30 -220 Overworld]\n§c+§8 Wiedzmy [2906 -5 -2310 Overworld]\n§c+§8 Wardeny [1458 -43 -1289 Overworld]");
         helpMessages.add("§8Sztandary\n\nZajete §cwzory§8 sztandardow dostepne sa do wgladu w specjalnym miejscu obok spawnu (285x, 432z).\n\nKazdy moze zarezerwowac swoj wzor u Senatora.");
-        helpMessages.add("§8Zakupy w Sklepie\n\n§c+§8 Za osiagniecie progu w sklepie gracze odblokowuja dodatkowe rzeczy.\n\nKolejna nagroda: §c" + goalUtils.getCurrentReward() + "\n\n§8Do celu brakuje: §c" + goalUtils.getMissingAmount() + "zl");
+        helpMessages.add("§8Zakupy W Sklepie\n\n§c+§8 Za osiagniecie progu w sklepie gracze odblokowuja dodatkowe rzeczy.\n\nKolejna nagroda: §c" + goalUtils.getCurrentReward() + "\n\n§8Do celu brakuje: §c" + goalUtils.getMissingAmount() + "zl");
         helpMessages.add("§8Osiagniecia\n\nZa zrealizowanie wszystkich osiagniec Senat moze przydzielic graczowi specjalna §cstatuetke§8.\n\nWystarczy wyslac odpowiednie screeny na Discorda i oznaczyc Senatora.");
         helpMessages.add("§8Skrzynki\n\nZawieraja rozne przedmioty.\n\nNajciekawsze z nich to:\n§c+§8 Elytra, Beacon, ShulkerBox (~0.4%)\n§c+§8 Netherytowe Narzedzia (~3%)\n§c+§8 Niestandardowe Przedmioty (~9%)");
+        helpMessages.add("§8Aktualizacja Skinow\n\n§c+§8 Serwer dziala w trybie offline i skiny pobierane sa przez system, ktory nie lubi obecnego firewalla.\n\n§c+§8 Jako VIP mozecie sobie zmieniac skina komenda, w tym importowac skorki z adresow url.");
         helpMessages.add("§8O Serwerze\n\n§cClaim World§8 stawia przede wszystkim na dlugoterminowosc.\n\nChcemy utrzymac rozgrywke w klimatach klasycznego Minecrafta, jednoczesnie caly czas nieco ja urozmaicajac.");
         
         new CommandBase("pomoc", true) {

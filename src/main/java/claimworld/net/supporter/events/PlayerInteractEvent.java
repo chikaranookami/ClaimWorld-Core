@@ -5,13 +5,19 @@ import claimworld.net.supporter.battlepass.SkillManager;
 import claimworld.net.supporter.items.ReadyItems;
 import claimworld.net.supporter.tasks.Task;
 import claimworld.net.supporter.tasks.TaskManager;
+import claimworld.net.supporter.utils.PrivateChestsUtils;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
+import org.bukkit.block.TileState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +46,11 @@ public class PlayerInteractEvent implements Listener {
     public void playerInteractEvent(org.bukkit.event.player.PlayerInteractEvent event) {
         if (event.getHand() == null) return;
         if (event.getHand().equals(EquipmentSlot.OFF_HAND)) return;
-        if (event.getClickedBlock() == null) return;
 
         Player player = event.getPlayer();
+
+
+
         ItemStack item = event.getItem();
         if (item == null) return;
 

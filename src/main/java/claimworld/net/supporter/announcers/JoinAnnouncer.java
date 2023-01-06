@@ -24,7 +24,7 @@ public class JoinAnnouncer {
     private final List<Sound> sounds = Collections.singletonList(Sound.ENTITY_PILLAGER_CELEBRATE);
 
     public String getAdminNote() {
-        return "§8Niedlugo pojawi sie nowy zwiastun projektu, a wraz z nim nasz pelnoprawny hymn!";
+        return "§8Niedlugo pojawi sie nowy system zabezpieczania skrzyn.\n\nBedzie prosty, intuicyjny i rozbudowany o brakujace obecnie funkcje.";
     }
 
     public String getActiveBonuses() {

@@ -14,7 +14,7 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class WarehouseUtils {
     public void tryCloseInventory(Player player) {
-        if (player.getOpenInventory().getTitle().equals("Skrytka " + player.getName())) player.closeInventory();
+        if (player.getOpenInventory().getTitle().equals("Skrytka " + player.getName())) getScheduler().runTask(Supporter.getPlugin(), player::closeInventory);
     }
 
     public void addItemsGlobal(List<ItemStack> items) {

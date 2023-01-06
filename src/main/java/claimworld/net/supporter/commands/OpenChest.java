@@ -250,6 +250,7 @@ public class OpenChest {
         randomItems.add(new ItemStack(Material.ELYTRA));
         randomItems.add(new ItemStack(Material.SHULKER_BOX));
         randomItems.add(new ItemStack(Material.ENDER_CHEST));
+        randomItems.add(new ItemStack(Material.SHULKER_SHELL));
         
         int baseAmount = 3;
         for (int i = 2; i < 6; i++) {
@@ -302,7 +303,7 @@ public class OpenChest {
             randomItems.add(new ItemStack(Material.REDSTONE_BLOCK, baseAmount * i));
             randomItems.add(new ItemStack(Material.TNT, baseAmount * i));
             randomItems.add(new ItemStack(Material.EXPERIENCE_BOTTLE, baseAmount * i));
-            randomItems.add(new ItemStack(Material.SHULKER_SHELL, baseAmount * i));
+            randomItems.add(new ItemStack(Material.BUDDING_AMETHYST, baseAmount * i));
             randomItems.add(new ItemStack(Material.STONE, baseAmount * i));
             randomItems.add(new ItemStack(Material.COBBLESTONE, baseAmount * i));
             randomItems.add(new ItemStack(Material.DIRT, baseAmount * i));

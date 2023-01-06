@@ -170,7 +170,7 @@ public class TaskManager {
         //third set
         taskMap.put("beOnlineWhenTraderSpawns", new Task("Badz online, gdy pojawi sie handlarz.", "", 0));
         taskMap.put("destroyDiamondPickaxe", new Task("Zuzyj diamentowy kilof.", "", 0));
-        taskMap.put("doSmallShit", new Task("Niech zbiera Ci sie na cos ciezszego.", "", 0));
+        taskMap.put("doSmallShit", new Task("Popusc odrobine.", "", 0));
         taskMap.put("openDragonChest", new Task("Otworz Skrzynie Smoka.", "", 0));
         taskMap.put("useActiveTeleporter", new Task("Uzyj aktywnego Teleportera.", "", 0));
 

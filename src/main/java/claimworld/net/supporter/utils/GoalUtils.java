@@ -58,6 +58,7 @@ public class GoalUtils {
         rewardsMap.put(1250, "Szybsze lowienie");
         rewardsMap.put(1750, "Efekty krwawienia");
         rewardsMap.put(2150, "Kalendarz Logowania");
+        rewardsMap.put(2500, "Zwoj Ognia");
         rewardsMap.put(9999, "-");
     }
 }

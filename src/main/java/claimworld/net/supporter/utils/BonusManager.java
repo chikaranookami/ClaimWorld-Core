@@ -42,7 +42,6 @@ public class BonusManager {
 
         bonusCommands.put("Bloki", "fillupwarehouse blocks");
         bonusCommands.put("Butelki", "fillupwarehouse xpBottle");
-        bonusCommands.put("AntyFantom", "gamerule doInsomnia false");
         bonusCommands.put("Skrzynka", "globalfreechest");
 
         bonusPointPrices.put("Butelki", 15);

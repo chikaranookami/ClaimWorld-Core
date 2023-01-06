@@ -44,14 +44,12 @@ public class PlayerJoinEvent implements Listener {
             player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 200, 1, false, false, true));
         }
 
-        //announcer + skin clear
+        //announcer
         getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
             if (geyserUtils.isPlayerFromGeyser(player.getUniqueId())) {
                 player.sendMessage(getUserPrefix() + "\nClaim World dziala na Java Edition, wiec rozgrywka zostala odpowiednio dostosowana do Twojego wydania.\n");
             } else {
                 new JoinAnnouncer().render(player);
-
-                if (!player.hasPermission("claimworld.vip")) dispatchCommand(getConsoleSender(), "skin clear " + player.getName());
             }
         }, 10L);
 
@@ -63,12 +61,10 @@ public class PlayerJoinEvent implements Listener {
             team.removeEntry(playerName);
         }, 20L);
 
-        //setlist + skin update
+        //setlist
         getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
             player.setPlayerListHeader(colorize("\n&a❤ Claim&fWorld&a.net\n"));
             BattlePassManager.getInstance().updateTablistFooter(player);
-
-            if (!player.hasPermission("claimworld.vip")) dispatchCommand(getConsoleSender(), "skin update " + player.getName());
         }, 30L);
 
         //manage global free chest

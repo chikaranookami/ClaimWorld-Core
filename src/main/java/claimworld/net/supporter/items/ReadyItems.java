@@ -62,6 +62,10 @@ public class ReadyItems {
         return new CustomItem("&aMenu", Material.CLOCK, Collections.singletonList(colorize("&7&oPanel gracza.")), 1).getItem();
     }
 
+    public ItemStack getKosaNaMoby() {
+        return new CustomItem("&aK&bo&cs&da &eN&fa &aM&bo&cb&dy", Material.NETHERITE_HOE, 1, Collections.singletonList(colorize(getLore("custom"))), 15, Arrays.asList(Enchantment.DAMAGE_UNDEAD, Enchantment.DAMAGE_ARTHROPODS, Enchantment.DURABILITY, Enchantment.LOOT_BONUS_MOBS, Enchantment.MENDING), Arrays.asList(20, 20, 5, 5, 1)).getItem();
+    }
+
     public ReadyItems() {
         itemMap.put("Kox", new CustomItem("", Material.ENCHANTED_GOLDEN_APPLE, null));
         itemMap.put("Ruda_diamentu", new CustomItem("", Material.DIAMOND_ORE, null));
@@ -83,8 +87,6 @@ public class ReadyItems {
         itemMap.put("Ksiazka_thorns5", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.THORNS, 5));
         itemMap.put("Ksiazka_power6", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.ARROW_DAMAGE, 6));
         itemMap.put("Ksiazka_fireaspect3", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.FIRE_ASPECT, 3));
-
-        //itemMap.put("Kosa_na_moby", new CustomItem("", Material.GHAST_TEAR, 1, Collections.singletonList(colorize(getLore("rare"))), 15, Arrays.asList(Enchantment.DAMAGE_UNDEAD, Enchantment.DAMAGE_ARTHROPODS, Enchantment.DURABILITY, Enchantment.LOOT_BONUS_MOBS, Enchantment.MENDING), Arrays.asList(10, 10, 5, 5, 1)));
 
         itemMap.put("Skrzynia_smoka", new CustomItem("&cSkrzynia Smoka", Material.CHEST_MINECART, Collections.singletonList(colorize(getLore("unique"))), 0));
         itemMap.put("Kupa", new CustomItem("&fKupa", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("common"))), 11));

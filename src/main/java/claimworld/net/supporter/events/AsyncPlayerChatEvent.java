@@ -23,7 +23,7 @@ public class AsyncPlayerChatEvent implements Listener {
     private void renderFilteredMessage(Player player, String message) {
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
             for (String word : streamerUtils.getForbiddenWords()) {
-                if (!message.contains(word)) continue;
+                if (!message.contains(word) || message.equals("simpson")) continue;
                 player.sendMessage(getUserPrefix() + "Wykryto niefajne okreslenie. Zablokowano wyslanie wiadomosci.");
                 return;
             }

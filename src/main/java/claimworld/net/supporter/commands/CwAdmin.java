@@ -19,6 +19,8 @@ import static org.bukkit.Bukkit.*;
 
 public class CwAdmin {
 
+    ReadyItems readyItems = ReadyItems.getInstance();
+
     private int snowAmount = 0;
     private final List<String> blockedPlayers = new ArrayList<>();
 
@@ -82,12 +84,19 @@ public class CwAdmin {
                 if (action.equals("giveCustomItems")) {
                     Location location = player.getLocation();
 
-                    for (Map.Entry<String, CustomItem> entry : ReadyItems.getInstance().getItemMap().entrySet()) {
+                    for (Map.Entry<String, CustomItem> entry : readyItems.getItemMap().entrySet()) {
                         ItemStack itemStack = entry.getValue().getItem();
                         Item item = location.getWorld().dropItem(location, itemStack);
                         item.setOwner(player.getUniqueId());
                     }
 
+                    return true;
+                }
+
+                if (action.equals("giveKosa")) {
+                    Location location = player.getLocation();
+                    Item item = location.getWorld().dropItem(location, readyItems.getKosaNaMoby());
+                    item.setOwner(player.getUniqueId());
                     return true;
                 }
 

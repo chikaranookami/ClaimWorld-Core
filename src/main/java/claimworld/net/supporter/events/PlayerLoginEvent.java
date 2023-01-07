@@ -8,7 +8,7 @@ import static org.bukkit.Bukkit.getServer;
 
 public class PlayerLoginEvent implements Listener {
 
-    public static final int reservedSlots = 4;
+    public static final int reservedSlots = 5;
 
     @EventHandler
     public void loginEvent(org.bukkit.event.player.PlayerLoginEvent event) {

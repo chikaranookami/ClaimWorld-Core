@@ -3,6 +3,7 @@ package claimworld.net.supporter.events;
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.tasks.Task;
 import claimworld.net.supporter.tasks.TaskManager;
+import claimworld.net.supporter.utils.JetpackUtils;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -17,10 +18,14 @@ public class PlayerTeleportEvent implements Listener {
 
     TaskManager taskManager = TaskManager.getInstance();
     Map<String, Task> taskMap = taskManager.getTaskMap();
+    JetpackUtils jetpackUtils = JetpackUtils.getInstance();
 
     @EventHandler
     public void playerTeleportEvent(org.bukkit.event.player.PlayerTeleportEvent event) {
         Player player = event.getPlayer();
+
+        jetpackUtils.disableJetpack(player.getName());
+
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("teleportYourself")));
 
         org.bukkit.event.player.PlayerTeleportEvent.TeleportCause teleportCause = event.getCause();

@@ -3,6 +3,11 @@ package claimworld.net.supporter.commands;
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.GeyserUtils;
 import claimworld.net.supporter.utils.GoalUtils;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -27,6 +32,15 @@ public class Pomoc {
         bookMeta.setTitle("Pomoc");
 
         bookMeta.setPages(helpMessages);
+
+        String mapLink = "http://46.4.78.190:35017/";
+        bookMeta.spigot().addPage(new ComponentBuilder()
+                .append("§8Mapa\n\n")
+                .append("§c§n> §8§oOtworz mape.")
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(mapLink)))
+                .event(new ClickEvent(ClickEvent.Action.OPEN_URL, mapLink))
+                .create());
+
         book.setItemMeta(bookMeta);
         return book;
     }
@@ -49,8 +63,9 @@ public class Pomoc {
         helpMessages.add("§8Sztandary\n\nZajete §cwzory§8 sztandardow dostepne sa do wgladu w specjalnym miejscu obok spawnu (285x, 432z).\n\nKazdy moze zarezerwowac swoj wzor u Senatora.");
         helpMessages.add("§8Zakupy W Sklepie\n\n§c+§8 Za osiagniecie progu w sklepie gracze odblokowuja dodatkowe rzeczy.\n\nKolejna nagroda: §c" + goalUtils.getCurrentReward() + "\n\n§8Do celu brakuje: §c" + goalUtils.getMissingAmount() + "zl");
         helpMessages.add("§8Osiagniecia\n\nZa zrealizowanie wszystkich osiagniec Senat moze przydzielic graczowi specjalna §cstatuetke§8.\n\nWystarczy wyslac odpowiednie screeny na Discorda i oznaczyc Senatora.");
-        helpMessages.add("§8Skrzynki\n\nZawieraja rozne przedmioty.\n\nNajciekawsze z nich to:\n§c+§8 Elytra, Beacon, ShulkerBox (~0.4%)\n§c+§8 Netherytowe Narzedzia (~3%)\n§c+§8 Niestandardowe Przedmioty (~9%)");
+        helpMessages.add("§8Skrzynki\n\nZawieraja rozne przedmioty.\n\nNajciekawsze z nich:\n§c+§8 Elytra, Beacon, ShulkerBox, Jetpack (~0.4%)\n§c+§8 Netherytowe Narzedzia (~3%)\n§c+§8 Niestandardowe Przedmioty (~9%)");
         helpMessages.add("§8Aktualizacja Skinow\n\n§c+§8 Serwer dziala w trybie offline i skiny pobierane sa przez system, ktory nie lubi obecnego firewalla.\n\n§c+§8 Jako VIP mozecie sobie zmieniac skina komenda, w tym importowac skorki z adresow url.");
+        helpMessages.add("§8Jetpack\n\nZuzywa sie szybko, ale ma naprawe.\n\nBy uzyc Jetpacka, wez go do glownej reki i nacisnij klawisz odpowiedzialny za zamiane przedmiotow w rekach.");
         helpMessages.add("§8O Serwerze\n\n§cClaim World§8 stawia przede wszystkim na dlugoterminowosc.\n\nChcemy utrzymac rozgrywke w klimatach klasycznego Minecrafta, jednoczesnie caly czas nieco ja urozmaicajac.");
         
         new CommandBase("pomoc", true) {

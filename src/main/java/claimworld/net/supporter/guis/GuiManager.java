@@ -1,5 +1,6 @@
 package claimworld.net.supporter.guis;
 
+import claimworld.net.supporter.items.ItemSets;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;

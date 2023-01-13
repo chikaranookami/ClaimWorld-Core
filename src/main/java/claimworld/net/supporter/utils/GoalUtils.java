@@ -60,6 +60,8 @@ public class GoalUtils {
         rewardsMap.put(2150, "Kalendarz Logowania");
         rewardsMap.put(2500, "Zwoj Ognia");
         rewardsMap.put(3100, "Smrod Po Kupie");
+        rewardsMap.put(4000, "Plecak");
+        rewardsMap.put(4200, "Slownik Ortograficzny");
         rewardsMap.put(9999, "-");
     }
 }

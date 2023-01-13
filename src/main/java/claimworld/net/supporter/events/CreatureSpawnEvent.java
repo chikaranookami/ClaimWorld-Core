@@ -25,6 +25,7 @@ import static org.bukkit.Bukkit.*;
 public class CreatureSpawnEvent implements Listener {
 
     TaskManager taskManager = TaskManager.getInstance();
+    ReadyItems readyItems = ReadyItems.getInstance();
 
     private final List<Player> players = new ArrayList<>();
     private final HashMap<Integer, String> traderName = new HashMap<>();
@@ -42,7 +43,7 @@ public class CreatureSpawnEvent implements Listener {
 
         int random = new Random().nextInt(8);
 
-        ReadyItems readyItems = ReadyItems.getInstance();
+        ItemStack jetpack = readyItems.get("Jetpack");
         ItemStack dolarek = readyItems.get("$1");
         ItemStack dolar64x = readyItems.get("$1", 64);
         ItemStack skrzyniaSmoka = readyItems.get("Skrzynia_smoka");
@@ -75,6 +76,7 @@ public class CreatureSpawnEvent implements Listener {
                 updatedRecipes.add(getCustomRecipe(unbreaking4, 1, new ItemStack(Material.EMERALD, 16), dolar64x));
                 updatedRecipes.add(getCustomRecipe(protection5, 1, new ItemStack(Material.EMERALD, 16), dolar64x));
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.SPONGE, 4), 1, new ItemStack(Material.EMERALD, 16), null));
+                updatedRecipes.add(getCustomRecipe(jetpack, 1, new ItemStack(Material.EMERALD, 16), dolar64x));
             }
             if (random > 6) {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.ELYTRA), 1, new ItemStack(Material.EMERALD, 64), dolar64x));
@@ -107,6 +109,7 @@ public class CreatureSpawnEvent implements Listener {
                 updatedRecipes.add(getCustomRecipe(sharpnessBook, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), dolar64x));
                 updatedRecipes.add(getCustomRecipe(skrzyniaSmoka, 4, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
                 updatedRecipes.add(getCustomRecipe(thorns5, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), dolar64x));
+                updatedRecipes.add(getCustomRecipe(jetpack, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), dolar64x));
             }
             if (random > 6) {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.ELYTRA), 1, new ItemStack(Material.PHANTOM_MEMBRANE, 64), dolar64x));

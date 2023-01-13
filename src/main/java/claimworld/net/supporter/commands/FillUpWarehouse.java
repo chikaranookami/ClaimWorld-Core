@@ -52,7 +52,7 @@ public class FillUpWarehouse {
 
         });
         List<ItemStack> items = new ArrayList<>();
-        items.add(new ItemStack(Material.EXPERIENCE_BOTTLE, 8));
+        items.add(new ItemStack(Material.EXPERIENCE_BOTTLE, 12));
         return items;
     }
 

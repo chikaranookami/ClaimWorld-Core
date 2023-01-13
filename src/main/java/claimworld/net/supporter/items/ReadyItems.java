@@ -78,6 +78,7 @@ public class ReadyItems {
         //itemMap.put("Halloweenowy_odbijacz", new CustomItem("&dHalloweenowy Odbijacz", Material.CARVED_PUMPKIN, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.THORNS, 8));
 
         itemMap.put("Niewidzialna_ramka", new CustomItem("&aNiewidzialna ramka", Material.ITEM_FRAME, Arrays.asList(colorize(getLore("uncommon")), "", colorize(getLore("oneTimeUse")))));
+
         itemMap.put("Ksiazka_unbreaking4", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.DURABILITY, 4));
         itemMap.put("Ksiazka_protection5", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.PROTECTION_ENVIRONMENTAL, 5));
         itemMap.put("Ksiazka_fortune4", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.LOOT_BONUS_BLOCKS, 4));
@@ -88,6 +89,7 @@ public class ReadyItems {
         itemMap.put("Ksiazka_power6", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.ARROW_DAMAGE, 6));
         itemMap.put("Ksiazka_fireaspect3", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.FIRE_ASPECT, 3));
 
+        itemMap.put("Jetpack", new CustomItem("&e&lJetpack", Material.CHAINMAIL_CHESTPLATE, 1, Collections.singletonList(colorize(getLore("legendary"))), 0, Enchantment.MENDING, 1));
         itemMap.put("Skrzynia_smoka", new CustomItem("&cSkrzynia Smoka", Material.CHEST_MINECART, Collections.singletonList(colorize(getLore("unique"))), 0));
         itemMap.put("Kupa", new CustomItem("&fKupa", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("common"))), 11));
         itemMap.put("$1", new CustomItem("&a$1", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("uncommon"))), 10));

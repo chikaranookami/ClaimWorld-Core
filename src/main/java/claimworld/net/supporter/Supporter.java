@@ -61,9 +61,12 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new PlayerItemBreakEvent(), this);
         pluginManager.registerEvents(new PlayerBedLeaveEvent(), this);
         pluginManager.registerEvents(new ServerListPingEvent(), this);
+        pluginManager.registerEvents(new PlayerSwapHandItemsEvent(), this);
+        pluginManager.registerEvents(new PrepareAnvilEvent(), this);
         //pluginManager.registerEvents(new BlockPlaceEvent(), this);
 
         //commands
+        //new Protection();
         new Mod();
         new ChestBooster();
         new Seriafw();

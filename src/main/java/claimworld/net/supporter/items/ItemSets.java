@@ -1,4 +1,4 @@
-package claimworld.net.supporter.guis;
+package claimworld.net.supporter.items;
 
 import claimworld.net.supporter.utils.ChestCounterUtils;
 import claimworld.net.supporter.items.CustomHead;
@@ -24,7 +24,6 @@ import static org.bukkit.Bukkit.getLogger;
 public class ItemSets {
     
     private final HashMap<Integer, ItemStack> itemMap = new HashMap<>();
-    private final ReadyItems readyItems = ReadyItems.getInstance();
 
     private final ItemStack cofnij = new CustomItem("&fCofnij", Material.ARROW, Collections.singletonList(colorize("&7&oPoprzednie menu."))).getItem();
 
@@ -81,10 +80,10 @@ public class ItemSets {
             itemMap.put(53, cofnij);
             itemMap.put(10, new CustomItem("&fUstaw dom", Material.WHITE_BED, Collections.singletonList(colorize("&7&oUzyj, by ustawic dom."))).getItem());
             itemMap.put(12, new CustomItem("&aDom", Material.LIME_BED, Collections.singletonList(lore)).getItem());
-            itemMap.put(13, new CustomItem("&aSpawn", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
+            itemMap.put(13, new CustomItem("&aSpawn (Nowy)", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(14, new CustomItem("&aAutostrada Polnocna", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(15, new CustomItem("&aAutostrada Poludniowa", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
-            itemMap.put(16, new CustomItem("&aCentrum Publiczne", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
+            itemMap.put(16, new CustomItem("&aWyspa Centralna", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(21, new CustomItem("&aLasy Wschodnie", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(22, new CustomItem("&aNadmorska Szlachta", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(23, new CustomItem("&aMonopoly", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());

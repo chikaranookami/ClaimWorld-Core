@@ -27,14 +27,35 @@ public class PlayerJoinEvent implements Listener {
     private final GeyserUtils geyserUtils = new GeyserUtils();
     private final AttributesManager attributesManager = new AttributesManager();
 
+    private void renderCustomJoinBroadcast(Player player, String playerName) {
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+            if (player.hasPermission("claimworld.mvp")) {
+                broadcastMessage(colorize("&c> &c&lMVP&c " + playerName + " wlasnie wszeld na serwer, POGGERS!"));
+                return;
+            }
+
+            if (player.hasPermission("claimworld.vip")) {
+                broadcastMessage(colorize("&b> &b&lVIP&b " + playerName + " wlasnie wszeld na serwer, pogU!"));
+                return;
+            }
+
+            broadcastMessage(colorize("&f> " + playerName + " wlasnie wszeld na serwer, witamy!"));
+        });
+    }
+
     @EventHandler
     public void joinEvent(org.bukkit.event.player.PlayerJoinEvent event) {
         Player player = event.getPlayer();
         String playerName = player.getName();
-        event.setJoinMessage(colorize("&f> " + playerName + " wlasnie wszeld na serwer, witamy!"));
+        renderCustomJoinBroadcast(player, playerName);
+
+        event.setJoinMessage("");
+
+        //fix rare jetpack bug
+        if (player.isFlying() && !player.hasPermission("claimworld.admin")) player.setFlying(false);
 
         //set menu item
-        player.getInventory().setItem(17, ReadyItems.getInstance().getMenuItem());
+        player.getInventory().setItem(17, readyItems.getMenuItem());
 
         //attributes
         attributesManager.updatePlayerHealth(player);
@@ -53,7 +74,7 @@ public class PlayerJoinEvent implements Listener {
             }
         }, 10L);
 
-        //checking compatibility between permissions and displayed team
+        //checking compatibility between permissions and displayed team & fix jetpack bug
         getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
             Team team = player.getScoreboard().getEntryTeam(playerName);
             if (team == null) return;

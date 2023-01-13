@@ -107,7 +107,7 @@ public class TaskManager {
                 }
                 taskCounterMap.put(playerName, newValue);
 
-                getLogger().log(Level.INFO, "updated counter of task " + taskName + " to value " + value);
+                getLogger().log(Level.INFO, "counter of " + taskName + " updated to " + value + " (" + playerName + ")");
 
                 break;
 /*

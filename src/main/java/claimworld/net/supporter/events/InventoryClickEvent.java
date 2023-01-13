@@ -6,7 +6,9 @@ import claimworld.net.supporter.battlepass.SkillManager;
 import claimworld.net.supporter.guis.Gui;
 import claimworld.net.supporter.guis.GuiManager;
 import claimworld.net.supporter.items.Locker;
+import claimworld.net.supporter.items.ReadyItems;
 import claimworld.net.supporter.tasks.TaskManager;
+import claimworld.net.supporter.utils.JetpackUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,6 +27,7 @@ public class InventoryClickEvent implements Listener {
 
     Locker locker = Locker.getInstance();
     TaskManager taskManager = TaskManager.getInstance();
+    JetpackUtils jetpackUtils = JetpackUtils.getInstance();
 
     private final List<String> fixedEquipments = new ArrayList<>();
 
@@ -40,13 +43,24 @@ public class InventoryClickEvent implements Listener {
 
         int slot = event.getSlot();
         Player player = (Player) event.getWhoClicked();
+        String playerName = player.getName();
+        ItemStack item = event.getCurrentItem();
         Inventory playerInventory = player.getInventory();
 
         //shulker inventory == player inventory - sprawdzone, tak jest
-        if (slot == 17 && clickedInventory == playerInventory) {
-            event.setCancelled(true);
-            getScheduler().runTaskLater(Supporter.getPlugin(), () -> new GuiManager(player, new Gui(null, 54, "Menu")), 1L);
-            return;
+        if (clickedInventory == playerInventory) {
+            if (slot == 17) {
+                event.setCancelled(true);
+                getScheduler().runTaskLater(Supporter.getPlugin(), () -> new GuiManager(player, new Gui(null, 54, "Menu")), 1L);
+                return;
+            }
+
+            if (slot == 40) {
+                if (!jetpackUtils.isJetpack(item)) return;
+                if (!player.isFlying() && !jetpackUtils.hasJetpack(playerName)) return;
+                event.setCancelled(true);
+                return;
+            }
         }
 
         Inventory inventory = event.getInventory();
@@ -62,14 +76,11 @@ public class InventoryClickEvent implements Listener {
 
         String title = event.getView().getTitle();
 
-        if (title.equals("Skrytka " + player.getName())) {
-            if (event.getCurrentItem() == null) return;
-            if (event.getCurrentItem().getType().isAir()) return;
+        if (title.equals("Skrytka " + playerName)) {
+            if (item == null) return;
+            if (item.getType().isAir()) return;
             if (playerInventory.firstEmpty() == -1) return;
             if (event.getClickedInventory() == playerInventory) return;
-
-            ItemStack item = event.getCurrentItem();
-            String playerName = player.getName();
 
             HashMap<String, List<ItemStack>> lockerMap = locker.getLockerMap();
             if (lockerMap.get(playerName).size() < 1) return;
@@ -212,7 +223,7 @@ public class InventoryClickEvent implements Listener {
                         return;
                     case 16:
                         player.closeInventory();
-                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " centrum_publiczne"), 1L);
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " wyspa_centralna"), 1L);
                         return;
                     case 21:
                         player.closeInventory();

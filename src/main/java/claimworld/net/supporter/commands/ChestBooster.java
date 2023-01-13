@@ -31,7 +31,7 @@ public class ChestBooster {
                 }
 
                 if (LocalTime.now().getHour() < 12) {
-                    player.sendMessage(getUserPrefix() + "Nie mozesz uzyc tej funkcji w nocy.");
+                    player.sendMessage(getUserPrefix() + "Ta funkcja jest dostepna od 12:00 do 0:00.");
                     return true;
                 }
 

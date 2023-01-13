@@ -24,7 +24,7 @@ public class JoinAnnouncer {
     private final List<Sound> sounds = Collections.singletonList(Sound.ENTITY_PILLAGER_CELEBRATE);
 
     public String getAdminNote() {
-        return "§8Niedlugo pojawi sie nowy system zabezpieczania skrzyn.\n\nBedzie prosty, intuicyjny i rozbudowany o brakujace obecnie funkcje.";
+        return "§8Zwoj Ognia za tydzien, a Kalendarz Logowania nieco pozniej!\n\nNowy system zabezpieczania skrzynek wymaga jeszcze paru usprawnien i poprawek.";
     }
 
     public String getActiveBonuses() {

@@ -3,6 +3,7 @@ package claimworld.net.supporter.events;
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.BonusManager;
 import claimworld.net.supporter.tasks.TaskManager;
+import claimworld.net.supporter.utils.JetpackUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,11 +15,14 @@ public class PlayerDeathEvent implements Listener {
 
     TaskManager taskManager = TaskManager.getInstance();
     BonusManager bonusManager = BonusManager.getInstance();
+    JetpackUtils jetpackUtils = JetpackUtils.getInstance();
 
     @EventHandler
     public void playerDeathEvent(org.bukkit.event.entity.PlayerDeathEvent event) {
         Player player = event.getEntity();
         event.getEntity().getWorld().strikeLightningEffect(player.getLocation());
+
+        jetpackUtils.disableJetpack(player.getName());
 
         assert player.getLastDamageCause() != null;
         EntityDamageEvent.DamageCause damageCause = player.getLastDamageCause().getCause();

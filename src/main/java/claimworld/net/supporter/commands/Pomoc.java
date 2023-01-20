@@ -2,8 +2,6 @@ package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.GeyserUtils;
-import claimworld.net.supporter.utils.GoalUtils;
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -19,7 +17,6 @@ import java.util.List;
 
 public class Pomoc {
 
-    private final GoalUtils goalUtils = new GoalUtils();
     private final GeyserUtils geyserUtils = new GeyserUtils();
     private final List<String> helpMessages = new ArrayList<>();
 
@@ -52,6 +49,7 @@ public class Pomoc {
         helpMessages.add("§8Dodatki / Zmiany\n\n§c+§8 Skrzynie blokuja sie po postawieniu\n§c+§8 Ograniczenie giga maszyn z redstone\n§c+§8 Brodawki wypadaja z piglinow\n§c+§8 Wiekszosc bytow mozna podnosic przy pomocy SHIFT+PPM\n§c+§8 Dodatkowi Handlarze\n§c+§8 System teleportacji");
         helpMessages.add("§8Dodatki / Zmiany\n\n§c+§8 Senat\n§c+§8 Globalne wzmocnienia\n§c+§8 Nieco spawn mobow, inne leje\n§c+§8 Limit bytow na chunk\n§c+§8 Battlepass i system zadan\n§c+§8 Umiejetnosci\n§c+§8Z mobow wypadaja ich glowy");
         helpMessages.add("§8Dodatki / Zmiany\n\n§c+§8 Przedmioty i exp grupuja sie\n§c+§8 Niestandardowe przedmioty\n§c+§8 Wielofunkcyjny Kowal\n§c+§8 Wylaczone dmg fajerwerkow w overworldzie i netherze\n§c+§8 Efekty krwawienia");
+        helpMessages.add("§8Dodatki / Zmiany\n\n§c+§8 50% szans na pogode inna, niz sloneczna\n§c+§8 Podnoszenie barier PPM netherytowa motyka");
         helpMessages.add("§8Senat\n\n§cSenat§8 to organizacja, ktora zajmuje sie obsluga graczy.\n\n§cSiedziba Senatu§8 jest obecnie w przygotowaniu, dlatego jesli czegos potrzebujesz to pisz bezposrednio do Senatora.");
         helpMessages.add("§8Senat\n\n§cSenatorowie§8: kinia_98, _NeKoToJa_, MarJan_Lubi_Kuce, Mr_PogromcA, xCaptain865, rtygta, Chikaraa.\n\nU Senatorow mozecie zakupic nastepujace uslugi:");
         helpMessages.add("§8Senat\n\n§c+§8 Niestandardowe ustawienia dzialki ($16/ustawienie/chunk)\n§c+§8 Zmiane biomu na dzialce ($16/chunk za biom z Overworlda lub $64/chunk za inny biom)\n§c+§8 Nieruchome moby ($16/moba)");
@@ -61,7 +59,7 @@ public class Pomoc {
         helpMessages.add("§8Wybrane Farmy\n\n§c+§8 Blazy [-334 72 -3 Nether]\n§c+§8 Owce [656 -703 Overworld]\n§c+§8 Kaktusy [409 289 Overworld]\n§c+§8 Trzcina [1096 -185 Overworld]\n§c+§8 Wiesniaki [310 -1979 Overworld]\n§c+§8 Jedzenie [3000 -2200 Overworld]");
         helpMessages.add("§8Wybrane Farmy\n\n§c+§8 Proch [-33 64 -1324 Overworld]\n§c+§8 Bruk [3000 -30 -220 Overworld]\n§c+§8 Wiedzmy [2906 -5 -2310 Overworld]\n§c+§8 Wardeny [1458 -43 -1289 Overworld]");
         helpMessages.add("§8Sztandary\n\nZajete §cwzory§8 sztandardow dostepne sa do wgladu w specjalnym miejscu obok spawnu (285x, 432z).\n\nKazdy moze zarezerwowac swoj wzor u Senatora.");
-        helpMessages.add("§8Zakupy W Sklepie\n\n§c+§8 Za osiagniecie progu w sklepie gracze odblokowuja dodatkowe rzeczy.\n\nKolejna nagroda: §c" + goalUtils.getCurrentReward() + "\n\n§8Do celu brakuje: §c" + goalUtils.getMissingAmount() + "zl");
+        helpMessages.add("§8Zakupy W Sklepie\n\n§c+§8 Za osiagniecie progu w sklepie na serwer wprowadzone zostana dodatkowe rzeczy. Wiecej informacji na stronie sklepu.\n\nDodatkowo od niedawna w sklepie mozecie odebrac Skrzynie Smoka za darmo.");
         helpMessages.add("§8Osiagniecia\n\nZa zrealizowanie wszystkich osiagniec Senat moze przydzielic graczowi specjalna §cstatuetke§8.\n\nWystarczy wyslac odpowiednie screeny na Discorda i oznaczyc Senatora.");
         helpMessages.add("§8Skrzynki\n\nZawieraja rozne przedmioty.\n\nNajciekawsze z nich:\n§c+§8 Elytra, Beacon, ShulkerBox, Jetpack (~0.4%)\n§c+§8 Netherytowe Narzedzia (~3%)\n§c+§8 Niestandardowe Przedmioty (~9%)");
         helpMessages.add("§8Aktualizacja Skinow\n\n§c+§8 Serwer dziala w trybie offline i skiny pobierane sa przez system, ktory nie lubi obecnego firewalla.\n\n§c+§8 Jako VIP mozecie sobie zmieniac skina komenda, w tym importowac skorki z adresow url.");

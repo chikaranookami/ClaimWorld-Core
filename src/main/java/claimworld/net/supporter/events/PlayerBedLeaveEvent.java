@@ -20,6 +20,7 @@ public class PlayerBedLeaveEvent implements Listener {
     @EventHandler
     public void playerBedLeaveEvent(org.bukkit.event.player.PlayerBedLeaveEvent event) {
         Player player = event.getPlayer();
+
         if (player.getWorld().getTime() != 0) return;
         if (delayedPlayers.contains(player)) return;
 

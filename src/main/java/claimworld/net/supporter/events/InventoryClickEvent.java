@@ -236,6 +236,7 @@ public class InventoryClickEvent implements Listener {
                     case 23:
                         player.closeInventory();
                         getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " monopoly"), 1L);
+                        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("singleTeleportYourself")));
                         return;
                     case 24:
                         player.closeInventory();

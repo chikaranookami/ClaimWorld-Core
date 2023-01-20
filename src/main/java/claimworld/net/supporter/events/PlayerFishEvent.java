@@ -1,7 +1,6 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
-import claimworld.net.supporter.utils.GoalUtils;
 import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -14,20 +13,26 @@ import static org.bukkit.Bukkit.getScheduler;
 public class PlayerFishEvent implements Listener {
 
     TaskManager taskManager = TaskManager.getInstance();
-    GoalUtils goalUtils = new GoalUtils();
 
     @EventHandler
     public void playerFishEvent(org.bukkit.event.player.PlayerFishEvent event) {
-        if (goalUtils.getShorterFishing()) event.getHook().setMaxWaitTime(500);
+        Entity entity = event.getCaught();
+        if (entity == null) return;
+
+        event.getHook().setMaxWaitTime(500);
 
         if (!event.getHook().isInOpenWater()) return;
         if (event.getState() != org.bukkit.event.player.PlayerFishEvent.State.CAUGHT_FISH) return;
 
-        Entity entity = event.getCaught();
-        assert entity != null;
+        Material material = ((Item) entity).getItemStack().getType();
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+            if (material == Material.BOW) {
+                taskManager.tryFinishTask(event.getPlayer(), taskManager.getTaskMap().get("fishOutBow"));
+                return;
+            }
 
-        if (!(((Item) entity).getItemStack().getType() == Material.STICK)) return;
-
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(event.getPlayer(), taskManager.getTaskMap().get("fishOutStick")));
+            if (!(material == Material.STICK)) return;
+            taskManager.tryFinishTask(event.getPlayer(), taskManager.getTaskMap().get("fishOutStick"));
+        });
     }
 }

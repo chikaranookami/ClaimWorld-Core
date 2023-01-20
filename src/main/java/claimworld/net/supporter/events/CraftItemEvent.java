@@ -15,7 +15,13 @@ public class CraftItemEvent implements Listener {
 
     @EventHandler
     public void craftItemEvent(org.bukkit.event.inventory.CraftItemEvent event) {
-        if (event.getRecipe().getResult().getType() != Material.BEACON) return;
+        Material material = event.getRecipe().getResult().getType();
+        if (material == Material.GRINDSTONE) {
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask((Player) event.getWhoClicked(), taskManager.getTaskMap().get("craftGrindstone")));
+            return;
+        }
+
+        if (material != Material.BEACON) return;
 
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask((Player) event.getWhoClicked(), taskManager.getTaskMap().get("craftBeacon")));
     }

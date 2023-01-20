@@ -24,14 +24,14 @@ public class JoinAnnouncer {
     private final List<Sound> sounds = Collections.singletonList(Sound.ENTITY_PILLAGER_CELEBRATE);
 
     public String getAdminNote() {
-        return "§8Zwoj Ognia za tydzien, a Kalendarz Logowania nieco pozniej!\n\nNowy system zabezpieczania skrzynek wymaga jeszcze paru usprawnien i poprawek.";
+        return "§8Za tydzien nowy system zabezpieczania skrzynek! <3";
     }
 
     public String getActiveBonuses() {
         List<String> keys = new ArrayList<>();
 
         for (Map.Entry<String, Boolean> entry : BonusManager.getInstance().getBonuses().entrySet()) {
-            if (entry.getValue()) keys.add("§c-§8" + entry.getKey() + "\n");
+            if (entry.getValue()) keys.add("\n§c-§8" + entry.getKey());
         }
 
         return String.join(" ", keys);
@@ -51,7 +51,7 @@ public class JoinAnnouncer {
         bookMeta.spigot().addPage(TaskManager.getInstance().getActiveTaskComponent());
 
         pageComponent = new ComponentBuilder()
-                .append("§cAktywne Bonusy\n")
+                .append("§cAktywne Bonusy")
                 .append(getActiveBonuses())
                 .create();
         bookMeta.spigot().addPage(pageComponent);

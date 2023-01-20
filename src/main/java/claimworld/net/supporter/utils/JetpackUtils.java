@@ -2,6 +2,7 @@ package claimworld.net.supporter.utils;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.items.ReadyItems;
+import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,6 +19,7 @@ import static org.bukkit.Bukkit.getScheduler;
 public class JetpackUtils {
 
     ReadyItems readyItems = ReadyItems.getInstance();
+    TaskManager taskManager = TaskManager.getInstance();
 
     private static JetpackUtils instance = null;
 
@@ -115,6 +117,11 @@ public class JetpackUtils {
             delayedPlayers.add(playerName);
             playersUsingJetpack.add(playerName);
             getScheduler().runTask(Supporter.getPlugin(), () -> use(playerName));
+
+            Player player = Bukkit.getPlayer(playerName);
+            if (player == null) return;
+
+            taskManager.tryFinishTask(player, taskManager.getTaskMap().get("useFireScroll"));
         });
     }
 }

@@ -28,8 +28,8 @@ public class EntityDeathEvent implements Listener {
 
         Map<String, Task> taskMap = taskManager.getTaskMap();
 
-        if (entity instanceof Monster) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("killSomeMobs")));
+        if (entityType == EntityType.CREEPER) {
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("killCreepers")));
         }
 
         if (entityType == EntityType.CAT) {

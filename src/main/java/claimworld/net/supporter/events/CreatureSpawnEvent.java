@@ -90,6 +90,7 @@ public class CreatureSpawnEvent implements Listener {
             ItemStack sharpnessBook = readyItems.get("Ksiazka_sharpness6");
             ItemStack looting4 = readyItems.get("Ksiazka_looting4");
             ItemStack thorns5 = readyItems.get("Ksiazka_thorns5");
+            ItemStack zwojOgnia = readyItems.get("Zwoj_ognia");
             //ItemStack halloweenowaZupa = readyItems.get("Halloweenowa zupa");
 
             //Fantomowy Handlarz
@@ -98,6 +99,7 @@ public class CreatureSpawnEvent implements Listener {
             updatedRecipes.add(getCustomRecipe(glowa2, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
             if (random > 1) {
                 updatedRecipes.add(getCustomRecipe(bilet, 2, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
+                updatedRecipes.add(getCustomRecipe(zwojOgnia, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
                 updatedRecipes.add(getCustomRecipe(dolarek, 4, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
             }
             if (random > 4) {

@@ -1,8 +1,6 @@
 package claimworld.net.supporter.commands;
 
 import claimworld.net.supporter.utils.CommandBase;
-import claimworld.net.supporter.utils.GeyserUtils;
-import claimworld.net.supporter.utils.GoalUtils;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

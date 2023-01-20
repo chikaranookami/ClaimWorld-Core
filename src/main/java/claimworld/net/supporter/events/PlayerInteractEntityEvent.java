@@ -1,6 +1,7 @@
 package claimworld.net.supporter.events;
 
 import claimworld.net.supporter.Supporter;
+import claimworld.net.supporter.items.ReadyItems;
 import claimworld.net.supporter.utils.BonusManager;
 import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.*;
@@ -10,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
@@ -23,6 +25,7 @@ public class PlayerInteractEntityEvent implements Listener {
 
     TaskManager taskManager = TaskManager.getInstance();
     BonusManager bonusManager = BonusManager.getInstance();
+    ReadyItems readyItems = ReadyItems.getInstance();
 
     private final List<EntityType> entityTypes = Arrays.asList(EntityType.COW, EntityType.SHEEP, EntityType.PIG, EntityType.CHICKEN);
     private final List<EntityType> blockedEntityTypes = Arrays.asList(EntityType.ENDER_DRAGON, EntityType.ENDER_CRYSTAL);
@@ -53,31 +56,60 @@ public class PlayerInteractEntityEvent implements Listener {
         }, 10L);
     }
 
+    private void useFireScroll(Entity entity) {
+        entity.getWorld().spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, entity.getLocation().add(1, 0, 1), 5, 0.1, 0.1, 0.1, 0.1);
+
+        getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> new BukkitRunnable() {
+            int i = 0;
+
+            @Override
+            public void run() {
+                if (i >= 60) {
+                    cancel();
+                    return;
+                }
+
+                entity.setFireTicks(20);
+                i++;
+            }
+        }.runTaskTimer(Supporter.getPlugin(), 0, 5L), 5L);
+    }
+
     @EventHandler
     public void playerInteractEntityEvent(org.bukkit.event.player.PlayerInteractEntityEvent event) {
         if (!event.getHand().equals(EquipmentSlot.HAND)) return;
 
         Player player = event.getPlayer();
+        ItemStack item = player.getInventory().getItemInMainHand();
 
-        if (!entityTypes.contains(event.getRightClicked().getType())) {
-            if (!bonusManager.getBonuses().get("Podnoszenie+")) return;
-            if (blockedEntityTypes.contains(event.getRightClicked().getType())) return;
-            if (fixedEntityTypes.contains(event.getRightClicked().getType())) return;
-            if (!event.getRightClicked().hasGravity()) return;
+        if (item.getType().isAir()) return;
+
+        Entity entity = event.getRightClicked();
+
+        if (item.isSimilar(readyItems.get("Zwoj_ognia"))) {
+            item.setAmount(item.getAmount() - 1);
+            useFireScroll(entity);
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("useFireScroll")));
+            return;
         }
 
-        if (!player.getInventory().getItemInMainHand().getType().isAir()) return;
+        EntityType entityType = event.getRightClicked().getType();
+
+        if (!entityTypes.contains(entityType)) {
+            if (!bonusManager.getBonuses().get("Podnoszenie+")) return;
+            if (blockedEntityTypes.contains(entityType)) return;
+            if (fixedEntityTypes.contains(entityType)) return;
+            if (!entity.hasGravity()) return;
+        }
+
         if (delayedPlayers.contains(player)) return;
 
         if (player.isSneaking()) {
-            EntityType entityType = event.getRightClicked().getType();
             if (entityType == EntityType.HORSE) event.setCancelled(true);
             if (entityType == EntityType.SKELETON_HORSE) event.setCancelled(true);
             if (entityType == EntityType.ZOMBIE_HORSE) event.setCancelled(true);
 
             if (player.getPassengers().isEmpty()) {
-                Entity entity = event.getRightClicked();
-
                 player.addPassenger(entity);
                 player.playSound(player, Sound.ITEM_ARMOR_EQUIP_ELYTRA, 0.7f, 1.0f);
 
@@ -91,8 +123,8 @@ public class PlayerInteractEntityEvent implements Listener {
 
             Vector direction = player.getLocation().getDirection();
 
-            for (Entity entity : player.getPassengers()) {
-                player.removePassenger(entity);
+            for (Entity passenger : player.getPassengers()) {
+                player.removePassenger(passenger);
                 player.playSound(player, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 0.5f, 1.0f);
 
                 int force = new Random().nextInt(15);
@@ -105,12 +137,12 @@ public class PlayerInteractEntityEvent implements Listener {
                 }
                 if (bonusManager.getBonuses().get("Rzucanie+")) number++;
 
-                entity.setVelocity(direction.multiply(number));
+                passenger.setVelocity(direction.multiply(number));
 
                 delayedPlayers.add(player);
                 removeDelayedPlayer(player);
 
-                showParticles(entity);
+                showParticles(passenger);
             }
 
             return;
@@ -118,8 +150,8 @@ public class PlayerInteractEntityEvent implements Listener {
 
         if (player.getPassengers().isEmpty()) return;
 
-        for (Entity entity : player.getPassengers()) {
-            player.removePassenger(entity);
+        for (Entity passenger : player.getPassengers()) {
+            player.removePassenger(passenger);
             player.playSound(player, Sound.ITEM_ARMOR_EQUIP_ELYTRA, 0.7f, 1.0f);
 
             delayedPlayers.add(player);

@@ -39,7 +39,7 @@ public class Kowal {
     private final GeyserUtils geyserUtils = new GeyserUtils();
 
     //stary spawn
-    private final Location kowalLocation = new Location(Bukkit.getWorld("1"), 264, 63, 405).add(0, 2, 0);
+    private final Location kowalLocation = new Location(Bukkit.getWorld("1"), -782, 49, -731).add(0, 2, 0);
 
     private final String kowalDescription = "Ulepsza / podwaja Twoje przedmioty - ma na to 50% szans.\nJesli mu sie nie uda, Twoje przedmioty zostana zniszczone.";
     private final String upgradeTutorial = "Wez do glownej reki przedmiot, ktory chcesz ulepszyc, a do drugiej wybrane ulepszenie.";

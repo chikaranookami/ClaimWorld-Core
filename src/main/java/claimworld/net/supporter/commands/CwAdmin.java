@@ -71,16 +71,6 @@ public class CwAdmin {
                     return true;
                 }
 
-                /*
-                if (action.equals("playGhastScream")) {
-                    getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
-                        renderGhastScream();
-                    }, 10L);
-                    sender.sendMessage("ghast scream has been played");
-                    return true;
-                }
-                 */
-
                 if (action.equals("giveCustomItems")) {
                     Location location = player.getLocation();
 
@@ -89,6 +79,9 @@ public class CwAdmin {
                         Item item = location.getWorld().dropItem(location, itemStack);
                         item.setOwner(player.getUniqueId());
                     }
+
+                    Item kosa = location.getWorld().dropItem(location, readyItems.getKosaNaMoby());
+                    kosa.setOwner(player.getUniqueId());
 
                     return true;
                 }

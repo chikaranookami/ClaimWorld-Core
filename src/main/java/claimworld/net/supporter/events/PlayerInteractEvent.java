@@ -9,17 +9,11 @@ import claimworld.net.supporter.utils.JetpackUtils;
 import claimworld.net.supporter.utils.PrivateChestsUtils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.block.TileState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.Damageable;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,8 +68,24 @@ public class PlayerInteractEvent implements Listener {
             event.setCancelled(true);
             return;
         }
+        
+        if (item == null) return;
 
+        Block block = event.getClickedBlock();
+        if (block == null) return;
+
+        Material blockType = block.getType();
         Player player = event.getPlayer();
+        Material itemType = item.getType();
+        Location location = block.getLocation();
+        
+        if (blockType == Material.BARRIER) {
+            if (itemType != Material.NETHERITE_HOE) return;
+            block.setType(Material.AIR);
+            player.getWorld().dropItemNaturally(location, new ItemStack(Material.BARRIER));
+            return;
+        }
+
         /*
         if (block != null && block.getType() == Material.CHEST) {
             if (!(block.getState() instanceof TileState)) return;
@@ -89,12 +99,9 @@ public class PlayerInteractEvent implements Listener {
         }
          */
 
-        if (item == null) return;
-
         Map<String, Task> taskMap = taskManager.getTaskMap();
 
         if (item.equals(readyItems.get("Skrzynia_smoka"))) {
-            //order not gonna work? didn't check that
             event.setCancelled(true);
             useChest(player, item, taskMap);
             return;
@@ -102,21 +109,20 @@ public class PlayerInteractEvent implements Listener {
 
         if (!allowedSpawnEggs.contains(event.getMaterial())) return;
         if (event.getClickedBlock().getLocation().distance(player.getLocation()) > 10) return;
-
-        Material itemType = item.getType();
+        
         if (itemType == Material.WITCH_SPAWN_EGG) {
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("spawnWitch")));
             return;
         }
 
-        if (event.getClickedBlock().getType() != Material.SPAWNER) return;
+        if (blockType != Material.SPAWNER) return;
+
         if (!skillManager.canActivateSkill(player, "Twoj spawner")) {
             event.setCancelled(true);
             return;
         }
-
-        Block block = event.getClickedBlock();
-        if (block != null) skillManager.renderSkillEffect(block.getLocation());
+        
+        skillManager.renderSkillEffect(location);
         getScheduler().runTaskLater(Supporter.getPlugin(), () -> player.getInventory().getItemInMainHand().setAmount(item.getAmount() - 1), 1L);
 
         if (itemType == Material.ZOMBIE_SPAWN_EGG) {

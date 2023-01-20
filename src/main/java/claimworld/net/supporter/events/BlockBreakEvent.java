@@ -72,6 +72,13 @@ public class BlockBreakEvent implements Listener {
 
             Map<String, Task> taskMap = taskManager.getTaskMap();
 
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("breakAnything")));
+
+            if (material == Material.ANCIENT_DEBRIS) {
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("breakDebris")));
+                return;
+            }
+
             if (material == Material.DEEPSLATE_EMERALD_ORE || material == Material.EMERALD_ORE) {
                 getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("breakEmeralds")));
                 return;

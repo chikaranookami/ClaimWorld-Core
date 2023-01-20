@@ -3,8 +3,6 @@ package claimworld.net.supporter;
 import claimworld.net.supporter.commands.*;
 import claimworld.net.supporter.events.*;
 import claimworld.net.supporter.timers.AutoMessageTimer;
-import claimworld.net.supporter.commands.Goal;
-import claimworld.net.supporter.timers.RamMangerTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
@@ -63,6 +61,10 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new ServerListPingEvent(), this);
         pluginManager.registerEvents(new PlayerSwapHandItemsEvent(), this);
         pluginManager.registerEvents(new PrepareAnvilEvent(), this);
+        pluginManager.registerEvents(new WeatherChangeEvent(), this);
+        pluginManager.registerEvents(new PlayerTakeLecternBookEvent(), this);
+        pluginManager.registerEvents(new PlayerRiptideEvent(), this);
+        pluginManager.registerEvents(new PlayerShearEntityEvent(), this);
         //pluginManager.registerEvents(new BlockPlaceEvent(), this);
 
         //commands
@@ -88,14 +90,13 @@ public final class Supporter extends JavaPlugin implements Listener {
         new DajPunkty();
         new Fw();
         new ShopAnnouncement();
-        new Goal();
         new FillUpWarehouse();
         new OpenChest();
         new BuyChests();
         new GlobalFreeChest();
+        new KalendarzLogowania();
 
         //systems
-        new RamMangerTimer();
         new AutoMessageTimer();
 
         //others

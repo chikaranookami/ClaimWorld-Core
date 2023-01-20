@@ -136,22 +136,22 @@ public class TaskManager {
     public TaskManager() {
         //first set
         taskMap.put("useChorus", new Task("Przemiesc sie o 200 metrow chorusem.", "", 0));
-        taskMap.put("placeInvisibleFrame", new Task("Powies 2 niewidzialne ramki.", "counter", 2));
-        taskMap.put("destroyNetheriteSword", new Task("Zuzyj netherytowy miecz.", "", 0));
+        taskMap.put("placeInvisibleFrame", new Task("Powies niewidzialna ramke.", "", 0));
+        taskMap.put("destroyNetheriteSword", new Task("Zuzyj kamienny miecz.", "", 0));
         taskMap.put("fishOutStick", new Task("Wylow patyk.", "", 0));
         taskMap.put("killWarden", new Task("Pokonaj Wardena.", "", 0));
         taskMap.put("craftBeacon", new Task("Zrob beacona.", "", 0));
         taskMap.put("doShit", new Task("Zrob kupe.", "", 0));
         taskMap.put("winRaid", new Task("Wygraj raida.", "", 0));
-        taskMap.put("doubleItemAtBlacksmith", new Task("Podwoj przedmiot u kowala.", "", 0));
+        taskMap.put("doubleItemAtBlacksmith", new Task("Podwoj 2 przedmioty u kowala.", "counter", 2));
         taskMap.put("setSpawnerToZombie", new Task("Ustaw zombie w spawnerze.", "", 0));
         taskMap.put("spawnWitch", new Task("Zresp wiedzme jajkiem.", "", 0));
         taskMap.put("sleepThruNights", new Task("Przespij 3 noce.", "counter", 3));
         taskMap.put("obtainNetherWarts", new Task("Dropnij 32 brodawki z piglinow.", "counter", 32));
         taskMap.put("breakEmeralds", new Task("Rozkop 4 emeraldy.", "counter", 4));
-        taskMap.put("breakDiamonds", new Task("Rozkop pol stacka diaxow.", "counter", 32));
-        taskMap.put("killIronGolems", new Task("Zabij 24 zelazne golemy.", "counter", 24));
-        taskMap.put("killSomeMobs", new Task("Zabij 150 dowolnych potworow.", "counter", 150));
+        taskMap.put("breakDiamonds", new Task("Rozkop 16 diaxow.", "counter", 16));
+        taskMap.put("killIronGolems", new Task("Zabij 20 zelaznych golemow.", "counter", 20));
+        taskMap.put("killCreepers", new Task("Zabij 30 creeperow.", "counter", 30));
 
         //second set
         taskMap.put("killDragon", new Task("Pokonaj Smoka.", "", 0));
@@ -162,32 +162,42 @@ public class TaskManager {
         taskMap.put("listenToBossbar", new Task("Wysluchaj serwerowych ogloszen.", "", 0));
         taskMap.put("transformZombieToVillager", new Task("Badz blisko nowego wiesniaka z przemienienia.", "", 0));
         taskMap.put("stayCloseToSomeNewEndermite", new Task("Badz blisko nowego endermita z ender perly.", "", 0));
-        taskMap.put("destroyItemsAtBlacksmith", new Task("Spal u kowala 3 przedmioty.", "counter", 3));
+        taskMap.put("destroyItemsAtBlacksmith", new Task("Spal u kowala 2 przedmioty.", "counter", 2));
         taskMap.put("throwNumberUsingDice", new Task("Wyrzuc 6 razy liczbe 12 na kostce.", "counter", 6));
-        taskMap.put("eatSuspiciousStew", new Task("Zjedz 6 podejrzanych potrawek.", "counter", 6));
-        taskMap.put("getHitByAnything", new Task("Oberwij od 40 razy.", "counter", 40));
+        taskMap.put("eatSuspiciousStew", new Task("Zjedz 5 podejrzanych potrawek.", "counter", 5));
+        taskMap.put("getHitByAnything", new Task("Oberwij 40 razy.", "counter", 40));
 
         //third set
         taskMap.put("beOnlineWhenTraderSpawns", new Task("Badz online, gdy pojawi sie handlarz.", "", 0));
         taskMap.put("destroyDiamondPickaxe", new Task("Zuzyj diamentowy kilof.", "", 0));
         taskMap.put("doSmallShit", new Task("Popusc odrobine.", "", 0));
         taskMap.put("openDragonChest", new Task("Otworz Skrzynie Smoka.", "", 0));
-        taskMap.put("useActiveTeleporter", new Task("Uzyj aktywnego Teleportera.", "", 0));
 
         //fifth set
         taskMap.put("pickupCreeper", new Task("Podnies Creepera.", "", 0));
         taskMap.put("upgradeItemAtBlacksmith", new Task("Ulepsz przedmiot u kowala.", "", 0));
-        taskMap.put("pressTrader", new Task("Zaznacz oferte u dowolnego wiesniaka / handlarza.", "", 0));
         taskMap.put("writeHeartOnSign", new Task("Postaw \"serduszko\" w pierwszej linijce dowolnej tabliczki.", "", 0));
 
-        //sixth set (not ready)
-        taskMap.put("dieDueToFire", new Task("Splon zywcem.", "", 0));
-        taskMap.put("killCats", new Task("Zabij 4 koty.", "counter", 4));
-        taskMap.put("checkSeaLevel", new Task("Sprawdz poziom morza.", "", 0));
-        taskMap.put("writeZagadka", new Task("Napisz zagadke na czacie.", "", 0));
-        taskMap.put("teleportYourself", new Task("Przeteleportuj sie w dowolne miejsce.", "", 0));
+        //sixth set
+        taskMap.put("dieDueToFire", new Task("Splon zywcem dwukrotnie.", "counter", 2));
+        taskMap.put("killCats", new Task("Zabij 6 kotow.", "counter", 4));
+        taskMap.put("teleportYourself", new Task("Przeteleportuj sie 10 razy.", "counter", 10));
         taskMap.put("eatRottenFlashes", new Task("Zjedz 32 sztuki zgnilego miesa.", "counter", 32));
-        taskMap.put("beOnlineWhenPlayerBuysFromShop", new Task("Badz online, gdy ktos kupi cos ze sklepu (Chikaraa chetnie rozda voucher!).", "", 0));
+        taskMap.put("beOnlineWhenPlayerBuysFromShop", new Task("Badz online, gdy ktos zrealizuje dzienny cel w sklepie (Chikaraa chetnie rozda voucher!).", "", 0));
+
+        //seventh set
+        taskMap.put("singleTeleportYourself", new Task("Przeteleportuj sie na Monopoly.", "", 0));
+        taskMap.put("placeReinforcedDeepslate", new Task("Postaw zbrojony lupek.", "", 0));
+        taskMap.put("fishOutBow", new Task("Wylow luk.", "", 0));
+        taskMap.put("useJetpack", new Task("Uzyj Jetpacka.", "", 0));
+        taskMap.put("useFireScroll", new Task("Uzyj Zwoju Ognia.", "", 0));
+        taskMap.put("craftGrindstone", new Task("Stworz Kamien Szlifierski.", "", 0));
+        taskMap.put("takeBookFromLectern", new Task("Zabierz ksiazke z mownicy (a pozniej ja odloz).", "", 0));
+        taskMap.put("riptideYourself", new Task("Wytorpeduj sie trojzebem 10 razy.", "counter", 10));
+        taskMap.put("shearSomething", new Task("Ogol wlasnorecznie 10 owieczek.", "counter", 10));
+        taskMap.put("breakDebris", new Task("Rozkop pradawne zgliszcza.", "", 0));
+        taskMap.put("placeAnything", new Task("Postaw lacznie 300 blokow.", "", 300));
+        taskMap.put("breakAnything", new Task("Zniszcz lacznie 300 blokow.", "", 300));
 
         //prepare list of tasks
         for (Map.Entry<String, Task> entry : taskMap.entrySet()) taskList.add(entry.getValue());

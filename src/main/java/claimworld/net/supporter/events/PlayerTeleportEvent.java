@@ -33,7 +33,7 @@ public class PlayerTeleportEvent implements Listener {
         assert to != null;
 
         if (teleportCause == org.bukkit.event.player.PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT) {
-            if (to.distance(event.getFrom()) < 100) return;
+            if (to.distance(event.getFrom()) < 200) return;
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("useChorus")));
             return;
         }

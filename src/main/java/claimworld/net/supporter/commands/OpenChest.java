@@ -321,6 +321,7 @@ public class OpenChest {
             randomItems.add(new ItemStack(Material.SANDSTONE, baseAmount * i));
         }
 
+        randomItems.add(new ItemStack(Material.BARRIER));
         randomItems.add(new ItemStack(Material.NETHERITE_AXE));
         randomItems.add(new ItemStack(Material.NETHERITE_PICKAXE));
         randomItems.add(new ItemStack(Material.NETHERITE_SHOVEL));
@@ -335,6 +336,7 @@ public class OpenChest {
         randomItems.add(new ItemStack(Material.SADDLE));
         randomItems.add(new ItemStack(Material.REINFORCED_DEEPSLATE));
 
+        rareMaterials.add(Material.BARRIER);
         rareMaterials.add(Material.ELYTRA);
         rareMaterials.add(Material.BEACON);
         rareMaterials.add(Material.ENDER_CHEST);

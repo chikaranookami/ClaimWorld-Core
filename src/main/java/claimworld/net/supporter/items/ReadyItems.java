@@ -63,7 +63,7 @@ public class ReadyItems {
     }
 
     public ItemStack getKosaNaMoby() {
-        return new CustomItem("&aK&bo&cs&da &eN&fa &aM&bo&cb&dy", Material.NETHERITE_HOE, 1, Collections.singletonList(colorize(getLore("custom"))), 15, Arrays.asList(Enchantment.DAMAGE_UNDEAD, Enchantment.DAMAGE_ARTHROPODS, Enchantment.DURABILITY, Enchantment.LOOT_BONUS_MOBS, Enchantment.MENDING), Arrays.asList(20, 20, 5, 5, 1)).getItem();
+        return new CustomItem("&aK&bo&cs&da &eN&ea &aM&bo&cb&dy", Material.NETHERITE_HOE, 1, Collections.singletonList(colorize(getLore("custom"))), 15, Arrays.asList(Enchantment.DAMAGE_UNDEAD, Enchantment.DAMAGE_ARTHROPODS, Enchantment.DURABILITY, Enchantment.LOOT_BONUS_MOBS, Enchantment.MENDING), Arrays.asList(20, 20, 5, 5, 1)).getItem();
     }
 
     public ReadyItems() {
@@ -79,20 +79,21 @@ public class ReadyItems {
 
         itemMap.put("Niewidzialna_ramka", new CustomItem("&aNiewidzialna ramka", Material.ITEM_FRAME, Arrays.asList(colorize(getLore("uncommon")), "", colorize(getLore("oneTimeUse")))));
 
-        itemMap.put("Ksiazka_unbreaking4", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.DURABILITY, 4));
-        itemMap.put("Ksiazka_protection5", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.PROTECTION_ENVIRONMENTAL, 5));
-        itemMap.put("Ksiazka_fortune4", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.LOOT_BONUS_BLOCKS, 4));
-        itemMap.put("Ksiazka_sharpness6", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.DAMAGE_ALL, 6));
-        itemMap.put("Ksiazka_swiftsneak4", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.SWIFT_SNEAK, 4));
-        itemMap.put("Ksiazka_looting4", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.LOOT_BONUS_MOBS, 4));
-        itemMap.put("Ksiazka_thorns5", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.THORNS, 5));
-        itemMap.put("Ksiazka_power6", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.ARROW_DAMAGE, 6));
-        itemMap.put("Ksiazka_fireaspect3", new CustomItem("", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.FIRE_ASPECT, 3));
+        itemMap.put("Ksiazka_unbreaking4", new CustomItem("Niezniszczalnosc IV", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.DURABILITY, 4));
+        itemMap.put("Ksiazka_protection5", new CustomItem("Ochrona V", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.PROTECTION_ENVIRONMENTAL, 5));
+        itemMap.put("Ksiazka_fortune4", new CustomItem("Szczescie IV", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.LOOT_BONUS_BLOCKS, 4));
+        itemMap.put("Ksiazka_sharpness6", new CustomItem("Ostrosc VI", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.DAMAGE_ALL, 6));
+        itemMap.put("Ksiazka_swiftsneak4", new CustomItem("Szybkie skradanie IV", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.SWIFT_SNEAK, 4));
+        itemMap.put("Ksiazka_looting4", new CustomItem("Grabiez IV", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.LOOT_BONUS_MOBS, 4));
+        itemMap.put("Ksiazka_thorns5", new CustomItem("Ciernie V", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.THORNS, 5));
+        itemMap.put("Ksiazka_power6", new CustomItem("Moc VI", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.ARROW_DAMAGE, 6));
+        itemMap.put("Ksiazka_fireaspect3", new CustomItem("Zaklety ogien III", Material.ENCHANTED_BOOK, 1, Collections.singletonList(colorize(getLore("rare"))), 0, Enchantment.FIRE_ASPECT, 3));
 
         itemMap.put("Jetpack", new CustomItem("&e&lJetpack", Material.CHAINMAIL_CHESTPLATE, 1, Collections.singletonList(colorize(getLore("legendary"))), 0, Enchantment.MENDING, 1));
         itemMap.put("Skrzynia_smoka", new CustomItem("&cSkrzynia Smoka", Material.CHEST_MINECART, Collections.singletonList(colorize(getLore("unique"))), 0));
         itemMap.put("Kupa", new CustomItem("&fKupa", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("common"))), 11));
         itemMap.put("$1", new CustomItem("&a$1", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("uncommon"))), 10));
         itemMap.put("Uniwersalny_bilet", new CustomItem("&fUniwersalny Bilet", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("common"))), 12));
+        itemMap.put("Zwoj_ognia", new CustomItem("&cZwoj ognia", Material.PAPER, Arrays.asList(colorize(getLore("unique")), colorize(""), colorize("&7&oWskazana osoba plonie"), colorize("&7&oprzez 15 sekund i nie"), colorize("&7&omozna jej ugasic.")), 0));
     }
 }

@@ -119,7 +119,7 @@ public class BattlePassManager {
                 List<ItemStack> items = new ArrayList<>();
                 items.add(readyItems.get("Skrzynia_smoka"));
 
-                new WarehouseUtils().addItemsSingle(player, items);
+                new WarehouseUtils().addItemsSingle(player.getName(), items);
 
                 attributesManager.tryUpdateStats(player);
             }, 10L);

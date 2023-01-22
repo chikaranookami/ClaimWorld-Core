@@ -62,6 +62,8 @@ public class BlockBreakEvent implements Listener {
             return;
         }
          */
+        Map<String, Task> taskMap = taskManager.getTaskMap();
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("breakAnything")));
 
         if (event.getExpToDrop() > 0 ) {
             if (bonusManager.getBonuses().get("DoubleXP")) {
@@ -69,10 +71,6 @@ public class BlockBreakEvent implements Listener {
             }
 
             if (player.getInventory().getItemInMainHand().getEnchantmentLevel(Enchantment.SILK_TOUCH) != 0) return;
-
-            Map<String, Task> taskMap = taskManager.getTaskMap();
-
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("breakAnything")));
 
             if (material == Material.ANCIENT_DEBRIS) {
                 getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("breakDebris")));

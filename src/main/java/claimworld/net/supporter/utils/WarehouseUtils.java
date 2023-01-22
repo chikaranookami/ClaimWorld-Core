@@ -2,6 +2,7 @@ package claimworld.net.supporter.utils;
 
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.items.Locker;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -19,21 +20,22 @@ public class WarehouseUtils {
 
     public void addItemsGlobal(List<ItemStack> items) {
         for (Player player : getOnlinePlayers()) {
-            addItemsSingle(player, items);
+            addItemsSingle(player.getName(), items);
         }
     }
 
-    public void addItemsSingle(Player player, List<ItemStack> items) {
-        addItemsSingle(player, items, false);
+    public void addItemsSingle(String playerName, List<ItemStack> items) {
+        addItemsSingle(playerName, items, false);
     }
 
-    public void addItemsSingle(Player player, List<ItemStack> items, boolean silent) {
-        tryCloseInventory(player);
-
-        if (!silent) player.sendMessage(MessageUtils.getUserPrefix() + "Otrzymales przedmiot. Wez go ze skrytki zanim zniknie!");
+    public void addItemsSingle(String playerName, List<ItemStack> items, boolean silent) {
+        Player player = Bukkit.getPlayer(playerName);
+        if (player != null) {
+            tryCloseInventory(player);
+            if (!silent) player.sendMessage(MessageUtils.getUserPrefix() + "Otrzymales przedmiot. Wez go ze skrytki zanim zniknie!");
+        }
 
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            String playerName = player.getName();
             List<ItemStack> fixedItems = new ArrayList<>(items);
             HashMap<String, List<ItemStack>> itemMap = Locker.getInstance().getLockerMap();
 

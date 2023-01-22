@@ -196,8 +196,8 @@ public class TaskManager {
         taskMap.put("riptideYourself", new Task("Wytorpeduj sie trojzebem 10 razy.", "counter", 10));
         taskMap.put("shearSomething", new Task("Ogol wlasnorecznie 10 owieczek.", "counter", 10));
         taskMap.put("breakDebris", new Task("Rozkop pradawne zgliszcza.", "", 0));
-        taskMap.put("placeAnything", new Task("Postaw lacznie 300 blokow.", "", 300));
-        taskMap.put("breakAnything", new Task("Zniszcz lacznie 300 blokow.", "", 300));
+        taskMap.put("placeAnything", new Task("Postaw lacznie 300 blokow.", "counter", 300));
+        taskMap.put("breakAnything", new Task("Zniszcz lacznie 300 blokow.", "counter", 300));
 
         //prepare list of tasks
         for (Map.Entry<String, Task> entry : taskMap.entrySet()) taskList.add(entry.getValue());

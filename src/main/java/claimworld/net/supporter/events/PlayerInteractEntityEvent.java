@@ -82,11 +82,10 @@ public class PlayerInteractEntityEvent implements Listener {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
 
-        if (item.getType().isAir()) return;
-
         Entity entity = event.getRightClicked();
 
         if (item.isSimilar(readyItems.get("Zwoj_ognia"))) {
+            if (item.getType().isAir()) return;
             item.setAmount(item.getAmount() - 1);
             useFireScroll(entity);
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("useFireScroll")));

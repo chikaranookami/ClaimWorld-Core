@@ -17,7 +17,7 @@ public class AutoMessageTimer {
         getServer().getConsoleSender().sendMessage("Przygotowywanie bossbarow...");
 
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () ->{
-            org.bukkit.boss.BossBar vipBossbar = Bukkit.createBossBar(colorize("Podoba Ci sie projekt? Chcesz, by sie rozwijal? Kup &c/vip&f"), BarColor.RED, BarStyle.SOLID);
+            org.bukkit.boss.BossBar vipBossbar = Bukkit.createBossBar(colorize("Podoba Ci sie &cprojekt&f? Chcesz, by sie rozwijal? Kup &c/vip&f"), BarColor.RED, BarStyle.SOLID);
             org.bukkit.boss.BossBar shopGoalBossbar = Bukkit.createBossBar(colorize("&eDarmowe Skrzynie Smoka&f juz na &eShop.ClaimWorld.net"), BarColor.YELLOW, BarStyle.SOLID);
             ActiveBossBar activeBossBar = new ActiveBossBar();
 

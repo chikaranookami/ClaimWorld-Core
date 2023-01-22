@@ -35,9 +35,10 @@ public class GlobalUtils {
     }
 
     public void addFreeChest(Player player) {
-        playersWithFreeChest.add(player.getName());
-        new WarehouseUtils().addItemsSingle(player, items);
+        String playerName = player.getName();
+        playersWithFreeChest.add(playerName);
+        new WarehouseUtils().addItemsSingle(playerName, items);
 
-        getLogger().log(Level.INFO, "2x free chest has been added to inventory of " + player.getDisplayName());
+        getLogger().log(Level.INFO, "2x free chest has been added to inventory of " + playerName);
     }
 }

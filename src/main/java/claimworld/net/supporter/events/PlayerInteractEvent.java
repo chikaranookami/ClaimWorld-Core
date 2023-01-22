@@ -62,12 +62,12 @@ public class PlayerInteractEvent implements Listener {
         if (event.getHand() == null) return;
 
         ItemStack item = event.getItem();
-        if (event.getHand().equals(EquipmentSlot.OFF_HAND)) {
+        /*if (event.getHand().equals(EquipmentSlot.OFF_HAND)) {
             if (!jetpackUtils.isJetpack(item)) return;
 
             event.setCancelled(true);
             return;
-        }
+        }*/
         
         if (item == null) return;
 

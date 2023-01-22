@@ -65,7 +65,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new PlayerTakeLecternBookEvent(), this);
         pluginManager.registerEvents(new PlayerRiptideEvent(), this);
         pluginManager.registerEvents(new PlayerShearEntityEvent(), this);
-        //pluginManager.registerEvents(new BlockPlaceEvent(), this);
+        pluginManager.registerEvents(new BlockPlaceEvent(), this);
 
         //commands
         //new Protection();

@@ -143,7 +143,7 @@ public class Kowal {
 
             player.sendMessage(getUserPrefix() + "Sukces! Kowal wykonal Twoje zlecenie!");
 
-            new WarehouseUtils().addItemsSingle(player, getItemList(item, finalItemAmount));
+            new WarehouseUtils().addItemsSingle(player.getName(), getItemList(item, finalItemAmount));
             taskManager.tryFinishTask(player, taskMap.get(questName));
 
         }, 30L);

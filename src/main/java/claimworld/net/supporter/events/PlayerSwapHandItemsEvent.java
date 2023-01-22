@@ -15,12 +15,11 @@ public class PlayerSwapHandItemsEvent implements Listener {
     public void playerSwapHandItemsEvent(org.bukkit.event.player.PlayerSwapHandItemsEvent event) {
         String playerName = event.getPlayer().getName();
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            if (jetpackUtils.isJetpack(event.getMainHandItem())) {
+            if (jetpackUtils.isJetpack(event.getOffHandItem())) {
+                jetpackUtils.switchJetpack(playerName);
+            } else {
                 jetpackUtils.disableJetpack(playerName);
-                return;
             }
-
-            if (jetpackUtils.isJetpack(event.getOffHandItem())) jetpackUtils.switchJetpack(playerName);
         });
     }
 }

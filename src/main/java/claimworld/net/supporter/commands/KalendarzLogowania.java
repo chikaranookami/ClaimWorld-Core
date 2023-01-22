@@ -17,7 +17,7 @@ public class KalendarzLogowania {
     private final String dailyObjectiveName = "dailyRewardCounter";
 
     public KalendarzLogowania() {
-        new CommandBase("kalendarzupdate", 2, true) {
+        new CommandBase("kalendarzupdate", 2, false) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
                 Player player = Bukkit.getPlayer(arguments[0]);

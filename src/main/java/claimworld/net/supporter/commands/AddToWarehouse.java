@@ -22,9 +22,6 @@ public class AddToWarehouse {
             public boolean onCommand(CommandSender sender, String[] arguments) {
                 if (arguments[1] == null) return false;
 
-                Player player = Bukkit.getPlayer(arguments[0]);
-                if (player == null) return false;
-
                 List<String> fixedMessage = new ArrayList<>(Arrays.asList(arguments));
                 fixedMessage.remove(0);
 
@@ -33,7 +30,7 @@ public class AddToWarehouse {
                 List<ItemStack> itemStackList = new ArrayList<>();
                 itemStackList.add(item);
 
-                warehouseUtils.addItemsSingle(player, itemStackList);
+                warehouseUtils.addItemsSingle(arguments[0], itemStackList);
 
                 return true;
             }

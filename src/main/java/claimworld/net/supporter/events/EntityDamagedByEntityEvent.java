@@ -30,6 +30,7 @@ public class EntityDamagedByEntityEvent implements Listener {
             return;
         }
 
+        if (event.getDamager().getType() != EntityType.PLAYER) return;
         Player player = (Player) event.getDamager();
 
         if (entityType == EntityType.CREEPER) {

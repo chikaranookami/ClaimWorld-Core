@@ -22,13 +22,13 @@ public class PlayerItemBreakEvent implements Listener {
         Material material = event.getBrokenItem().getType();
         Map<String, Task> taskMap = taskManager.getTaskMap();
 
-        if (material == Material.NETHERITE_SWORD) {
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(event.getPlayer(), taskMap.get("destroyNetheriteSword")));
+        if (material == Material.STONE_SWORD) {
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(event.getPlayer(), taskMap.get("destroySword")));
             return;
         }
 
         if (material != Material.DIAMOND_PICKAXE) return;
 
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("destroyDiamondPickaxe")));
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("destroyPickaxe")));
     }
 }

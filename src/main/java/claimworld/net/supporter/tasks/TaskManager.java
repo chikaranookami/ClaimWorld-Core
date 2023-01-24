@@ -137,7 +137,7 @@ public class TaskManager {
         //first set
         taskMap.put("useChorus", new Task("Przemiesc sie o 200 metrow chorusem.", "", 0));
         taskMap.put("placeInvisibleFrame", new Task("Powies niewidzialna ramke.", "", 0));
-        taskMap.put("destroyNetheriteSword", new Task("Zuzyj kamienny miecz.", "", 0));
+        taskMap.put("destroySword", new Task("Zuzyj kamienny miecz.", "", 0));
         taskMap.put("fishOutStick", new Task("Wylow patyk.", "", 0));
         taskMap.put("killWarden", new Task("Pokonaj Wardena.", "", 0));
         taskMap.put("craftBeacon", new Task("Zrob beacona.", "", 0));
@@ -169,7 +169,7 @@ public class TaskManager {
 
         //third set
         taskMap.put("beOnlineWhenTraderSpawns", new Task("Badz online, gdy pojawi sie handlarz.", "", 0));
-        taskMap.put("destroyDiamondPickaxe", new Task("Zuzyj diamentowy kilof.", "", 0));
+        taskMap.put("destroyPickaxe", new Task("Zuzyj diamentowy kilof.", "", 0));
         taskMap.put("doSmallShit", new Task("Popusc odrobine.", "", 0));
         taskMap.put("openDragonChest", new Task("Otworz Skrzynie Smoka.", "", 0));
 

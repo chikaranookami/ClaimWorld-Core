@@ -58,14 +58,6 @@ public class EntityDeathEvent implements Listener {
 
         if (entityType == EntityType.ENDER_DRAGON) {
             getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskMap.get("killDragon")));
-            return;
-        }
-
-        if (entityType == EntityType.CHICKEN) {
-            if (((Chicken) entity).isAware()) return;
-
-            event.getDrops().clear();
-            event.setDroppedExp(0);
         }
     }
 }

@@ -27,10 +27,10 @@ public class AutoMessageTimer {
             if (new Random().nextBoolean()) {
                 getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> activeBossBar.render(vipBossbar), time);
             } else {
-                getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> activeBossBar.render(vipBossbar), time * 3);
+                getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> activeBossBar.render(vipBossbar), time * 5);
             }
 
-            getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> activeBossBar.render(shopGoalBossbar), time * 2);
+            getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> activeBossBar.render(shopGoalBossbar), time * 3);
         });
     }
 }

@@ -25,24 +25,20 @@ public class EntityDamagedByEntityEvent implements Listener {
         double damage = event.getDamage();
 
         EntityType entityType = event.getDamager().getType();
-        if (entityType == EntityType.SNOWMAN) {
-            event.setDamage(event.getDamage() * 6);
-            return;
-        }
 
         if (event.getDamager().getType() != EntityType.PLAYER) return;
         Player player = (Player) event.getDamager();
 
-        if (entityType == EntityType.CREEPER) {
-            if (event.getDamager().getType() != EntityType.PLAYER) return;
+        if (event.getEntityType() == EntityType.CREEPER) {
+            if (entityType != EntityType.PLAYER) return;
 
-            ItemMeta itemMeta = player.getInventory().getItemInOffHand().getItemMeta();
+            ItemMeta itemMeta = player.getInventory().getItemInMainHand().getItemMeta();
             if (itemMeta == null) return;
 
             if (!itemMeta.hasDisplayName()) return;
             if (!itemMeta.getDisplayName().equals(readyItems.getKosaNaMoby().getItemMeta().getDisplayName())) return;
 
-            event.setDamage(500);
+            event.setDamage(damage * 4);
             return;
         }
 

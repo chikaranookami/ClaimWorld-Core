@@ -49,7 +49,7 @@ public class Pomoc {
         helpMessages.add("§8Dodatki / Zmiany\n\n§c+§8 Skrzynie blokuja sie po postawieniu\n§c+§8 Ograniczenie giga maszyn z redstone\n§c+§8 Brodawki wypadaja z piglinow\n§c+§8 Wiekszosc bytow mozna podnosic przy pomocy SHIFT+PPM\n§c+§8 Dodatkowi Handlarze\n§c+§8 System teleportacji");
         helpMessages.add("§8Dodatki / Zmiany\n\n§c+§8 Senat\n§c+§8 Globalne wzmocnienia\n§c+§8 Nieco spawn mobow, inne leje\n§c+§8 Limit bytow na chunk\n§c+§8 Battlepass i system zadan\n§c+§8 Umiejetnosci\n§c+§8Z mobow wypadaja ich glowy");
         helpMessages.add("§8Dodatki / Zmiany\n\n§c+§8 Przedmioty i exp grupuja sie\n§c+§8 Niestandardowe przedmioty\n§c+§8 Wielofunkcyjny Kowal\n§c+§8 Wylaczone dmg fajerwerkow w overworldzie i netherze\n§c+§8 Efekty krwawienia");
-        helpMessages.add("§8Dodatki / Zmiany\n\n§c+§8 50% szans na pogode inna, niz sloneczna\n§c+§8 Podnoszenie barier PPM netherytowa motyka");
+        helpMessages.add("§8Dodatki / Zmiany\n\n§c+§8 50% szans na pogode inna, niz sloneczna\n§c+§8 Podnoszenie barier PPM netherytowa motyka\n§c+§8 Osoby z dostepem do zabezpieczen moga niszczyc bloki");
         helpMessages.add("§8Senat\n\n§cSenat§8 to organizacja, ktora zajmuje sie obsluga graczy.\n\n§cSiedziba Senatu§8 jest obecnie w przygotowaniu, dlatego jesli czegos potrzebujesz to pisz bezposrednio do Senatora.");
         helpMessages.add("§8Senat\n\n§cSenatorowie§8: kinia_98, _NeKoToJa_, MarJan_Lubi_Kuce, Mr_PogromcA, xCaptain865, rtygta, Chikaraa.\n\nU Senatorow mozecie zakupic nastepujace uslugi:");
         helpMessages.add("§8Senat\n\n§c+§8 Niestandardowe ustawienia dzialki ($16/ustawienie/chunk)\n§c+§8 Zmiane biomu na dzialce ($16/chunk za biom z Overworlda lub $64/chunk za inny biom)\n§c+§8 Nieruchome moby ($16/moba)");

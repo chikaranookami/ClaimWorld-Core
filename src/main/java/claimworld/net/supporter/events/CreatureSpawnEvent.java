@@ -7,14 +7,14 @@ import claimworld.net.supporter.items.ReadyItems;
 import claimworld.net.supporter.tasks.Task;
 import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.WanderingTrader;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.MerchantRecipe;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.*;
 import java.util.logging.Level;
@@ -162,29 +162,49 @@ public class CreatureSpawnEvent implements Listener {
         }
 
         if (getOnlinePlayers().size() < 2) return;
-        if (!(event.getEntityType().equals(EntityType.WANDERING_TRADER))) return;
 
-        int chance = new Random().nextInt(4);
-        if (chance > 1) return;
+        EntityType entityType = event.getEntityType();
 
-        getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
-            for (Player onlinePlayer : getOnlinePlayers()) {
-                players.add(onlinePlayer);
-                if (!(players.size() < 2)) break;
-            }
+        if (event.getEntity() instanceof Monster) {
+            int chance = new Random().nextInt(25);
+            if (chance != 0) return;
 
-            WanderingTrader trader = (WanderingTrader) event.getEntity();
-            trader.setCustomNameVisible(true);
-            trader.setDespawnDelay(12000);
-            trader.setRecipes(getRecipeSets(chance));
-            trader.setCustomName(traderName.get(chance));
-            broadcastMessage(colorize(MessageUtils.getBroadcastPrefix() + traderName.get(chance) + "&f wlasnie pojawil sie na koordynatach &ex" + Math.round(trader.getLocation().getX()) + " &foraz &ez" + Math.round(trader.getLocation().getZ()) + "&f."));
+            Monster monster = (Monster) event.getEntity();
+            monster.setCanPickupItems(false);
+            monster.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(monster.getHealth() * 4);
+            monster.setSilent(true);
+            monster.setVisualFire(true);
+            monster.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 4));
+            monster.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
 
-            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-                for (Player player : getOnlinePlayers()) {
-                    taskManager.tryFinishTask(player, taskMap.get("beOnlineWhenTraderSpawns"));
+            getLogger().log(Level.INFO, "summoned special monster at " + event.getLocation());
+
+            return;
+        }
+
+        if (entityType.equals(EntityType.WANDERING_TRADER)) {
+            int chance = new Random().nextInt(4);
+            if (chance > 1) return;
+
+            getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
+                for (Player onlinePlayer : getOnlinePlayers()) {
+                    players.add(onlinePlayer);
+                    if (!(players.size() < 2)) break;
                 }
-            });
-        }, 20L);
+
+                WanderingTrader trader = (WanderingTrader) event.getEntity();
+                trader.setCustomNameVisible(true);
+                trader.setDespawnDelay(12000);
+                trader.setRecipes(getRecipeSets(chance));
+                trader.setCustomName(traderName.get(chance));
+                broadcastMessage(colorize(MessageUtils.getBroadcastPrefix() + traderName.get(chance) + "&f wlasnie pojawil sie na koordynatach &ex" + Math.round(trader.getLocation().getX()) + " &foraz &ez" + Math.round(trader.getLocation().getZ()) + "&f."));
+
+                getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+                    for (Player player : getOnlinePlayers()) {
+                        taskManager.tryFinishTask(player, taskMap.get("beOnlineWhenTraderSpawns"));
+                    }
+                });
+            }, 20L);
+        }
     }
 }

@@ -63,7 +63,7 @@ public class ReadyItems {
     }
 
     public ItemStack getKosaNaMoby() {
-        return new CustomItem("&aK&bo&cs&da &eN&ea &aM&bo&cb&dy", Material.NETHERITE_HOE, 1, Collections.singletonList(colorize(getLore("custom"))), 15, Arrays.asList(Enchantment.DAMAGE_UNDEAD, Enchantment.DAMAGE_ARTHROPODS, Enchantment.DURABILITY, Enchantment.LOOT_BONUS_MOBS, Enchantment.MENDING), Arrays.asList(20, 20, 5, 5, 1)).getItem();
+        return new CustomItem("&aK&bo&cs&da &eN&ea &aM&bo&cb&dy", Material.NETHERITE_HOE, 1, Collections.singletonList(colorize(getLore("custom"))), 15, Arrays.asList(Enchantment.DAMAGE_ARTHROPODS, Enchantment.FIRE_ASPECT, Enchantment.LOOT_BONUS_MOBS, Enchantment.MENDING, Enchantment.DAMAGE_ALL, Enchantment.SILK_TOUCH, Enchantment.DAMAGE_UNDEAD, Enchantment.DURABILITY), Arrays.asList(10, 2, 3, 1, 10, 1, 10, 3)).getItem();
     }
 
     public ReadyItems() {

@@ -24,7 +24,6 @@ public class EntityDeathEvent implements Listener {
         if (player == null) return;
 
         EntityType entityType = event.getEntityType();
-        Entity entity = event.getEntity();
 
         Map<String, Task> taskMap = taskManager.getTaskMap();
 

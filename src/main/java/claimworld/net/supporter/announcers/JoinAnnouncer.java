@@ -24,7 +24,7 @@ public class JoinAnnouncer {
     private final List<Sound> sounds = Collections.singletonList(Sound.ENTITY_PILLAGER_CELEBRATE);
 
     public String getAdminNote() {
-        return "§8Za tydzien nowy system zabezpieczania skrzynek! <3";
+        return "§8Zwiastun z hymnem serwera doslownie na dniach!";
     }
 
     public String getActiveBonuses() {

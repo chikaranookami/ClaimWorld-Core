@@ -66,6 +66,10 @@ public class ReadyItems {
         return new CustomItem("&aK&bo&cs&da &eN&ea &aM&bo&cb&dy", Material.NETHERITE_HOE, 1, Collections.singletonList(colorize(getLore("custom"))), 15, Arrays.asList(Enchantment.DAMAGE_ARTHROPODS, Enchantment.FIRE_ASPECT, Enchantment.LOOT_BONUS_MOBS, Enchantment.MENDING, Enchantment.DAMAGE_ALL, Enchantment.SILK_TOUCH, Enchantment.DAMAGE_UNDEAD, Enchantment.DURABILITY), Arrays.asList(10, 2, 3, 1, 10, 1, 10, 3)).getItem();
     }
 
+    public ItemStack getFireballStick() {
+        return new CustomItem("&eSzczelajacy Patyk", Material.STICK, Collections.singletonList("&7&omhm")).getItem();
+    }
+
     public ReadyItems() {
         itemMap.put("Kox", new CustomItem("", Material.ENCHANTED_GOLDEN_APPLE, null));
         itemMap.put("Ruda_diamentu", new CustomItem("", Material.DIAMOND_ORE, null));

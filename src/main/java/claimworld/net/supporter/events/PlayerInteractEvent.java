@@ -9,9 +9,12 @@ import claimworld.net.supporter.utils.JetpackUtils;
 import claimworld.net.supporter.utils.PrivateChestsUtils;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Fireball;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
@@ -32,6 +35,7 @@ public class PlayerInteractEvent implements Listener {
 
     private final List<Material> allowedSpawnEggs = new ArrayList<>();
     private final List<Player> delayedPlayers = new ArrayList<>();
+    private final List<String> delayedShooters = new ArrayList<>();
 
     public PlayerInteractEvent() {
         allowedSpawnEggs.add(Material.ZOMBIE_SPAWN_EGG);
@@ -57,25 +61,53 @@ public class PlayerInteractEvent implements Listener {
         });
     }
 
+    private void renderShot(Player player) {
+        Fireball fireball = player.launchProjectile(Fireball.class);
+        fireball.setDirection(player.getLocation().getDirection().multiply(4));
+        fireball.setIsIncendiary(false);
+
+        World world = player.getWorld();
+        Location location = player.getLocation().add(0, 1, 0);
+        world.spawnParticle(Particle.SWEEP_ATTACK, location, 4);
+        world.playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 0.8f, 0.8f);
+
+        player.swingMainHand();
+
+        getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> delayedShooters.remove(player.getName()), 40L);
+    }
+
     @EventHandler
     public void playerInteractEvent(org.bukkit.event.player.PlayerInteractEvent event) {
         if (event.getHand() == null) return;
 
         ItemStack item = event.getItem();
-        /*if (event.getHand().equals(EquipmentSlot.OFF_HAND)) {
+        if (event.getHand().equals(EquipmentSlot.OFF_HAND)) {
             if (!jetpackUtils.isJetpack(item)) return;
 
             event.setCancelled(true);
             return;
-        }*/
+        }
         
         if (item == null) return;
+
+        Player player = event.getPlayer();
+
+        if (item.isSimilar(readyItems.getFireballStick())) {
+            Action action = event.getAction();
+            if (action != Action.RIGHT_CLICK_AIR && action != Action.RIGHT_CLICK_BLOCK) return;
+
+            String playerName = player.getName();
+            if (delayedShooters.contains(playerName)) return;
+            delayedShooters.add(playerName);
+
+            renderShot(player);
+            return;
+        }
 
         Block block = event.getClickedBlock();
         if (block == null) return;
 
         Material blockType = block.getType();
-        Player player = event.getPlayer();
         Material itemType = item.getType();
         Location location = block.getLocation();
         

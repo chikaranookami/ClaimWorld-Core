@@ -166,6 +166,8 @@ public class CreatureSpawnEvent implements Listener {
         EntityType entityType = event.getEntityType();
 
         if (event.getEntity() instanceof Monster) {
+            if (entityType == EntityType.CREEPER) return;
+
             int chance = new Random().nextInt(25);
             if (chance != 0) return;
 
@@ -176,8 +178,6 @@ public class CreatureSpawnEvent implements Listener {
             monster.setVisualFire(true);
             monster.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 4));
             monster.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
-
-            getLogger().log(Level.INFO, "summoned special monster at " + event.getLocation());
 
             return;
         }

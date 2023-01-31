@@ -11,14 +11,11 @@ import static org.bukkit.Bukkit.getScheduler;
 
 public class PlayerAdvancementDoneEvent implements Listener {
 
-    ReadyItems readyItems = ReadyItems.getInstance();
     TaskManager taskManager = TaskManager.getInstance();
 
     @EventHandler
     public void playerAdvancementDoneEvent(org.bukkit.event.player.PlayerAdvancementDoneEvent event) {
         Player player = event.getPlayer();
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("getAchievementDone")));
-
-        player.getWorld().dropItemNaturally(player.getLocation(), readyItems.get("$1"));
     }
 }

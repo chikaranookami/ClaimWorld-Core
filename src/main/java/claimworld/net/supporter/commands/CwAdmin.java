@@ -93,6 +93,13 @@ public class CwAdmin {
                     return true;
                 }
 
+                if (action.equals("givePatyk")) {
+                    Location location = player.getLocation();
+                    Item item = location.getWorld().dropItem(location, readyItems.getFireballStick());
+                    item.setOwner(player.getUniqueId());
+                    return true;
+                }
+
                 Locker locker = Locker.getInstance();
                 HashMap<String, List<ItemStack>> items = locker.getLockerMap();
 

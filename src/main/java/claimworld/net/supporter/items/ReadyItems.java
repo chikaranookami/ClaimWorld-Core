@@ -67,13 +67,14 @@ public class ReadyItems {
     }
 
     public ItemStack getFireballStick() {
-        return new CustomItem("&eSzczelajacy Patyk", Material.STICK, Collections.singletonList("&7&omhm")).getItem();
+        return new CustomItem("&eSzczelajacy Patyk", Material.STICK, Collections.singletonList(colorize("&7&omhm"))).getItem();
     }
 
     public ReadyItems() {
         itemMap.put("Kox", new CustomItem("", Material.ENCHANTED_GOLDEN_APPLE, null));
         itemMap.put("Ruda_diamentu", new CustomItem("", Material.DIAMOND_ORE, null));
         itemMap.put("Sztabka_netherytu", new CustomItem("", Material.NETHERITE_INGOT, null));
+        itemMap.put("Elytra", new CustomItem("Elytra", Material.ELYTRA, null));
 
         //itemMap.put("Prezent", new CustomItem("&dPrezent", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("rare"))), 13));
         //itemMap.put("Skarpeta", new CustomItem("&dSkarpeta", Material.GHAST_TEAR, Collections.singletonList(colorize(getLore("rare"))), 14));

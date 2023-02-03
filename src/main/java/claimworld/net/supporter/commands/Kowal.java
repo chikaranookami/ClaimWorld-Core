@@ -3,6 +3,7 @@ package claimworld.net.supporter.commands;
 import claimworld.net.supporter.Supporter;
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.GeyserUtils;
+import claimworld.net.supporter.utils.JetpackUtils;
 import claimworld.net.supporter.utils.WarehouseUtils;
 import claimworld.net.supporter.items.ReadyItems;
 import claimworld.net.supporter.tasks.Task;
@@ -35,6 +36,7 @@ public class Kowal {
 
     ReadyItems readyItems = ReadyItems.getInstance();
     TaskManager taskManager = TaskManager.getInstance();
+    JetpackUtils jetpackUtils = JetpackUtils.getInstance();
 
     private final GeyserUtils geyserUtils = new GeyserUtils();
 
@@ -198,7 +200,7 @@ public class Kowal {
                         return;
                     }
 
-                    if (item.isSimilar(readyItems.get("$1")) || item.isSimilar(readyItems.get("Uniwersalny_bilet")) || item.isSimilar(readyItems.get("Skrzynia_smoka"))) {
+                    if (jetpackUtils.isJetpack(item) || item.isSimilar(readyItems.get("$1")) || item.isSimilar(readyItems.get("Uniwersalny_bilet")) || item.isSimilar(readyItems.get("Skrzynia_smoka"))) {
                         player.sendMessage(getUserPrefix() + "Kowal nie obsluguje tego przedmiotu.");
                         return;
                     }

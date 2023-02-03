@@ -23,7 +23,6 @@ import static org.bukkit.Bukkit.*;
 public class OpenChest {
 
     private final List<ItemStack> randomItems = new ArrayList<>();
-    private final List<ItemStack> prezentItems = new ArrayList<>();
     private final List<Material> rareMaterials = new ArrayList<>();
 
     private void playVisuals(World world, Location location) {
@@ -247,7 +246,6 @@ public class OpenChest {
         randomItems.add(readyItems.get("$1", 24));
         randomItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, 24));
 
-        randomItems.add(new ItemStack(Material.ELYTRA));
         randomItems.add(new ItemStack(Material.SHULKER_BOX));
         randomItems.add(new ItemStack(Material.ENDER_CHEST));
         randomItems.add(new ItemStack(Material.SHULKER_SHELL));
@@ -256,6 +254,9 @@ public class OpenChest {
         for (int i = 2; i < 6; i++) {
             randomItems.add(readyItems.get("$1", baseAmount * i));
 
+            randomItems.add(new ItemStack(Material.GILDED_BLACKSTONE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.WET_SPONGE, baseAmount * i));
+            randomItems.add(new ItemStack(Material.SPONGE, baseAmount * i));
             randomItems.add(new ItemStack(Material.PHANTOM_MEMBRANE, baseAmount * i));
             randomItems.add(new ItemStack(Material.NETHER_WART, baseAmount * i));
             randomItems.add(new ItemStack(Material.NETHER_WART_BLOCK, baseAmount * i));

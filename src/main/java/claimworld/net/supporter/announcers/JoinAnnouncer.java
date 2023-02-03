@@ -24,7 +24,7 @@ public class JoinAnnouncer {
     private final List<Sound> sounds = Collections.singletonList(Sound.ENTITY_PILLAGER_CELEBRATE);
 
     public String getAdminNote() {
-        return "§8Zwiastun z hymnem serwera doslownie na dniach!";
+        return "§8Zaczynamy powoli zmiany ekonomiczne, a pozniej przyjdzie czas na kolejne poziomy przepustki!";
     }
 
     public String getActiveBonuses() {

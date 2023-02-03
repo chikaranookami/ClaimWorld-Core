@@ -22,6 +22,8 @@ import static claimworld.net.supporter.battlepass.BattlePassManager.mainObjectiv
 import static org.bukkit.Bukkit.getLogger;
 
 public class ItemSets {
+
+    ReadyItems readyItems = ReadyItems.getInstance();
     
     private final HashMap<Integer, ItemStack> itemMap = new HashMap<>();
 
@@ -75,6 +77,12 @@ public class ItemSets {
             return itemMap;
         }
 
+        if (inventoryName.equals("Mechanik")) {
+            itemMap.put(10, new CustomItem("&fElytra", Material.ELYTRA, Collections.singletonList(colorize("&7&oCena: &a$128")), 0).getItem());
+            itemMap.put(12, new CustomItem("&fJetpack", Material.CHAINMAIL_CHESTPLATE, Collections.singletonList(colorize("&7&oCena: &a$128")), 0).getItem());
+            return itemMap;
+        }
+
         if (inventoryName.equals("Teleportacja")) {
             String lore = colorize("&7&oUzyj, by sie przeteleportowac.");
             itemMap.put(53, cofnij);
@@ -108,7 +116,7 @@ public class ItemSets {
             itemMap.put(22, new CustomItem("&fKonsola efektow", Material.BEACON, Collections.singletonList(colorize("&7&oPodrasuj swoj wyglad."))).getItem());
             itemMap.put(23, new CustomItem("&fMaly fajerwerk", Material.FIREWORK_STAR, Collections.singletonList(colorize("&7&oOdpal fajerwerka pod nogami."))).getItem());
             itemMap.put(24, new CustomItem("&fSeria fajerwerkow", Material.FIREWORK_ROCKET, Collections.singletonList(colorize("&7&oTwoj maly pokaz."))).getItem());
-            itemMap.put(25, new CustomItem("&f7% Na Bonus", Material.NETHER_STAR, Arrays.asList(colorize("&7&oSprobuj zarzucic wszystkim"), colorize("&7&ograczom online po kilka"), colorize("&7&ododatkowych Skrzyn Smoka."), "", colorize("&7&oDostepne miedzy 12:00, a 00:00."))).getItem());
+            itemMap.put(25, new CustomItem("&f5% Na Bonus", Material.NETHER_STAR, Arrays.asList(colorize("&7&oSprobuj zarzucic wszystkim"), colorize("&7&ograczom online po kilka"), colorize("&7&ododatkowych Skrzyn Smoka."), "", colorize("&7&oDostepne miedzy 12:00, a 00:00."))).getItem());
             return itemMap;
         }
 

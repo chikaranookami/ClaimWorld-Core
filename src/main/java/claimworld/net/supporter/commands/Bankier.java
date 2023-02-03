@@ -1,29 +1,38 @@
 package claimworld.net.supporter.commands;
 
+import claimworld.net.supporter.items.ReadyItems;
 import claimworld.net.supporter.utils.CommandBase;
+import claimworld.net.supporter.utils.WarehouseUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
 
-import static claimworld.net.supporter.utils.MessageUtils.getBroadcastPrefix;
 import static claimworld.net.supporter.utils.MessageUtils.getUserPrefix;
-import static org.bukkit.Bukkit.broadcastMessage;
-import static org.bukkit.Bukkit.dispatchCommand;
+import static org.bukkit.Bukkit.*;
 
-public class ChestBooster {
+public class Bankier {
+
+    ReadyItems readyItems = ReadyItems.getInstance();
 
     private final List<String> lockedPlayers = new ArrayList<>();
 
-    public ChestBooster() {
-        new CommandBase("chestbooster", true) {
+    public Bankier() {
+        new CommandBase("bankier", 1, false) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
-                Player player = (Player) sender;
+                Player player = Bukkit.getPlayer(arguments[0]);
+                if (player == null) {
+                    getLogger().log(Level.INFO, "Player is null");
+                    return true;
+                }
+
                 String playerName = player.getName();
                 if (lockedPlayers.contains(playerName)) {
                     player.sendMessage(getUserPrefix() + "Nie mozesz uzyc tej funkcji wiecej, niz raz na restart.");
@@ -37,21 +46,15 @@ public class ChestBooster {
 
                 lockedPlayers.add(playerName);
 
-                int random = new Random().nextInt(25);
-                if (random != 0) {
-                    player.sendMessage(getUserPrefix() + "Niestety - nie udalo Ci sie wlaczyc dodatkowych skrzynek. Sprobuj ponownie po restarcie serwera.");
-                    return true;
-                }
+                new WarehouseUtils().addItemsSingle(playerName, Collections.singletonList(readyItems.get("$1")));
 
-                dispatchCommand(Bukkit.getConsoleSender(), "buychests 10");
-                broadcastMessage(getBroadcastPrefix() + "Gracz " + playerName + " zarzucil dodatkowymi skrzynkami!");
                 return true;
             }
 
             @Override
             public String getUsage() {
-                return "/chestbooster";
+                return "/bankier";
             }
-        }.setPermission("claimworld.mvp");
+        }.setPermission("claimworld.admin");
     }
 }

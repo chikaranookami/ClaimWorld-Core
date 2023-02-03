@@ -68,7 +68,9 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new BlockPlaceEvent(), this);
 
         //commands
-        //new Protection();
+        new Bankier();
+        new OpenMenu();
+        new BuyItem();
         new Mod();
         new ChestBooster();
         new Seriafw();

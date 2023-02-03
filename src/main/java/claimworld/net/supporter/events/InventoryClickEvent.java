@@ -141,6 +141,18 @@ public class InventoryClickEvent implements Listener {
             return;
         }
 
+        if (title.equals("Mechanik")) {
+            switch (slot) {
+                case 10:
+                    dispatchCommand(getConsoleSender(), "buyitem " + playerName + " Elytra");
+                    return;
+                case 12:
+                    dispatchCommand(getConsoleSender(), "buyitem " + playerName + " Jetpack");
+                    return;
+            }
+            return;
+        }
+
         if (title.equals("Teleportacja") || title.equals("Ulatwienia dostepu") || title.equals("Panel VIP")) {
             if (slot == 53) {
                 new GuiManager(player, new Gui(null, 54, "Menu"));

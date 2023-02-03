@@ -13,6 +13,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -49,6 +50,12 @@ public class InventoryClickEvent implements Listener {
 
         //shulker inventory == player inventory - sprawdzone, tak jest
         if (clickedInventory == playerInventory) {
+            if (event.getAction() == InventoryAction.HOTBAR_SWAP) {
+                if (!jetpackUtils.isJetpack(clickedInventory.getItem(40))) return;
+                event.setCancelled(true);
+                return;
+            }
+
             if (slot == 17) {
                 event.setCancelled(true);
                 getScheduler().runTaskLater(Supporter.getPlugin(), () -> new GuiManager(player, new Gui(null, 54, "Menu")), 1L);

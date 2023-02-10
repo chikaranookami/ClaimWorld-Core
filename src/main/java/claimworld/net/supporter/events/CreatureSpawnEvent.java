@@ -175,7 +175,7 @@ public class CreatureSpawnEvent implements Listener {
             monster.setCanPickupItems(false);
             monster.setSilent(true);
             monster.setVisualFire(true);
-            monster.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 3));
+            monster.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
             monster.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 3));
             monster.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
 

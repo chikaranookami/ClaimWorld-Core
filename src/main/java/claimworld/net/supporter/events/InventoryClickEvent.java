@@ -29,6 +29,7 @@ public class InventoryClickEvent implements Listener {
     Locker locker = Locker.getInstance();
     TaskManager taskManager = TaskManager.getInstance();
     JetpackUtils jetpackUtils = JetpackUtils.getInstance();
+    ReadyItems readyItems = ReadyItems.getInstance();
 
     private final List<String> fixedEquipments = new ArrayList<>();
 
@@ -50,12 +51,6 @@ public class InventoryClickEvent implements Listener {
 
         //shulker inventory == player inventory - sprawdzone, tak jest
         if (clickedInventory == playerInventory) {
-            if (event.getAction() == InventoryAction.HOTBAR_SWAP) {
-                if (!jetpackUtils.isJetpack(clickedInventory.getItem(40))) return;
-                event.setCancelled(true);
-                return;
-            }
-
             if (slot == 17) {
                 event.setCancelled(true);
                 getScheduler().runTaskLater(Supporter.getPlugin(), () -> new GuiManager(player, new Gui(null, 54, "Menu")), 1L);
@@ -68,6 +63,14 @@ public class InventoryClickEvent implements Listener {
                 event.setCancelled(true);
                 return;
             }
+
+            if (event.getAction() == InventoryAction.HOTBAR_SWAP) {
+                if (!jetpackUtils.isJetpack(clickedInventory.getItem(40))) return;
+                event.setCancelled(true);
+                return;
+            }
+
+            return;
         }
 
         Inventory inventory = event.getInventory();
@@ -148,6 +151,18 @@ public class InventoryClickEvent implements Listener {
                     return;
                 case 12:
                     dispatchCommand(getConsoleSender(), "buyitem " + playerName + " Jetpack");
+                    return;
+            }
+            return;
+        }
+
+        if (title.equals("Bankier")) {
+            switch (slot) {
+                case 10:
+                    dispatchCommand(getConsoleSender(), "wymienexpa " + playerName);
+                    return;
+                case 12:
+                    dispatchCommand(getConsoleSender(), "odbierzlokate " + playerName);
                     return;
             }
             return;
@@ -264,6 +279,10 @@ public class InventoryClickEvent implements Listener {
                     case 25:
                         player.closeInventory();
                         getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " lasy_polnocne"), 1L);
+                        return;
+                    case 30:
+                        player.closeInventory();
+                        getScheduler().runTaskLater(Supporter.getPlugin(), () -> Bukkit.dispatchCommand(getConsoleSender(), "loadlokacja " + player.getName() + " nowy_rzym"), 1L);
                         return;
                 }
 

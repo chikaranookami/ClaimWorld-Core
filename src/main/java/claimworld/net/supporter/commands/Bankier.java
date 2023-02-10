@@ -1,11 +1,15 @@
 package claimworld.net.supporter.commands;
 
+import claimworld.net.supporter.guis.Gui;
+import claimworld.net.supporter.guis.GuiManager;
 import claimworld.net.supporter.items.ReadyItems;
 import claimworld.net.supporter.utils.CommandBase;
 import claimworld.net.supporter.utils.WarehouseUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -24,7 +28,7 @@ public class Bankier {
     private final List<String> lockedPlayers = new ArrayList<>();
 
     public Bankier() {
-        new CommandBase("bankier", 1, false) {
+        new CommandBase("wymienexpa", 1, false) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
                 Player player = Bukkit.getPlayer(arguments[0]);
@@ -32,6 +36,37 @@ public class Bankier {
                     getLogger().log(Level.INFO, "Player is null");
                     return true;
                 }
+
+                player.closeInventory();
+
+                if (player.getLevel() != 30) {
+                    player.sendMessage(getUserPrefix() + "By to zrobic, potrzebujesz 30 poziomu doswiadczenia.");
+                    return true;
+                }
+
+                player.setLevel(0);
+
+                player.getWorld().dropItem(player.getLocation(), new ItemStack(Material.EXPERIENCE_BOTTLE, 140));
+
+                return true;
+            }
+
+            @Override
+            public String getUsage() {
+                return "/wymienexpa <gracz>";
+            }
+        }.setPermission("claimworld.admin");
+
+        new CommandBase("odbierzlokate", 1, false) {
+            @Override
+            public boolean onCommand(CommandSender sender, String[] arguments) {
+                Player player = Bukkit.getPlayer(arguments[0]);
+                if (player == null) {
+                    getLogger().log(Level.INFO, "Player is null");
+                    return true;
+                }
+
+                player.closeInventory();
 
                 String playerName = player.getName();
                 if (lockedPlayers.contains(playerName)) {
@@ -53,7 +88,27 @@ public class Bankier {
 
             @Override
             public String getUsage() {
-                return "/bankier";
+                return "/odbierzlokate <player>";
+            }
+        }.setPermission("claimworld.admin");
+
+        new CommandBase("bankier", 1, false) {
+            @Override
+            public boolean onCommand(CommandSender sender, String[] arguments) {
+                Player player = Bukkit.getPlayer(arguments[0]);
+                if (player == null) {
+                    getLogger().log(Level.INFO, "Player is null");
+                    return true;
+                }
+
+                new GuiManager(player, new Gui(null, 54, "Bankier"));
+
+                return true;
+            }
+
+            @Override
+            public String getUsage() {
+                return "/bankier <player>";
             }
         }.setPermission("claimworld.admin");
     }

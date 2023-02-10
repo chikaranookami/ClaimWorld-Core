@@ -81,10 +81,15 @@ public class TaskManager {
     public void tryFinishTask(Player player, Task task) {
         getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
             for (Task activeTask : getActiveTasks()) {
-                String taskName = task.getName();
-                if (!activeTask.getName().equals(taskName)) continue;
-
                 String playerName = player.getName();
+                String taskName = task.getName();
+
+                if (taskName == null) {
+                    getLogger().log(Level.WARNING, "Nie ma zadania: " + taskName + ", gracz: " + playerName);
+                    return;
+                }
+
+                if (!activeTask.getName().equals(taskName)) continue;
                 if (playersWhoDidTask.contains(playerName)) return;
 
                 int value;

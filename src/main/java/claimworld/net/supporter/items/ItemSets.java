@@ -83,6 +83,12 @@ public class ItemSets {
             return itemMap;
         }
 
+        if (inventoryName.equals("Bankier")) {
+            itemMap.put(10, new CustomItem("&fWymien expa", Material.EXPERIENCE_BOTTLE, Arrays.asList(colorize("&7&oZamien swoj 30 level"), colorize("&7&ona 140 butelek expa.")), 0).getItem());
+            itemMap.put(12, new CustomItem("&fOdbierz lokate", Material.EMERALD, Arrays.asList(colorize("&7&oOdbierz swoja lokate."), colorize("&7&oDostepne miedzy 12:00, a 0:00.")), 0).getItem());
+            return itemMap;
+        }
+
         if (inventoryName.equals("Teleportacja")) {
             String lore = colorize("&7&oUzyj, by sie przeteleportowac.");
             itemMap.put(53, cofnij);
@@ -97,6 +103,7 @@ public class ItemSets {
             itemMap.put(23, new CustomItem("&aMonopoly", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(24, new CustomItem("&aWioska", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             itemMap.put(25, new CustomItem("&aLasy Polnocne", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
+            itemMap.put(30, new CustomItem("&aNowy Rzym", Material.LIME_BANNER, Collections.singletonList(lore)).getItem());
             return itemMap;
         }
 

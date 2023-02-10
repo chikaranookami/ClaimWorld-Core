@@ -67,18 +67,18 @@ public class CreatureSpawnEvent implements Listener {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.ZOMBIE_SPAWN_EGG), 1, dolar64x, null));
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.CREEPER_SPAWN_EGG), 1, dolar64x, null));
             }
-            if (random > 3) {
+            if (random > 2) {
                 updatedRecipes.add(getCustomRecipe(dolarek, 4, new ItemStack(Material.EMERALD, 64), null));
                 updatedRecipes.add(getCustomRecipe(skrzyniaSmoka, 4, new ItemStack(Material.EMERALD, 32), null));
                 updatedRecipes.add(getCustomRecipe(fireaspect3, 1, new ItemStack(Material.EMERALD, 16), dolar64x));
             }
-            if (random > 5) {
+            if (random > 4) {
                 updatedRecipes.add(getCustomRecipe(unbreaking4, 1, new ItemStack(Material.EMERALD, 16), dolar64x));
                 updatedRecipes.add(getCustomRecipe(protection5, 1, new ItemStack(Material.EMERALD, 16), dolar64x));
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.SPONGE, 4), 1, new ItemStack(Material.EMERALD, 16), null));
                 updatedRecipes.add(getCustomRecipe(jetpack, 1, new ItemStack(Material.EMERALD, 16), dolar64x));
             }
-            if (random > 6) {
+            if (random > 5) {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.ELYTRA), 1, new ItemStack(Material.EMERALD, 64), dolar64x));
                 updatedRecipes.add(getCustomRecipe(power6, 1, new ItemStack(Material.EMERALD, 16), dolar64x));
             }
@@ -102,18 +102,18 @@ public class CreatureSpawnEvent implements Listener {
                 updatedRecipes.add(getCustomRecipe(zwojOgnia, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
                 updatedRecipes.add(getCustomRecipe(dolarek, 4, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
             }
-            if (random > 4) {
+            if (random > 3) {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.SKELETON_SPAWN_EGG), 1, dolar64x, null));
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.WITCH_SPAWN_EGG), 1, dolar64x, null));
                 updatedRecipes.add(getCustomRecipe(looting4, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), dolar64x));
             }
-            if (random > 5) {
+            if (random > 4) {
                 updatedRecipes.add(getCustomRecipe(sharpnessBook, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), dolar64x));
                 updatedRecipes.add(getCustomRecipe(skrzyniaSmoka, 4, new ItemStack(Material.PHANTOM_MEMBRANE, 32), null));
                 updatedRecipes.add(getCustomRecipe(thorns5, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), dolar64x));
                 updatedRecipes.add(getCustomRecipe(jetpack, 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), dolar64x));
             }
-            if (random > 6) {
+            if (random > 5) {
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.ELYTRA), 1, new ItemStack(Material.PHANTOM_MEMBRANE, 64), dolar64x));
                 updatedRecipes.add(getCustomRecipe(new ItemStack(Material.SPONGE, 4), 1, new ItemStack(Material.PHANTOM_MEMBRANE, 16), null));
             }
@@ -168,18 +168,32 @@ public class CreatureSpawnEvent implements Listener {
         if (event.getEntity() instanceof Monster) {
             if (entityType == EntityType.CREEPER) return;
 
-            int chance = new Random().nextInt(20);
+            int chance = new Random().nextInt(33);
             if (chance != 0) return;
 
             Monster monster = (Monster) event.getEntity();
             monster.setCanPickupItems(false);
-            monster.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(monster.getHealth() * 4);
             monster.setSilent(true);
             monster.setVisualFire(true);
-            monster.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 4));
-            monster.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
-            monster.setCustomName("Wzmocniony");
-            monster.setCustomNameVisible(true);
+            monster.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 5));
+            monster.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 5));
+            monster.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 2));
+
+            int boosts = new Random().nextInt(3);
+            if (boosts == 0) {
+                monster.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 6));
+                monster.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 5));
+            }
+
+            if (boosts > 0) {
+                monster.addPotionEffect(new PotionEffect(PotionEffectType.POISON, Integer.MAX_VALUE, 2));
+                monster.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 2));
+            }
+
+            if (boosts > 1) {
+                monster.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, Integer.MAX_VALUE, 2));
+                monster.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 4));
+            }
 
             return;
         }
@@ -191,6 +205,7 @@ public class CreatureSpawnEvent implements Listener {
             getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
                 for (Player onlinePlayer : getOnlinePlayers()) {
                     players.add(onlinePlayer);
+
                     if (!(players.size() < 2)) break;
                 }
 

@@ -5,6 +5,7 @@ import claimworld.net.supporter.tasks.TaskManager;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -25,14 +26,14 @@ public class PlayerFishEvent implements Listener {
         if (event.getState() != org.bukkit.event.player.PlayerFishEvent.State.CAUGHT_FISH) return;
 
         Material material = ((Item) entity).getItemStack().getType();
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
-            if (material == Material.BOW) {
-                taskManager.tryFinishTask(event.getPlayer(), taskManager.getTaskMap().get("fishOutBow"));
-                return;
-            }
+        Player player = event.getPlayer();
 
-            if (!(material == Material.STICK)) return;
-            taskManager.tryFinishTask(event.getPlayer(), taskManager.getTaskMap().get("fishOutStick"));
-        });
+        if (material == Material.BOW) {
+            getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("fishOutBow")));
+            return;
+        }
+
+        if (material != Material.STICK) return;
+        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("fishOutStick")));
     }
 }

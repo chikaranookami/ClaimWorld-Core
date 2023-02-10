@@ -37,6 +37,8 @@ public class PlayerInteractEvent implements Listener {
     private final List<Player> delayedPlayers = new ArrayList<>();
     private final List<String> delayedShooters = new ArrayList<>();
 
+    private final int experienceNeeded = 10;
+
     public PlayerInteractEvent() {
         allowedSpawnEggs.add(Material.ZOMBIE_SPAWN_EGG);
         allowedSpawnEggs.add(Material.SKELETON_SPAWN_EGG);
@@ -76,6 +78,10 @@ public class PlayerInteractEvent implements Listener {
         getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> delayedShooters.remove(player.getName()), 40L);
     }
 
+    private void fillBottle(Player player) {
+
+    }
+
     @EventHandler
     public void playerInteractEvent(org.bukkit.event.player.PlayerInteractEvent event) {
         if (event.getHand() == null) return;
@@ -91,6 +97,7 @@ public class PlayerInteractEvent implements Listener {
         if (item == null) return;
 
         Player player = event.getPlayer();
+        World world = player.getWorld();
 
         if (item.isSimilar(readyItems.getFireballStick())) {
             Action action = event.getAction();
@@ -114,7 +121,7 @@ public class PlayerInteractEvent implements Listener {
         if (blockType == Material.BARRIER) {
             if (itemType != Material.NETHERITE_HOE) return;
             block.setType(Material.AIR);
-            player.getWorld().dropItemNaturally(location, new ItemStack(Material.BARRIER));
+            world.dropItemNaturally(location, new ItemStack(Material.BARRIER));
             return;
         }
 

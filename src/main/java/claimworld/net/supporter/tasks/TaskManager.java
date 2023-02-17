@@ -163,7 +163,6 @@ public class TaskManager {
         taskMap.put("starveToDeath", new Task("Umrzyj z glodu.", "", 0));
         taskMap.put("getHitByLightningStrike", new Task("Oberwij piorunem.", "", 0));
         taskMap.put("timeoutRaid", new Task("Przeczekaj atak na wioske.", "", 0));
-        taskMap.put("getAchievementDone", new Task("Ukoncz dowolne osiagniecie.", "", 0));
         taskMap.put("listenToBossbar", new Task("Wysluchaj serwerowych ogloszen.", "", 0));
         taskMap.put("transformZombieToVillager", new Task("Badz blisko nowego wiesniaka z przemienienia.", "", 0));
         taskMap.put("stayCloseToSomeNewEndermite", new Task("Badz blisko nowego endermita z ender perly.", "", 0));

@@ -117,6 +117,11 @@ public class JetpackUtils {
             delayedPlayers.add(playerName);
             playersUsingJetpack.add(playerName);
             getScheduler().runTask(Supporter.getPlugin(), () -> use(playerName));
+
+            Player player = Bukkit.getPlayer(playerName);
+            if (player == null) return;
+
+            taskManager.tryFinishTask(player, taskManager.getTaskMap().get("useJetpack"));
         });
     }
 }

@@ -168,7 +168,7 @@ public class CreatureSpawnEvent implements Listener {
         if (event.getEntity() instanceof Monster) {
             if (entityType == EntityType.CREEPER) return;
 
-            int chance = new Random().nextInt(33);
+            int chance = new Random().nextInt(25);
             if (chance != 0) return;
 
             Monster monster = (Monster) event.getEntity();

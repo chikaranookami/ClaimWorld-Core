@@ -29,7 +29,6 @@ public class InventoryClickEvent implements Listener {
     Locker locker = Locker.getInstance();
     TaskManager taskManager = TaskManager.getInstance();
     JetpackUtils jetpackUtils = JetpackUtils.getInstance();
-    ReadyItems readyItems = ReadyItems.getInstance();
 
     private final List<String> fixedEquipments = new ArrayList<>();
 
@@ -77,7 +76,7 @@ public class InventoryClickEvent implements Listener {
 
         if (inventory.getType() != InventoryType.CHEST) return;
         if (inventory.getLocation() != null) return;
-        if (inventory.getSize() < 9) return;
+        if (inventory.getSize() < 18) return;
         if (fixedEquipments.contains(event.getView().getTitle())) return;
 
         event.setCancelled(true);
@@ -93,8 +92,8 @@ public class InventoryClickEvent implements Listener {
             if (event.getClickedInventory() == playerInventory) return;
 
             HashMap<String, List<ItemStack>> lockerMap = locker.getLockerMap();
-            if (lockerMap.get(playerName).size() < 1) return;
             if (lockerMap.get(playerName) == null) return;
+            if (lockerMap.get(playerName).size() < 1) return;
 
             inventory.removeItem(item);
             playerInventory.addItem(item);

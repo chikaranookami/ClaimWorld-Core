@@ -32,7 +32,6 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new PlayerQuitEvent(), this);
         pluginManager.registerEvents(new RaidStopEvent(), this);
         pluginManager.registerEvents(new LightningStrikeEvent(), this);
-        pluginManager.registerEvents(new PlayerAdvancementDoneEvent(), this);
         pluginManager.registerEvents(new PlayerRespawnEvent(), this);
         pluginManager.registerEvents(new PlayerLoginEvent(), this);
         pluginManager.registerEvents(new PlayerJoinEvent(), this);
@@ -66,6 +65,7 @@ public final class Supporter extends JavaPlugin implements Listener {
         pluginManager.registerEvents(new PlayerRiptideEvent(), this);
         pluginManager.registerEvents(new PlayerShearEntityEvent(), this);
         pluginManager.registerEvents(new BlockPlaceEvent(), this);
+        pluginManager.registerEvents(new ProjectileHitEvent(), this);
 
         //commands
         new Bankier();

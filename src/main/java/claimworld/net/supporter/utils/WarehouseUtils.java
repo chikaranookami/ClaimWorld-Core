@@ -35,12 +35,12 @@ public class WarehouseUtils {
             if (!silent) player.sendMessage(MessageUtils.getUserPrefix() + "Otrzymales przedmiot. Wez go ze skrytki zanim zniknie!");
         }
 
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> {
+        getScheduler().runTaskLaterAsynchronously(Supporter.getPlugin(), () -> {
             List<ItemStack> fixedItems = new ArrayList<>(items);
             HashMap<String, List<ItemStack>> itemMap = Locker.getInstance().getLockerMap();
 
             if (itemMap.get(playerName) != null) itemMap.get(playerName).addAll(fixedItems);
             itemMap.putIfAbsent(playerName, fixedItems);
-        });
+        }, 10L);
     }
 }

@@ -143,7 +143,7 @@ public class TaskManager {
         taskMap.put("useChorus", new Task("Przemiesc sie o 200 metrow chorusem.", "", 0));
         taskMap.put("placeInvisibleFrame", new Task("Powies niewidzialna ramke.", "", 0));
         taskMap.put("destroySword", new Task("Zuzyj kamienny miecz.", "", 0));
-        taskMap.put("fishOutStick", new Task("Wylow patyk.", "", 0));
+        //taskMap.put("fishOutStick", new Task("Wylow patyk.", "", 0));
         taskMap.put("killWarden", new Task("Pokonaj Wardena.", "", 0));
         taskMap.put("craftBeacon", new Task("Zrob beacona.", "", 0));
         taskMap.put("doShit", new Task("Zrob kupe.", "", 0));

@@ -33,7 +33,7 @@ public class PlayerFishEvent implements Listener {
             return;
         }
 
-        if (material != Material.STICK) return;
-        getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("fishOutStick")));
+        //if (material != Material.STICK) return;
+        //getScheduler().runTaskAsynchronously(Supporter.getPlugin(), () -> taskManager.tryFinishTask(player, taskManager.getTaskMap().get("fishOutStick")));
     }
 }

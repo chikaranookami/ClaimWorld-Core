@@ -25,6 +25,9 @@ public class PrepareAnvilEvent implements Listener {
         ItemMeta item2Meta = item2.getItemMeta();
         if (item2Meta == null) return;
 
+        if (!item1Meta.hasDisplayName()) return;
+        if (!item2Meta.hasDisplayName()) return;
+
         if (item1Meta.getDisplayName().equals(readyItems.get("Jetpack").getItemMeta().getDisplayName())) {
             event.setResult(new ItemStack(Material.AIR));
             return;

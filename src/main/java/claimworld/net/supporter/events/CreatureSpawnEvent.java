@@ -164,8 +164,9 @@ public class CreatureSpawnEvent implements Listener {
         if (getOnlinePlayers().size() < 2) return;
 
         EntityType entityType = event.getEntityType();
+        Entity entity = event.getEntity();
 
-        if (event.getEntity() instanceof Monster) {
+        if (entity instanceof Monster) {
             if (entityType == EntityType.CREEPER) return;
 
             int chance = new Random().nextInt(25);
@@ -175,11 +176,16 @@ public class CreatureSpawnEvent implements Listener {
             monster.setCanPickupItems(false);
             monster.setSilent(true);
             monster.setVisualFire(true);
+            monster.setRemoveWhenFarAway(true);
+
             monster.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, Integer.MAX_VALUE, 1));
-            monster.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 3));
             monster.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 1));
 
-            int boosts = new Random().nextInt(3);
+            if (monster instanceof Spider) {
+                monster.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 1));
+            }
+
+            int boosts = new Random().nextInt(4);
             if (boosts == 0) {
                 monster.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 3));
                 monster.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 3));
@@ -192,6 +198,10 @@ public class CreatureSpawnEvent implements Listener {
 
             if (boosts > 1) {
                 monster.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, Integer.MAX_VALUE, 2));
+            }
+
+            if (boosts > 2) {
+                monster.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 3));
             }
 
             return;

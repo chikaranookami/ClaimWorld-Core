@@ -6,7 +6,7 @@
 
     <groupId>claimworld.net</groupId>
     <artifactId>supporter</artifactId>
-    <version>1.32</version>
+    <version>1.33</version>
     <packaging>jar</packaging>
 
     <name>Supporter</name>

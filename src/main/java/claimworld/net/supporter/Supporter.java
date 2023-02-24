@@ -3,6 +3,7 @@ package claimworld.net.supporter;
 import claimworld.net.supporter.commands.*;
 import claimworld.net.supporter.events.*;
 import claimworld.net.supporter.timers.AutoMessageTimer;
+import claimworld.net.supporter.timers.BossTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
@@ -100,11 +101,6 @@ public final class Supporter extends JavaPlugin implements Listener {
 
         //systems
         new AutoMessageTimer();
-
-        //others
-        getScheduler().runTaskLater(this, () -> {
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doInsomnia true");
-            getLogger().log(Level.INFO, "Lokalna godzina: " + LocalTime.now().getHour() + "h " + LocalTime.now().getMinute() + "m");
-        }, 100L);
+        new BossTimer();
     }
 }

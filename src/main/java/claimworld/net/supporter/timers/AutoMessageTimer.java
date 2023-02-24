@@ -7,6 +7,7 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 
 import java.util.Random;
+import java.util.logging.Level;
 
 import static claimworld.net.supporter.utils.StringUtils.colorize;
 import static org.bukkit.Bukkit.*;
@@ -14,7 +15,7 @@ import static org.bukkit.Bukkit.*;
 public class AutoMessageTimer {
 
     public AutoMessageTimer() {
-        getServer().getConsoleSender().sendMessage("Przygotowywanie bossbarow...");
+        getLogger().log(Level.INFO, "[" + getClass().getSimpleName() + "] Przygotowywanie...");
 
         if (new Random().nextInt(4) != 0) return;
 

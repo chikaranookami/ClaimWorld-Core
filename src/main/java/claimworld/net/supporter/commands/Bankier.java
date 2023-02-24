@@ -39,12 +39,13 @@ public class Bankier {
 
                 player.closeInventory();
 
-                if (player.getLevel() != 30) {
-                    player.sendMessage(getUserPrefix() + "By to zrobic, potrzebujesz 30 poziomu doswiadczenia.");
+                int playerLevel = player.getLevel();
+                if (playerLevel < 30) {
+                    player.sendMessage(getUserPrefix() + "By to zrobic, potrzebujesz przynajmniej 30 poziomu doswiadczenia.");
                     return true;
                 }
 
-                player.setLevel(0);
+                player.setLevel(playerLevel - 30);
 
                 player.getWorld().dropItem(player.getLocation(), new ItemStack(Material.EXPERIENCE_BOTTLE, 140));
 

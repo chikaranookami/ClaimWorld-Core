@@ -145,7 +145,7 @@ public class TaskManager {
         taskMap.put("destroySword", new Task("Zuzyj kamienny miecz.", "", 0));
         //taskMap.put("fishOutStick", new Task("Wylow patyk.", "", 0));
         taskMap.put("killWarden", new Task("Pokonaj Wardena.", "", 0));
-        taskMap.put("craftBeacon", new Task("Zrob beacona.", "", 0));
+        taskMap.put("craftBeacon", new Task("Przygotuj beacona w craftingu.", "", 0));
         taskMap.put("doShit", new Task("Zrob kupe.", "", 0));
         taskMap.put("winRaid", new Task("Wygraj raida.", "", 0));
         taskMap.put("doubleItemAtBlacksmith", new Task("Podwoj 2 przedmioty u kowala.", "counter", 2));
@@ -195,7 +195,7 @@ public class TaskManager {
         taskMap.put("fishOutBow", new Task("Wylow luk.", "", 0));
         taskMap.put("useJetpack", new Task("Uzyj Jetpacka.", "", 0));
         taskMap.put("useFireScroll", new Task("Uzyj Zwoju Ognia.", "", 0));
-        taskMap.put("craftGrindstone", new Task("Stworz Kamien Szlifierski.", "", 0));
+        taskMap.put("craftGrindstone", new Task("Przygotuj Kamien Szlifierski w craftingu.", "", 0));
         taskMap.put("takeBookFromLectern", new Task("Zabierz ksiazke z mownicy (a pozniej ja odloz).", "", 0));
         taskMap.put("riptideYourself", new Task("Wytorpeduj sie trojzebem 10 razy.", "counter", 10));
         taskMap.put("shearSomething", new Task("Ogol wlasnorecznie 10 owieczek.", "counter", 10));

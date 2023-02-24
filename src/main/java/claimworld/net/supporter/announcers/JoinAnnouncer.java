@@ -24,7 +24,7 @@ public class JoinAnnouncer {
     private final List<Sound> sounds = Collections.singletonList(Sound.ENTITY_PILLAGER_CELEBRATE);
 
     public String getAdminNote() {
-        return "§8Zaczynamy powoli zmiany ekonomiczne, a pozniej przyjdzie czas na kolejne poziomy przepustki!";
+        return "§8Koncem marca odbedzie sie dwudniowy event §cDwa Zamki§8, w ktorym zderza sie ze soba dwie druzyny.\n\nPrzygotujcie sie, bedzie ostro!";
     }
 
     public String getActiveBonuses() {

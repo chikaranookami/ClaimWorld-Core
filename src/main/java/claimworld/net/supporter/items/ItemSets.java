@@ -22,8 +22,6 @@ import static claimworld.net.supporter.battlepass.BattlePassManager.mainObjectiv
 import static org.bukkit.Bukkit.getLogger;
 
 public class ItemSets {
-
-    ReadyItems readyItems = ReadyItems.getInstance();
     
     private final HashMap<Integer, ItemStack> itemMap = new HashMap<>();
 
@@ -84,7 +82,7 @@ public class ItemSets {
         }
 
         if (inventoryName.equals("Bankier")) {
-            itemMap.put(10, new CustomItem("&fWymien expa", Material.EXPERIENCE_BOTTLE, Arrays.asList(colorize("&7&oZamien swoj 30 level"), colorize("&7&ona 140 butelek expa.")), 0).getItem());
+            itemMap.put(10, new CustomItem("&fWymien expa", Material.EXPERIENCE_BOTTLE, Arrays.asList(colorize("&7&oWymien 30 swoich leveli"), colorize("&7&ona 140 butelek expa.")), 0).getItem());
             itemMap.put(12, new CustomItem("&fOdbierz lokate", Material.EMERALD, Arrays.asList(colorize("&7&oOdbierz swoja lokate."), colorize("&7&oDostepne miedzy 12:00, a 0:00.")), 0).getItem());
             return itemMap;
         }

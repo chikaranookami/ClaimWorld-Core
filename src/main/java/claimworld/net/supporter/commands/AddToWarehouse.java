@@ -20,8 +20,6 @@ public class AddToWarehouse {
         new CommandBase("addtowarehouse", 2, false) {
             @Override
             public boolean onCommand(CommandSender sender, String[] arguments) {
-                if (arguments[1] == null) return false;
-
                 List<String> fixedMessage = new ArrayList<>(Arrays.asList(arguments));
                 fixedMessage.remove(0);
 

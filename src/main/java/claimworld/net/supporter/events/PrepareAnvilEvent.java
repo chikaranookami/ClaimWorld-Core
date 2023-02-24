@@ -17,7 +17,7 @@ public class PrepareAnvilEvent implements Listener {
     @EventHandler
     public void prepareAnvilEvent(org.bukkit.event.inventory.PrepareAnvilEvent event) {
         ItemStack item1 = event.getInventory().getItem(0);
-        ItemStack item2 = event.getInventory().getItem(0);
+        ItemStack item2 = event.getInventory().getItem(1);
         if ((item1 == null || !item1.isSimilar(readyItems.get("Jetpack"))) && (item2 == null || !item2.isSimilar(readyItems.get("Jetpack")))) return;
 
         event.setResult(new ItemStack(Material.AIR));

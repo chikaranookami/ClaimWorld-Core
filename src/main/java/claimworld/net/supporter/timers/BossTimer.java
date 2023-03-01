@@ -26,9 +26,10 @@ public class BossTimer {
             return;
         }
 
+
         getScheduler().runTaskLater(Supporter.getPlugin(), () -> {
             broadcastMessage(getBroadcastPrefix() + "Mini boss pojawi sie za 30 sekund na Stadionie (spawn)!");
             getScheduler().runTaskLater(Supporter.getPlugin(), () -> dispatchCommand(getConsoleSender(), "mm mobs spawn SkeletonKing 1 1,-752,85,-730"), 600);
-        }, 144000);
+        }, 72000);
     }
 }

@@ -187,17 +187,17 @@ public class CreatureSpawnEvent implements Listener {
 
             int boosts = new Random().nextInt(4);
             if (boosts == 0) {
-                monster.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 3));
-                monster.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 3));
+                monster.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2));
+                monster.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 2));
             }
 
             if (boosts > 0) {
-                monster.addPotionEffect(new PotionEffect(PotionEffectType.POISON, Integer.MAX_VALUE, 2));
+                monster.addPotionEffect(new PotionEffect(PotionEffectType.POISON, Integer.MAX_VALUE, 1));
                 monster.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, Integer.MAX_VALUE, 2));
             }
 
             if (boosts > 1) {
-                monster.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, Integer.MAX_VALUE, 2));
+                monster.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, Integer.MAX_VALUE, 1));
             }
 
             if (boosts > 2) {
